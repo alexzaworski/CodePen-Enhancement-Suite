@@ -1,0 +1,38 @@
+.ces__padded-heading {
+  padding-bottom:8px;
+}
+
+.ces__form-row:after {
+  content: "";
+  clear: both; 
+  display: block;
+}
+.ces__divider-half {
+  float:left;
+  width:50%;
+  max-width: 250px;
+}
+
+.ces__label {
+  display:block;
+}
+
+.ces__label [type="radio"] {
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.ces__input--with-margin {
+  margin-bottom:10px;
+}
+
+.ces__white-text {
+  color:white!important;
+}
+
+.ces__light-gray {
+  color: #ccc;
+}
+.ces__small-text {
+  font-size: .9em;
+}
