@@ -19,7 +19,6 @@
 * which are required to change settings/save Pens/etc. 
 *
 */
-
 var csrfToken = $("meta[name='csrf-token']").attr("content");
 
 /*
@@ -30,7 +29,6 @@ var csrfToken = $("meta[name='csrf-token']").attr("content");
 * (it can vary due to https/non-https pages).
 *
 */
-
 var baseUrl = window.location.origin + "/";
 
 /*
@@ -44,15 +42,16 @@ var baseUrl = window.location.origin + "/";
 *
 * The JSON parsing gets incredibly awkward... Would prefer something easier.
 */
-
 var initData = (function(){
   var data = $("#init-data").val();
-  data = data.replace(/"{/g, '{').replace(/}"/g, '}').replace(/\\"/g, '"').replace(/\\"/g, '"');
+  data = data.replace(/"{/g, '{') // Strips quotes from curly brackets
+             .replace(/}"/g, '}')
+             .replace(/\\"/g, '"') // Strips the first layer of slashes
+             .replace(/\\"/g, '"'); // Strips the second layer of slashes
   return JSON.parse(data);
 })();
 
 // Sends initData off to init.js since content scripts can't access the window object.
 // This allows conditional loading of modules based on initData.
-
 var sendDataToContentScript = new CustomEvent("initDataMessage", {detail: initData});
 window.dispatchEvent(sendDataToContentScript);
