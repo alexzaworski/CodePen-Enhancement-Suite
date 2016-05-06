@@ -26,12 +26,12 @@
   margin-bottom:10px;
 }
 
-.ces__white-text {
+.ces__white {
   color:white!important;
 }
 
 .ces__light-gray {
-  color: #ccc;
+  color: #ccc!important;
 }
 .ces__small-text {
   font-size: .9em;
