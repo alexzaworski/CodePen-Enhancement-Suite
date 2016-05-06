@@ -1,6 +1,6 @@
 /*
 * ---
-* Kicks everything off yeeeee
+* Kicks everything off
 * ---
 */
 
