@@ -11,7 +11,7 @@
 // to load it ourselves.
 function loadModule(scriptName, callback) {
   var scriptEl = document.createElement('script');
-  scriptEl.src = chrome.extension.getURL('modules/' + scriptName + '.js');
+  scriptEl.src = chrome.extension.getURL('lib/modules/' + scriptName + '.js');
   scriptEl.addEventListener('load', callback, false);
   document.body.appendChild(scriptEl);
 }
@@ -20,7 +20,7 @@ function loadModule(scriptName, callback) {
 styleEl = document.createElement("link")
 styleEl.setAttribute("rel", "stylesheet")
 styleEl.setAttribute("type", "text/css")
-styleEl.setAttribute("href", chrome.extension.getURL("styles/ces_styles.css"));
+styleEl.setAttribute("href", chrome.extension.getURL("lib/css/ces_lib.css"));
 document.head.appendChild(styleEl);
 
 
