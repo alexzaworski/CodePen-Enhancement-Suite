@@ -9,7 +9,8 @@
     "128": "core/icons/icon-128.png"
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "background": {
     "scripts": ["core/js/bg.js"]
