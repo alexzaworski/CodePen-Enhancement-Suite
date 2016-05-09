@@ -1,3 +1,5 @@
+/* GENERIC STYLES */
+
 .ces__padded-heading {
   padding-bottom:8px;
 }
@@ -35,4 +37,24 @@
 }
 .ces__small-text {
   font-size: .9em;
+}
+
+/* RESPONSIVE PREVIEW STYLES */
+
+.layout-top .ces__resize-bar {
+  width: 20px;
+  cursor: col-resize;
+  border-left: 1px solid rgba(255,255,255,0.1);
+  border-right: 1px solid rgba(0,0,0,0.4);
+  background: #343436;
+  flex-shrink:0;
+}
+
+.layout-top #ces__resize {
+  display:flex;
+}
+
+.layout-top #result_div {
+  position: relative;
+  width:100%;
 }
