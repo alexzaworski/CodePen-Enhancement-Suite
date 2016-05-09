@@ -57,3 +57,59 @@ header {
 p {
   margin-top:0;
 }
+
+input[disabled] {
+  opacity: .5;
+}
+input[disabled] ~ label{
+  opacity: .5;
+}
+
+.fancy-checkbox__wrapper {
+  position: relative;
+}
+
+.fancy-checkbox {
+  display:none;
+}
+
+.fancy-checkbox ~ label {
+  -webkit-user-select: none;
+  user-select:none;
+  float:left;
+  line-height: 15px; /* Should be the same as the height of label:after */
+}
+.fancy-checkbox ~ label:after {
+  margin-right: 10px;
+  content: '';
+  display:block;
+  float:left;
+  height: 15px; /* Height/border radius should be equal */
+  border-radius: 15px;
+  width: 30px;
+  background: red;
+}
+
+.fancy-checkbox:checked ~ label:after {
+  background: #bada55;
+}
+.fancy-checkbox ~ label:before {
+  top: -2.5px;
+  position: absolute;
+  margin-right: 10px;
+  left:0;
+  content: '';
+  display:block;
+  float:left;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  transition:
+    color .1s ease-out,
+    left .1s ease-out;
+}
+
+.fancy-checkbox:checked ~ label:before {
+  left: 10px; /* Difference between label:after width and label:before width */
+}
