@@ -46,15 +46,18 @@ function loadConditionalModules() {
   if (initData.__pageType === "profile") {
     loadModule("hideProfileCss");
   }
+  if ( initData.__pageType === "pen" || initData.__pageType === "details" || initData.__pageType === "posts" ) {
+    loadModule("commentPreviews");
+  }
   if (initData.__pageType === "pen") {
-
+    loadModule("resizablePreviews");
     // Only loads if the user owns the Pen they're viewing (and they're logged in).
     if ( initData.__pen.user_id === initData.__user.id && initData.__user.id != 1 ) {
       loadModule("cesSave");
       loadModule("customPenSlugs");
       loadModule("editorSettings");
     }
-    loadModule("resizablePreviews");
+    
   }
 }
 
