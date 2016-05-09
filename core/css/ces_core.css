@@ -33,7 +33,7 @@ body, html {
 body {
   width: 275px;
   font-family: "Lato", sans-serif;
-  background: #343436;
+  background: #191919;
   color: white;
   line-height: 1.5;
   font-size: 14px;
@@ -47,10 +47,31 @@ p {
   margin-top:0;
 }
 
+.row {
+  margin-bottom: 20px;
+}
+
+.row:last-child {
+  margin-bottom:0;
+}
+
+.divider--half {
+  width: 50%;
+  float:left;
+}
+
+.divider--half:nth-of-type(1) {
+  padding-right: 5px;
+}
+
+.divider--half:nth-of-type(2) {
+  padding-left: 5px;
+}
+
 /* HEADER STUFF */
 
 header {
-  background: #191919;
+  background: black;
   padding: 15px;
 }
 
@@ -67,12 +88,18 @@ header {
 
 /* BASIC INPUT STYLES */
 
+label {
+  cursor:pointer;
+}
+
 input[disabled] {
   opacity: .5;
 }
 input[disabled] ~ label{
   opacity: .5;
+  cursor:auto;
 }
+
 
 /* FANCY INPUTS */
 
@@ -105,13 +132,14 @@ input[disabled] ~ label{
   background: #bada55;
 }
 .fancy-checkbox ~ label:before {
-  top: -2.5px;
+  top: 50%;
+  transform:translateY(-50%);
   position: absolute;
   margin-right: 10px;
-  left:0;
   content: '';
   display:block;
   float:left;
+  left: -1px;
   height: 20px;
   width: 20px;
   border-radius: 50%;
@@ -125,3 +153,19 @@ input[disabled] ~ label{
   left: 10px; /* Difference between label:after width and label:before width */
 }
 
+/* BUTTONS */
+
+.button {
+  display:block;
+  padding: 10px 15px;
+  text-align:center;
+  background: #343436;
+  color: white;
+  text-decoration: none;
+  outline: none;
+  border-radius: 3px;
+}
+
+.button:hover {
+  background: #555 ;
+}
