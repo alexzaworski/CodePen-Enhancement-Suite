@@ -11,8 +11,6 @@ A Chrome extension meant to enhance the CodePen experience. Like [RES](https://g
 ## Current To-Do's
 
 ### Real Soon
-* Add `report issue` button to Page Action popup
-* Improve styling on profile CSS toggle button
 * Fix Pen resize handle coloring on light themes
 * Add GUI for enabling/disabling JS on CodePen (probably via Page Action popup)
 
