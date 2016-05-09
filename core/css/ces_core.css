@@ -1,0 +1,59 @@
+@font-face {
+    font-family: "Telefon";
+    font-weight: normal;
+    src: url(../fonts/telefon.woff) format("woff");
+}
+@font-face {
+    font-family: "Telefon Black";
+    font-weight: bold;
+    src: url(../fonts/telefon.woff) format("woff");
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.clearfix:after {
+  content: "";
+  clear: both; 
+  display: block;
+}
+
+body, html {
+  margin:0;
+}
+body {
+  width: 275px;
+  font-family: "Lato", sans-serif;
+  background: #343436;
+  color: white;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.header__icon-wrap {
+  width:  40px;
+  margin: 0 auto;
+}
+
+.header__icon {
+  height: 100%;
+  width: auto;
+  fill:white;
+}
+
+header {
+  background: #191919;
+  padding: 15px;
+}
+
+.main-content-wrapper {
+  padding: 15px;
+}
+
+p {
+  margin-top:0;
+}

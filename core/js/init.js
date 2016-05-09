@@ -29,10 +29,12 @@ loadModule("globalVars");
 loadModule("utilScripts");
 
 
+var initData;
+
 // The Global Variables module includes some initialization data
 // that is needed to conditionally load other modules, so we need to wait
 // for that event to fire and then we can keep doin' our thing.
-window.addEventListener("initDataMessage", function(evt) {
+window.addEventListener("init-data-ready", function(evt) {
   initData = evt.detail;
   loadConditionalModules();
 });

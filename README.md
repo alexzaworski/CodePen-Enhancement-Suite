@@ -4,6 +4,6 @@ A Chrome extension meant to enhance the CodePen experience. Like [RES](https://g
 
 ## Current features:
 * Resizable Pen previews when in `Editor View`
-* Disable custom CSS on profile pages _(todo: make this togglable)_
+* Toggle custom CSS on CodePen PRO user's profile pages
 * Access editor settings from the Pen Settings modal while in the `Editor View.`
 * Set custom slug hashes for Pens (changes the URL on public Pens)
