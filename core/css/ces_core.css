@@ -9,6 +9,8 @@
     src: url(../fonts/telefon.woff) format("woff");
 }
 
+/* RESET-ISH STUFF */
+
 html {
   box-sizing: border-box;
 }
@@ -25,6 +27,9 @@ html {
 body, html {
   margin:0;
 }
+
+/* BASIC TYPE & STRUCTURE */
+
 body {
   width: 275px;
   font-family: "Lato", sans-serif;
@@ -32,6 +37,21 @@ body {
   color: white;
   line-height: 1.5;
   font-size: 14px;
+}
+
+.main-content-wrapper {
+  padding: 15px;
+}
+
+p {
+  margin-top:0;
+}
+
+/* HEADER STUFF */
+
+header {
+  background: #191919;
+  padding: 15px;
 }
 
 .header__icon-wrap {
@@ -45,18 +65,7 @@ body {
   fill:white;
 }
 
-header {
-  background: #191919;
-  padding: 15px;
-}
-
-.main-content-wrapper {
-  padding: 15px;
-}
-
-p {
-  margin-top:0;
-}
+/* BASIC INPUT STYLES */
 
 input[disabled] {
   opacity: .5;
@@ -64,6 +73,8 @@ input[disabled] {
 input[disabled] ~ label{
   opacity: .5;
 }
+
+/* FANCY INPUTS */
 
 .fancy-checkbox__wrapper {
   position: relative;
@@ -113,3 +124,4 @@ input[disabled] ~ label{
 .fancy-checkbox:checked ~ label:before {
   left: 10px; /* Difference between label:after width and label:before width */
 }
+
