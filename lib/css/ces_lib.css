@@ -113,3 +113,7 @@
 .ces__fancy-checkbox:checked ~ label:before {
   left: 10px; /* Difference between label:after width and label:before width */
 }
+
+#comment-form {
+  line-height: 0; /* Fixes alignment annoyance when toggling comment previews */
+}
