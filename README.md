@@ -1,8 +1,14 @@
-# CodePen Enhancement Suite
+# CodePen Enhancement Suite v0.1.1
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
 ## Current Features
+
+* [Resizable Pen Previews](#resizable-pen-previews)
+* [Custom Pen Slugs](#custom-pen-slugs)
+* [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
+* [Preview Comments on Pens/Posts Before Submitting](#preview-comments-on-pensposts-before-submitting)
+* [Toggle Custom CSS on CodePen PRO User's Profiles](#toggle-custom-css-on-codepen-pro-users-profiles)
 
 ### Resizable Pen Previews
 
