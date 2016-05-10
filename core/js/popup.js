@@ -1,12 +1,14 @@
 var disableCss = document.getElementById("disable-css");
 disableCss.setAttribute("disabled", true);
 
+// Wrapper function to distribute runtime messages to the active tab
 function sendToActiveTab(message) {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, message);
   });
 }
 
+// Waits for initData to be passed, then initializes everything accordingly
 chrome.runtime.onMessage.addListener(function(message){
   if (message.method === "init-data-ready") {
     if (message.data.__pageType === "profile") {
@@ -15,7 +17,11 @@ chrome.runtime.onMessage.addListener(function(message){
     }
   }
 });
+
+
+// Requests initData after the init-data-ready listener is set
 sendToActiveTab({method:"request-init-data"});
+
 
 function setEventListeners() {
   disableCss.addEventListener("click", function(){
@@ -28,6 +34,8 @@ function setEventListeners() {
   });
 }
 
+
+// Sets the initial state of the toggle based on the user's settings
 function setInitialState(username) {
   disableCss.removeAttribute("disabled");
   chrome.storage.sync.get("disabledProfiles", function(data){

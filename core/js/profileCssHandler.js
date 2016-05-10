@@ -98,6 +98,7 @@ function addToDisabledProfiles() {
   chrome.storage.sync.set({"disabledProfiles":disabledProfiles});
 }
 
+
 // Exact opposite of the above.
 function removeFromDisabledProfiles () {
   var index = disabledProfiles.indexOf(user);
