@@ -134,11 +134,11 @@
   left: 10px; /* Difference between label:after width and label:before width */
 }
 
-#comment-form {
+.ces__preview-enabled#comment-form {
   line-height: 0; /* Fixes alignment annoyance when toggling comment previews */
 }
 
-#subscribe-link { /* Properly aligns "notify me of new comment" link on the Post comment box */
+.ces__preview-enabled #subscribe-link { /* Properly aligns "notify me of new comment" link on the Post comment box */
   line-height: 15px;
   display: block!important; /* Battling inline styling */
   padding-top: 10px;
