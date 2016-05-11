@@ -166,6 +166,10 @@ input[disabled] ~ label{
   border-radius: 3px;
 }
 
+.button--skinny {
+  padding: 5px 15px;
+}
+
 .button:hover {
   background: #555 ;
 }
