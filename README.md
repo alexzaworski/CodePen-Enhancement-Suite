@@ -35,7 +35,13 @@ CodePen users can be pretty creative. Sometimes _too_ creative. This lets you tu
 
 ## Installation
 
-Currently only available as an unpackaged extension. `git clone` and follow [these instructions](https://developer.chrome.com/extensions/getstarted#unpacked) to install (takes like two minutes tops).
+[Available from the Chrome app store.](https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim)
+
+To install in dev mode:
+
+1. `git clone` 
+2. [Follow these instructions](https://developer.chrome.com/extensions/getstarted#unpacked)
+
 
 ## Why Didn't You Do (Thing)?
 
