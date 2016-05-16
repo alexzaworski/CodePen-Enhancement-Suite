@@ -1,11 +1,10 @@
-# CodePen Enhancement Suite v0.1.1
+# CodePen Enhancement Suite v0.1.2
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
 ## Current Features
 
 * [Resizable Pen Previews](#resizable-pen-previews)
-* [Custom Pen Slugs](#custom-pen-slugs)
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
 * [Preview Comments on Pens/Posts Before Submitting](#preview-comments-on-pensposts-before-submitting)
 * [Toggle Custom CSS on CodePen PRO User's Profiles](#toggle-custom-css-on-codepen-pro-users-profiles)
@@ -15,14 +14,6 @@ A Chrome extension meant to enhance the CodePen experience. Like [RES](https://g
 Adds a draggable handle in the `Editor View` while using the `Top` layout that allows you to change the size of your Pen, making the experience of debugging responsive Pens a lot more pleasant. 
 
 ![Resizable Preview Demos](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/resize_previews.gif)
-
-### Custom Pen Slugs
-
-Allows you to set custom slug hashes for a Pen, which changes its actual URL. This feature relies on undocumented CodePen functionality and is fairly buggy, but usually works.
-
-Custom slugs work on private Pens as well as public Pens, but the displayed URL of private Pens uses the private slug hash which isn't modifiable.
-
-![Custom Slugs Demo](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/custom_slugs.gif)
 
 ### Access Editor Settings from Within the Pen Editor
 
