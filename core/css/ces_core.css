@@ -1,14 +1,3 @@
-@font-face {
-    font-family: "Telefon";
-    font-weight: normal;
-    src: url(../fonts/telefon.woff) format("woff");
-}
-@font-face {
-    font-family: "Telefon Black";
-    font-weight: bold;
-    src: url(../fonts/telefon.woff) format("woff");
-}
-
 /* RESET-ISH STUFF */
 
 html {
