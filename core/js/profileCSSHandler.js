@@ -1,7 +1,7 @@
 /*
 * ---
 * Acts as the middle ground between the Page Action logic (core/js/popup.js) and 
-* the profile css module (lib/modules/hideProfileCss.js)
+* the profile css module (lib/modules/hideProfileCSS.js)
 * ---
 */
 
@@ -47,8 +47,8 @@ function setUpDisabledProfiles() {
 // the Page Action popup won't do anything until it's actually clicked
 // by the user (ie the CSS won't be removed at all until the user takes action).
 window.addEventListener("request-css-event", function(){
-  if (isProfileCssDisabled(user, disabledProfiles)) {
-      sendDisableCssEvent();
+  if (isProfileCSSDisabled(user, disabledProfiles)) {
+      sendDisableCSSEvent();
   }
 })
 
@@ -61,11 +61,11 @@ window.addEventListener("request-css-event", function(){
 function setRuntimeListeners() {
   chrome.runtime.onMessage.addListener(function(message){
     if (message.method === "disable-profile-css") {
-      sendDisableCssEvent();
+      sendDisableCSSEvent();
       addToDisabledProfiles(user, disabledProfiles);
     }
     if (message.method === "enable-profile-css" ) {
-      sendEnableCssEvent();
+      sendEnableCSSEvent();
       removeFromDisabledProfiles(user, disabledProfiles);
     }
     if (message.method === "request-init-data") {
@@ -108,7 +108,7 @@ function removeFromDisabledProfiles () {
   chrome.storage.sync.set({"disabledProfiles":disabledProfiles});
 }
 
-function isProfileCssDisabled() {
+function isProfileCSSDisabled() {
   return (disabledProfiles.indexOf(user) != -1);
 }
 
@@ -116,12 +116,12 @@ function isProfileCssDisabled() {
 // These functions both dispatch events
 // which the Hide Profile CSS module listens for
 // in order to know when to make DOM changes
-function sendDisableCssEvent() {
-  var disableCss = new CustomEvent("disable-css");
-  window.dispatchEvent(disableCss);
+function sendDisableCSSEvent() {
+  var disableCSS = new CustomEvent("disable-css");
+  window.dispatchEvent(disableCSS);
 }
 
-function sendEnableCssEvent() {
-  var enableCss = new CustomEvent("enable-css");
-  window.dispatchEvent(enableCss);
+function sendEnableCSSEvent() {
+  var enableCSS = new CustomEvent("enable-css");
+  window.dispatchEvent(enableCSS);
 }

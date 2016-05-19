@@ -15,8 +15,14 @@
   <div class="main-content-wrapper">
     <div class="row">
       <div class="fancy-checkbox__wrapper clearfix">
+        <input type="checkbox" id="disable-js" class="fancy-checkbox">
+        <label for="disable-js">Disable JS in previews <a target="_blank" href="https://blog.codepen.io/documentation/features/turn-off-javascript-in-previews/">(?)</a></label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="fancy-checkbox__wrapper clearfix">
         <input type="checkbox" id="disable-css" class="fancy-checkbox">
-        <label for="disable-css">Disable Custom Profile CSS</label>
+        <label for="disable-css">Disable this user's profile CSS</label>
       </div>
     </div>
     <div class="row clearfix">
@@ -28,6 +34,7 @@
       </div>
     </div>
   </div>
-  <script src="../js/popup.js"></script>
+  <script src="../js/previewJSToggle.js"></script>
+  <script src="../js/profileCSSToggle.js"></script>
 </body>
 </html>

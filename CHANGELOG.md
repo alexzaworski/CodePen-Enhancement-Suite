@@ -1,6 +1,12 @@
 # Change Log
 
-## 0.1.2
+## v0.1.3
+
+### Added
+
+* Added GUI to enable/disable javascript in previews
+
+## v0.1.2
 
 ### Removed
 
@@ -10,7 +16,7 @@
 
 * CES Save module wraped into the Editor Settings module since without Pen slugs everything is a lot less complicated
 
-## 0.1.1
+## v0.1.1
 
 ### Added
 

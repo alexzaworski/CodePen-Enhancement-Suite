@@ -1,4 +1,4 @@
-# CodePen Enhancement Suite v0.1.2
+# CodePen Enhancement Suite v0.1.3
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
@@ -8,6 +8,7 @@ A Chrome extension meant to enhance the CodePen experience. Like [RES](https://g
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
 * [Preview Comments on Pens/Posts Before Submitting](#preview-comments-on-pensposts-before-submitting)
 * [Toggle Custom CSS on CodePen PRO User's Profiles](#toggle-custom-css-on-codepen-pro-users-profiles)
+* [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
 
 ### Resizable Pen Previews
 
@@ -26,6 +27,12 @@ Adds another tab to the `Pen Settings` modal that lets you change current theme/
 Pretty straightforward. Relies on CodePen's internal markdown processing to generate previews which is kinda neat. It won't compile @username links, but most everything else works.
 
 ![Comment Preview Demo](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/comment_preview.gif)
+
+### Toggle Pen preview JS with a GUI
+
+Makes things a little bit easier if you find yourself locked out of a Pen/need to disable javascript for some other reason.
+
+![Disable JS Demo](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/disable_js_toggle.png)
 
 ### Toggle Custom CSS on CodePen PRO User's Profiles
 
@@ -46,12 +53,3 @@ To install in dev mode:
 ## Why Didn't You Do (Thing)?
 
 (Thing) sounds like a really good idea. Open an issue and I'll see what I can do. Any bug reports are welcome too, please contribute!
-
-## Current To-Do's
-
-### Real Soon
-* Add GUI for enabling/disabling JS on CodePen (probably via Page Action popup)
-
-### Down the road kinda stuff
-* Allow user control over which modules are loaded
-* Add a visual indicator for notifications (probably won't do this, CodePen's working on it themselves)
