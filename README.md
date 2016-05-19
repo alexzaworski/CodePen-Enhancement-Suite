@@ -42,7 +42,7 @@ CodePen users can be pretty creative. Sometimes _too_ creative. This lets you tu
 
 ## Installation
 
-[Available from the Chrome app store.](https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim)
+[Available from the Chrome web store.](https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim)
 
 To install in dev mode:
 
