@@ -32,6 +32,15 @@ body {
   padding: 15px;
 }
 
+a, a:visited {
+  color: #76daff;
+  outline: none;
+}
+
+a:hover {
+  color:white;
+}
+
 p {
   margin-top:0;
 }
@@ -81,14 +90,11 @@ label {
   cursor:pointer;
 }
 
-input[disabled] {
-  opacity: .5;
+input[disabled],
+input[disabled] ~ label {
+  opacity: .4;
+  cursor: not-allowed;
 }
-input[disabled] ~ label{
-  opacity: .5;
-  cursor:auto;
-}
-
 
 /* FANCY INPUTS */
 
@@ -151,8 +157,11 @@ input[disabled] ~ label{
   background: #343436;
   color: white;
   text-decoration: none;
-  outline: none;
   border-radius: 3px;
+}
+
+.button:visited {
+  color: white;
 }
 
 .button--skinny {
