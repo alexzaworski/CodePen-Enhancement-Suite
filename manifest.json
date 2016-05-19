@@ -20,7 +20,7 @@
       "matches":["http://codepen.io/*", "https://codepen.io/*"],
       "js":[
         "core/js/init.js",
-        "core/js/profileCssHandler.js"
+        "core/js/profileCSSHandler.js"
       ]
     }
   ],

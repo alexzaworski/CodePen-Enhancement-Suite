@@ -44,7 +44,7 @@ window.addEventListener("init-data-ready", function(evt) {
 // aren't needed on all pages.
 function loadConditionalModules() {
   if (initData.__pageType === "profile") {
-    loadModule("hideProfileCss");
+    loadModule("hideProfileCSS");
   }
   if ( initData.__pageType === "pen" || initData.__pageType === "details" || initData.__pageType === "posts" ) {
     loadModule("commentPreviews");

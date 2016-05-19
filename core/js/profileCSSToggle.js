@@ -1,6 +1,6 @@
-var profileCssToggle = (function(){
-  var disableCss = document.getElementById("disable-css");
-  disableCss.setAttribute("disabled", true);
+var profileCSSToggle = (function(){
+  var disableCSS = document.getElementById("disable-css");
+  disableCSS.setAttribute("disabled", true);
 
   // Wrapper function to distribute runtime messages to the active tab
   function sendToActiveTab(message) {
@@ -25,8 +25,8 @@ var profileCssToggle = (function(){
 
 
   function setEventListeners() {
-    disableCss.addEventListener("click", function(){
-      if (disableCss.checked) {
+    disableCSS.addEventListener("click", function(){
+      if (disableCSS.checked) {
         sendToActiveTab({method:"disable-profile-css"});
       }
       else {
@@ -38,17 +38,17 @@ var profileCssToggle = (function(){
 
   // Sets the initial state of the toggle based on the user's settings
   function setInitialState(username) {
-    disableCss.removeAttribute("disabled");
+    disableCSS.removeAttribute("disabled");
     chrome.storage.sync.get("disabledProfiles", function(data){
       if (!data.hasOwnProperty("disabledProfiles")){
         return;
       }
       if (data.disabledProfiles.indexOf(username) != -1 ) {
-        disableCss.setAttribute("checked", true);
+        disableCSS.setAttribute("checked", true);
         sendToActiveTab("disable-profile-css");
       }
       else {
-        disableCss.removeAttribute("checked");
+        disableCSS.removeAttribute("checked");
       }
     });
   }

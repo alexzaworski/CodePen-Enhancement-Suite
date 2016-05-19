@@ -5,16 +5,16 @@
 // Pretty much all of this is straightforward. Leverages a tiny
 // URL parsing library I nabbed off stackoverflow.
 
-var previewJsToggle = (function(){
+var previewJSToggle = (function(){
 
   var disableJS = document.getElementById("disable-js");
   setInitialState();
   disableJS.addEventListener("click", function(){
     if (disableJS.checked) {
-      disablePreviewJs();
+      disablePreviewJS();
     }
     else {
-      enablePreviewJs();
+      enablePreviewJS();
     }
   })
 
@@ -26,7 +26,7 @@ var previewJsToggle = (function(){
   }
 
 
-  function disablePreviewJs() {
+  function disablePreviewJS() {
     chrome.tabs.getSelected(function(tab){
         var url = URLParser(tab.url);
         if (!url.hasParam("turn_off_js")) {
@@ -37,7 +37,7 @@ var previewJsToggle = (function(){
   }
 
 
-  function enablePreviewJs() {
+  function enablePreviewJS() {
     chrome.tabs.getSelected(function(tab){
       var url = URLParser(tab.url);
       if (url.hasParam("turn_off_js")) {
@@ -86,6 +86,9 @@ var previewJsToggle = (function(){
         return path + query;
       },
       hasParam: function(name){
+        if (!params) {
+          return;
+        }
         for (var i = 0; i < params.length; i++) {
           var pair = params[i].split('=');
           if (decodeURIComponent(pair[0]) == name) { return true; }
