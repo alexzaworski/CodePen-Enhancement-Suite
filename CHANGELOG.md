@@ -14,7 +14,7 @@
 
 ### Changed
 
-* CES Save module wraped into the Editor Settings module since without Pen slugs everything is a lot less complicated
+* CES Save module wrapped into the Editor Settings module since without Pen slugs everything is a lot less complicated
 
 ## v0.1.1
 
