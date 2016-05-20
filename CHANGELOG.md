@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.1.4
+
+### Fixed
+
+* Comment previews longer than one line no longer collapse on themselves.
+
 ## v0.1.3
 
 ### Added
