@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.1.5
+
+### Fixed
+
+* Fixed parsing of init data, which would sometimes fail.
+
 ## v0.1.4
 
 ### Fixed
