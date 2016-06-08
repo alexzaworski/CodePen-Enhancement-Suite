@@ -1,4 +1,4 @@
-# CodePen Enhancement Suite v0.1.5
+# CodePen Enhancement Suite v0.1.6
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 

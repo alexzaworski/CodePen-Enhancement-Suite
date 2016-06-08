@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.1.6
+
+### Fixed
+
+* Fixed bug that prevented the comment preview toggle from properly appending itself
+
 ## v0.1.5
 
 ### Fixed
