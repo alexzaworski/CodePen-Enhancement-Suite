@@ -28,11 +28,11 @@ var previewJSToggle = (function(){
 
   function disablePreviewJS() {
     chrome.tabs.getSelected(function(tab){
-        var url = URLParser(tab.url);
-        if (!url.hasParam("turn_off_js")) {
-          url = url.setParam("turn_off_js", true);
-          chrome.tabs.update({url:url});
-        }
+      var url = URLParser(tab.url);
+      if (!url.hasParam("turn_off_js")) {
+        url = url.setParam("turn_off_js", true);
+        chrome.tabs.update({url:url});
+      }
     });
   }
 

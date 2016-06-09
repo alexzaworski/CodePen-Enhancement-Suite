@@ -46,6 +46,7 @@ function loadConditionalModules() {
   if (initData.__pageType === "profile") {
     loadModule("hideProfileCSS");
   }
+
   if ( initData.__pageType === "pen" || initData.__pageType === "details" || initData.__pageType === "posts" ) {
     loadModule("commentPreviews");
   }

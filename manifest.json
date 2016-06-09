@@ -8,6 +8,7 @@
     "48":  "core/icons/icon-48.png",
     "128": "core/icons/icon-128.png"
   },
+  "options_page": "core/html/ces_options.html",
   "permissions": [
     "tabs",
     "storage"
@@ -20,7 +21,8 @@
       "matches":["http://codepen.io/*", "https://codepen.io/*"],
       "js":[
         "core/js/init.js",
-        "core/js/profileCSSHandler.js"
+        "core/js/profileCSSHandler.js",
+        "core/js/customThemeHandler.js"
       ]
     }
   ],
