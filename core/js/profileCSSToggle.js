@@ -2,13 +2,6 @@ var profileCSSToggle = (function(){
   var disableCSS = document.getElementById("disable-css");
   disableCSS.setAttribute("disabled", true);
 
-  // Wrapper function to distribute runtime messages to the active tab
-  function sendToActiveTab(message) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, message);
-    });
-  }
-
   // Waits for initData to be passed, then initializes everything accordingly
   chrome.runtime.onMessage.addListener(function(message){
     if (message.method === "init-data-ready") {
