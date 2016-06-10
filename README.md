@@ -2,6 +2,15 @@
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
+## Installation
+
+[Available from the Chrome web store.](https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim)
+
+To install in dev mode:
+
+1. `git clone` 
+2. [Follow these instructions](https://developer.chrome.com/extensions/getstarted#unpacked)
+
 ## Current Features
 
 * [Custom Editor Themes](#custom-editor-themes)
@@ -50,15 +59,6 @@ Makes things a little bit easier if you find yourself locked out of a Pen/need t
 CodePen users can be pretty creative. Sometimes _too_ creative. This lets you turn off a user's custom profile CSS with a toggle switch.
 
 ![Disable CSS Demo](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/profile_css.gif)
-
-## Installation
-
-[Available from the Chrome web store.](https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim)
-
-To install in dev mode:
-
-1. `git clone` 
-2. [Follow these instructions](https://developer.chrome.com/extensions/getstarted#unpacked)
 
 
 ## Why Didn't You Do (Thing)?
