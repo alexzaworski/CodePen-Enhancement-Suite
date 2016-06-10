@@ -6,8 +6,11 @@
 
 var customThemeHandler = (function(){
 
-  var styleEl = document.createElement("style");
-  var ogTheme = document.querySelector("[href*='assets/editor/themes']");
+  var styleEl = document.createElement("style"),
+      ogTheme = document.querySelector("[href*='assets/editor/themes']"),
+      pageWrap = document.getElementsByClassName("page-wrap")[0],
+      isLightTheme = false;
+
   
   // If CodePen's not loading a theme, we don't need to either.
   if (!ogTheme) {
@@ -29,10 +32,9 @@ var customThemeHandler = (function(){
     chrome.storage.local.get("cmIsLightTheme", function(response){
       if (response.cmIsLightTheme) {
         styleEl.innerHTML += lightCSS;
-
+        isLightTheme = true;
         // This class needs to be added since the resize bar appended by the preview resize module looks rediculous
         // if it's left dark when the theme is light
-        document.getElementsByClassName("page-wrap")[0].classList.add("ces-light-theme");
       }
 
       init();
@@ -64,13 +66,14 @@ var customThemeHandler = (function(){
   // suuuuucks but hopefully people aren't toggling themes much...
   function enableTheme() {
     document.head.appendChild(styleEl);
+    pageWrap.classList.toggle("ces-light-theme", isLightTheme);
     ogTheme.remove();
   }
 
   function disableTheme() {
     styleEl.remove();
     document.head.appendChild(ogTheme);
-    
+    pageWrap.classList.toggle("ces-light-theme", false);
   }
 
   function init() {
