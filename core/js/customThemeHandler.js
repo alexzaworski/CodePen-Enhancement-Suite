@@ -59,8 +59,7 @@ var customThemeHandler = (function(){
   // the user has CodePen's settings set to use a light theme but the custom
   // theme is a dark theme, all the light styles bleed through.
   //
-  //It's not reallly
-  // practical to overwrite all of them. Ideally we wouldn't need to do this,
+  // It's not really practical to overwrite all of them. Ideally we wouldn't need to do this,
   // it's maybe possible to first check if they're using a light theme by default and
   // adjust accordingly but that seems kinda bad too.
   //
