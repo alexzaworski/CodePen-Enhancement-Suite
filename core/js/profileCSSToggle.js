@@ -16,15 +16,9 @@ var profileCSSToggle = (function(){
   // Requests initData after the init-data-ready listener is set
   sendToActiveTab({method:"request-init-data"});
 
-
   function setEventListeners() {
     disableCSS.addEventListener("click", function(){
-      if (disableCSS.checked) {
-        sendToActiveTab({method:"disable-profile-css"});
-      }
-      else {
-        sendToActiveTab({method:"enable-profile-css"});
-      }
+      sendToActiveTab({method:"disable-profile-css", data:disableCSS.checked});
     });
   }
 

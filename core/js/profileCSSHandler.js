@@ -61,12 +61,14 @@ var profileCSSHandler = (function(){
   function setRuntimeListeners() {
     chrome.runtime.onMessage.addListener(function(message){
       if (message.method === "disable-profile-css") {
-        sendDisableCSSEvent();
-        addToDisabledProfiles(user, disabledProfiles);
-      }
-      if (message.method === "enable-profile-css" ) {
-        sendEnableCSSEvent();
-        removeFromDisabledProfiles(user, disabledProfiles);
+        if ( message.data == true ) {
+          sendDisableCSSEvent();
+          addToDisabledProfiles(user, disabledProfiles);
+        }
+        else {
+          sendEnableCSSEvent();
+          removeFromDisabledProfiles(user, disabledProfiles);
+        }
       }
       if (message.method === "request-init-data") {
         prepareInitDataForPopup();

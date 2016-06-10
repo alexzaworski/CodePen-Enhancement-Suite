@@ -8,11 +8,13 @@ var customThemeToggle = (function(){
   var optionsLink = document.getElementById("options-link");
   var enableTheme = document.getElementById("enable-theme");
 
+
   chrome.storage.local.get("cmCustomThemeEnabled", function(response){
     var themeIsEnabled = !!response.cmCustomThemeEnabled;
     enableTheme.checked = themeIsEnabled;
     setEventListeners();
   });
+
 
   function setEventListeners() {
     optionsLink.addEventListener("click", function(e){
@@ -31,17 +33,11 @@ var customThemeToggle = (function(){
       });
     });
 
+
     enableTheme.addEventListener("click", function(){
-      if (enableTheme.checked) {
-        chrome.storage.local.set({"cmCustomThemeEnabled": true}, function(){
-          sendToActiveTab({method:"enable-custom-theme"});
-        })
-      }
-      else {
-        chrome.storage.local.set({"cmCustomThemeEnabled": false}, function(){
-          sendToActiveTab({method:"disable-custom-theme"});
-        })
-      }
+      chrome.storage.local.set({"cmCustomThemeEnabled":enableTheme.checked}, function(){
+        sendToActiveTab({method:"enable-custom-theme", data:enableTheme.checked});
+      });
     });
   }
 })();
