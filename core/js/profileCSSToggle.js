@@ -32,7 +32,7 @@ var profileCSSToggle = (function(){
   // Sets the initial state of the toggle based on the user's settings
   function setInitialState(username) {
     disableCSS.removeAttribute("disabled");
-    chrome.storage.sync.get("disabledProfiles", function(data){
+    chrome.storage.local.get("disabledProfiles", function(data){
       if (!data.hasOwnProperty("disabledProfiles")){
         return;
       }

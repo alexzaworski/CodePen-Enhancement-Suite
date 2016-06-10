@@ -30,7 +30,7 @@ var profileCSSHandler = (function(){
   // Grabs an array of usernames that represents the profiles
   // which currently have their styles disabled.
   function setUpDisabledProfiles() {
-    chrome.storage.sync.get("disabledProfiles", function(data){
+    chrome.storage.local.get("disabledProfiles", function(data){
       if (data.hasOwnProperty("disabledProfiles")) {
         disabledProfiles = data.disabledProfiles;
       }
@@ -95,7 +95,7 @@ var profileCSSHandler = (function(){
     if (disabledProfiles.indexOf(user) === -1) {
       disabledProfiles.push(user);
     }
-    chrome.storage.sync.set({"disabledProfiles":disabledProfiles});
+    chrome.storage.local.set({"disabledProfiles":disabledProfiles});
   }
 
 
@@ -105,7 +105,7 @@ var profileCSSHandler = (function(){
     if (index != -1) {
       disabledProfiles.splice(index, 1);
     }
-    chrome.storage.sync.set({"disabledProfiles":disabledProfiles});
+    chrome.storage.local.set({"disabledProfiles":disabledProfiles});
   }
 
   function isProfileCSSDisabled() {
