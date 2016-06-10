@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.2.2
+
+### Fixed
+
+* Fixed bug that caused small sliver of background color to appear below scrollbars when using light custom themes
+
 ## v0.2.1
 
 ### Fixed
