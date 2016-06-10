@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.2.0
+
+* Added custom editor themes
+
 ## v0.1.6
 
 ### Fixed

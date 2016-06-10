@@ -1,14 +1,25 @@
-# CodePen Enhancement Suite v0.1.6
+# CodePen Enhancement Suite v0.2.0
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
 ## Current Features
 
+* [Custom Editor Themes](#custom-editor-themes)
 * [Resizable Pen Previews](#resizable-pen-previews)
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
 * [Preview Comments on Pens/Posts Before Submitting](#preview-comments-on-pensposts-before-submitting)
 * [Toggle Custom CSS on CodePen PRO User's Profiles](#toggle-custom-css-on-codepen-pro-users-profiles)
 * [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
+
+### Custom Editor Themes
+
+Adds the ability to customize your editor theme via a GUI. Allows you to adjust the following:
+
+* Syntax highlighting colors
+* Background/cursor colors
+* CodePen UI colors (light/dark)
+
+![Custom Eidtor Themes](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/custom_editor_theme.png)
 
 ### Resizable Pen Previews
 
@@ -36,7 +47,7 @@ Makes things a little bit easier if you find yourself locked out of a Pen/need t
 
 ### Toggle Custom CSS on CodePen PRO User's Profiles
 
-CodePen users can be pretty creative. Sometimes _too_ creative. This lets you turn off a user's custom profile CSS with a toggle switch. It keeps track of users you currently have disabled via Chrome's storage API so you don't need to hit the toggle every time you land on a given user's profile.
+CodePen users can be pretty creative. Sometimes _too_ creative. This lets you turn off a user's custom profile CSS with a toggle switch.
 
 ![Disable CSS Demo](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/profile_css.gif)
 
