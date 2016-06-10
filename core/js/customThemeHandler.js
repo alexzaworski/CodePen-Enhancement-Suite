@@ -1,3 +1,9 @@
+/*
+* Okay so.... addmitedly this should probably be a module. It's tough 'cause
+* I need access to the storage API in order to check for initialization stuff.
+* If someone wants to take a crack at reorganizing this please do.
+*/
+
 var customThemeHandler = (function(){
 
   var styleEl = document.createElement("style");
@@ -45,6 +51,17 @@ var customThemeHandler = (function(){
     });
   }
 
+  // The reason we're removing the old style tag here is that if 
+  // the user has CodePen's settings set to use a light theme but the custom
+  // theme is a dark theme, all the light styles bleed through.
+  //
+  //It's not reallly
+  // practical to overwrite all of them. Ideally we wouldn't need to do this,
+  // it's maybe possible to first check if they're using a light theme by default and
+  // adjust accordingly but that seems kinda bad too.
+  //
+  // This is responsible for an annoying white flicker while the styles swap which
+  // suuuuucks but hopefully people aren't toggling themes much...
   function enableTheme() {
     document.head.appendChild(styleEl);
     ogTheme.remove();
