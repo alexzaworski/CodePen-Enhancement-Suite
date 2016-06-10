@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.2.1
+
+### Fixed
+
+* Fixed issue that caused invisible scrollbars when using custom themes
+
 ## v0.2.0
 
 * Added custom editor themes
