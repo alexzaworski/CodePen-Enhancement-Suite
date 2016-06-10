@@ -72,8 +72,8 @@
   box-shadow: 0 0px 2px rgba(0,0,0,0.1),0 1px 1px rgba(0,0,0,0.1);
 }
 
+.ces-light-theme  #ces__resize,
 .classic #ces__resize,
-.mdn-like #ces__resize,
 .solarized-light #ces__resize,
 .xq-light #ces__resize,
 .oceanic-light #ces__resize,
