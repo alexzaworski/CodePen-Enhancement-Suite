@@ -19,11 +19,11 @@ var customThemeToggle = (function(){
       //http://stackoverflow.com/a/16130739
       var optionsUrl = chrome.extension.getURL('core/html/ces_options.html');
       chrome.tabs.query({url: optionsUrl}, function(tabs) {
-          if (tabs.length) {
-              chrome.tabs.update(tabs[0].id, {active: true});
-          } else {
-              chrome.tabs.create({url: optionsUrl});
-          }
+        if (tabs.length) {
+          chrome.tabs.update(tabs[0].id, {active: true});
+        } else {
+          chrome.tabs.create({url: optionsUrl});
+        }
       });
     });
 
