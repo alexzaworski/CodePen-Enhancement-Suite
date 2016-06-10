@@ -19,7 +19,7 @@ var customThemeToggle = (function(){
 
       // needed to prevent the click from propagating to the checkbox
       e.preventDefault();
-      
+
       //http://stackoverflow.com/a/16130739
       var optionsUrl = chrome.extension.getURL('core/html/ces_options.html');
       chrome.tabs.query({url: optionsUrl}, function(tabs) {
