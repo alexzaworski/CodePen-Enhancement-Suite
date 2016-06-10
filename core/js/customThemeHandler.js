@@ -7,18 +7,18 @@
 var customThemeHandler = (function(){
 
   var styleEl = document.createElement("style"),
-      ogTheme = document.querySelector("[href*='assets/editor/themes']"),
       pageWrap = document.getElementsByClassName("page-wrap")[0],
+      ogTheme = document.querySelector("[href*='assets/editor/themes']"),
+      ogClassList = pageWrap.classList;
       isLightTheme = false;
 
-  
   // If CodePen's not loading a theme, we don't need to either.
   if (!ogTheme) {
     return;
   }
 
   // This is baked into CodePen's dark themes but we need a way to add it ourselves. This is the easiest way.
-  var globalBaseCSS = " .CodeMirror-simplescroll-horizontal div,.CodeMirror-simplescroll-vertical div {background: #666;}";
+  var globalBaseCSS = " .CodeMirror-simplescroll-horizontal div,.CodeMirror-simplescroll-vertical div {background: #666;} .powers{border-bottom:1px solid rgba(255, 255, 255, 0.0470588);";
   
   // CSS ripped from the default custom theme
   var defaultCSS = ".box,.editor .top-boxes,.CodeMirror-gutter-wrapper{background:#272825} .CodeMirror-cursor{border-left-color:#ffffff} .box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre{color:#ffffff} .cm-keyword{color:#FA2D7D} .cm-atom{color:#ae81ff} .box-html .cm-atom{color:#ae81ff} .cm-def{color:#F79900} .cm-variable{color:#71D7D0} .cm-variable-2{color:#AE81FF} .cm-variable-3{color:#a6e22e} .cm-header{color:#FA2D7D} .cm-number{color:#B78CFF} .cm-property{color:#71D7D0} .cm-attribute{color:#a6e22e} .cm-builtin{color:#a6e22e} .cm-qualifier{color:#a6e22e} .cm-operator{color:#FA2D7D} .cm-meta{color:#FA2D7D} .cm-string{color:#E9E07F} .cm-string-2{color:#E9E07F} .cm-tag{color:#FA2D7D} .box-css .cm-tag{color:#f92672} .cm-tag.cm-bracket{color:#ffffff} .CodeMirror-linenumber{color:#575344} .CodeMirror-guttermarker-subtle{color:#575344} .cm-comment{color:#575344} .CodeMirror-focused .CodeMirror-selected, .CodeMirror-selected{background-color:#3c3c3c}";
@@ -70,6 +70,11 @@ var customThemeHandler = (function(){
   // This is responsible for an annoying white flicker while the styles swap which
   // suuuuucks but hopefully people aren't toggling themes much...
   function enableTheme() {
+
+    // Need to strip old theme classes because they cause conflicts with
+    // the resizer module if they don't match the custom theme in terms of
+    // light/dark
+    pageWrap.className = "page-wrap";
     document.head.appendChild(styleEl);
     pageWrap.classList.toggle("ces-light-theme", isLightTheme);
     ogTheme.remove();
@@ -79,7 +84,7 @@ var customThemeHandler = (function(){
   function disableTheme() {
     styleEl.remove();
     document.head.appendChild(ogTheme);
-    pageWrap.classList.toggle("ces-light-theme", false);
+    pageWrap.classList = ogClassList;
   }
 
 

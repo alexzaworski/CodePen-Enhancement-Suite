@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.2.3
+
+### Fixed
+
+* Fixed bug that would occasionally cause the Pen resizer to display incorrectly when using custom themes
+
 ## v0.2.2
 
 ### Fixed
