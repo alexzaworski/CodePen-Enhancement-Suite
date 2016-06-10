@@ -15,7 +15,7 @@ A Chrome extension meant to enhance the CodePen experience. Like [RES](https://g
 
 Adds the ability to customize your editor theme via a GUI. Allows you to adjust the following:
 
-* Syntax highlighting colors
+* Syntax highlighting
 * Background/cursor colors
 * CodePen UI colors (light/dark)
 
