@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.2.4
+
+* Fixed JS error thrown on pages that don't have the page-wrap class
+* Fixed coloring of gear icon on the new post page
+
 ## v0.2.3
 
 ### Fixed
