@@ -32,7 +32,6 @@ body {
   font-size: 16px;
 }
 
-
 .CodeMirror {
   background: initial;
   font-size: 14px;
@@ -40,7 +39,6 @@ body {
   font-family: "Menlo", "Monaco", monospace;
   height: auto;
 }
-
 
 .CodeMirror-foldgutter-open:after {
   content: "\25BE";
@@ -53,7 +51,6 @@ body {
   margin: 0;
   overflow: hidden !important;
 }
-
 
 .page-wrap {
   display: flex;
@@ -145,6 +142,7 @@ body {
   text-transform: uppercase;
   animation: fade 1s ease-out;
 }
+
 .light .last-saved {
   color: #aaa;
   animation-name: fade--dark;
@@ -166,6 +164,7 @@ body {
     color: #aaa;
   }
 }
+
 .color-controls {
   overflow: auto;
   padding: 20px;
@@ -200,6 +199,7 @@ body {
   position: relative;
   bottom: 2px;
 }
+
 .cmEl__heading:after {
   content: '';
   clear: both;
@@ -219,6 +219,7 @@ body {
   line-height: 20px;
   fill: #aaa;
 }
+
 .cmEl__settings svg {
   display: block;
   height: 100%;
