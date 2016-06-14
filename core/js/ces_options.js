@@ -564,7 +564,7 @@ function buildBaseElements(){
   var cmSelect = new cmElement({
     prettyName: "Selected",
     selector: ".CodeMirror-focused .CodeMirror-selected, .CodeMirror-selected",
-    color: "#2C2C2C",
+    color: "#414141",
     description: "annoyingly hard to demo here, used for highlighted text",
     prop: "background-color",
     important: true
