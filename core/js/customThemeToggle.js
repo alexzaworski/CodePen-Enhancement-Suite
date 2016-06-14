@@ -10,13 +10,15 @@ var customThemeToggle = (function(){
 
 
   chrome.storage.local.get("cmCustomThemeEnabled", function(response){
-    var themeIsEnabled = !!response.cmCustomThemeEnabled;
-    enableTheme.checked = themeIsEnabled;
+    enableTheme.checked = !!response.cmCustomThemeEnabled;
     setEventListeners();
   });
 
 
   function setEventListeners() {
+    
+    // Need to manually add link functionality to the options page link.
+    // Alternatively, could just dynamically add the URL-- I'm not sure it matters much though.
     optionsLink.addEventListener("click", function(e){
 
       // needed to prevent the click from propagating to the checkbox
