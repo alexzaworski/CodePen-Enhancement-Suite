@@ -221,7 +221,6 @@ function cmElement(options){
     this.prettyName = options.prettyName;
     this.selector = options.selector;
     this.color = options.color;
-    this.stashedColor = this.color;
     this.description = options.description || false;
     this.master = cmTheme.getElement(options.master) || false;
     this.id = this.prettyName.toLowerCase().replace(/\s/g, "_");
