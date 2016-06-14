@@ -1,5 +1,13 @@
 # Change Log
 
+## v0.2.5
+
+### Fixed
+
+* Increased contrast of selection color on default custom theme
+* Fix bug that caused selection color of a custom theme to bleed through to the post editor
+* Fix bug that prevented the light base theme from activating
+
 ## v0.2.4
 
 ### Fixed

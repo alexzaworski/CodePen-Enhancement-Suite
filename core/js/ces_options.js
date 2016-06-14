@@ -567,7 +567,6 @@ function buildBaseElements(){
     color: "#414141",
     description: "annoyingly hard to demo here, used for highlighted text",
     prop: "background-color",
-    important: true
   });
 }
 
