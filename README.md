@@ -17,7 +17,7 @@ To install in dev mode:
 * [Resizable Pen Previews](#resizable-pen-previews)
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
 * [Preview Comments on Pens/Posts Before Submitting](#preview-comments-on-pensposts-before-submitting)
-* [Toggle Custom CSS on CodePen PRO User's Profiles](#toggle-custom-css-on-codepen-pro-users-profiles)
+* [Toggle Custom CSS on User Profiles](#toggle-custom-css-on-user-profiles)
 * [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
 
 ### Custom Editor Themes
@@ -54,7 +54,7 @@ Makes things a little bit easier if you find yourself locked out of a Pen/need t
 
 ![Disable JS Demo](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/disable_js_toggle.png)
 
-### Toggle Custom CSS on CodePen PRO User's Profiles
+### Toggle Custom CSS on User Profiles
 
 CodePen users can be pretty creative. Sometimes _too_ creative. This lets you turn off a user's custom profile CSS with a toggle switch.
 
