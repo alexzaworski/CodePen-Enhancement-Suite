@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.2.6
+
+### Fixed
+
+* Fixed problem with Pen preview resizer that prevented scrolling
+
 ## v0.2.5
 
 ### Fixed
