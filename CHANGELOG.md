@@ -8,7 +8,7 @@
 
 ### Fixed
 
-* Selected color from custom themes now applies to searched text
+* `Selected` color from custom themes now applies to searched text
 
 ## v0.2.6
 
