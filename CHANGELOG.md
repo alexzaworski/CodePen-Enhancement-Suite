@@ -1,5 +1,15 @@
 # Change Log
 
+## v0.3.0
+
+### Added
+
+* Added a button in the JavaScript Editor for easy access to linting
+
+### Fixed
+
+* Selected color from custom themes now applies to searched text
+
 ## v0.2.6
 
 ### Fixed
