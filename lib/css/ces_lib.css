@@ -140,3 +140,108 @@
   display: block!important; /* Battling inline styling */
   padding-top: 10px;
 }
+
+/* PROFILE PREVIEWS */
+
+.ces__profile-preview {
+  width: 450px;
+  background: #191919;
+  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 99;
+  border: 5px solid #47CF73;
+  border-radius: 2px;
+}
+
+.ces__pen {
+  width: 133px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: relative;
+
+}
+
+.ces__pen:last-of-type {
+  margin-right: 10px;
+}
+
+.ces__pen__link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top:0;
+  left:0; 
+}
+.ces__iframe-wrap {
+  background:white;
+  border: 3px solid #2F2F31;
+  height: 80px;
+  margin-bottom: 5px;
+}
+
+
+.ces__profile__pens {
+  display:flex;
+}
+
+.ces__pen__title {
+  color: #999;
+  font-size: .85rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow:hidden;
+  margin-left: 3px;
+  font-weight: bold;
+  letter-spacing: .02em;
+}
+
+.ces__iframe {
+  width: 500%;
+  height: 500%;
+  transform-origin: top left;
+  transform: scale(.2);
+}
+
+.ces__profile__avatar {
+  background:white;
+  height: 60px;
+  width: 60px;
+  border: 5px solid #1E1E1E;
+  float:left;
+  margin-right: 10px;
+}
+
+.ces__profile__name {
+  font-family: "Telefon";
+  font-weight: 900;
+  font-size: 1.3rem;
+}
+
+.ces__profile__username {
+  color: #999;
+}
+
+.ces__profile__header {
+  color:white;
+  padding: 10px;
+  background: #333 url("../assets/profile-bg.svg");
+  background-size: cover;
+}
+
+.ces__profile__stat {
+  color: white;
+}
+.ces__profile__stats {
+  background: black;
+  padding: 10px;
+  font-size: .85rem;
+}
+
+.ces__stats__link {
+  display:inline-block;
+  margin-right: 5px;
+  color: #999;
+}
