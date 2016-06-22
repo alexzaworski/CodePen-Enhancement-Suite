@@ -26,7 +26,6 @@ var profileCSSHandler = (function(){
     
   });
 
-
   // Grabs an array of usernames that represents the profiles
   // which currently have their styles disabled.
   function setUpDisabledProfiles() {
@@ -36,7 +35,6 @@ var profileCSSHandler = (function(){
       }
     });
   }
-
 
   // This listens for requests from the Hide Profile CSS module,
   // which is solely responsible for enabling/disabling the css on the page
@@ -51,7 +49,6 @@ var profileCSSHandler = (function(){
         sendDisableCSSEvent();
     }
   })
-
 
   // Sets up the onMessage listeners that interact with the Page Action popup.
   //
@@ -76,7 +73,6 @@ var profileCSSHandler = (function(){
     });
   }
 
-
   // Sends a copy of initData to the Page Action popup.
   //
   // It really feels like there ought to be a better way to handle this
@@ -89,7 +85,6 @@ var profileCSSHandler = (function(){
     chrome.runtime.sendMessage(initDataReady);
   }
 
-
   // Adds a username to the array of profiles
   // that have their CSS disabled, then saves to
   // Chrome's storage for later access.
@@ -99,7 +94,6 @@ var profileCSSHandler = (function(){
     }
     chrome.storage.local.set({"disabledProfiles":disabledProfiles});
   }
-
 
   // Exact opposite of the above.
   function removeFromDisabledProfiles () {
@@ -113,7 +107,6 @@ var profileCSSHandler = (function(){
   function isProfileCSSDisabled() {
     return (disabledProfiles.indexOf(user) != -1);
   }
-
 
   // These functions both dispatch events
   // which the Hide Profile CSS module listens for

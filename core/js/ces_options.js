@@ -107,6 +107,7 @@ var cmTheme = {
   stash: function() {
     this.needsSave = false;
     window.onbeforeunload = null;
+    
     // Unfortunately this has to use local storage instead of sync storage.
     // This is due to the item size limit of 4096 bytes in sync storage.
     this.lastSaved = String(new Date()).substr(4);
@@ -146,7 +147,6 @@ var cmTheme = {
     });
     return el || false;
   },
-
 
   setupGUI: function() {
     this.container = document.getElementById("controls");
@@ -569,7 +569,6 @@ function buildBaseElements(){
     prop: "background-color",
   });
 }
-
 
 chrome.storage.local.get("cmElements", function(response){
   if (!response.cmElements) {

@@ -60,7 +60,6 @@ CodePen users can be pretty creative. Sometimes _too_ creative. This lets you tu
 
 ![Disable CSS Demo](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/profile_css.gif)
 
-
 ## Why Didn't You Do (Thing)?
 
 (Thing) sounds like a really good idea. Open an issue and I'll see what I can do. Any bug reports are welcome too, please contribute!

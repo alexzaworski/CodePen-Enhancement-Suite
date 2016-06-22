@@ -16,18 +16,15 @@ function loadModule(scriptName, callback) {
   document.body.appendChild(scriptEl);
 }
 
-
 styleEl = document.createElement("link")
 styleEl.setAttribute("rel", "stylesheet")
 styleEl.setAttribute("type", "text/css")
 styleEl.setAttribute("href", chrome.extension.getURL("lib/css/ces_lib.css"));
 document.head.appendChild(styleEl);
 
-
 // First loads modules that don't depend on the current page.
 loadModule("globalVars");
 loadModule("utilScripts");
-
 
 var initData;
 
@@ -39,7 +36,6 @@ window.addEventListener("init-data-ready", function(evt) {
   loadConditionalModules();
 });
 
-
 // Handles the conditional loading of modules that
 // aren't needed on all pages.
 function loadConditionalModules() {
@@ -48,7 +44,6 @@ function loadConditionalModules() {
     || initData.__pageType === "explore-posts"){
     loadModule("profilePreviews");
   }
-
 
   if (initData.__pageType === "profile") {
     loadModule("hideProfileCSS");
@@ -70,7 +65,6 @@ function loadConditionalModules() {
     
   }
 }
-
 
 // Starts an event listener that waits for requests for 
 // absolute paths.

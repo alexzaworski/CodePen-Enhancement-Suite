@@ -12,7 +12,6 @@ var profileCSSToggle = (function(){
     }
   });
 
-
   // Requests initData after the init-data-ready listener is set
   sendToActiveTab({method:"request-init-data"});
 
@@ -21,7 +20,6 @@ var profileCSSToggle = (function(){
       sendToActiveTab({method:"disable-profile-css", data:disableCSS.checked});
     });
   }
-
 
   // Sets the initial state of the toggle based on the user's settings
   function setInitialState(username) {

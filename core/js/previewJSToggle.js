@@ -18,13 +18,11 @@ var previewJSToggle = (function(){
     }
   })
 
-
   function setInitialState() {
     chrome.tabs.getSelected(function(tab){
       disableJS.checked = URLParser(tab.url).hasParam("turn_off_js");
     });
   }
-
 
   function disablePreviewJS() {
     chrome.tabs.getSelected(function(tab){
@@ -36,7 +34,6 @@ var previewJSToggle = (function(){
     });
   }
 
-
   function enablePreviewJS() {
     chrome.tabs.getSelected(function(tab){
       var url = URLParser(tab.url);
@@ -46,7 +43,6 @@ var previewJSToggle = (function(){
       }
     });
   }
-
 
   // ...Didn't want to deal with this nonsense,
   // cleaned up this guy's (already small) library:

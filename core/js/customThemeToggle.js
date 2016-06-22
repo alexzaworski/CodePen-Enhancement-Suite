@@ -8,12 +8,10 @@ var customThemeToggle = (function(){
   var optionsLink = document.getElementById("options-link");
   var enableTheme = document.getElementById("enable-theme");
 
-
   chrome.storage.local.get("cmCustomThemeEnabled", function(response){
     enableTheme.checked = !!response.cmCustomThemeEnabled;
     setEventListeners();
   });
-
 
   function setEventListeners() {
     
@@ -34,7 +32,6 @@ var customThemeToggle = (function(){
         }
       });
     });
-
 
     enableTheme.addEventListener("click", function(){
       chrome.storage.local.set({"cmCustomThemeEnabled":enableTheme.checked}, function(){

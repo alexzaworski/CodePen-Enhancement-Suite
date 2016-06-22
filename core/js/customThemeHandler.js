@@ -55,7 +55,6 @@ var customThemeHandler = (function(){
     })
   })
 
-
   // Listens for messages from the theme toggle script (core/js/customThemeToggle.js)
   function setRuntimeListener() {
     chrome.runtime.onMessage.addListener(function(message){
@@ -69,7 +68,6 @@ var customThemeHandler = (function(){
       }
     });
   }
-
 
   // The reason we're removing the old style tag here is that if 
   // the user has CodePen's settings set to use a light theme but the custom
@@ -96,7 +94,6 @@ var customThemeHandler = (function(){
     ogTheme.remove();
   }
 
-
   function disableTheme() {
     styleEl.remove();
     document.head.appendChild(ogTheme);
@@ -106,7 +103,6 @@ var customThemeHandler = (function(){
       pageWrap.classList = ogClassList;
     }
   }
-
 
   function init() {
     setRuntimeListener();
