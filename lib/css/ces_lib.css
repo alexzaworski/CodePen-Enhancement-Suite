@@ -144,15 +144,37 @@
 /* PROFILE PREVIEWS */
 
 .ces__profile-preview {
-  width: 450px;
-  background: #191919;
-  box-shadow: 0 0 10px rgba(0,0,0,.5);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display:none;
   position: absolute;
-  top:0;
-  left:0;
   z-index: 99;
+  width: 450px;
+}
+
+.ces__profile-preview.active {
+  display:block;
+}
+
+.ces__profile-wrapper {
+  background: #191919;
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
   border: 5px solid #47CF73;
   border-radius: 2px;
+}
+
+.ces__profile-wrapper:after {
+  content: "";
+  display:block;
+  height: 18px;
+  width: 18px;
+  transform:rotate(45deg);
+  background: #47CF73;
+  position: absolute;
+  border-radius: 2px;
+  top: 7.5px;
+  z-index:-1;
+  left:35px; /* (padding in header + avatar width)/2 == centered over avatar */
 }
 
 .ces__pen {
@@ -161,7 +183,6 @@
   margin-top: 10px;
   margin-bottom: 10px;
   position: relative;
-
 }
 
 .ces__pen:last-of-type {
@@ -206,7 +227,7 @@
 }
 
 .ces__profile__avatar {
-  background:white;
+  background:#1E1E1E;
   height: 60px;
   width: 60px;
   border: 5px solid #1E1E1E;
@@ -218,6 +239,7 @@
   font-family: "Telefon";
   font-weight: 900;
   font-size: 1.3rem;
+  margin-top: 5px;
 }
 
 .ces__profile__username {

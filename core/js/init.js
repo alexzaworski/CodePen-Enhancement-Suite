@@ -44,7 +44,8 @@ window.addEventListener("init-data-ready", function(evt) {
 // aren't needed on all pages.
 function loadConditionalModules() {
   if ( initData.__pageType === "home"
-    || initData.__pageType === "explore-pens") {
+    || initData.__pageType === "explore-pens"
+    || initData.__pageType === "explore-posts"){
     loadModule("profilePreviews");
   }
 

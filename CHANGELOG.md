@@ -4,6 +4,7 @@
 
 ### Added
 
+* Added user previews when hovering over a profile link
 * Added a button in the JavaScript Editor for easy access to linting
 
 ### Fixed
