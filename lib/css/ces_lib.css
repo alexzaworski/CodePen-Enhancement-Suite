@@ -309,3 +309,57 @@
 .ces__isFollowing .ces__follow-user {
   display:none;
 }
+
+/* UPDATE MODAL STYLES */
+
+.ces__update-modal {
+  background: white;
+  position:fixed;
+  padding: 15px;
+  bottom: 15px;
+  left: 15px;
+  z-index:99;
+  border-radius: 2px;
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
+  color:#191919;
+}
+
+.ces__update__title {
+  border-bottom: 3px solid #0ebeff;
+  padding-bottom: 10px;
+  font-size: 1.2em;
+}
+
+.ces__update-modal ul {
+  padding-left: 18px;
+  margin-bottom: 10px;
+}
+
+.ces__update-modal a {
+  color: #0ebeff;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.ces__update-modal :last-child {
+  margin-bottom:0;
+}
+
+.ces__update__dismiss {
+  float:right;
+  padding: 5px 10px;
+}
+
+.ces__update__actions {
+  padding-top: 15px;
+  border-top: 1px solid #bbb;
+}
+
+.ces__text-like-button {
+  color: #0ebeff;
+  display:inline;
+  background:none;
+  border: 0;
+  cursor:pointer;
+  line-height: 34px; /* matches height of buttons */
+}

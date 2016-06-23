@@ -22,7 +22,8 @@
       "js":[
         "core/js/init.js",
         "core/js/profileCSSHandler.js",
-        "core/js/customThemeHandler.js"
+        "core/js/customThemeHandler.js",
+        "core/js/cesUpdates.js"
       ]
     }
   ],
