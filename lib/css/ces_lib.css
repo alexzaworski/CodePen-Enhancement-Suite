@@ -159,7 +159,7 @@
 .ces__profile-wrapper {
   background: #28282B;
   box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
-  border: 5px solid #47CF73;
+  border: 3px solid #0ebeff;
   border-radius: 2px;
 }
 
@@ -169,7 +169,7 @@
   height: 18px;
   width: 18px;
   transform:rotate(45deg);
-  background: #47CF73;
+  background: #0ebeff;
   position: absolute;
   border-radius: 2px;
   top: 7.5px;
@@ -194,11 +194,13 @@
   position: relative;
 }
 
-.ces__iframe-wrap:after {
+.ces__pen__link:hover ~ .ces__iframe-wrap:after {
   content: "";
   display:block;
   height: 3px;
-  background: green;
+  width: 100%;
+  background: #0ebeff;
+  bottom:0;
   
   position: absolute;
 }
@@ -251,6 +253,10 @@
   font-size: 1.3rem;
   margin-top: 5px;
   color:white;
+}
+
+.ces__pro-badge {
+  margin-left: 3px;
 }
 
 
