@@ -224,7 +224,6 @@ function cmElement(options){
     this.description = options.description || false;
     this.master = cmTheme.getElement(options.master) || false;
     this.id = this.prettyName.toLowerCase().replace(/\s/g, "_");
-    this.important = options.important ? "!important" : "";
     this.setupElements();
     cmTheme.addElement(this);
     if (this.master) {
@@ -242,7 +241,7 @@ function cmElement(options){
   }
 
   this.getStyleRule = function(){
-    return (this.selector + "{" + this.prop + ":" + this.color + this.important + "} ");
+    return (this.selector + "{" + this.prop + ":" + this.color + "} ");
   }
 
   this.syncTo = function(master) {
@@ -394,7 +393,6 @@ function buildBaseElements(){
     selector: ".CodeMirror-cursor",
     color: "#ffffff",
     prop: "border-left-color",
-    important: true
   })
 
   var cmDefault = new cmElement({
