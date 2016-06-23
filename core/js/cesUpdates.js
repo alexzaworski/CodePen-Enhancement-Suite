@@ -24,7 +24,7 @@ function init(){
                 <li>Added some bugs</li>
               </ul>
               <p>
-                <a target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite">See what's new</a>
+                <a target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite#new-profile-previews">See what's new</a>
               </p>
               <div class="ces__update__actions ces__clearfix">
                 <button id="ces__hide-forever" class="ces__text-like-button">Never show patch notes</button>
