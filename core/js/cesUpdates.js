@@ -18,7 +18,7 @@ chrome.storage.local.get("disable-patch-notes", function(response){
 function init(){
   var title = `CodePen Enhancement Suite ${currentPatch}`
   var notes = `<ul>
-                <li>On-hover profile previews while<br>browsing Pens</li>
+                <li>On-hover profile previews while<br>browsing Pens or Posts</li>
                 <li>Inline Lint button in JavaScript editor</li>
                 <li>Fixed some bugs</li>
                 <li>Added some bugs</li>
