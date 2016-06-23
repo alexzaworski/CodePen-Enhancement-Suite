@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.3.1
+
+### Fixed
+
+* Fixed bug with update modals that would cause the DOM to become unresponsive when creating a new Pen (my bad..)
+
 ## v0.3.0
 
 ### Added

@@ -16,7 +16,6 @@ chrome.storage.local.get("disable-patch-notes", function(response){
 })
 
 function init(){
-  var title = `CodePen Enhancement Suite ${currentPatch}`
   var notes = `<ul>
                 <li>On-hover profile previews while<br>browsing Pens or Posts</li>
                 <li>Inline Lint button in JavaScript editor</li>
@@ -31,13 +30,16 @@ function init(){
                 <button id="ces__dismiss" class="ces__update__dismiss button button-medium green">Dismiss</button>
               </div>`;
   var template = `<div id="ces__updates" class="ces__update-modal">
-                    <h3 class="ces__update__title">${title}</h3>
+                    <h3 class="ces__update__title">CodePen Enhancement Suite ${currentPatch}</h3>
                     <div class="ces__update__notes">
                       ${notes}
                     </div>
                   </div>`
 
-  document.body.innerHTML += template;
+var modal = document.createElement("div");
+modal.innerHTML = template;
+modal = modal.firstChild;
+document.body.appendChild(modal);
 
   var dismissButton = document.getElementById("ces__dismiss");
   var modal = document.getElementById("ces__updates");
