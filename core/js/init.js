@@ -39,9 +39,7 @@ window.addEventListener("init-data-ready", function(evt) {
 // Handles the conditional loading of modules that
 // aren't needed on all pages.
 function loadConditionalModules() {
-  if ( initData.__pageType === "home"
-    || initData.__pageType === "explore-pens"
-    || initData.__pageType === "explore-posts"){
+  if ( !!initData.__pageType.match(/^(home|explore-pens|pen|posts|details|explore-posts)$/) ){
     loadModule("profilePreviews");
   }
 
@@ -49,9 +47,7 @@ function loadConditionalModules() {
     loadModule("hideProfileCSS");
   }
 
-  if ( initData.__pageType === "pen" 
-    || initData.__pageType === "details"
-    || initData.__pageType === "posts" ) {
+  if ( !!initData.__pageType.match(/^(pen|details|posts)$/)) {
     loadModule("commentPreviews");
   }
 
