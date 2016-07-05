@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.4.0
+
+### Changed
+
+* Improved coverage on profile previews. Now they work on Pens, Posts, comments, etc. 
+
 ## v0.3.2
 
 ### Removed

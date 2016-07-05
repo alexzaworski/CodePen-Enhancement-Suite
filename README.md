@@ -1,4 +1,4 @@
-# CodePen Enhancement Suite v0.3.1
+# CodePen Enhancement Suite v0.4.0
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
@@ -13,7 +13,7 @@ To install in dev mode:
 
 ## Current Features
 
-* [\[NEW\] Profile Previews](#new-profile-previews)
+* [\[UPDATED\] Profile Previews](#profile-previews)
 * [Custom Editor Themes](#custom-editor-themes)
 * [Resizable Pen Previews](#resizable-pen-previews)
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
@@ -21,9 +21,15 @@ To install in dev mode:
 * [Toggle Custom CSS on User Profiles](#toggle-custom-css-on-user-profiles)
 * [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
 
-### \[NEW\] Profile Previews
+### Profile Previews
 
-Hover over a profile link while browsing Pens or Posts for more details on that user
+Hover over a profile link for more details on that user. Currently works in the following places:
+
+* Browsing Pens
+* Browsing Posts
+* Pen/Post Comments
+* Pen Details View
+
 
 ![Profile Hover Preview](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/profile-hover.gif)
 
