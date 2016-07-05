@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.3.2
+
+### Removed
+
+* Removed inline JS lint module (made obsolete by CodePen UI updates)
+
 ## v0.3.1
 
 ### Fixed

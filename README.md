@@ -14,7 +14,6 @@ To install in dev mode:
 ## Current Features
 
 * [\[NEW\] Profile Previews](#new-profile-previews)
-* [\[NEW\] Inline Linting Button for JavaScript](#new-inline-linting-button-for-javascript)
 * [Custom Editor Themes](#custom-editor-themes)
 * [Resizable Pen Previews](#resizable-pen-previews)
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
@@ -27,10 +26,6 @@ To install in dev mode:
 Hover over a profile link while browsing Pens or Posts for more details on that user
 
 ![Profile Hover Preview](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/profile-hover.gif)
-
-### \[NEW\] Inline Linting Button for Javascript
-
-Adds a button to the JavaScript editor to run JS Hint (previously burried in the Pen Settings modal).
 
 ### Custom Editor Themes
 
