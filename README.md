@@ -13,7 +13,8 @@ To install in dev mode:
 
 ## Current Features
 
-* [\[UPDATED\] Profile Previews](#profile-previews)
+* [\[NEW\] Quick-Add Your Pens as an External Resource](#new-quick-add-your-pens-as-an-external-resource)
+* [\[UPDATED\] Profile Previews](#updated-profile-previews)
 * [Custom Editor Themes](#custom-editor-themes)
 * [Resizable Pen Previews](#resizable-pen-previews)
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
@@ -21,7 +22,13 @@ To install in dev mode:
 * [Toggle Custom CSS on User Profiles](#toggle-custom-css-on-user-profiles)
 * [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
 
-### Profile Previews
+### [NEW] Quick-Add Your Pens as an External Resource
+
+Adds your most recent public Pens to the CSS/JS typeaheads.
+
+Want to quickly filter out your Pens? Just search `::`.
+
+### [UPDATED] Profile Previews
 
 Hover over a profile link for more details on that user. Currently works in the following places:
 

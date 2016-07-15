@@ -2,6 +2,10 @@
 
 ## v0.4.0
 
+### Added
+
+* Added Recent Pens Typeahead module — view your recent (public) Pens in the CSS/JS external resource typeaheads
+
 ### Changed
 
 * Improved coverage on profile previews. Now they work on Pens, Posts, comments, etc. 
