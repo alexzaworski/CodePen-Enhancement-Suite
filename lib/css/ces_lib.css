@@ -322,6 +322,7 @@
   border-radius: 2px;
   box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
   color:#191919;
+  max-width: 350px;
 }
 
 .ces__update__title {
@@ -337,6 +338,9 @@
 
 .ces__update-modal a {
   color: #0ebeff;
+}
+
+.ces__update-modal__cta {
   text-transform: uppercase;
   font-weight: bold;
 }

@@ -1,14 +1,15 @@
-var currentPatch = "0.3.0";
-
+var currentPatch = "0.4.0";
+var storageString = currentPatch + "-patch-notes";
 chrome.storage.local.get("disable-patch-notes", function(response){
   
   // Note: never ever change this to a different name, you'll bypass the setting
+  // and serve patch notes to people who disabled them which is super obnoxious
   if (!!response["disable-patch-notes"]) {
     return;
   }
   else {
-    chrome.storage.local.get("0.3.0-patch-notes", function(response){
-      if (!!!response[currentPatch + "-patch-notes"]) {
+    chrome.storage.local.get(storageString, function(response){
+      if (!response[storageString]) {
         init();
       }
     })
@@ -17,13 +18,13 @@ chrome.storage.local.get("disable-patch-notes", function(response){
 
 function init(){
   var notes = `<ul>
-                <li>On-hover profile previews while<br>browsing Pens or Posts</li>
-                <li>Inline Lint button in JavaScript editor</li>
-                <li>Fixed some bugs</li>
+                <li>Adds your recent public Pens to the external resource typeaheads</li>
+                <li>On-hover profile previews now work in way more spots</li>
+                <li>Added obnoxious begging for reviews <a href="https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim">(jk but seriously, how am I doing?</a></li>
                 <li>Added some bugs</li>
               </ul>
               <p>
-                <a target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite#new-profile-previews">See what's new</a>
+                <a class="ces__update-modal__cta" target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite#new-profile-previews">See what's new</a>
               </p>
               <div class="ces__update__actions ces__clearfix">
                 <button id="ces__hide-forever" class="ces__text-like-button">Never show patch notes</button>
@@ -45,7 +46,7 @@ document.body.appendChild(modal);
   var modal = document.getElementById("ces__updates");
   dismissButton.addEventListener("click", function(){
     modal.parentNode.removeChild(modal);
-    chrome.storage.local.set({"0.3.0-patch-notes":true});
+    chrome.storage.local.set({storageString:true});
   });
 
   var hideForever = document.getElementById("ces__hide-forever");
