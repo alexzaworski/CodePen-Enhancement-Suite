@@ -17,15 +17,19 @@ chrome.storage.local.get("disable-patch-notes", function(response){
 })
 
 function init(){
-  var notes = `<ul>
+  var notes = `
+              <h5>New Features</h5>
+              <ul>
                 <li>Adds your recent public Pens to the external resource typeaheads</li>
-                <li>On-hover profile previews now work in way more spots</li>
-                <li>Added obnoxious begging for reviews <a href="https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim">(jk but seriously, how am I doing?</a></li>
-                <li>Added some bugs</li>
               </ul>
-              <p>
-                <a class="ces__update-modal__cta" target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite#new-profile-previews">See what's new</a>
-              </p>
+              <h5>Other Stuff</h5>
+              <ul>
+                <li>On-hover profile previews now work on more pages</li>
+                <li>Added obnoxious pleas for reviews<br><a href="https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim">(jk but seriously, how am I doing?)</a></li>
+                <li>Added joke of the day</li>
+                <li>Sobered up, removed joke of the day</li>
+              </ul>
+                <a class="ces__update-modal__cta" target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite#new-profile-previews">See what's new »</a>
               <div class="ces__update__actions ces__clearfix">
                 <button id="ces__hide-forever" class="ces__text-like-button">Never show patch notes</button>
                 <button id="ces__dismiss" class="ces__update__dismiss button button-medium green">Dismiss</button>

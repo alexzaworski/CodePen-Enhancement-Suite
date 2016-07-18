@@ -323,12 +323,14 @@
   box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
   color:#191919;
   max-width: 350px;
+  font-size: 13px;
 }
 
 .ces__update__title {
   border-bottom: 3px solid #0ebeff;
   padding-bottom: 10px;
   font-size: 1.2em;
+  margin-bottom: 15px;
 }
 
 .ces__update-modal ul {
@@ -336,13 +338,21 @@
   margin-bottom: 10px;
 }
 
+.ces__update-modal li {
+  margin-bottom: 5px;
+}
+
 .ces__update-modal a {
   color: #0ebeff;
 }
 
 .ces__update-modal__cta {
-  text-transform: uppercase;
   font-weight: bold;
+  display: block;
+  padding: 10px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
 }
 
 .ces__update-modal :last-child {
@@ -352,14 +362,11 @@
 .ces__update__dismiss {
   float:right;
   padding: 5px 10px;
-}
-
-.ces__update__actions {
-  padding-top: 15px;
-  border-top: 1px solid #bbb;
+  margin-right: 0;
 }
 
 .ces__text-like-button {
+  font-size: 1em;
   color: #0ebeff;
   display:inline;
   background:none;
