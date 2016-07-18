@@ -50,7 +50,9 @@ document.body.appendChild(modal);
   var modal = document.getElementById("ces__updates");
   dismissButton.addEventListener("click", function(){
     modal.parentNode.removeChild(modal);
-    chrome.storage.local.set({storageString:true});
+    var settingsObj = {}
+    settingsObj[storageString] = true;
+    chrome.storage.local.set(settingsObj);
   });
 
   var hideForever = document.getElementById("ces__hide-forever");
