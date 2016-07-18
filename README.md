@@ -28,14 +28,14 @@ Adds your most recent public Pens to the CSS/JS typeaheads.
 
 Want to quickly filter out your Pens? Just search `::`.
 
+![Recent Pens Typeahead](/demo_images/typeahead.gif)
+
 ### [UPDATED] Profile Previews
 
 Hover over a profile link for more details on that user. Currently works in the following places:
 
-* Browsing Pens
-* Browsing Posts
-* Pen/Post Comments
-* Pen Details View
+* All grid views
+* Single Pen/Post pages
 
 
 ![Profile Hover Preview](https://s3-us-west-2.amazonaws.com/s.cdpn.io/186499/profile-hover.gif)
