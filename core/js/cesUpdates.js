@@ -29,7 +29,7 @@ function init(){
                 <li>Added joke of the day</li>
                 <li>Sobered up, removed joke of the day</li>
               </ul>
-                <a class="ces__update-modal__cta" target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite#new-profile-previews">See what's new »</a>
+                <a class="ces__update-modal__cta" target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite#new-quick-add-your-pens-as-an-external-resource">See what's new »</a>
               <div class="ces__update__actions ces__clearfix">
                 <button id="ces__hide-forever" class="ces__text-like-button">Never show patch notes</button>
                 <button id="ces__dismiss" class="ces__update__dismiss button button-medium green">Dismiss</button>
