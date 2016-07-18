@@ -20,7 +20,7 @@ function init(){
   var notes = `
               <h5>New Features</h5>
               <ul>
-                <li>Adds your recent public Pens to the external resource typeaheads</li>
+                <li>Adds your recent public Pens to the external resource typeaheads <a href="https://github.com/alexzaworski/CodePen-Enhancement-Suite/tree/0.4.0#new-quick-add-your-pens-as-an-external-resource">(example here)</a>.</li>
               </ul>
               <h5>Other Stuff</h5>
               <ul>
