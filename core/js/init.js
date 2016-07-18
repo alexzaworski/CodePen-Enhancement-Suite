@@ -39,7 +39,7 @@ window.addEventListener("init-data-ready", function(evt) {
 // Handles the conditional loading of modules that
 // aren't needed on all pages.
 function loadConditionalModules() {
-  if ( !!initData.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections)$/) ){
+  if ( !!initData.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections|full)$/) ){
     loadModule("profilePreviews");
   }
 
