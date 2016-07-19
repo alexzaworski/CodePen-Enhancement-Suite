@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.4.1
+
+### Fixed
+
+* Fix link to typeahead in patch notes modal
+
 ## v0.4.0
 
 ### Added
