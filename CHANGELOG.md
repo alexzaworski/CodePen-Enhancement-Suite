@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.4.2
+
+### Fixed
+
+* Added underline to matching brackets while using a custom theme
+
 ## v0.4.1
 
 ### Fixed
