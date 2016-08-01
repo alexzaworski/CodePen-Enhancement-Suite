@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.4.3
+
+### Fixed
+
+* Attempting to load conditional modules on pages that don't have an associated pageType no longer causes an error
+
 ## v0.4.2
 
 ### Fixed
