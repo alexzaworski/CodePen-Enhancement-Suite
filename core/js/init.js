@@ -16,9 +16,9 @@ function loadModule(scriptName, callback) {
   document.body.appendChild(scriptEl);
 }
 
-styleEl = document.createElement("link")
-styleEl.setAttribute("rel", "stylesheet")
-styleEl.setAttribute("type", "text/css")
+styleEl = document.createElement("link");
+styleEl.setAttribute("rel", "stylesheet");
+styleEl.setAttribute("type", "text/css");
 styleEl.setAttribute("href", chrome.extension.getURL("lib/css/ces_lib.css"));
 document.head.appendChild(styleEl);
 

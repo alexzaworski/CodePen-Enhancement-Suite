@@ -16,7 +16,7 @@ var previewJSToggle = (function(){
     else {
       enablePreviewJS();
     }
-  })
+  });
 
   function setInitialState() {
     chrome.tabs.getSelected(function(tab){
@@ -74,11 +74,11 @@ var previewJSToggle = (function(){
         params = params || [];
         params.push(name + '=' + value);
         params.forEach(function(param){
-          if (query.length > 0) { query += "&" };
+          if (query.length > 0) { query += "&"; }
           query += param;
         });
-        if (query.length > 0) { query = "?" + query };
-        if (hash.length > 0) { query = query + "#" + hash };
+        if (query.length > 0) { query = "?" + query; }
+        if (hash.length > 0) { query = query + "#" + hash; }
         return path + query;
       },
       hasParam: function(name){
@@ -103,14 +103,14 @@ var previewJSToggle = (function(){
           });
           params = newparams ;
           params.forEach(function(param){
-            if (query.length > 0) { query += "&" };
+            if (query.length > 0) { query += "&"; }
             query += param;
-          })
+          });
         }
-        if (query.length > 0) { query = "?" + query };
-        if (hash.length > 0) { query = query + "#" + hash };
+        if (query.length > 0) { query = "?" + query; }
+        if (hash.length > 0) { query = query + "#" + hash; }
         return path + query;
       },
-    }
+    };
   }
 })();

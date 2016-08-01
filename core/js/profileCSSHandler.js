@@ -44,11 +44,11 @@ var profileCSSHandler = (function(){
   // so it can remove the CSS immediately. This needs to be done this way since
   // the Page Action popup won't do anything until it's actually clicked
   // by the user (ie the CSS won't be removed at all until the user takes action).
-  window.addEventListener("request-css-event", function(){;
+  window.addEventListener("request-css-event", function(){
     if (isProfileCSSDisabled(user, disabledProfiles)) {
         sendDisableCSSEvent();
     }
-  })
+  });
 
   // Sets up the onMessage listeners that interact with the Page Action popup.
   //
@@ -58,7 +58,7 @@ var profileCSSHandler = (function(){
   function setRuntimeListeners() {
     chrome.runtime.onMessage.addListener(function(message){
       if (message.method === "disable-profile-css") {
-        if ( message.data == true ) {
+        if ( message.data === true ) {
           sendDisableCSSEvent();
           addToDisabledProfiles(user, disabledProfiles);
         }
@@ -81,7 +81,7 @@ var profileCSSHandler = (function(){
     var initDataReady = {
       method: "init-data-ready",
       data: initData
-    }
+    };
     chrome.runtime.sendMessage(initDataReady);
   }
 

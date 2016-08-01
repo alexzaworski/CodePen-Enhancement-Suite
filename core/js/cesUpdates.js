@@ -12,9 +12,9 @@ chrome.storage.local.get("disable-patch-notes", function(response){
       if (!response[storageString]) {
         init();
       }
-    })
+    });
   }
-})
+});
 
 function init(){
   var notes = `
@@ -39,18 +39,16 @@ function init(){
                     <div class="ces__update__notes">
                       ${notes}
                     </div>
-                  </div>`
+                  </div>`;
 
-var modal = document.createElement("div");
-modal.innerHTML = template;
-modal = modal.firstChild;
-document.body.appendChild(modal);
-
+  var modal = document.createElement("div");
+  modal.innerHTML = template;
+  modal = modal.firstChild;
+  document.body.appendChild(modal);
   var dismissButton = document.getElementById("ces__dismiss");
-  var modal = document.getElementById("ces__updates");
   dismissButton.addEventListener("click", function(){
     modal.parentNode.removeChild(modal);
-    var settingsObj = {}
+    var settingsObj = {};
     settingsObj[storageString] = true;
     chrome.storage.local.set(settingsObj);
   });
