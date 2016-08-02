@@ -1,4 +1,4 @@
-(function(){
+(function() {
   "use strict";
 
   /*
@@ -7,7 +7,7 @@
 
   // http://stackoverflow.com/a/9251169
   var escapeHTML = (function() {
-    var escape = document.createElement('textarea');
+    var escape = document.createElement("textarea");
     return function(html) {
       escape.textContent = html;
       return escape.innerHTML;
@@ -16,8 +16,9 @@
 
   // https://gist.github.com/fatihacet/1290216
   var pubsub = {};
-  (function(q) { 
-    var topics = {}, subUid = -1;
+  (function(q) {
+    var topics = {},
+        subUid = -1;
     q.subscribe = function(topic, func) {
       if (!topics[topic]) {
         topics[topic] = [];

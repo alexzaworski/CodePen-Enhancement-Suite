@@ -1,9 +1,9 @@
 module.exports = function(grunt) {
-  require('load-grunt-tasks')(grunt);
+  require("load-grunt-tasks")(grunt);
   grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+    pkg: grunt.file.readJSON("package.json"),
     jshint: {
-      all: ["Gruntfile.js", "core/**/*.js", "lib/**/*.js"],
+      files: ["Gruntfile.js", "core/**/*.js", "lib/**/*.js"],
       options: {
         browser: true,
         globals: {
@@ -11,6 +11,13 @@ module.exports = function(grunt) {
         },
         esversion: 6
       },
+    },
+    jscs: {
+      files: ["Gruntfile.js", "core/**/*.js", "lib/**/*.js"],
+      options: {
+        preset: "google",
+        validateQuoteMarks: "\""
+      }
     }
   });
 };
