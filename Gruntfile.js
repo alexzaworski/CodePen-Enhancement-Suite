@@ -16,7 +16,12 @@ module.exports = function(grunt) {
       files: ["Gruntfile.js", "core/**/*.js", "lib/**/*.js"],
       options: {
         preset: "google",
-        validateQuoteMarks: "\""
+        validateQuoteMarks: "\"",
+        maximumLineLength: false,
+        fix: true,
+        requireCamelCaseOrUpperCaseIdentifiers: {
+          ignoreProperties: true
+        }
       }
     }
   });

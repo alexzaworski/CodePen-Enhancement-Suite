@@ -1,35 +1,34 @@
 /*
 * ---
-* Acts as the middle ground between the Page Action logic (core/js/popup.js) and 
+* Acts as the middle ground between the Page Action logic (core/js/popup.js) and
 * the profile css module (lib/modules/hideProfileCSS.js)
 * ---
 */
 
-var profileCSSHandler = (function(){
-  var disabledProfiles = [],
-      user;
+var profileCSSHandler = (function() {
+  var disabledProfiles = [];
+  var user;
 
-  // Needs to have access to the initData object in order to determine
+  // Needs to have access to the INIT_DATA object in order to determine
   // if all of the profile-related listeners etc need to be enabled
   window.addEventListener("init-data-ready", function() {
-    
+
     // If we're not on a profile page we can just bail and skip doing anything else
-    if (initData.__pageType != "profile") {
+    if (INIT_DATA.__pageType != "profile") {
       return;
     }
 
     // Otherwise record what profile we're currently viewing
     // and handle things accordingly
-    user = initData.__profiled.username;
+    user = INIT_DATA.__profiled.username;
     setRuntimeListeners();
     setUpDisabledProfiles();
-    
   });
 
   // Grabs an array of usernames that represents the profiles
   // which currently have their styles disabled.
   function setUpDisabledProfiles() {
-    chrome.storage.local.get("disabledProfiles", function(data){
+    chrome.storage.local.get("disabledProfiles", function(data) {
       if (data.hasOwnProperty("disabledProfiles")) {
         disabledProfiles = data.disabledProfiles;
       }
@@ -44,9 +43,9 @@ var profileCSSHandler = (function(){
   // so it can remove the CSS immediately. This needs to be done this way since
   // the Page Action popup won't do anything until it's actually clicked
   // by the user (ie the CSS won't be removed at all until the user takes action).
-  window.addEventListener("request-css-event", function(){
+  window.addEventListener("request-css-event", function() {
     if (isProfileCSSDisabled(user, disabledProfiles)) {
-        sendDisableCSSEvent();
+      sendDisableCSSEvent();
     }
   });
 
@@ -56,13 +55,12 @@ var profileCSSHandler = (function(){
   // the messages relayed to the Hide Profile CSS module which then strips
   // or adds the style tags accordingly.
   function setRuntimeListeners() {
-    chrome.runtime.onMessage.addListener(function(message){
+    chrome.runtime.onMessage.addListener(function(message) {
       if (message.method === "disable-profile-css") {
-        if ( message.data === true ) {
+        if (message.data === true) {
           sendDisableCSSEvent();
           addToDisabledProfiles(user, disabledProfiles);
-        }
-        else {
+        } else {
           sendEnableCSSEvent();
           removeFromDisabledProfiles(user, disabledProfiles);
         }
@@ -73,14 +71,14 @@ var profileCSSHandler = (function(){
     });
   }
 
-  // Sends a copy of initData to the Page Action popup.
+  // Sends a copy of INIT_DATA to the Page Action popup.
   //
   // It really feels like there ought to be a better way to handle this
   // but I'm not sure what it is.
   function prepareInitDataForPopup() {
     var initDataReady = {
       method: "init-data-ready",
-      data: initData
+      data: INIT_DATA
     };
     chrome.runtime.sendMessage(initDataReady);
   }
@@ -92,16 +90,16 @@ var profileCSSHandler = (function(){
     if (disabledProfiles.indexOf(user) === -1) {
       disabledProfiles.push(user);
     }
-    chrome.storage.local.set({"disabledProfiles":disabledProfiles});
+    chrome.storage.local.set({"disabledProfiles": disabledProfiles});
   }
 
   // Exact opposite of the above.
-  function removeFromDisabledProfiles () {
+  function removeFromDisabledProfiles() {
     var index = disabledProfiles.indexOf(user);
     if (index != -1) {
       disabledProfiles.splice(index, 1);
     }
-    chrome.storage.local.set({"disabledProfiles":disabledProfiles});
+    chrome.storage.local.set({"disabledProfiles": disabledProfiles});
   }
 
   function isProfileCSSDisabled() {

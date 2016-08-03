@@ -5,41 +5,40 @@
 // Pretty much all of this is straightforward. Leverages a tiny
 // URL parsing library I nabbed off stackoverflow.
 
-var previewJSToggle = (function(){
+var previewJSToggle = (function() {
 
   var disableJS = document.getElementById("disable-js");
   setInitialState();
-  disableJS.addEventListener("click", function(){
+  disableJS.addEventListener("click", function() {
     if (disableJS.checked) {
       disablePreviewJS();
-    }
-    else {
+    } else {
       enablePreviewJS();
     }
   });
 
   function setInitialState() {
-    chrome.tabs.getSelected(function(tab){
+    chrome.tabs.getSelected(function(tab) {
       disableJS.checked = URLParser(tab.url).hasParam("turn_off_js");
     });
   }
 
   function disablePreviewJS() {
-    chrome.tabs.getSelected(function(tab){
+    chrome.tabs.getSelected(function(tab) {
       var url = URLParser(tab.url);
       if (!url.hasParam("turn_off_js")) {
         url = url.setParam("turn_off_js", true);
-        chrome.tabs.update({url:url});
+        chrome.tabs.update({url: url});
       }
     });
   }
 
   function enablePreviewJS() {
-    chrome.tabs.getSelected(function(tab){
+    chrome.tabs.getSelected(function(tab) {
       var url = URLParser(tab.url);
       if (url.hasParam("turn_off_js")) {
         url = url.removeParam("turn_off_js");
-        chrome.tabs.update({url:url});
+        chrome.tabs.update({url: url});
       }
     });
   }
@@ -50,10 +49,10 @@ var previewJSToggle = (function(){
   //
   // Certainly isn't optimal but it will work for now.
   function URLParser(u) {
-    var path="",
-        query="",
-        hash="",
-        params;
+    var path = "";
+    var query = "";
+    var hash = "";
+    var params;
 
     if (u.indexOf("#") > 0) {
       hash = u.substr(u.indexOf("#") + 1);
@@ -63,17 +62,17 @@ var previewJSToggle = (function(){
     if (u.indexOf("?") > 0) {
       path = u.substr(0 , u.indexOf("?"));
       query = u.substr(u.indexOf("?") + 1);
-      params = query.split('&');
+      params = query.split("&");
+    } else {
+      path = u;
     }
 
-    else { path = u; }
-
     return {
-      setParam: function(name, value){
+      setParam: function(name, value) {
         query = "";
         params = params || [];
-        params.push(name + '=' + value);
-        params.forEach(function(param){
+        params.push(name + "=" + value);
+        params.forEach(function(param) {
           if (query.length > 0) { query += "&"; }
           query += param;
         });
@@ -81,28 +80,28 @@ var previewJSToggle = (function(){
         if (hash.length > 0) { query = query + "#" + hash; }
         return path + query;
       },
-      hasParam: function(name){
+      hasParam: function(name) {
         if (!params) {
           return;
         }
         for (var i = 0; i < params.length; i++) {
-          var pair = params[i].split('=');
-          if (decodeURIComponent(pair[0]) == name) { return true; }
+          var pair = params[ i ].split("=");
+          if (decodeURIComponent(pair[ 0 ]) == name) { return true; }
         }
         return false;
       },
-      removeParam: function(name){
+      removeParam: function(name) {
         query = "";
         if (params) {
           var newparams = [];
-          params.forEach(function(param){
-            var pair = param.split('=');
-            if (decodeURIComponent(pair[0]) != name) {
+          params.forEach(function(param) {
+            var pair = param.split("=");
+            if (decodeURIComponent(pair[ 0 ]) != name) {
               newparams.push(param);
             }
           });
           params = newparams ;
-          params.forEach(function(param){
+          params.forEach(function(param) {
             if (query.length > 0) { query += "&"; }
             query += param;
           });

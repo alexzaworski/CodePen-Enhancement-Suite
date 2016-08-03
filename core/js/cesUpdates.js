@@ -1,22 +1,21 @@
 var currentPatch = "0.4.0";
 var storageString = currentPatch + "-patch-notes";
-chrome.storage.local.get("disable-patch-notes", function(response){
-  
+chrome.storage.local.get("disable-patch-notes", function(response) {
+
   // Note: never ever change this to a different name, you'll bypass the setting
   // and serve patch notes to people who disabled them which is super obnoxious
-  if (!!response["disable-patch-notes"]) {
+  if (!!response[ "disable-patch-notes" ]) {
     return;
-  }
-  else {
-    chrome.storage.local.get(storageString, function(response){
-      if (!response[storageString]) {
+  } else {
+    chrome.storage.local.get(storageString, function(response) {
+      if (!response[ storageString ]) {
         init();
       }
     });
   }
 });
 
-function init(){
+function init() {
   var notes = `
               <h5>New Features</h5>
               <ul>
@@ -46,16 +45,16 @@ function init(){
   modal = modal.firstChild;
   document.body.appendChild(modal);
   var dismissButton = document.getElementById("ces__dismiss");
-  dismissButton.addEventListener("click", function(){
+  dismissButton.addEventListener("click", function() {
     modal.parentNode.removeChild(modal);
     var settingsObj = {};
-    settingsObj[storageString] = true;
+    settingsObj[ storageString ] = true;
     chrome.storage.local.set(settingsObj);
   });
 
   var hideForever = document.getElementById("ces__hide-forever");
-  hideForever.addEventListener("click", function(){
+  hideForever.addEventListener("click", function() {
     modal.parentNode.removeChild(modal);
-     chrome.storage.local.set({"disable-patch-notes":true});
+    chrome.storage.local.set({"disable-patch-notes": true});
   });
 }

@@ -17,14 +17,14 @@
   // https://gist.github.com/fatihacet/1290216
   var pubsub = {};
   (function(q) {
-    var topics = {},
-        subUid = -1;
+    var topics = {};
+    var subUid = -1;
     q.subscribe = function(topic, func) {
-      if (!topics[topic]) {
-        topics[topic] = [];
+      if (!topics[ topic ]) {
+        topics[ topic ] = [];
       }
       var token = (++subUid).toString();
-      topics[topic].push({
+      topics[ topic ].push({
         token: token,
         func: func
       });
@@ -32,14 +32,14 @@
     };
 
     q.publish = function(topic, args) {
-      if (!topics[topic]) {
+      if (!topics[ topic ]) {
         return false;
       }
-      setTimeout(function(){
-        var subscribers = topics[topic],
-            len = subscribers ? subscribers.length : 0;
+      setTimeout(function() {
+        var subscribers = topics[ topic ];
+        var len = subscribers ? subscribers.length : 0;
         while (len--) {
-          subscribers[len].func(args);
+          subscribers[ len ].func(args);
         }
       }, 0);
       return true;
@@ -48,10 +48,10 @@
 
     q.unsubscribe = function(token) {
       for (var m in topics) {
-        if (topics[m]) {
-          for (var i = 0, j = topics[m].length; i < j; i++) {
-            if (topics[m][i].token === token) {
-              topics[m].splice(i, 1);
+        if (topics[ m ]) {
+          for (var i = 0, j = topics[ m ].length; i < j; i++) {
+            if (topics[ m ][ i ].token === token) {
+              topics[ m ].splice(i, 1);
               return token;
             }
           }
@@ -72,7 +72,7 @@
     styleEl: document.createElement("style"),
     isLightTheme: false,
 
-    appendStyles: function(){
+    appendStyles: function() {
       document.head.appendChild(this.styleEl);
     },
 
@@ -84,23 +84,22 @@
       if (needsSave && !this.needsSave) {
         this.setUnload();
       }
-      
       this.styleEl.innerHTML = this.buildStyles();
     },
 
     // Concatonates all elements' style rules into one string
-    buildStyles: function(){
+    buildStyles: function() {
       var styles = "";
-      this.elements.forEach(function(element){
+      this.elements.forEach(function(element) {
         styles += element.getStyleRule();
       });
       return styles;
     },
 
-    setUnload: function(){
+    setUnload: function() {
       this.needsSave = true;
       window.onbeforeunload = function(e) {
-      return 'Your changes are NOT saved, if you continue they will be discarded.';
+        return "Your changes are NOT saved, if you continue they will be discarded.";
       };
     },
 
@@ -108,12 +107,12 @@
     stash: function() {
       this.needsSave = false;
       window.onbeforeunload = null;
-      
+
       // Unfortunately this has to use local storage instead of sync storage.
       // This is due to the item size limit of 4096 bytes in sync storage.
       this.lastSaved = String(new Date()).substr(4);
       var elementStash = [];
-      this.elements.forEach(function(element){
+      this.elements.forEach(function(element) {
         var toStash = {
           prettyName: element.prettyName,
           selector: element.selector,
@@ -124,13 +123,13 @@
         };
         elementStash.push(toStash);
       });
-      chrome.storage.local.set({"cmElements":elementStash});
-      chrome.storage.local.set({"cmCSS":this.buildStyles()});
-      chrome.storage.local.set({"cmIsLightTheme":this.isLightTheme});
+      chrome.storage.local.set({"cmElements": elementStash});
+      chrome.storage.local.set({"cmCSS": this.buildStyles()});
+      chrome.storage.local.set({"cmIsLightTheme": this.isLightTheme});
       chrome.storage.local.set({"cmLastSaved": this.lastSaved});
     },
 
-    revert: function(){
+    revert: function() {
       location.reload();
     },
 
@@ -139,9 +138,9 @@
     },
 
     // Given an ID, retrieves an element and returns it
-    getElement : function(id) {
+    getElement: function(id) {
       var el;
-      this.elements.some(function(element){
+      this.elements.some(function(element) {
         if (element.id === id) {
           el = element;
         }
@@ -158,17 +157,17 @@
       this.pageWrap = document.getElementById("page-wrap");
     },
 
-    addGUIEventListeners: function(){
-      this.revertButton.addEventListener("click", function(){
+    addGUIEventListeners: function() {
+      this.revertButton.addEventListener("click", function() {
         this.revert();
       }.bind(this));
 
-      this.saveButton.addEventListener("click", function(){
+      this.saveButton.addEventListener("click", function() {
         this.stash();
         this.displaySaveTime();
       }.bind(this));
 
-      this.baseUIToggle.addEventListener("click", function(){
+      this.baseUIToggle.addEventListener("click", function() {
         this.isLightTheme = this.baseUIToggle.checked;
         if (!this.needsSave) {
           this.setUnload();
@@ -179,8 +178,8 @@
       // Couldn't figure out a better way to do this quickly,
       // should revisit at some point 'cause this is awfully janky...
       // Ideally wouldn't use JS at all
-      for (var i=0; i<this.fauxLabels.length; i++) {
-        this.fauxLabels[i].addEventListener("click", function(){
+      for (var i = 0; i < this.fauxLabels.length; i++) {
+        this.fauxLabels[ i ].addEventListener("click", function() {
           this.baseUIToggle.click();
         }.bind(this));
       }
@@ -197,9 +196,9 @@
       document.getElementById("save-info").classList.remove("save-info--hidden");
     },
 
-    drawGUI: function(){
+    drawGUI: function() {
       this.displaySaveTime();
-      this.elements.forEach(function(element){
+      this.elements.forEach(function(element) {
         element.setupSelectEl();
         element.draw();
       });
@@ -216,7 +215,7 @@
     }
   };
 
-  var cmElement = function(options) {
+  var CMElement = function(options) {
     this.prop = options.prop || "color";
     this.prettyName = options.prettyName;
     this.selector = options.selector;
@@ -227,15 +226,15 @@
     this.setupElements();
     cmTheme.addElement(this);
     if (this.master) {
-      this.syncTo(this.master); 
+      this.syncTo(this.master);
     }
   };
 
-  cmElement.prototype.getStyleRule = function() {
+  CMElement.prototype.getStyleRule = function() {
     return (this.selector + "{" + this.prop + ":" + this.color + "} ");
   };
 
-  cmElement.prototype.updateColor = function(color, themeNeedsSave) {
+  CMElement.prototype.updateColor = function(color, themeNeedsSave) {
     themeNeedsSave = !!themeNeedsSave;
     this.color = color;
     this.inputEl.value = color;
@@ -244,25 +243,25 @@
     cmTheme.updateStyles(themeNeedsSave);
   };
 
-  cmElement.prototype.syncTo = function(master) {
+  CMElement.prototype.syncTo = function(master) {
     if (this.master) {
       pubsub.unsubscribe(this.token);
     }
     this.master = master;
     this.updateColor(master.color);
-    this.token = pubsub.subscribe(master.id, function(color){
+    this.token = pubsub.subscribe(master.id, function(color) {
       this.updateColor(color);
     }.bind(this));
   };
 
-  cmElement.prototype.unSync = function() {
+  CMElement.prototype.unSync = function() {
     if (!this.master) { return; }
     this.master = false;
     this.selectEl.value = "none";
     pubsub.unsubscribe(this.token);
   };
 
-  cmElement.prototype.setupInputEl = function() {
+  CMElement.prototype.setupInputEl = function() {
     var fauxEl = document.createElement("div");
     fauxEl.classList.add("cmEl__fauxColor");
     this.fauxEl = fauxEl;
@@ -270,7 +269,7 @@
     inputEl.classList.add("cmEl__color");
     inputEl.type = "color";
     inputEl.value = this.color;
-    inputEl.addEventListener("input", function(){
+    inputEl.addEventListener("input", function() {
       this.unSync();
       this.updateColor(this.inputEl.value, true);
     }.bind(this));
@@ -278,17 +277,17 @@
     this.fauxEl.appendChild(this.inputEl);
   };
 
-  cmElement.prototype.setupHeadingEl = function() {
+  CMElement.prototype.setupHeadingEl = function() {
     var headingEl = document.createElement("h2");
     headingEl.classList.add("cmEl__heading");
     headingEl.innerHTML = this.prettyName;
-    headingEl.addEventListener("click", function(){
+    headingEl.addEventListener("click", function() {
       this.inputEl.click();
     }.bind(this));
     this.headingEl = headingEl;
   };
 
-  cmElement.prototype.setupDescriptionEl = function() {
+  CMElement.prototype.setupDescriptionEl = function() {
     if (!this.description) {
       return;
     }
@@ -298,7 +297,7 @@
     this.descriptionEl = descriptionEl;
   };
 
-  cmElement.prototype.setupLabelEl = function() {
+  CMElement.prototype.setupLabelEl = function() {
     var labelEl = document.createElement("label");
     labelEl.htmlFor = this.id;
     labelEl.classList.add("cmEl__syncTo-label");
@@ -306,12 +305,12 @@
     this.labelEl = labelEl;
   };
 
-  cmElement.prototype.setupSelectEl = function() {
+  CMElement.prototype.setupSelectEl = function() {
     var selectEl = document.createElement("select");
     selectEl.id = this.id;
     selectEl.classList.add("cmEl__syncTo");
     selectEl.innerHTML = "<option value='none'>None</option>";
-    cmTheme.elements.forEach(function(element){
+    cmTheme.elements.forEach(function(element) {
       if (element != this) {
         var option = document.createElement("option");
         option.value = element.id;
@@ -322,33 +321,32 @@
         selectEl.appendChild(option);
       }
     }.bind(this));
-    selectEl.addEventListener("change", function(e){
+    selectEl.addEventListener("change", function(e) {
       var selection = cmTheme.getElement(this.selectEl.value);
       if (selection) {
-        this.syncTo(selection);  
-      }
-      else {
+        this.syncTo(selection);
+      } else {
         this.unSync();
       }
     }.bind(this));
     this.selectEl = selectEl;
   };
 
-  cmElement.prototype.setupSettingsEl = function() {
+  CMElement.prototype.setupSettingsEl = function() {
     var settingsEl = document.createElement("button");
     settingsEl.classList.add("cmEl__settings");
-    settingsEl.addEventListener("click", function(){
+    settingsEl.addEventListener("click", function() {
       this.classList.toggle("active");
     });
     var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    use.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href", "#gear");
+    use.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", "#gear");
     svg.appendChild(use);
     settingsEl.appendChild(svg);
     this.settingsEl = settingsEl;
   };
 
-  cmElement.prototype.setupElements = function() {
+  CMElement.prototype.setupElements = function() {
     this.setupInputEl();
     this.setupHeadingEl();
     this.setupSettingsEl();
@@ -357,7 +355,7 @@
     this.updateColor(this.color);
   };
 
-  cmElement.prototype.draw = function(){
+  CMElement.prototype.draw = function() {
     var advWrapper = document.createElement("div");
     advWrapper.classList.add("cmEl__advanced");
     if (this.descriptionEl) {
@@ -365,7 +363,6 @@
     }
     advWrapper.appendChild(this.labelEl);
     advWrapper.appendChild(this.selectEl);
-    
     var wrapper = document.createElement("div");
     wrapper.id = "cmEl_" + this.id;
     wrapper.classList.add("cmEl");
@@ -377,186 +374,186 @@
     cmTheme.container.appendChild(wrapper);
   };
 
-  function buildBaseElements(){
-    var cmBackground = new cmElement({
+  function buildBaseElements() {
+    var cmBackground = new CMElement({
       prettyName: "Background",
       selector: ".box,.editor .top-boxes,.CodeMirror-gutter-wrapper",
       color: "#272825",
       prop: "background"
     });
 
-    var cmCursor = new cmElement({
+    var cmCursor = new CMElement({
       prettyName: "Cursor",
       selector: ".CodeMirror-cursor",
       color: "#ffffff",
       prop: "border-left-color",
     });
 
-    var cmDefault = new cmElement({
+    var cmDefault = new CMElement({
       prettyName: "Default",
       selector: ".box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre",
       description: "when nothin' else applies",
       color: "#ffffff",
     });
 
-    var cmKeyword = new cmElement({
+    var cmKeyword = new CMElement({
       prettyName: "Keyword",
       selector: ".cm-keyword",
       color: "#FA2D7D",
       description: "e.g. var, function"
     });
 
-    var cmAtom = new cmElement({
+    var cmAtom = new CMElement({
       prettyName: "Atom",
       selector: ".cm-atom",
       color: "#ae81ff",
       description: "used for some CSS values and JS primitives (e.g. null, undefined)"
     });
 
-    var cmHTMLAtom = new cmElement({
+    var cmHTMLAtom = new CMElement({
       prettyName: "HTML Atom",
       selector: ".box-html .cm-atom",
       master: "atom",
       description: "e.g. HTML entities"
     });
 
-    var cmDef = new cmElement({
+    var cmDef = new CMElement({
       prettyName: "Definition",
       selector: ".cm-def",
       color: "#F79900",
       description: "e.g. @include, var foo"
     });
 
-    var cmVariable = new cmElement({
+    var cmVariable = new CMElement({
       prettyName: "Variable",
       selector: ".cm-variable",
       color: "#71D7D0",
       description: "for already-defined variables"
     });
 
-    var cmVariable2 = new cmElement({
+    var cmVariable2 = new CMElement({
       prettyName: "Variable 2",
       selector: ".cm-variable-2",
       color: "#AE81FF",
       description: "e.g. markdown lists, JS args, SCSS variables"
     });
 
-    var cmVariable3 = new cmElement({
+    var cmVariable3 = new CMElement({
       prettyName: "Variable 3",
       selector: ".cm-variable-3",
       color: "#a6e22e",
       description: "used for CSS psuedo elements e.g. :before"
     });
 
-    var cmHeader = new cmElement({
+    var cmHeader = new CMElement({
       prettyName: "Header",
       selector: ".cm-header",
       color: "#FA2D7D",
       description: "used for Markdown headers and maybe other stuff"
     });
 
-    var cmNumber = new cmElement({
+    var cmNumber = new CMElement({
       prettyName: "Number",
       selector: ".cm-number",
       color: "#B78CFF",
     });
 
-    var cmProperty = new cmElement({
+    var cmProperty = new CMElement({
       prettyName: "Property",
       selector: ".cm-property",
       color: "#71D7D0",
       description: "CSS properties, JS object properties"
     });
 
-    var cmAttribute = new cmElement({
+    var cmAttribute = new CMElement({
       prettyName: "Attribute",
       selector: ".cm-attribute",
       color: "#a6e22e",
       description: "HTML attributes"
     });
 
-    var cmBuiltin = new cmElement({
+    var cmBuiltin = new CMElement({
       prettyName: "Builtin",
       selector: ".cm-builtin",
       master: "attribute",
       description: "used for CSS ID selectors"
     });
 
-    var cmQualifier = new cmElement({
+    var cmQualifier = new CMElement({
       prettyName: "Qualifier",
       selector: ".cm-qualifier",
       master: "attribute",
       description: "used for CSS class selectors"
     });
 
-    var cmOperator = new cmElement({
+    var cmOperator = new CMElement({
       prettyName: "Operator",
       selector: ".cm-operator",
       color: "#FA2D7D",
       description: "e.g. =, +, -"
     });
 
-    var cmMeta = new cmElement({
+    var cmMeta = new CMElement({
       prettyName: "Meta",
       selector: ".cm-meta",
       color: "#FA2D7D",
       description: "used for vendor prefixes"
     });
 
-    var cmString = new cmElement({
+    var cmString = new CMElement({
       prettyName: "String Color",
       selector: ".cm-string",
       color: "#E9E07F",
     });
 
-    var cmString2 = new cmElement({
+    var cmString2 = new CMElement({
       prettyName: "Secondary String",
       selector: ".cm-string-2",
       color: "#E9E07F",
       description: "some CSS values"
     });
 
-    var cmTag = new cmElement({
+    var cmTag = new CMElement({
       prettyName: "HTML Tag",
       selector: ".cm-tag",
       color: "#FA2D7D",
       description: "tags in HTML"
     });
 
-    var cmCSSTag = new cmElement({
+    var cmCSSTag = new CMElement({
       prettyName: "CSS Tag",
       selector: ".box-css .cm-tag",
       color: "#f92672",
       description: "element selectors in CSS"
     });
 
-    var cmTagBracket = new cmElement({
+    var cmTagBracket = new CMElement({
       prettyName: "Tag Bracket",
       selector: ".cm-tag.cm-bracket",
       color: "#ffffff",
       description: "angle brackets in HTML"
     });
 
-    var cmLineNumber = new cmElement({
+    var cmLineNumber = new CMElement({
       prettyName: "Line Number",
       selector: ".CodeMirror-linenumber",
       color: "#575344",
     });
 
-    var cmGutterMarker = new cmElement({
+    var cmGutterMarker = new CMElement({
       prettyName: "Gutter Marker",
       selector: ".CodeMirror-guttermarker-subtle",
       description: "e.g. those toggle arrows next to line numbers",
       master: "line_number"
     });
 
-    var cmComment = new cmElement({
+    var cmComment = new CMElement({
       prettyName: "Comment",
       selector: ".cm-comment",
       master: "line_number"
     });
 
-    var cmSelect = new cmElement({
+    var cmSelect = new CMElement({
       prettyName: "Selected",
       selector: ".cm-searching, .CodeMirror-focused .CodeMirror-selected, .CodeMirror-selected",
       color: "#414141",
@@ -565,18 +562,17 @@
     });
   }
 
-  chrome.storage.local.get("cmElements", function(response){
+  chrome.storage.local.get("cmElements", function(response) {
     if (!response.cmElements) {
       buildBaseElements();
       cmTheme.init();
-    }
-    else {
-      response.cmElements.forEach(function(element){
-        new cmElement(element);
+    } else {
+      response.cmElements.forEach(function(element) {
+        new CMElement(element);
       });
-      chrome.storage.local.get("cmLastSaved", function(response){
+      chrome.storage.local.get("cmLastSaved", function(response) {
         cmTheme.lastSaved = response.cmLastSaved;
-        chrome.storage.local.get("cmIsLightTheme", function(response){
+        chrome.storage.local.get("cmIsLightTheme", function(response) {
           cmTheme.isLightTheme = response.cmIsLightTheme;
           cmTheme.init();
         });

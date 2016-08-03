@@ -10,9 +10,9 @@
 // we get access to some nice stuff like JQuery without having
 // to load it ourselves.
 function loadModule(scriptName, callback) {
-  var scriptEl = document.createElement('script');
-  scriptEl.src = chrome.extension.getURL('lib/modules/' + scriptName + '.js');
-  scriptEl.addEventListener('load', callback, false);
+  var scriptEl = document.createElement("script");
+  scriptEl.src = chrome.extension.getURL("lib/modules/" + scriptName + ".js");
+  scriptEl.addEventListener("load", callback, false);
   document.body.appendChild(scriptEl);
 }
 
@@ -26,46 +26,45 @@ document.head.appendChild(styleEl);
 loadModule("globalVars");
 loadModule("utilScripts");
 
-var initData;
+var INIT_DATA;
 
 // The Global Variables module includes some initialization data
 // that is needed to conditionally load other modules, so we need to wait
 // for that event to fire and then we can keep doin' our thing.
 window.addEventListener("init-data-ready", function(evt) {
-  initData = evt.detail;
+  INIT_DATA = evt.detail;
   loadConditionalModules();
 });
 
 // Handles the conditional loading of modules that
 // aren't needed on all pages.
 function loadConditionalModules() {
-  if (!initData.hasOwnProperty("__pageType")) {
+  if (!INIT_DATA.hasOwnProperty("__pageType")) {
     return;
   }
-  if ( !!initData.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections|full)$/) ){
+  if (!!INIT_DATA.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections|full)$/)) {
     loadModule("profilePreviews");
   }
 
-  if (initData.__pageType === "profile") {
+  if (INIT_DATA.__pageType === "profile") {
     loadModule("hideProfileCSS");
   }
 
-  if ( !!initData.__pageType.match(/^(pen|details|posts)$/)) {
+  if (!!INIT_DATA.__pageType.match(/^(pen|details|posts)$/)) {
     loadModule("commentPreviews");
   }
 
-  if (initData.__pageType === "pen") {
+  if (INIT_DATA.__pageType === "pen") {
     loadModule("recentPensTypeahead");
     loadModule("resizablePreviews");
     // Only loads if the user owns the Pen they're viewing (and they're logged in).
-    if ( initData.__pen.user_id === initData.__user.id && initData.__user.id != 1 ) {
+    if (INIT_DATA.__pen.user_id === INIT_DATA.__user.id && INIT_DATA.__user.id != 1) {
       loadModule("editorSettings");
     }
-    
   }
 }
 
-// Starts an event listener that waits for requests for 
+// Starts an event listener that waits for requests for
 // absolute paths.
 window.addEventListener("requestExtensionUrl", function(evt) {
   url = evt.detail;
