@@ -1,5 +1,12 @@
 # Change Log
 
+## v0.4.4
+
+### Fixed
+
+* Fixed listing of followers/following in profile previews (they were swapped)
+* Fixed bug that occasionally prevented profile previews from displaying
+
 ## v0.4.3
 
 ### Fixed
