@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.4.5
+
+### Fixed
+
+* Fixed encoding issue on comment previews
+
 ## v0.4.4
 
 ### Fixed
