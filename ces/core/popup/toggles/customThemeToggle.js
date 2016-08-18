@@ -5,6 +5,13 @@
 // core/js/customThemeHandler.js
 
 var customThemeToggle = (function() {
+  // Wrapper function to distribute runtime messages to the active tab
+  function sendToActiveTab(message) {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[ 0 ].id, message);
+    });
+  }
+
   var optionsLink = document.getElementById("options-link");
   var enableTheme = document.getElementById("enable-theme");
 
@@ -23,7 +30,7 @@ var customThemeToggle = (function() {
       e.preventDefault();
 
       //http://stackoverflow.com/a/16130739
-      var optionsUrl = chrome.extension.getURL("core/html/ces_options.html");
+      var optionsUrl = chrome.extension.getURL("core/options/options.html");
       chrome.tabs.query({url: optionsUrl}, function(tabs) {
         if (tabs.length) {
           chrome.tabs.update(tabs[ 0 ].id, {active: true});

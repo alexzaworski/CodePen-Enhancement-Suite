@@ -3,7 +3,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON("package.json"),
     jshint: {
-      files: ["Gruntfile.js", "core/**/*.js", "lib/**/*.js"],
+      files: ["Gruntfile.js", "ces/**/*.js"],
       options: {
         browser: true,
         globals: {
@@ -13,7 +13,7 @@ module.exports = function(grunt) {
       },
     },
     jscs: {
-      files: ["Gruntfile.js", "core/**/*.js", "lib/**/*.js"],
+      files: ["Gruntfile.js", "ces/**/*.js"],
       options: {
         preset: "google",
         validateQuoteMarks: "\"",
@@ -22,6 +22,14 @@ module.exports = function(grunt) {
         requireCamelCaseOrUpperCaseIdentifiers: {
           ignoreProperties: true
         }
+      }
+    },
+    compress: {
+      zip: {
+        options: {
+          archive: "ces.zip"
+        },
+        src: ["ces/**/*"],
       }
     }
   });

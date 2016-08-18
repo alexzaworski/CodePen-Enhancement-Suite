@@ -8,29 +8,29 @@
     "48":  "core/icons/icon-48.png",
     "128": "core/icons/icon-128.png"
   },
-  "options_page": "core/html/ces_options.html",
+  "options_page": "core/options/options.html",
   "permissions": [
     "tabs",
     "storage"
   ],
   "background": {
-    "scripts": ["core/js/bg.js"]
+    "scripts": ["core/background_scripts/bg.js"]
   },
   "content_scripts": [
     {
       "matches":["http://codepen.io/*", "https://codepen.io/*"],
       "js":[
-        "core/js/init.js",
-        "core/js/profileCSSHandler.js",
-        "core/js/customThemeHandler.js",
-        "core/js/cesUpdates.js"
+        "core/content_scripts/init.js",
+        "core/content_scripts/profileCSSHandler.js",
+        "core/content_scripts/customThemeHandler.js",
+        "core/content_scripts/cesUpdates.js"
       ]
     }
   ],
   "page_action": {
-    "default_popup" : "core/html/ces_popup.html"
+    "default_popup" : "core/popup/popup.html"
   },
   "web_accessible_resources": [
-    "lib/**/*"
+    "modules/**/*"
   ]
 }

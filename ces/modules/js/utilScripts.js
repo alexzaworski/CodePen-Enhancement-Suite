@@ -63,7 +63,7 @@ var U_ON_PEN_SAVE = function(callback) {
 // I don't need to handle closing the modal or any of that
 // nonsense which is preeeetty nice.
 var U_THROW_ERROR_MODAL = function(message) {
-  U_REQUEST_EXTENSION_URL("lib/html/error-modal.html", function(response) {
+  U_REQUEST_EXTENSION_URL("modules/html/error-modal.html", function(response) {
     var errorModal = $("<div>").load(response, function() {
       errorModal.find("#ces__error-message").html(message);
       $.showModal(errorModal[ 0 ].innerHTML);

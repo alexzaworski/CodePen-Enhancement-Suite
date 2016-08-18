@@ -88,7 +88,7 @@
   // stored locally, there isn't any problem with making a new AJAX request
   // for the same file repeatedly.
   Preview.prototype.getTemplate = function(callback) {
-    U_REQUEST_EXTENSION_URL("lib/html/profile-preview.html", function(response) {
+    U_REQUEST_EXTENSION_URL("modules/html/profile-preview.html", function(response) {
       $.get(response, function(response) {
         this.template = $(response);
         callback();

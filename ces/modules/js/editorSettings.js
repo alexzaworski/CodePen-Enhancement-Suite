@@ -48,7 +48,7 @@
   //
   // Once it's fully loaded, it sets the active theme
   // based on the init data.
-  U_REQUEST_EXTENSION_URL("lib/html/editor-settings.html", function(response) {
+  U_REQUEST_EXTENSION_URL("modules/html/editor-settings.html", function(response) {
     $editorSettingsContainer.load(response, function() {
       $("#" + editorSettings.theme).prop("checked", true);
       $("#" + editorSettings.font_type).prop("selected", true);
