@@ -8,7 +8,6 @@
 * Allows for control of things like editor theme/fonts/etc
 * without leaving the editor at all.
 *
-*
 */
 
 (function() {

@@ -1,7 +1,7 @@
 /*
 * ---
-* Acts as the middle ground between the Page Action logic (core/js/popup.js) and
-* the profile css module (lib/modules/hideProfileCSS.js)
+* Acts as the middle ground between the Page Action logic and
+* the profile css module.
 * ---
 */
 

@@ -1,8 +1,6 @@
 // Adds toggle for custom theme to Page Action.
 //
 // This file *only* controls that toggle,
-// the logic behind enabling/disabling the theme is found in
-// core/js/customThemeHandler.js
 
 var customThemeToggle = (function() {
   // Wrapper function to distribute runtime messages to the active tab

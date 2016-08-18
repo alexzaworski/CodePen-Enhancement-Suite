@@ -23,8 +23,7 @@ styleEl.setAttribute("href", chrome.extension.getURL("modules/css/modules.css"))
 document.head.appendChild(styleEl);
 
 // First loads modules that don't depend on the current page.
-loadModule("globalVars");
-loadModule("utilScripts");
+loadModule("globals");
 
 var INIT_DATA;
 

@@ -55,7 +55,7 @@ var customThemeHandler = (function() {
     });
   });
 
-  // Listens for messages from the theme toggle script (core/js/customThemeToggle.js)
+  // Listens for messages from the theme toggle script
   function setRuntimeListener() {
     chrome.runtime.onMessage.addListener(function(message) {
       if (message.method === "enable-custom-theme") {
