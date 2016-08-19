@@ -23,7 +23,8 @@
         "core/content_scripts/init.js",
         "core/content_scripts/profileCSSHandler.js",
         "core/content_scripts/customThemeHandler.js",
-        "core/content_scripts/cesUpdates.js"
+        "core/content_scripts/cesUpdates.js",
+        "core/content_scripts/activityFeedHandler.js"
       ]
     }
   ],

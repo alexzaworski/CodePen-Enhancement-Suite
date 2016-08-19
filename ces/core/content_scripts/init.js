@@ -38,6 +38,10 @@ window.addEventListener("init-data-ready", function(evt) {
 // Handles the conditional loading of modules that
 // aren't needed on all pages.
 function loadConditionalModules() {
+  if (document.getElementById("activity-dropdown")) {
+    loadModule("activityFeed");
+  }
+
   if (!INIT_DATA.hasOwnProperty("__pageType")) {
     return;
   }

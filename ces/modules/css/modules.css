@@ -374,3 +374,20 @@
   cursor:pointer;
   line-height: 34px; /* matches height of buttons */
 }
+
+.header-activity-button.ces__new-notification {
+  position:relative;
+}
+
+.header-activity-button.ces__new-notification:after {
+  content: "";
+  display: block;
+  height: 10px;
+  width: 10px;
+  background: #0ebeff;
+  border-radius: 50%;
+  position: absolute;
+  left: -4px;
+  border: 2px solid black;
+  top: 15px;
+}
