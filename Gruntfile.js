@@ -33,7 +33,6 @@ module.exports = function(grunt) {
           expand: true,
           cwd: "ces",
           src: ["**/*"],
-          dest: "./"
         }]
       }
     }
