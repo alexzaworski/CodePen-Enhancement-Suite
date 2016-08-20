@@ -1,4 +1,4 @@
-var cesUpdates = (function(){
+var cesUpdates = (function() {
   var currentPatch = "0.5.0";
   var storageString = currentPatch + "-patch-notes";
   chrome.storage.local.get("disable-patch-notes", function(response) {
