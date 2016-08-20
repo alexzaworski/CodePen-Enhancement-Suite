@@ -14,13 +14,14 @@ To install in dev mode:
 
 ## Current Features
 
-* [Quick-Add Your Pens as an External Resource](#quick-add-your-pens-as-an-external-resource)
-* [Profile Previews](#profile-previews)
-* [Custom Editor Themes](#custom-editor-themes)
-* [Resizable Pen Previews](#resizable-pen-previews)
-* [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
-* [Preview Comments on Pens/Posts Before Submitting](#preview-comments-on-pensposts-before-submitting)
-* [Toggle Custom CSS on User Profiles](#toggle-custom-css-on-user-profiles)
+* [Easily see when you have new notifications](#easily-see-when-you-have-new-notifications
+* [Quick-add your Pens as an external resource](#quick-add-your-pens-as-an-external-resource)
+* [On-hover profile previews](#profile-previews)
+* [Custom editor themes](#custom-editor-themes)
+* [Resizable Pen previews](#resizable-pen-previews)
+* [Access editor settings from within the Pen editor](#access-editor-settings-from-within-the-pen-editor)
+* [Preview comments on Pens/Posts before submitting](#preview-comments-on-pensposts-before-submitting)
+* [Toggle custom CSS on user profiles](#toggle-custom-css-on-user-profiles)
 * [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
 
 ### Easily see when you have new notifications
