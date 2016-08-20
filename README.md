@@ -1,4 +1,4 @@
-# CodePen Enhancement Suite v0.4.5
+# CodePen Enhancement Suite v0.5.0
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
@@ -14,7 +14,7 @@ To install in dev mode:
 
 ## Current Features
 
-* [Easily see when you have new notifications](#easily-see-when-you-have-new-notifications
+* [Easily see when you have new notifications](#easily-see-when-you-have-new-notifications)
 * [Quick-add your Pens as an external resource](#quick-add-your-pens-as-an-external-resource)
 * [On-hover profile previews](#profile-previews)
 * [Custom editor themes](#custom-editor-themes)
