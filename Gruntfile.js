@@ -29,7 +29,12 @@ module.exports = function(grunt) {
         options: {
           archive: "ces.zip"
         },
-        src: ["ces/**/*"],
+        files: [{
+          expand: true,
+          cwd: "ces",
+          src: ["**/*"],
+          dest: "./"
+        }]
       }
     }
   });
