@@ -9,8 +9,7 @@ A Chrome extension meant to enhance the CodePen experience. Like [RES](https://g
 To install in dev mode:
 
 1. `git clone`
-2. `npm install` 
-3. [Follow these instructions](https://developer.chrome.com/extensions/getstarted#unpacked)
+2. [Follow these instructions](https://developer.chrome.com/extensions/getstarted#unpacked)
 
 ## Current Features
 
