@@ -14,8 +14,8 @@ To install in dev mode:
 
 ## Current Features
 
-* [\[NEW\] Quick-Add Your Pens as an External Resource](#new-quick-add-your-pens-as-an-external-resource)
-* [\[UPDATED\] Profile Previews](#updated-profile-previews)
+* [Quick-Add Your Pens as an External Resource](#quick-add-your-pens-as-an-external-resource)
+* [Profile Previews](#profile-previews)
 * [Custom Editor Themes](#custom-editor-themes)
 * [Resizable Pen Previews](#resizable-pen-previews)
 * [Access Editor Settings from Within the Pen Editor](#access-editor-settings-from-within-the-pen-editor)
@@ -23,7 +23,13 @@ To install in dev mode:
 * [Toggle Custom CSS on User Profiles](#toggle-custom-css-on-user-profiles)
 * [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
 
-### [NEW] Quick-Add Your Pens as an External Resource
+### Easily see when you have new notifications
+
+Adds a small visiual indicator when new items are added to your activity feed.
+
+![New Activity](/demo_images/notification.png)
+
+### Quick-Add Your Pens as an External Resource
 
 Adds your most recent public Pens to the CSS/JS typeaheads.
 
@@ -31,7 +37,7 @@ Want to quickly filter out your Pens? Just search `::`.
 
 ![Recent Pens Typeahead](/demo_images/typeahead.gif)
 
-### [UPDATED] Profile Previews
+### Profile Previews
 
 Hover over a profile link for more details on that user. Currently works in the following places:
 

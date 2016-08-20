@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.0
+
+### Added
+
+* Added a small visiual indicator when new items are added to your activity feed.
+
 ## v0.4.5
 
 ### Fixed
