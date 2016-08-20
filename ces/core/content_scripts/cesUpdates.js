@@ -20,7 +20,7 @@ var cesUpdates = (function() {
     var notes = `
                 <h5>New Features</h5>
                 <ul>
-                  <li>Added a small visiual indicator when new items are added to your activity feed.</li>
+                  <li>Added a small visiual indicator for notifications.</li>
                 </ul>
                   <a class="ces__update-modal__cta" target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite">See what's new »</a>
                 <div class="ces__update__actions ces__clearfix">

@@ -4,7 +4,7 @@
 
 ### Added
 
-* Added a small visiual indicator when new items are added to your activity feed.
+* Added a small visiual indicator for notifications
 
 ## v0.4.5
 
