@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.1
+
+### Fixed
+
+* Profile previews should no longer appear at arbitrary times/locations
+
 ## v0.5.0
 
 ### Added

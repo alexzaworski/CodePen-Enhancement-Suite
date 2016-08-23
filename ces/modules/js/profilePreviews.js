@@ -231,6 +231,15 @@
   };
 
   Preview.prototype.display = function() {
+
+    // an attempt to fix a long-standing bug in which
+    // profile previews would appear seamingly at random
+    // or in the wrong spot. Obviously this is a bandage
+    // fix and doesn't address the root cause which I'm
+    // assuming is related to the way timeouts are handled.
+    if(!this.profileLink.is(":hover")){
+      return;
+    }
     this.position();
     this.template.addClass("active");
   };
@@ -284,7 +293,6 @@
   };
 
   Preview.prototype.fillTemplate = function() {
-    // Holy callback hell
     this.getProfileData(function() {
       this.getPenData(function() {
         this.addProfileToPreview();
