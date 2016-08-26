@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.2 
+
+### Fixed
+
+* Profile previews now work on the Pen owner's name in comment modals
+
 ## v0.5.1
 
 ### Fixed

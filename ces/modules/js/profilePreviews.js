@@ -12,7 +12,7 @@
   var profileLinks;
   var selectors = {
     default: ".user a",
-    pen: ".pen-owner-link, .comment-username",
+    pen: ".pen-owner-link, .comment-username, .pen-owner-name",
     full: ".pen-owner-link",
     // nth-of-type makes sure the link to the user's blog isn't also
     // included (they have the same class applied)
@@ -237,7 +237,7 @@
     // or in the wrong spot. Obviously this is a bandage
     // fix and doesn't address the root cause which I'm
     // assuming is related to the way timeouts are handled.
-    if(!this.profileLink.is(":hover")){
+    if (!this.profileLink.is(":hover")) {
       return;
     }
     this.position();
