@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.3
+
+### Fixed
+
+* Added editor settings support for new themes
+
 ## v0.5.2 
 
 ### Fixed
