@@ -14,16 +14,22 @@
     default: ".user a",
     pen: ".pen-owner-link, .comment-username, .pen-owner-name",
     full: ".pen-owner-link",
+
     // nth-of-type makes sure the link to the user's blog isn't also
     // included (they have the same class applied)
     posts: ".author-link:nth-of-type(2), .comment-username",
-    details: ".comment-username, .pen-owner-name",
-    collection: ".username, .author-link"
+
+    details: ".comment-username, .pen-owner-name, .user-name.module",
+    collection: ".username, .author-link",
+
+    // needs to be :first-of-type so it doesn't pick up
+    // the link to the pen/post/whatever.
+    activity: ".activity-name:first-of-type"
   };
   var selector = selectors[ INIT_DATA.__pageType ] || selectors.default;
   var penCommentsHandled = false;
   var isGridView = (function() {
-    return !!INIT_DATA.__pageType.match(/^(home|explore-posts|explore-pens|explore-collections|collection)$/);
+    return !!INIT_DATA.__pageType.match(/^(home|explore-posts|explore-pens|explore-collections|collection|activity|details)$/);
   })();
 
   (function init() {
@@ -80,7 +86,13 @@
   // Object that contains the entire profile preview
   var Preview = function(profileLink) {
     this.profileLink = profileLink;
-    this.baseURL = location.origin + this.profileLink.attr("href");
+    var linkIsFullURL = (function() {
+      return !!profileLink.attr("href").match(/^https?:\/\/codepen\.io/);
+    })();
+
+    this.baseURL = linkIsFullURL ?
+                   this.profileLink.attr("href") :
+                   location.origin + this.profileLink.attr("href");
     this.init();
   };
 

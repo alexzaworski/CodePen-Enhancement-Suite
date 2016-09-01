@@ -45,7 +45,7 @@ function loadConditionalModules() {
   if (!INIT_DATA.hasOwnProperty("__pageType")) {
     return;
   }
-  if (!!INIT_DATA.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections|full)$/)) {
+  if (!!INIT_DATA.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections|full|activity)$/)) {
     loadModule("profilePreviews");
   }
 

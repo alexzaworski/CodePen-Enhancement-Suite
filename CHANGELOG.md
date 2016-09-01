@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.4
+
+### Improved
+
+* Increased coverage on profile previews (added to activity feed and Pen lovers on details view of Pens)
+
 ## v0.5.3
 
 ### Fixed
