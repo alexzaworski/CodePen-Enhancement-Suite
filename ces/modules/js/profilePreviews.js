@@ -152,13 +152,15 @@
       pen.url = $this.find("link").text();
       pen.slug = pen.url.substr(pen.url.lastIndexOf("/") + 1);
       pen.iframe = $("<iframe>");
-      pen.iframe.attr("src", location.protocol + "//s.codepen.io/derekjp/fullcpgrid/" + pen.slug);
-      pen.iframe.attr("data-title", pen.title);
-      pen.iframe.attr("sandbox", INIT_DATA.__CPDATA.iframe_sandbox);
-      pen.iframe.attr("scrolling", "no");
-      pen.iframe.attr("frameborder", "0");
-      pen.iframe.attr("allowtransparency", "true");
-      pen.iframe.addClass("ces__iframe");
+      pen.iframe.attr({
+        "src": location.protocol + "//s.codepen.io/derekjp/fullcpgrid/" + pen.slug,
+        "data-title": pen.title,
+        "sandbox": INIT_DATA.__CPDATA.iframe_sandbox,
+        "scrolling": "no",
+        "frameborder": "0",
+        "allowtransparency": "true",
+        "class": "ces__iframe"
+      });
       pens.push(pen);
     });
     this.pens = pens;
