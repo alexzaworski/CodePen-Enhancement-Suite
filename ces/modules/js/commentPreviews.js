@@ -58,7 +58,7 @@
   // Creates the actual toggle switch used to control whether or not
   // the preview is currently enabled.
   function addPreviewToggle() {
-    U_REQUEST_EXTENSION_URL("modules/html/comment-preview-toggle.html", function(url) {
+    CES_GLOBALS.REQUEST_EXTENSION_URL("modules/html/comment-preview-toggle.html", function(url) {
       $previewToggle.load(url, function() {
         $submitButton.before($previewToggle);
         $previewToggle.click(handlePreviewClick);
@@ -124,7 +124,7 @@
       url: "/preprocessors",
       method: "POST",
       headers: {
-        "X-CSRF-Token": CSRF_TOKEN,
+        "X-CSRF-Token": CES_GLOBALS.CSRF_TOKEN,
       },
       data: "html=" + encodeURIComponent(rawText) + "&html_pre_processor=markdown",
       complete: function(response) {

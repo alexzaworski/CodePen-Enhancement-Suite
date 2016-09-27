@@ -8,11 +8,12 @@
 var profileCSSHandler = (function() {
   var disabledProfiles = [];
   var user;
+  var INIT_DATA;
 
   // Needs to have access to the INIT_DATA object in order to determine
   // if all of the profile-related listeners etc need to be enabled
-  window.addEventListener("init-data-ready", function() {
-
+  window.addEventListener("init-data-ready", function(e) {
+    INIT_DATA = e.detail;
     // If we're not on a profile page we can just bail and skip doing anything else
     if (INIT_DATA.__pageType != "profile") {
       return;

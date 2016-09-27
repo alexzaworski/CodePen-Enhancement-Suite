@@ -20,7 +20,7 @@
   var pendingSave = false;
 
   // Grabs the inital settings for the editor so we can change 'em as necessary.
-  var editorSettings = INIT_DATA.__pen.editor_settings;
+  var editorSettings = CES_GLOBALS.INIT_DATA.__pen.editor_settings;
 
   // Markup is reconstructed from what CodePen was already using so that
   // I can just re-use their tab functionality.
@@ -47,7 +47,7 @@
   //
   // Once it's fully loaded, it sets the active theme
   // based on the init data.
-  U_REQUEST_EXTENSION_URL("modules/html/editor-settings.html", function(response) {
+  CES_GLOBALS.REQUEST_EXTENSION_URL("modules/html/editor-settings.html", function(response) {
     $editorSettingsContainer.load(response, function() {
       $("#" + editorSettings.theme).prop("checked", true);
       $("#" + editorSettings.font_type).prop("selected", true);
@@ -56,7 +56,7 @@
       // Because of the redirect caused by saving a new Pen, the callback gets screwed up
       // when saving editor settings. The easiest way to fix this is to force people to save
       // first. Sorta sucks, but it works.
-      if (INIT_DATA.__pen.slug_hash === "") {
+      if (CES_GLOBALS.INIT_DATA.__pen.slug_hash === "") {
         $editorSettingsContainer.prepend("<p>Editor settings are only available once you've saved your Pen at least once. I know it's weird, I'm working on it :(</p>");
         $editorSettingsContainer.find("input, select, label").addClass("disabled");
         return;
@@ -65,7 +65,7 @@
       // This module won't work over an insecure connection because it needs to hit
       // a secure endpoint. If the user is browsing over HTTP it'll throw a cross-origin
       // error and won't save.
-      if (!U_IS_HTTPS()) {
+      if (!CES_GLOBALS.IS_HTTPS()) {
         $editorSettingsContainer.find("input, select, label").addClass("disabled");
         var httpsMessage = "Hi! Looks like you're not currently using HTTPS. Editor settings will only work over a secure connection.";
         var httpsUrl = location.href.replace("http://", "https://");
@@ -87,7 +87,7 @@
 
   // Kicks off our custom save function every time a
   // 'pen-saved' event gets fired.
-  U_ON_PEN_SAVE(cesSaveInit);
+  CES_GLOBALS.ON_PEN_SAVE(cesSaveInit);
   function cesSaveInit() {
     // If there's an outstanding save request,
     // wait until it's done to avoid any interference.
@@ -131,10 +131,10 @@
   // To combat that, we throw an error client-side and ask the user to reload
   // the page over HTTPS (and even give 'em a link, how nice are we?)
   function editorSettingsValid() {
-    if (!U_IS_HTTPS()) {
+    if (!CES_GLOBALS.IS_HTTPS()) {
       var httpsUrl = location.href.replace("http://", "https://");
       var httpsLink = "<a href='" + httpsUrl + "'>Reload this page over HTTPS.</a>";
-      U_THROW_ERROR_MODAL("Whoops! You need to be browsing over HTTPS for editor settings to work.<br><br>" + httpsLink);
+      CES_GLOBALS.THROW_ERROR_MODAL("Whoops! You need to be browsing over HTTPS for editor settings to work.<br><br>" + httpsLink);
       return false;
     }
     return true;
@@ -150,11 +150,11 @@
       return;
     }
 
-    U_CP("/" + INIT_DATA.__user.username + "/settings/save/editor", "editor_settings", newEditorSettings, function(response) {
+    CES_GLOBALS.CP("/" + CES_GLOBALS.INIT_DATA.__user.username + "/settings/save/editor", "editor_settings", newEditorSettings, function(response) {
       if (response.status === 200) {
         location.reload();
       } else {
-        U_THROW_ERROR_MODAL("Uh oh. Those editor settings failed to save. CodePen doesn't know why, I don't know why, you don't know why (well, maybe you do?). It's a bad time.");
+        CES_GLOBALS.THROW_ERROR_MODAL("Uh oh. Those editor settings failed to save. CodePen doesn't know why, I don't know why, you don't know why (well, maybe you do?). It's a bad time.");
         return false;
       }
     });

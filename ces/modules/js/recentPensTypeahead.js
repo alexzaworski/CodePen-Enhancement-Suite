@@ -16,7 +16,7 @@
   // We need this data basically right away, we can't wait
   // until the userinitiates a typeahead because the
   // dataFilter function needs to be synchronous
-  $.get(location.protocol + "//codepen.io/" + INIT_DATA.__user.username + "/public/feed", function(response) {
+  $.get(location.protocol + "//codepen.io/" + CES_GLOBALS.INIT_DATA.__user.username + "/public/feed", function(response) {
     parsePenData(response);
   });
 
