@@ -85,9 +85,9 @@ CES_GLOBALS.IS_HTTPS = function() {
 // REQUESTEDURL is the relative path of the file,
 // CALLBACK is... self explanatory. Fires once the URL is received.
 CES_GLOBALS.REQUEST_EXTENSION_URL = function(requestedUrl, callback) {
-  window.addEventListener("receivedUrl", function handleUrl(evt) {
+  window.addEventListener("receivedUrl", function handleUrl(e) {
     window.removeEventListener("receivedUrl", handleUrl);
-    callback(evt.detail);
+    callback(e.detail);
   });
   var requestExtensionUrl = new CustomEvent("requestExtensionUrl", {detail: requestedUrl});
   window.dispatchEvent(requestExtensionUrl);

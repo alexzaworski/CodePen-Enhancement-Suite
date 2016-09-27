@@ -30,8 +30,8 @@ var INIT_DATA;
 // The Global Variables module includes some initialization data
 // that is needed to conditionally load other modules, so we need to wait
 // for that event to fire and then we can keep doin' our thing.
-window.addEventListener("init-data-ready", function(evt) {
-  INIT_DATA = evt.detail;
+window.addEventListener("init-data-ready", function(e) {
+  INIT_DATA = e.detail;
   loadConditionalModules();
 });
 
@@ -69,8 +69,8 @@ function loadConditionalModules() {
 
 // Starts an event listener that waits for requests for
 // absolute paths.
-window.addEventListener("requestExtensionUrl", function(evt) {
-  url = evt.detail;
+window.addEventListener("requestExtensionUrl", function(e) {
+  url = e.detail;
   var urlResponse = new CustomEvent("receivedUrl", {detail: chrome.extension.getURL(url)});
   window.dispatchEvent(urlResponse);
 });
