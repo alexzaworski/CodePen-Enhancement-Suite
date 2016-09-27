@@ -21,7 +21,6 @@ To install in dev mode:
 * [Access editor settings from within the Pen editor](#access-editor-settings-from-within-the-pen-editor)
 * [Preview comments on Pens/Posts before submitting](#preview-comments-on-pensposts-before-submitting)
 * [Toggle custom CSS on user profiles](#toggle-custom-css-on-user-profiles)
-* [Toggle Pen preview JS with a GUI](#toggle-pen-preview-js-with-a-gui)
 
 ### Easily see when you have new notifications
 
@@ -74,12 +73,6 @@ Adds another tab to the `Pen Settings` modal that lets you change current theme/
 Pretty straightforward. Relies on CodePen's internal markdown processing to generate previews which is kinda neat. It won't compile @username links, but most everything else works.
 
 ![Comment Preview Demo](demo_images/comment_preview.gif)
-
-### Toggle Pen preview JS with a GUI
-
-Makes things a little bit easier if you find yourself locked out of a Pen/need to disable javascript for some other reason.
-
-![Disable JS Demo](demo_images/disable_js.png)
 
 ### Toggle Custom CSS on User Profiles
 
