@@ -24,7 +24,8 @@
         "core/content_scripts/profileCSSHandler.js",
         "core/content_scripts/customThemeHandler.js",
         "core/content_scripts/cesUpdates.js",
-        "core/content_scripts/activityFeedHandler.js"
+        "core/content_scripts/activityFeedHandler.js",
+        "core/content_scripts/distractionFreeModeHandler.js"
       ]
     }
   ],

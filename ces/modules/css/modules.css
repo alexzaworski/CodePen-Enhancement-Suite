@@ -101,6 +101,7 @@
   float:left;
   line-height: 15px; /* Should be the same as the height of label:after */
 }
+
 .ces__fancy-checkbox ~ label:after {
   margin-right: 10px;
   content: '';
@@ -112,9 +113,14 @@
   background: red;
 }
 
+.ces__fancy-checkbox--light ~ label:after {
+  background: #ccc;
+}
+
 .ces__fancy-checkbox:checked ~ label:after {
   background: #bada55;
 }
+
 .ces__fancy-checkbox ~ label:before {
   top: 50%;
   transform:translateY(-50%);
@@ -133,8 +139,14 @@
     left .1s ease-out;
 }
 
+.ces__fancy-checkbox--light ~ label:before {
+  height: 18px;
+  width: 18px;
+  border: 1px solid #ccc;
+}
+
 .ces__fancy-checkbox:checked ~ label:before {
-  left: 10px; /* Difference between label:after width and label:before width */
+  left: 11px; /* Difference between label:after width and label:before width */
 }
 
 .ces__preview-enabled #subscribe-link { /* Properly aligns "notify me of new comment" link on the Post comment box */

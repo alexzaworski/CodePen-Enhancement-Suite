@@ -58,6 +58,7 @@ function loadConditionalModules() {
   }
 
   if (INIT_DATA.__pageType === "pen") {
+    loadModule("distractionFreeMode");
     loadModule("recentPensTypeahead");
     loadModule("resizablePreviews");
     // Only loads if the user owns the Pen they're viewing (and they're logged in).
