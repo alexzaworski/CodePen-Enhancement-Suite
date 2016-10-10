@@ -147,12 +147,14 @@ body {
   height: calc(100% - 32px);
 }
 
-.unsaved #save {
+.unsaved #save,
+.unsaved #update {
   color: #FEDD31;
   opacity: 1;
 }
 
-.unsaved #save::after {
+.unsaved #save::after,
+.unsaved #update::after {
   content: none;
 }
 
