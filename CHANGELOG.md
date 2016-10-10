@@ -1,5 +1,15 @@
 # Change Log
 
+## v0.6.0
+
+### Added
+
+* Distraction free editing mode
+
+### Removed
+
+* Removed GUI to enable/disable JavaScript in previews
+
 ## v0.5.4
 
 ### Improved
@@ -161,7 +171,7 @@
 
 ### Added
 
-* Added GUI to enable/disable javascript in previews
+* Added GUI to enable/disable JavaScript in previews
 
 ## v0.1.2
 

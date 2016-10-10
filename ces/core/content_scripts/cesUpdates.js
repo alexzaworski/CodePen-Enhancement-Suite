@@ -1,5 +1,5 @@
 var cesUpdates = (function() {
-  var currentPatch = "0.5.0";
+  var currentPatch = "0.6.0";
   var storageString = currentPatch + "-patch-notes";
   chrome.storage.local.get("disable-patch-notes", function(response) {
 
@@ -18,11 +18,17 @@ var cesUpdates = (function() {
 
   function init() {
     var notes = `
-                <h5>New Features</h5>
+                <h5>The Latest</h5>
                 <ul>
-                  <li>Added a small visiual indicator for notifications.</li>
+                  <li>Added distraction free editing mode<br>(Change View » Distraction Free Mode)</li>
+                  <li>Deprecated JavaScript preview toggle</li>
                 </ul>
-                  <a class="ces__update-modal__cta" target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite">See what's new »</a>
+                <div class="ces__update-modal__cta">
+                  <a target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite">View on GitHub »</a>
+                  <br />
+                  <a target="_blank" href="https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim?hl=en">Rate »</a>
+                </div>
+                  
                 <div class="ces__update__actions ces__clearfix">
                   <button id="ces__hide-forever" class="ces__text-like-button">Never show patch notes</button>
                   <button id="ces__dismiss" class="ces__update__dismiss button button-medium green">Dismiss</button>

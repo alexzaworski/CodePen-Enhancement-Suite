@@ -1,4 +1,4 @@
-# CodePen Enhancement Suite v0.5.4
+# CodePen Enhancement Suite v0.6.0
 
 A Chrome extension meant to enhance the CodePen experience. Like [RES](https://github.com/honestbleeps/Reddit-Enhancement-Suite).
 
@@ -13,14 +13,37 @@ To install in dev mode:
 
 ## Current Features
 
+* [Custom editor themes](#custom-editor-themes)
+* [Distraction Free editing mode](#distraction-free-mode)
+* [Resizable Pen previews](#resizable-pen-previews)
 * [Easily see when you have new notifications](#easily-see-when-you-have-new-notifications)
 * [Quick-add your Pens as an external resource](#quick-add-your-pens-as-an-external-resource)
 * [On-hover profile previews](#profile-previews)
-* [Custom editor themes](#custom-editor-themes)
-* [Resizable Pen previews](#resizable-pen-previews)
 * [Access editor settings from within the Pen editor](#access-editor-settings-from-within-the-pen-editor)
 * [Preview comments on Pens/Posts before submitting](#preview-comments-on-pensposts-before-submitting)
 * [Toggle custom CSS on user profiles](#toggle-custom-css-on-user-profiles)
+
+### Custom Editor Themes
+
+Adds the ability to customize your editor theme via a GUI. Allows you to adjust the following:
+
+* Syntax highlighting
+* Background/cursor colors
+* CodePen UI colors (light/dark)
+
+![Custom Eidtor Themes](/demo_images/custom_theme.png)
+
+### Distraction Free Mode
+
+Adds a toggle to the "Change View" dropdown in the Pen editor to enable Distraction Free Mode
+
+![Distraction Free Mode](/demo_images/distraction-free-mode.png)
+
+### Resizable Pen Previews
+
+Adds a draggable handle in the `Editor View` while using the `Top` layout that allows you to change the size of your Pen, making the experience of debugging responsive Pens a lot more pleasant. 
+
+![Resizable Preview Demos](/demo_images/resize_preview.gif)
 
 ### Easily see when you have new notifications
 
@@ -43,24 +66,7 @@ Hover over a profile link for more details on that user. Currently works in the 
 * All grid views
 * Single Pen/Post pages
 
-
 ![Profile Hover Preview](/demo_images/profile_preview.gif)
-
-### Custom Editor Themes
-
-Adds the ability to customize your editor theme via a GUI. Allows you to adjust the following:
-
-* Syntax highlighting
-* Background/cursor colors
-* CodePen UI colors (light/dark)
-
-![Custom Eidtor Themes](/demo_images/custom_theme.png)
-
-### Resizable Pen Previews
-
-Adds a draggable handle in the `Editor View` while using the `Top` layout that allows you to change the size of your Pen, making the experience of debugging responsive Pens a lot more pleasant. 
-
-![Resizable Preview Demos](/demo_images/resize_preview.gif)
 
 ### Access Editor Settings from Within the Pen Editor
 
