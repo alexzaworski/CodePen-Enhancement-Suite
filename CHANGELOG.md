@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.6.1
+
+* Fix save button styling when logged in
+
 ## v0.6.0
 
 ### Added
