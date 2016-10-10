@@ -1,4 +1,4 @@
-var distractionFreeHandler = (function(){
+var distractionFreeHandler = (function() {
   window.addEventListener("init-data-ready", function(e) {
     INIT_DATA = e.detail;
     if (INIT_DATA.__pageType != "pen") {
@@ -7,9 +7,9 @@ var distractionFreeHandler = (function(){
     addListeners();
   });
   function addListeners() {
-    window.addEventListener("request-distraction-free", function(){
-      chrome.storage.local.get("distractionFree", function(r){
-        if (r.distractionFree === true ) {
+    window.addEventListener("request-distraction-free", function() {
+      chrome.storage.local.get("distractionFree", function(r) {
+        if (r.distractionFree === true) {
           sendStatus(true);
         } else {
           sendStatus(false);
@@ -17,10 +17,10 @@ var distractionFreeHandler = (function(){
             chrome.storage.local.set({"distractionFree": false});
           }
         }
-      })
+      });
     });
 
-    window.addEventListener("distraction-free-update", function(e){
+    window.addEventListener("distraction-free-update", function(e) {
       setStatus(e.detail);
     });
   }

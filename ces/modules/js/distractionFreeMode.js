@@ -8,7 +8,6 @@
 *
 */
 
-
 CES_GLOBALS.REQUEST_EXTENSION_URL("modules/css/distractionFreeMode.css", function(url) {
   var $styleEl = $("<link>");
   var $head = $("head");
@@ -20,20 +19,19 @@ CES_GLOBALS.REQUEST_EXTENSION_URL("modules/css/distractionFreeMode.css", functio
     href: url
   });
 
-  
-  $styleEl.one("load", function(){
+  $styleEl.one("load", function() {
     forceEditorsToAdjust();
   });
 
   var $distractionToggle = $("<div class='ces__fancy-checkbox__wrapper ces__clearfix'>");
-  
+
   CES_GLOBALS.REQUEST_EXTENSION_URL("modules/html/distraction-free-mode.html", function(url) {
     $distractionToggle.load(url, function() {
       $(".editor-layout-buttons").before($distractionToggle);
-        $checkbox = $("#distraction-free-mode");
-        addListeners();
-        var requestInitialState = new CustomEvent("request-distraction-free");
-        window.dispatchEvent(requestInitialState);
+      $checkbox = $("#distraction-free-mode");
+      addListeners();
+      var requestInitialState = new CustomEvent("request-distraction-free");
+      window.dispatchEvent(requestInitialState);
     });
   });
 
@@ -47,12 +45,12 @@ CES_GLOBALS.REQUEST_EXTENSION_URL("modules/css/distractionFreeMode.css", functio
   }
 
   // Forces a resize to trigger which normalizes
-  // any weirdness caused by adjusting editor widths  
+  // any weirdness caused by adjusting editor widths
   function forceEditorsToAdjust() {
     CP.codeEditorResizeController.onWindowResize();
   }
   function addListeners() {
-    $checkbox.on("change", function(e){
+    $checkbox.on("change", function(e) {
       if ($checkbox.is(":checked")) {
         addStyles();
       } else {
@@ -71,9 +69,8 @@ CES_GLOBALS.REQUEST_EXTENSION_URL("modules/css/distractionFreeMode.css", functio
     window.dispatchEvent(statusEvent);
   }
 
-  window.addEventListener("distraction-free-enabled", function(e){
+  window.addEventListener("distraction-free-enabled", function(e) {
     $checkbox.prop("checked", e.detail).change();
   });
 
-
- });
+});
