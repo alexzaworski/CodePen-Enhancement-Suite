@@ -5,7 +5,7 @@
 }
 
 .by {
-  display: none;
+  margin: auto 0 auto 10px;
 }
 
 .user-avatar {
@@ -41,7 +41,8 @@ body.layout-top .resizer {
 .edit-pen-title {
   height: 12px;
   width: 12px;
-  top: -2px;
+  top: 0px;
+  margin: auto 5px auto 0;
 }
 
 /*
@@ -109,13 +110,23 @@ body.layout-top .top-boxes .box .box-title-name {
 
 .pen-title-area .pen-title {
   font-size: 1em;
-}
-
-.pen-title-text, .pen-title-home-link {
+  width: auto;
+  background: #1d1f20;
+  height: 100%;
   display: flex;
 }
 
-.pen-title-area .pen-title, .pen-title-home-link svg {
+.pen-title-area .pen-title-link {
+  max-width: none;
+  margin: auto 0;
+  padding: 0 10px;
+}
+.pen-title-text, .pen-title-home-link {
+  display: flex;
+  margin-right: 5px;
+}
+
+.pen-title-home-link svg {
   margin: auto;
 }
 
