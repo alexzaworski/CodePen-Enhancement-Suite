@@ -76,7 +76,6 @@ CES_GLOBALS.CP = function(url, key, value, callback) {
   });
 };
 
-// Returns TRUE if currently using https
 CES_GLOBALS.IS_HTTPS = function() {
   return window.location.protocol === "https:";
 };
