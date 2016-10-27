@@ -1,5 +1,12 @@
 # Change Log
 
+## v0.6.2
+
+### Fixed
+
+* Fixed issue with ajax calls requiring CSRF tokens
+* Pen author now visible in distraction free mode
+
 ## v0.6.1
 
 * Fix save button styling when logged in
