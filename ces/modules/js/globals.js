@@ -69,7 +69,7 @@ CES_GLOBALS.CP = function(url, key, value, callback) {
     url: url,
     method: "POST",
     headers: {
-      "X-CSRF-Token": CSRF_TOKEN,
+      "X-CSRF-Token": CES_GLOBALS.CSRF_TOKEN,
     },
     data: key + "=" + encodeURIComponent(JSON.stringify(value)),
     complete: callback
