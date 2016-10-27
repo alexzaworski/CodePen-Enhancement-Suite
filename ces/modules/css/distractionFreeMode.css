@@ -2,6 +2,7 @@
   height: 34px;
   min-height: 34px;
   border-width: 3px;
+  border-color: #222;
 }
 
 .by {
@@ -42,7 +43,7 @@ body.layout-top .resizer {
   height: 12px;
   width: 12px;
   top: 0px;
-  margin: auto 5px auto 0;
+  margin: auto 10px auto 0;
 }
 
 /*
@@ -111,7 +112,7 @@ body.layout-top .top-boxes .box .box-title-name {
 .pen-title-area .pen-title {
   font-size: 1em;
   width: auto;
-  background: #1d1f20;
+  background: rgba(127,127,127,.3);
   height: 100%;
   display: flex;
 }
