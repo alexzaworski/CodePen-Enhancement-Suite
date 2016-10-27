@@ -61,7 +61,13 @@ function loadConditionalModules() {
     loadModule("distractionFreeMode");
     loadModule("recentPensTypeahead");
     loadModule("resizablePreviews");
+    
     // Only loads if the user owns the Pen they're viewing (and they're logged in).
+    // Technically could be loaded regardless of whether or not the person owns the Pen,
+    // but that would require some UI changes since there's no save button in that case.
+    //
+    // CMD-S would still work but that causes a fork if you're viewing someone else's Pen.
+    // Eventually it would be good to sort all of that out.
     if (INIT_DATA.__pen.user_id === INIT_DATA.__user.id && INIT_DATA.__user.id != 1) {
       loadModule("editorSettings");
     }
