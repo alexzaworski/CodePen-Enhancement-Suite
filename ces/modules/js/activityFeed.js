@@ -10,7 +10,6 @@
 
 (function() {
   "use strict";
-  var activityFeed;
   var $activityButton = $(".header-activity-button");
 
   // grabs current feed and ships it to the content script
@@ -19,25 +18,40 @@
     if (!r.html) {
       return;
     }
-    activityFeed = $(r.html);
-    activityFeed.find(".activity-date").remove();
-    activityFeed = activityFeed.html().replace(/\s/g, "");
-    var checkActivityFeed = new CustomEvent("activity-feed", {detail: activityFeed});
+    var activityArray = [];
+    var $activityList = $(r.html).find(".activity-list .activity");
+
+    $activityList.each(function(index, item) {
+      var $item = $(item);
+      activityArray.push({
+        name: $item.find(".activity-name").text().replace(/\s/g, ""),
+        action: $item.find(".activity-action").text().replace(/\s/g, ""),
+        thing: $item.find(".activity-thing").text().replace(/\s/g, "")
+      });
+    });
+
+    var activityJSON = JSON.stringify(activityArray);
+    var checkActivityFeed = new CustomEvent("activity-feed", {detail: activityJSON});
+
+    setUpNewActivityListener(activityJSON);
     window.dispatchEvent(checkActivityFeed);
+
   });
 
   // listens for a new-activity event from the content script,
   // appends classes as appropriate.
-  window.addEventListener("new-activity", function() {
-    $activityButton.addClass("ces__new-notification").click(function() {
-      $activityButton.removeClass("ces__new-notification");
-      sendNewFeed();
+  var setUpNewActivityListener = function(activityJSON) {
+    $(window).one("new-activity", function handleActivity() {
+      $activityButton.addClass("ces__new-notification").one("click", function() {
+        $activityButton.removeClass("ces__new-notification");
+        sendNewFeed(activityJSON);
+      });
     });
-  });
+  };
 
   // updates stored feed with the current one
-  var sendNewFeed = function() {
-    var activityFeedUpdate = new CustomEvent("activity-feed-update", {detail: activityFeed});
+  var sendNewFeed = function(activityJSON) {
+    var activityFeedUpdate = new CustomEvent("activity-feed-update", {detail: activityJSON});
     window.dispatchEvent(activityFeedUpdate);
     $activityButton.removeClass("ces__new-notification");
   };
