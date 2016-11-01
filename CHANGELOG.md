@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.6.3
+
+### Fixed
+
+* Tweaked handling of activity feeds in efforts to reduce false positives
+
 ## v0.6.2
 
 ### Fixed
