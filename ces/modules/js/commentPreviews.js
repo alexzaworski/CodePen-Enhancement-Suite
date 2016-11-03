@@ -121,11 +121,8 @@
   function getPreview(callback) {
     var rawText = $commentBox.val();
     $.ajax({
-      url: "/preprocessors",
+      url: "https://preprocessor.codepen.io",
       method: "POST",
-      headers: {
-        "X-CSRF-Token": CES_GLOBALS.CSRF_TOKEN,
-      },
       data: "html=" + encodeURIComponent(rawText) + "&html_pre_processor=markdown",
       complete: function(response) {
         callback(JSON.parse(response.responseText).results.html);

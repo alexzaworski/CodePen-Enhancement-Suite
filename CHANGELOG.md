@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.6.4
+
+### Fixed
+
+* Fixed comment previews (CodePen changed the endpoint)
+
 ## v0.6.3
 
 ### Fixed
