@@ -63,9 +63,6 @@ Want to quickly filter out your Pens? Just search `::`.
 
 Hover over a profile link for more details on that user. Currently works in the following places:
 
-* All grid views
-* Single Pen/Post pages
-
 ![Profile Hover Preview](/demo_images/profile_preview.gif)
 
 ### Access Editor Settings from Within the Pen Editor
