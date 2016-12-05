@@ -216,6 +216,7 @@
   };
 
   var CMElement = function(options) {
+    cmTheme.addElement(this);
     this.prop = options.prop || "color";
     this.prettyName = options.prettyName;
     this.selector = options.selector;
@@ -224,7 +225,6 @@
     this.master = cmTheme.getElement(options.master) || false;
     this.id = this.prettyName.toLowerCase().replace(/\s/g, "_");
     this.setupElements();
-    cmTheme.addElement(this);
     if (this.master) {
       this.syncTo(this.master);
     }
