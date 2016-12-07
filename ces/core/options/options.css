@@ -1,3 +1,4 @@
+
 ::-webkit-scrollbar {
   width: .5em;
   height: .5em;
@@ -30,26 +31,6 @@ html {
 body {
   font-family: lato;
   font-size: 16px;
-}
-
-.CodeMirror {
-  background: initial;
-  font-size: 14px;
-  line-height: 21px;
-  font-family: "Menlo", "Monaco", monospace;
-  height: auto;
-}
-
-.CodeMirror-foldgutter-open:after {
-  content: "\25BE";
-  font-size: 14px;
-  font-family: sans-serif;
-}
-
-.CodeMirror-scroll {
-  padding: 0;
-  margin: 0;
-  overflow: hidden !important;
 }
 
 .page-wrap {
@@ -227,7 +208,7 @@ body {
   transition: fill .1s;
 }
 
-.cmEl__settings:hover, .cmEl__settings.active, .cmEl__settings:focus {
+.cmEl__settings:hover, .cmEl__settings.active {
   fill: #333;
 }
 
@@ -242,7 +223,7 @@ body {
 
 .cmEl__syncTo-label {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 5px;
   font-size: .7em;
   color: #666;
   font-weight: bold;
@@ -281,9 +262,11 @@ body {
   flex-basis: 33%;
   margin-left: 20px;
   overflow: auto;
+  overflow-x: hidden;
   border-radius: 4px;
   padding: 5px;
 }
+
 .box:first-of-type {
   margin-left: 0;
 }
@@ -366,4 +349,46 @@ body {
 
 .light .base-ui__label {
   color: #777;
+}
+
+.presets-wrapper {
+  font-size: .8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: -20px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background: #aaa;
+}
+
+.presets {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.cmEl__font-controls {
+  margin-bottom: 5px;
+}
+
+.cmEl__font-controls:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.cmEl__font-control {
+  padding: 5px;
+  display: block;
+  height: 20px;
+  width: 20px;
+  float: left;
+  background: #999;
+  fill: #333;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cmEl__font-control.active {
+  background: #333;
+  fill: #999;
 }
