@@ -15,7 +15,7 @@ var presets = (function() {
   },
   {
     prettyName: "Default",
-    selector: ".box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre",
+    selector: ".CodeMirror pre, .box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre",
     description: "when nothin' else applies",
     color: "#E6E6E6",
   },
