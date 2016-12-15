@@ -77,12 +77,12 @@ var cmTheme = (function() {
 
   var addGUIEventListeners = function() {
     revertButton.addEventListener("click", revert);
-    
-    exportButton.addEventListener("click", function(){
+
+    exportButton.addEventListener("click", function() {
       exportTheme();
     });
-    
-    importButton.addEventListener("click", function(){
+
+    importButton.addEventListener("click", function() {
       importInput.click();
     });
 
@@ -159,7 +159,7 @@ var cmTheme = (function() {
     });
     return elementStash;
   };
-  
+
   var exportTheme = function() {
     var presetExport = {};
     presetExport.elements = buildElementStash();
