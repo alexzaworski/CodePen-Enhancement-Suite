@@ -89,6 +89,21 @@ body {
   border: 3px solid #333;
 }
 
+.button--tiny {
+  padding: 4px;
+  border: 0;
+  font-size: .8em;
+  font-weight: normal;
+}
+
+.button--default:hover:not(:active) {
+  background-color: #333;
+}
+
+.light .button--default:hover:not(:active) {
+  background: #ccc;
+}
+
 .light .button--default:not(:active) {
   background: white;
   color: #555;
@@ -362,8 +377,42 @@ body {
 }
 
 .presets {
+  margin-left: 4px;
+  margin-right: 2px;
+  background: black;
+  vertical-align: middle;
+  color: white;
+  border: 0;
+  padding: 4px 20px 4px 10px;
+  font-size: 0.8em;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: 0;
+  -webkit-appearance: none;
+}
+
+.light .presets {
+  background: white;
+  color: #555;
+}
+.presets-select-wrapper {
+  position: relative;
   display: inline-block;
-  margin-left: 5px;
+  color: #555;
+  vertical-align: top;
+}
+
+.presets-select-wrapper:after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border: .35rem solid transparent;
+  border-top-color: inherit;
+  right: 8px;
+  top: 40%;
 }
 
 .cmEl__font-controls {
