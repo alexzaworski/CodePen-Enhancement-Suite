@@ -1,5 +1,5 @@
 var cesUpdates = (function() {
-  var currentPatch = "0.6.0";
+  var currentPatch = "0.7.0";
   var storageString = currentPatch + "-patch-notes";
   chrome.storage.local.get("disable-patch-notes", function(response) {
 
@@ -20,15 +20,14 @@ var cesUpdates = (function() {
     var notes = `
                 <h5>The Latest</h5>
                 <ul>
-                  <li>Added distraction free editing mode<br>(Change View » Distraction Free Mode)</li>
-                  <li>Deprecated JavaScript preview toggle</li>
+                  <li>You can now base your custom theme on one of over a dozen presets (including all of CodePen's standard themes)</li>
+                  <li>Custom themes can now be imported/exported. Make something cool? <a target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite/issues">Let me know on GitHub</a> and I might add it 👍
+                  </li>
                 </ul>
-                <div class="ces__update-modal__cta">
-                  <a target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite">View on GitHub »</a>
-                  <br />
-                  <a target="_blank" href="https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim?hl=en">Rate »</a>
-                </div>
-                  
+                <hr class="ces__update__hr">
+                <h5>Liking the extension?</h5>
+                <p>Consider <a target="_blank" href="https://chrome.google.com/webstore/detail/codepen-enhancement-suite/olmbnbpkgkagfnkdmaehjcpdkfkfokim?hl=en">rating it in the Chrome Web Store.</a> Have an idea to make it even better? <a target="_blank" href="https://github.com/alexzaworski/CodePen-Enhancement-Suite/issues">Hit me up.</a></p>
+                <hr class="ces__update__hr">
                 <div class="ces__update__actions ces__clearfix">
                   <button id="ces__hide-forever" class="ces__text-like-button">Never show patch notes</button>
                   <button id="ces__dismiss" class="ces__update__dismiss button button-medium green">Dismiss</button>

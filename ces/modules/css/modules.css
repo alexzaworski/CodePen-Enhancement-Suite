@@ -389,6 +389,11 @@
   line-height: 34px; /* matches height of buttons */
 }
 
+.ces__update__hr {
+  margin: 20px 0;
+  border-color: #ddd;
+}
+
 .header-activity-button.ces__new-notification {
   position:relative;
 }
