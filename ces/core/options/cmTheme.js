@@ -7,7 +7,7 @@ var cmTheme = (function() {
   var container = document.getElementById("controls");
   var saveButton = document.getElementById("save");
   var baseUIToggle = document.getElementById("base-ui");
-  var fauxLabels = document.getElementsByClassName("base-ui__label");
+  var fauxToggleLabels = document.getElementsByClassName("base-ui__label");
   var pageWrap = document.getElementById("page-wrap");
   var presetSelect = document.getElementById("presets");
   var revertButton = document.getElementById("revert");
@@ -18,12 +18,10 @@ var cmTheme = (function() {
     document.head.appendChild(styleEl);
   };
 
-  // Updates the content of the appended style tag.
   var updateStyles = function(needsSave) {
     styleEl.innerHTML = buildStyles();
   };
 
-  // Concatonates all elements' style rules into one string
   var buildStyles = function() {
     var styles = "";
     elements.forEach(function(element) {
@@ -32,12 +30,10 @@ var cmTheme = (function() {
     return styles;
   };
 
-  // Saves all necessary data to browser storage for later retrieval
   var addElement = function(element) {
     elements.push(element);
   };
 
-  // Given an ID, retrieves an element and returns it
   var getElement = function(id) {
     var el;
     elements.some(function(element) {
@@ -61,29 +57,25 @@ var cmTheme = (function() {
     pageWrap.classList.toggle("light", baseUIToggle.checked);
   };
 
-  var handleFauxLabelClick = function() {
+  var handlefauxToggleLabelClick = function() {
     baseUIToggle.click();
   };
+
   var addGUIEventListeners = function() {
-    revertButton.addEventListener("click", function() {
-      revert();
-    }.bind(this));
+    revertButton.addEventListener("click", revert);
 
     saveButton.addEventListener("click", function() {
       stash();
       displaySaveTime();
-    }.bind(this));
+    });
 
     baseUIToggle.addEventListener("click", function() {
       isLightTheme = baseUIToggle.checked;
       setPageBackground();
     });
 
-    // Couldn't figure out a better way to do this quickly,
-    // should revisit at some point 'cause this is awfully janky...
-    // Ideally wouldn't use JS at all
-    for (var i = 0; i < fauxLabels.length; i++) {
-      fauxLabels[ i ].addEventListener("click", handleFauxLabelClick);
+    for (var i = 0; i < fauxToggleLabels.length; i++) {
+      fauxToggleLabels[ i ].addEventListener("click", handlefauxToggleLabelClick);
     }
 
     presetSelect.addEventListener("change", function(e) {
@@ -104,6 +96,7 @@ var cmTheme = (function() {
   };
 
   var drawGUI = function() {
+    displaySaveTime();
     elements.forEach(function(element) {
       element.setupSelectEl();
       element.draw();
@@ -123,8 +116,6 @@ var cmTheme = (function() {
     needsSave = false;
     window.onbeforeunload = null;
 
-    // Unfortunately this has to use local storage instead of sync storage.
-    // This is due to the item size limit of 4096 bytes in sync storage.
     lastSaved = String(new Date()).substr(4, 20);
     var elementStash = [];
     elements.forEach(function(element) {
@@ -138,6 +129,9 @@ var cmTheme = (function() {
       };
       elementStash.push(toStash);
     });
+
+    // Unfortunately this has to use local storage instead of sync storage.
+    // This is due to the item size limit of 4096 bytes in sync storage.
     chrome.storage.local.set({
       "cmElements": elementStash,
       "cmCSS": buildStyles(),
@@ -177,7 +171,7 @@ var cmTheme = (function() {
   };
 
   var buildElementsFromPreset = function() {
-    var preset = presets[presetSelect.value];
+    var preset = presets[ presetSelect.value ];
     initElements(preset.elements);
     isLightTheme = preset.light;
     initGUI();
