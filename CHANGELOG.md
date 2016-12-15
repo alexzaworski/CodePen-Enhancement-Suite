@@ -1,5 +1,17 @@
 # Change Log
 
+## v0.7.0
+
+### Added
+
+* Custom themes now give a few presets to use as a base
+* Custom themes can now be imported/exported as JSON
+
+### Fixed
+
+* Tweaked some selectors in custom theme CSS to catch edge cases
+* The extension will now load an external version of jQuery on pages where jQuery is absent
+
 ## v0.6.4
 
 ### Fixed
