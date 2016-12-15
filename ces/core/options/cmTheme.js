@@ -10,6 +10,7 @@ var cmTheme = (function() {
   var fauxToggleLabels = document.getElementsByClassName("base-ui__label");
   var pageWrap = document.getElementById("page-wrap");
   var presetSelect = document.getElementById("presets");
+  var presetLoad = document.getElementById("load-preset");
   var revertButton = document.getElementById("revert");
   var saveInfo = document.getElementById("save-info");
   var lastSaved = false;
@@ -78,7 +79,7 @@ var cmTheme = (function() {
       fauxToggleLabels[i].addEventListener("click", handlefauxToggleLabelClick);
     }
 
-    presetSelect.addEventListener("change", function(e) {
+    presetLoad.addEventListener("click", function() {
       reset();
       buildElementsFromPreset();
     });
