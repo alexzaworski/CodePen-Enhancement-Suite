@@ -5,7 +5,7 @@ var presets = (function() {
   var elementGlobals = [
   {
     prettyName: "Background",
-    selector: ".box,.editor .top-boxes,.CodeMirror-gutter-wrapper",
+    selector: ".box, .editor .top-boxes, .CodeMirror-gutter-wrapper, body.project .editor-pane, body.project .editor",
     prop: "background"
   },
   {
