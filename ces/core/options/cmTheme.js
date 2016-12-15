@@ -75,7 +75,7 @@ var cmTheme = (function() {
     });
 
     for (var i = 0; i < fauxToggleLabels.length; i++) {
-      fauxToggleLabels[ i ].addEventListener("click", handlefauxToggleLabelClick);
+      fauxToggleLabels[i].addEventListener("click", handlefauxToggleLabelClick);
     }
 
     presetSelect.addEventListener("change", function(e) {
@@ -171,7 +171,7 @@ var cmTheme = (function() {
   };
 
   var buildElementsFromPreset = function() {
-    var preset = presets[ presetSelect.value ];
+    var preset = presets[presetSelect.value];
     initElements(preset.elements);
     isLightTheme = preset.light;
     initGUI();

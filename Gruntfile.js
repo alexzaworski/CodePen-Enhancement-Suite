@@ -19,6 +19,7 @@ module.exports = function(grunt) {
         validateQuoteMarks: "\"",
         maximumLineLength: false,
         fix: true,
+        disallowSpacesInsideBrackets: true,
         requireCamelCaseOrUpperCaseIdentifiers: {
           ignoreProperties: true
         }

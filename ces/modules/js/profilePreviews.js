@@ -26,7 +26,7 @@
     // the link to the pen/post/whatever.
     activity: ".activity-name:first-of-type"
   };
-  var selector = selectors[ CES_GLOBALS.INIT_DATA.__pageType ] || selectors.default;
+  var selector = selectors[CES_GLOBALS.INIT_DATA.__pageType] || selectors.default;
   var penCommentsHandled = false;
   var isGridView = (function() {
     return !!CES_GLOBALS.INIT_DATA.__pageType.match(/^(home|explore-posts|explore-pens|explore-collections|collection|activity|details)$/);
@@ -232,9 +232,9 @@
       var iframeWrapper = $("<div class='ces__iframe-wrap'>");
       var titleWrapper = $("<div class='ces__pen__title'>");
       var penLink = $("<a class='ces__pen__link'>");
-      penLink.attr("href", pens[ i ].url);
-      iframeWrapper.append(pens[ i ].iframe);
-      titleWrapper.html(CES_GLOBALS.ESCAPE_HTML(pens[ i ].title));
+      penLink.attr("href", pens[i].url);
+      iframeWrapper.append(pens[i].iframe);
+      titleWrapper.html(CES_GLOBALS.ESCAPE_HTML(pens[i].title));
       penWrapper
         .append(penLink)
         .append(iframeWrapper)

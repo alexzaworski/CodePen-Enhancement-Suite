@@ -5,11 +5,11 @@ var cesUpdates = (function() {
 
     // Note: never ever change this to a different name, you'll bypass the setting
     // and serve patch notes to people who disabled them which is super obnoxious
-    if (!!response[ "disable-patch-notes" ]) {
+    if (!!response["disable-patch-notes"]) {
       return;
     } else {
       chrome.storage.local.get(storageString, function(response) {
-        if (!response[ storageString ]) {
+        if (!response[storageString]) {
           init();
         }
       });
@@ -48,7 +48,7 @@ var cesUpdates = (function() {
     dismissButton.addEventListener("click", function() {
       modal.parentNode.removeChild(modal);
       var settingsObj = {};
-      settingsObj[ storageString ] = true;
+      settingsObj[storageString] = true;
       chrome.storage.local.set(settingsObj);
     });
 
