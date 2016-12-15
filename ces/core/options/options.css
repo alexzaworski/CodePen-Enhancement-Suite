@@ -31,6 +31,7 @@ html {
 body {
   font-family: lato;
   font-size: 16px;
+  min-width: 1150px;
 }
 
 .page-wrap {
@@ -87,6 +88,10 @@ body {
   margin-right: 10px;
   border-radius: 4px;
   border: 3px solid #333;
+}
+
+.button--default:last-child {
+  margin-right: 0;
 }
 
 .button--tiny {
@@ -380,7 +385,6 @@ body {
   margin-left: 4px;
   margin-right: 2px;
   background: black;
-  vertical-align: middle;
   color: white;
   border: 0;
   padding: 4px 20px 4px 10px;
@@ -440,4 +444,14 @@ body {
 .cmEl__font-control.active {
   background: #333;
   fill: #999;
+}
+
+.export-controls {
+  background: #111;
+  padding: 20px;
+  padding-left: 0;
+}
+
+.light .export-controls {
+  background: white;
 }

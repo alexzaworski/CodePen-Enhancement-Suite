@@ -8,18 +8,25 @@ var cmTheme = (function() {
   var saveButton = document.getElementById("save");
   var baseUIToggle = document.getElementById("base-ui");
   var fauxToggleLabels = document.getElementsByClassName("base-ui__label");
+  var exportButton = document.getElementById("export-json");
+  var importButton = document.getElementById("import-json");
+  var importInput = document.getElementById("import-input");
   var pageWrap = document.getElementById("page-wrap");
   var presetSelect = document.getElementById("presets");
   var presetLoad = document.getElementById("load-preset");
   var revertButton = document.getElementById("revert");
   var saveInfo = document.getElementById("save-info");
   var lastSaved = false;
-  var needsSave = false;
+
   var appendStyles = function() {
     document.head.appendChild(styleEl);
   };
 
-  var updateStyles = function(needsSave) {
+  var updateStyles = function(shouldSetSave) {
+    if (shouldSetSave && !window.onbeforeunload) {
+      setUnload();
+    }
+
     styleEl.innerHTML = buildStyles();
   };
 
@@ -46,6 +53,12 @@ var cmTheme = (function() {
     return el || false;
   };
 
+  var setUnload = function() {
+    window.onbeforeunload = function() {
+      return "Your changes are NOT saved, if you continue they will be discarded.";
+    };
+  };
+
   var getElements = function() {
     return elements;
   };
@@ -64,6 +77,24 @@ var cmTheme = (function() {
 
   var addGUIEventListeners = function() {
     revertButton.addEventListener("click", revert);
+    
+    exportButton.addEventListener("click", function(){
+      exportTheme();
+    });
+    
+    importButton.addEventListener("click", function(){
+      importInput.click();
+    });
+
+    importInput.addEventListener("change", function(e) {
+      var file = importInput.files[0];
+      fr = new FileReader();
+      fr.onload = function() {
+        reset();
+        buildElementsFromPreset(JSON.parse(fr.result));
+      };
+      fr.readAsText(file);
+    });
 
     saveButton.addEventListener("click", function() {
       stash();
@@ -80,8 +111,9 @@ var cmTheme = (function() {
     }
 
     presetLoad.addEventListener("click", function() {
+      setUnload();
       reset();
-      buildElementsFromPreset();
+      buildElementsFromPreset(presets[presetSelect.value]);
     });
   };
 
@@ -113,11 +145,7 @@ var cmTheme = (function() {
     styleEl.innerHTML = "";
   };
 
-  var stash = function() {
-    needsSave = false;
-    window.onbeforeunload = null;
-
-    lastSaved = String(new Date()).substr(4, 20);
+  var buildElementStash = function() {
     var elementStash = [];
     elements.forEach(function(element) {
       var toStash = {
@@ -130,6 +158,28 @@ var cmTheme = (function() {
       };
       elementStash.push(toStash);
     });
+    return elementStash;
+  }
+  
+  var exportTheme = function() {
+    var presetExport = {};
+    presetExport.elements = buildElementStash();
+    presetExport.light = isLightTheme;
+    var dataStr = "data:text/json;charset=utf-8,";
+    dataStr += encodeURIComponent(JSON.stringify(presetExport));
+    var a = document.createElement("a");
+    a.href = dataStr;
+    a.setAttribute("download", "ces_theme.json");
+    document.body.appendChild(a);
+    a.click();
+    a.parentNode.removeChild(a);
+  };
+
+  var stash = function() {
+    window.onbeforeunload = null;
+
+    lastSaved = String(new Date()).substr(4, 20);
+    var elementStash = buildElementStash();
 
     // Unfortunately this has to use local storage instead of sync storage.
     // This is due to the item size limit of 4096 bytes in sync storage.
@@ -157,7 +207,7 @@ var cmTheme = (function() {
   var buildElements = function() {
     chrome.storage.local.get("cmElements", function(response) {
       if (!response.cmElements) {
-        buildElementsFromPreset();
+        buildElementsFromPreset(presets[presetSelect.value]);
       } else {
         initElements(response.cmElements);
         chrome.storage.local.get("cmLastSaved", function(response) {
@@ -171,8 +221,7 @@ var cmTheme = (function() {
     });
   };
 
-  var buildElementsFromPreset = function() {
-    var preset = presets[presetSelect.value];
+  var buildElementsFromPreset = function(preset) {
     initElements(preset.elements);
     isLightTheme = preset.light;
     initGUI();
