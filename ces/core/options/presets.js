@@ -1,5 +1,5 @@
 // jscs:disable requireDotNotation
-/* jshint sub: true */
+// jshint sub: true
 var presets = (function() {
   var presets = {};
   var elementGlobals = [
