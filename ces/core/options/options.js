@@ -7,11 +7,11 @@
     
     xhr.onload = function() {
       previewEl.innerHTML = xhr.responseText;
-    }
+    };
     
     xhr.open('GET', previewURL);
     xhr.send();
-  }
+  };
   
   appendPreviewHTML();
   cmTheme.init(presets);
