@@ -251,7 +251,7 @@ var presets = (function() {
       }
     ]
   };
-  
+
   presets["Cobalt2"] = {
     light: false,
     elements: [
@@ -365,7 +365,7 @@ var presets = (function() {
       }
     ],
   };
-  
+
   presets["Twilight"] = {
     light: false,
     elements: [
@@ -1739,13 +1739,13 @@ var presets = (function() {
       }
     ]
   };
- 
+
   var setupElement = function(element) {
     if (!element.prettyName) {
       console.warn(presetName + ": element name missing.");
       return;
     }
-    
+
     for (var i = 0; i < elementGlobals.length; i++) {
       var global = elementGlobals[i];
       if (global.prettyName === element.prettyName) {

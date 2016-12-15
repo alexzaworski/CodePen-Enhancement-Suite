@@ -42,9 +42,9 @@ function init() {
     var data = $("#init-data").val();
     var parsedData = $.parseJSON(data);
     for (var key in parsedData) {
-      var prop = parsedData[ key ];
+      var prop = parsedData[key];
       if (needsParsing(prop)) {
-        parsedData[ key ] = $.parseJSON(prop);
+        parsedData[key] = $.parseJSON(prop);
       }
     }
 
@@ -126,7 +126,7 @@ function init() {
     CES_GLOBALS.REQUEST_EXTENSION_URL("modules/html/error-modal.html", function(response) {
       var errorModal = $("<div>").load(response, function() {
         errorModal.find("#ces__error-message").html(message);
-        $.showModal(errorModal[ 0 ].innerHTML);
+        $.showModal(errorModal[0].innerHTML);
       });
     });
   };
