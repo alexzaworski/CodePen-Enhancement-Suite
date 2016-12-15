@@ -85,8 +85,8 @@ var previewJSToggle = (function() {
           return;
         }
         for (var i = 0; i < params.length; i++) {
-          var pair = params[ i ].split("=");
-          if (decodeURIComponent(pair[ 0 ]) == name) { return true; }
+          var pair = params[i].split("=");
+          if (decodeURIComponent(pair[0]) == name) { return true; }
         }
         return false;
       },
@@ -96,7 +96,7 @@ var previewJSToggle = (function() {
           var newparams = [];
           params.forEach(function(param) {
             var pair = param.split("=");
-            if (decodeURIComponent(pair[ 0 ]) != name) {
+            if (decodeURIComponent(pair[0]) != name) {
               newparams.push(param);
             }
           });

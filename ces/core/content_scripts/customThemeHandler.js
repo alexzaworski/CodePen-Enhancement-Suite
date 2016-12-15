@@ -7,7 +7,7 @@
 var customThemeHandler = (function() {
 
   var styleEl = document.createElement("style");
-  var pageWrap = document.getElementsByClassName("page-wrap")[ 0 ];
+  var pageWrap = document.getElementsByClassName("page-wrap")[0];
   var ogTheme = document.querySelector("[href*='assets/editor/themes']");
   var isLightTheme = false;
 

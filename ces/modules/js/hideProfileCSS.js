@@ -14,8 +14,8 @@
 (function() {
   "use strict";
 
-  var headEl = document.getElementsByTagName("head")[ 0 ];
-  var styleEl = headEl.getElementsByTagName("style")[ 0 ];
+  var headEl = document.getElementsByTagName("head")[0];
+  var styleEl = headEl.getElementsByTagName("style")[0];
 
   // These events are fired by the profileCSSHandler content script
   window.addEventListener("disable-css", function() {
