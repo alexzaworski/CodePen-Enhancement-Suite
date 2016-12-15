@@ -3,7 +3,13 @@
 .CodeMirror {
   font-family: monospace;
   height: 300px;
-  color: black
+  color: black;
+  font-size: 14px;
+  line-height: 21px;
+  font-family: "Monaco", "Menlo", monospace;
+  height: auto;
+  background: none;
+  position: relative;
 }
 
 .CodeMirror-lines {
@@ -108,12 +114,6 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 
 .CodeMirror-activeline-background {
   background: #e8f2ff
-}
-
-.CodeMirror {
-  position: relative;
-  overflow: hidden;
-  background: white
 }
 
 .CodeMirror-scroll {
@@ -291,10 +291,6 @@ div.CodeMirror-dragcursors {
   visibility: visible
 }
 
-.CodeMirror-selected {
-  background: #d9d9d9
-}
-
 .CodeMirror-focused .CodeMirror-selected {
   background: #d7d4f0
 }
@@ -334,12 +330,6 @@ div.CodeMirror-dragcursors {
 
 span.CodeMirror-selectedtext {
   background: none
-}
-
-.CodeMirror {
-  font: 15px/1.5 Monaco, MonoSpace;
-  background: none;
-  height: 100%
 }
 
 .CodeMirror-gutters {
@@ -449,4 +439,11 @@ div.CodeMirror span.CodeMirror-matchingbracket {
 .CodeMirror-simplescroll-vertical div {
   right: 0;
   width: 100%
+}
+
+
+.CodeMirror-scroll {
+  padding: 0;
+  margin: 0;
+  overflow: hidden !important;
 }
