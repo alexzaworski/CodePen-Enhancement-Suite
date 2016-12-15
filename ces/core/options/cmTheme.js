@@ -88,7 +88,7 @@ var cmTheme = (function() {
 
     importInput.addEventListener("change", function(e) {
       var file = importInput.files[0];
-      fr = new FileReader();
+      var fr = new FileReader();
       fr.onload = function() {
         reset();
         buildElementsFromPreset(JSON.parse(fr.result));
@@ -159,7 +159,7 @@ var cmTheme = (function() {
       elementStash.push(toStash);
     });
     return elementStash;
-  }
+  };
   
   var exportTheme = function() {
     var presetExport = {};
