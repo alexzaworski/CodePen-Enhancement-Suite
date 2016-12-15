@@ -129,7 +129,6 @@ var cmTheme = (function() {
   };
 
   var drawGUI = function() {
-    displaySaveTime();
     elements.forEach(function(element) {
       element.setupSelectEl();
       element.draw();
@@ -212,6 +211,7 @@ var cmTheme = (function() {
         initElements(response.cmElements);
         chrome.storage.local.get("cmLastSaved", function(response) {
           lastSaved = response.cmLastSaved;
+          displaySaveTime();
           chrome.storage.local.get("cmIsLightTheme", function(response) {
             isLightTheme = response.cmIsLightTheme;
             initGUI();
