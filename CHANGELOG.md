@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.7.1
+
+### Fixed
+
+* Fixed an issue with transparency on autocomplete popups
+
 ## v0.7.0
 
 ### Added
