@@ -88,6 +88,7 @@ var customThemeHandler = (function() {
     // If there is a page wrap, reset its classes and append our own
     if (pageWrap) {
       pageWrap.className = "page-wrap";
+      pageWrap.classList.add("ces-theme");
       pageWrap.classList.toggle("ces-light-theme", isLightTheme);
     }
     ogTheme.remove();

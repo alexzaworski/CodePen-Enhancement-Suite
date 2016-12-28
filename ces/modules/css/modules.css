@@ -410,3 +410,31 @@
   border: 2px solid black;
   top: 15px;
 }
+
+/* FIX BACKGROUND ON AUTO COMPLETE MODALS W/ CUSTOM THEMES */
+.ces-theme ~ .CodeMirror-hints {
+  border: 1px solid #555;
+  background: #333;
+  color: #fff
+}
+
+.ces-theme ~ .CodeMirror-hints li.CodeMirror-hint-active {
+  background: #c1c1c1;
+  color: #000;
+}
+
+.ces-light-theme ~ .CodeMirror-hints {
+  border: 1px solid silver;
+  background: #fff;
+  color: #000;
+}
+
+.ces-light-theme ~ .CodeMirror-hint {
+  color: #000!important;
+}
+
+.ces-light-theme ~ .CodeMirror-hints li.CodeMirror-hint-active {
+  background: #08f;
+  color:white;
+}
+
