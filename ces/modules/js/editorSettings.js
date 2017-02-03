@@ -20,7 +20,7 @@
   var pendingSave = false;
 
   // Grabs the inital settings for the editor so we can change 'em as necessary.
-  var editorSettings = CES_GLOBALS.INIT_DATA.__pen.editor_settings;
+  var editorSettings = CES_GLOBALS.INIT_DATA.__item.editor_settings;
 
   // Markup is reconstructed from what CodePen was already using so that
   // I can just re-use their tab functionality.
@@ -56,7 +56,7 @@
       // Because of the redirect caused by saving a new Pen, the callback gets screwed up
       // when saving editor settings. The easiest way to fix this is to force people to save
       // first. Sorta sucks, but it works.
-      if (CES_GLOBALS.INIT_DATA.__pen.slug_hash === "") {
+      if (CES_GLOBALS.INIT_DATA.__item.slug_hash === "") {
         $editorSettingsContainer.prepend("<p>Editor settings are only available once you've saved your Pen at least once. I know it's weird, I'm working on it :(</p>");
         $editorSettingsContainer.find("input, select, label").addClass("disabled");
         return;

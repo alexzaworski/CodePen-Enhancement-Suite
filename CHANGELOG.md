@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.7.2
+
+### Fixed
+
+* Update an object key in `INIT_DATA` to match a change on CodePen's end
+
 ## v0.7.1
 
 ### Fixed

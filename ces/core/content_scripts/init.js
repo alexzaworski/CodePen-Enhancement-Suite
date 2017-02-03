@@ -68,7 +68,7 @@ function loadConditionalModules() {
     //
     // CMD-S would still work but that causes a fork if you're viewing someone else's Pen.
     // Eventually it would be good to sort all of that out.
-    if (INIT_DATA.__pen.user_id === INIT_DATA.__user.id && INIT_DATA.__user.id != 1) {
+    if (INIT_DATA.__item.user_id === INIT_DATA.__user.id && INIT_DATA.__user.id != 1) {
       loadModule("editorSettings");
     }
   }
