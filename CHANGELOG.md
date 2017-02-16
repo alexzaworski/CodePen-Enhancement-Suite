@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.7.3
+
+### Fixed
+
+* Added Fira Code editor font
+
 ## v0.7.2
 
 ### Fixed
