@@ -1,22 +1,79 @@
 var cesUpdates = (function() {
-  var currentPatch = "0.7.0";
-  var storageString = currentPatch + "-patch-notes";
-  chrome.storage.local.get("disable-patch-notes", function(response) {
 
-    // Note: never ever change this to a different name, you'll bypass the setting
-    // and serve patch notes to people who disabled them which is super obnoxious
-    if (!!response["disable-patch-notes"]) {
-      return;
-    } else {
-      chrome.storage.local.get(storageString, function(response) {
-        if (!response[storageString]) {
-          init();
-        }
-      });
-    }
+  // Not actually in sync with the most up-to-date patch,
+  // only incremented when the current version should display
+  // patch notes (major releases, significant bug fixes)
+  var currentPatch = "0.7.0";
+  var patchNoteKey = currentPatch + "-patch-notes";
+
+  var welcomeKey = "has-loaded-before";
+
+  // Note: never ever change this to a different name, you'll bypass the setting
+  // and serve patch notes to people who disabled them which is super obnoxious
+  var disableKey = "disable-patch-notes";
+
+  function checkIfNotesDisabled(callback) {
+    chrome.storage.local.get(disableKey, function(response) {
+      if (!!response[disableKey]) {
+        return;
+      } else {
+        callback();
+      }
+    });
+  }
+
+  function checkIfSeenWelcome(callback) {
+    chrome.storage.local.get(welcomeKey, function(response) {
+      if (!response[welcomeKey]) {
+        var storageObj = {};
+        storageObj[patchNoteKey] = true;
+        storageObj[welcomeKey] = true;
+        chrome.storage.local.set(storageObj);
+      } else {
+        callback();
+      }
+    });
+  }
+
+  function checkIfSeenCurentNotes(callback) {
+    chrome.storage.local.get(patchNoteKey, function(response) {
+      if (!response[patchNoteKey]) {
+        callback();
+      }
+    });
+  }
+
+  checkIfNotesDisabled(function() {
+    checkIfSeenWelcome(function() {
+      checkIfSeenCurentNotes(init);
+    });
   });
 
   function init() {
+    // todo: make this be less garbage.
+
+    var setupButtons = function() {
+      var dismissButton = document.getElementById("ces__dismiss");
+      var hideForever = document.getElementById("ces__hide-forever");
+      hideForever.addEventListener("click", function() {
+        setKey(disableKey);
+      });
+      dismissButton.addEventListener("click", function() {
+        setKey(patchNoteKey);
+      });
+    };
+
+    var setKey = function(key) {
+      removeModal();
+      var storageObj = {};
+      storageObj[key] = true;
+      chrome.storage.local.set(storageObj);
+    };
+
+    var removeModal = function() {
+      modal.parentNode.removeChild(modal);
+    };
+
     var notes = `
                 <h5>The Latest</h5>
                 <ul>
@@ -43,18 +100,6 @@ var cesUpdates = (function() {
     modal.innerHTML = template;
     modal = modal.firstChild;
     document.body.appendChild(modal);
-    var dismissButton = document.getElementById("ces__dismiss");
-    dismissButton.addEventListener("click", function() {
-      modal.parentNode.removeChild(modal);
-      var settingsObj = {};
-      settingsObj[storageString] = true;
-      chrome.storage.local.set(settingsObj);
-    });
-
-    var hideForever = document.getElementById("ces__hide-forever");
-    hideForever.addEventListener("click", function() {
-      modal.parentNode.removeChild(modal);
-      chrome.storage.local.set({"disable-patch-notes": true});
-    });
+    setupButtons();
   }
 })();
