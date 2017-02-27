@@ -153,6 +153,8 @@ var cmTheme = (function() {
         color: element.color,
         description: element.description,
         prop: element.prop,
+        italic: element.italic,
+        underline: element.underline,
         master: element.master.id
       };
       elementStash.push(toStash);

@@ -146,32 +146,31 @@ CMElement.prototype.buildSVGIcon = function(id) {
   return svg;
 };
 
-CMElement.prototype.setupItalicEl = function() {
-  var italicEl = this.buildSVGIcon("italic");
-  italicEl.classList.add("cmEl__font-control");
-  italicEl.addEventListener("click", function() {
-    this.italic = !this.italic;
-    italicEl.classList.toggle("active", this.italic);
+// sets up the italic/underline toggles. The `control`
+// param should either be "italic" or "underline".
+CMElement.prototype.setupFontControlEl = function(control) {
+  // Todo: move over to eslint 'cause this sucks lol
+  /* jscs: disable requireDotNotation */
+  /* jshint sub: true */
+  var controlEl = this.buildSVGIcon(control);
+  controlEl.classList.add("cmEl__font-control");
+  if (this[control]) {
+    controlEl.classList.add("active");
+  }
+  controlEl.addEventListener("click", function() {
+    this[control] = !this[control];
+    controlEl.classList.toggle("active", this["control"]);
     cmTheme.updateStyles();
   }.bind(this));
-  this.italicEl = italicEl;
-};
-
-CMElement.prototype.setupUnderlineEl = function() {
-  var underlineEl = this.buildSVGIcon("underline");
-  underlineEl.classList.add("cmEl__font-control");
-  underlineEl.addEventListener("click", function() {
-    this.underline = !this.underline;
-    underlineEl.classList.toggle("active", this.underline);
-    cmTheme.updateStyles();
-  }.bind(this));
-  this.underlineEl = underlineEl;
+  this[control + "El"] = controlEl;
+  /* jshint sub: false */
+  /* jscs: enable requireDotNotation */
 };
 
 CMElement.prototype.setupFontEl = function() {
   var fontEl = document.createElement("div");
-  this.setupItalicEl();
-  this.setupUnderlineEl();
+  this.setupFontControlEl("italic");
+  this.setupFontControlEl("underline");
   fontEl.classList.add("cmEl__font-controls");
   fontEl.appendChild(this.italicEl);
   fontEl.appendChild(this.underlineEl);
