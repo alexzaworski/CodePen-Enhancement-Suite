@@ -1,5 +1,13 @@
 # Change Log
 
+## v0.7.4
+
+### Fixed
+
+* Fixed issue where font styles in custom themes wouldn't save/apply
+* Re-saving a custom theme now always updates its props/selectors (incase they change in the future)
+* Patch notes no longer display the first time you load the extension
+
 ## v0.7.3
 
 ### Fixed
