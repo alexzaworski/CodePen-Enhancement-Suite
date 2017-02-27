@@ -1,3 +1,140 @@
+// jscs:disable requireDotNotation
+// jshint sub: true
+var elementGlobals = [];
+elementGlobals["Background"] = {
+  selector: ".box, .editor .top-boxes, .CodeMirror-gutter-wrapper, body.project .editor-pane, body.project .editor",
+  prop: "background"
+};
+
+elementGlobals["Cursor"] = {
+  selector: ".CodeMirror-cursor",
+  prop: "border-left-color",
+};
+
+elementGlobals["Default"] = {
+  selector: ".CodeMirror pre, .box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre",
+  description: "when nothin' else applies",
+};
+
+elementGlobals["Keyword"] = {
+  selector: ".cm-keyword",
+  description: "e.g. var, function"
+};
+
+elementGlobals["Atom"] = {
+  selector: ".cm-atom",
+  description: "used for some CSS values and JS primitives (e.g. null, undefined)"
+};
+
+elementGlobals["HTML Atom"] = {
+  selector: ".box-html .cm-atom",
+  description: "e.g. HTML entities"
+};
+
+elementGlobals["Definition"] = {
+  selector: ".cm-def",
+  description: "e.g. @include, var foo"
+};
+
+elementGlobals["Variable"] = {
+  selector: ".cm-variable",
+  description: "for already-defined variables"
+};
+
+elementGlobals["Variable 2"] = {
+  selector: ".cm-variable-2",
+  description: "e.g. markdown lists, JS args, SCSS variables"
+};
+
+elementGlobals["Variable 3"] = {
+  selector: ".cm-variable-3",
+  description: "used for CSS psuedo elements e.g. :before"
+};
+
+elementGlobals["Header"] = {
+  selector: ".cm-header",
+  description: "used for Markdown headers and maybe other stuff"
+};
+
+elementGlobals["Number"] = {
+  selector: ".cm-number",
+};
+
+elementGlobals["Property"] = {
+  selector: ".cm-property",
+  description: "CSS properties, JS object properties"
+};
+
+elementGlobals["Attribute"] = {
+  selector: ".cm-attribute",
+  description: "HTML attributes"
+};
+
+elementGlobals["Builtin"] = {
+  selector: ".cm-builtin",
+  description: "used for CSS ID selectors"
+};
+
+elementGlobals["Qualifier"] = {
+  selector: ".cm-qualifier",
+  description: "used for CSS class selectors"
+};
+
+elementGlobals["Operator"] = {
+  selector: ".cm-operator",
+  description: "e.g. =, +, -"
+};
+
+elementGlobals["Meta"] = {
+  selector: ".cm-meta",
+  description: "used for vendor prefixes"
+};
+
+elementGlobals["String Color"] = {
+  selector: ".cm-string",
+};
+
+elementGlobals["Secondary String"] = {
+  selector: ".cm-string-2",
+  description: "some CSS values"
+};
+
+elementGlobals["HTML Tag"] = {
+  selector: ".cm-tag",
+  description: "tags in HTML"
+};
+
+elementGlobals["CSS Tag"] = {
+  selector: ".box-css .cm-tag",
+  description: "element selectors in CSS"
+};
+
+elementGlobals["Tag Bracket"] = {
+  selector: ".cm-tag.cm-bracket",
+  description: "angle brackets in HTML"
+};
+
+elementGlobals["Line Number"] = {
+  selector: ".CodeMirror-linenumber",
+};
+
+elementGlobals["Gutter Marker"] = {
+  selector: ".CodeMirror-guttermarker-subtle",
+  description: "e.g. those toggle arrows next to line numbers",
+};
+
+elementGlobals["Comment"] = {
+  selector: ".cm-comment",
+};
+
+elementGlobals["Selected"] = {
+  selector: ".cm-searching, .CodeMirror-focused .CodeMirror-selected, .CodeMirror-selected",
+  description: "used for highlighted text",
+  prop: "background-color",
+};
+
+// jscs:enable requireDotNotation
+// jshint sub: false
 var cmTheme = (function() {
   var rawElements = [];
   var elements =  [];
@@ -149,10 +286,7 @@ var cmTheme = (function() {
     elements.forEach(function(element) {
       var toStash = {
         prettyName: element.prettyName,
-        selector: element.selector,
         color: element.color,
-        description: element.description,
-        prop: element.prop,
         italic: element.italic,
         underline: element.underline,
         master: element.master.id
@@ -223,6 +357,13 @@ var cmTheme = (function() {
     });
   };
 
+  var setupElementGlobals = function(element) {
+    var globalElement = elementGlobals[element.prettyName];
+    element.selector = globalElement.selector;
+    if (globalElement.description) { element.description = globalElement.description; }
+    if (globalElement.prop) { element.prop = globalElement.prop; }
+  };
+
   var buildElementsFromPreset = function(preset) {
     initElements(preset.elements);
     isLightTheme = preset.light;
@@ -242,6 +383,7 @@ var cmTheme = (function() {
 
   var initElements = function(rawElements) {
     rawElements.forEach(function(element) {
+      setupElementGlobals(element);
       new CMElement(element);
     });
   };
