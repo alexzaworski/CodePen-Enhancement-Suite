@@ -187,7 +187,7 @@
       name.append($("<span class='ces__pro-badge badge badge-pro'>Pro</span>"));
     }
     template.find('.ces__profile__link').attr('href', this.baseURL);
-    template.find('.ces__profile__username').html(this.escapeHTML("@" + profile.username));
+    template.find('.ces__profile__username').html(this.escapeHTML('@' + profile.username));
     template.find('.ces__profile__avatar').attr('src', profile.avatar);
     template.find('.ces__profile__followers-stat').html(profile.followers);
     template.find('.ces__profile__followers-link').attr('href', this.baseURL + '/followers');
