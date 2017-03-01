@@ -18,7 +18,7 @@
 
 ### Fixed
 
-* Update an object key in `INIT_DATA` to match a change on CodePen's end
+* Update an object key in `initData` to match a change on CodePen's end
 
 ## v0.7.1
 

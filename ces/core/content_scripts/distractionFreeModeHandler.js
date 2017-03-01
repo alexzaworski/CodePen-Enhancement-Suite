@@ -1,7 +1,7 @@
 (function distractionFreeHandler () {
   window.addEventListener('init-data-ready', function (e) {
-    var INIT_DATA = e.detail;
-    if (INIT_DATA.__pageType !== 'pen') {
+    var initData = e.detail;
+    if (initData.__pageType !== 'pen') {
       return;
     }
     addListeners();

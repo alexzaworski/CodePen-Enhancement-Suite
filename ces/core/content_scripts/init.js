@@ -25,13 +25,13 @@ document.head.appendChild(styleEl);
 // First loads modules that don't depend on the current page.
 loadModule('globals');
 
-var INIT_DATA;
+var initData;
 
 // The Global Variables module includes some initialization data
 // that is needed to conditionally load other modules, so we need to wait
 // for that event to fire and then we can keep doin' our thing.
 window.addEventListener('init-data-ready', function (e) {
-  INIT_DATA = e.detail;
+  initData = e.detail;
   loadConditionalModules();
 });
 
@@ -42,22 +42,22 @@ function loadConditionalModules () {
     loadModule('activityFeed');
   }
 
-  if (!INIT_DATA.hasOwnProperty('__pageType')) {
+  if (!initData.hasOwnProperty('__pageType')) {
     return;
   }
-  if (INIT_DATA.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections|full|activity)$/)) {
+  if (initData.__pageType.match(/^(home|pen|posts|collection|details|explore-pens|explore-posts|explore-collections|full|activity)$/)) {
     loadModule('profilePreviews');
   }
 
-  if (INIT_DATA.__pageType === 'profile') {
+  if (initData.__pageType === 'profile') {
     loadModule('hideProfileCSS');
   }
 
-  if (INIT_DATA.__pageType.match(/^(pen|details|posts)$/)) {
+  if (initData.__pageType.match(/^(pen|details|posts)$/)) {
     loadModule('commentPreviews');
   }
 
-  if (INIT_DATA.__pageType === 'pen') {
+  if (initData.__pageType === 'pen') {
     loadModule('distractionFreeMode');
     loadModule('recentPensTypeahead');
     loadModule('resizablePreviews');
@@ -68,7 +68,7 @@ function loadConditionalModules () {
     //
     // CMD-S would still work but that causes a fork if you're viewing someone else's Pen.
     // Eventually it would be good to sort all of that out.
-    if (INIT_DATA.__item.user_id === INIT_DATA.__user.id && INIT_DATA.__user.id !== 1) {
+    if (initData.__item.user_id === initData.__user.id && initData.__user.id !== 1) {
       loadModule('editorSettings');
     }
   }

@@ -26,10 +26,10 @@
     // the link to the pen/post/whatever.
     activity: '.activity-name:first-of-type'
   };
-  var selector = selectors[CES_GLOBALS.INIT_DATA.__pageType] || selectors.default;
+  var selector = selectors[CES.initData.__pageType] || selectors.default;
   var penCommentsHandled = false;
   var isGridView = (function () {
-    return !!CES_GLOBALS.INIT_DATA.__pageType.match(/^(home|explore-posts|explore-pens|explore-collections|collection|activity|details)$/);
+    return !!CES.initData.__pageType.match(/^(home|explore-posts|explore-pens|explore-collections|collection|activity|details)$/);
   })();
 
   (function init () {
@@ -37,7 +37,7 @@
     if (isGridView) {
       subscribeToGrid();
     }
-    if (CES_GLOBALS.INIT_DATA.__pageType === 'pen') {
+    if (CES.initData.__pageType === 'pen') {
       subscribeToCommentModal();
     }
   })();
@@ -100,7 +100,7 @@
   // stored locally, there isn't any problem with making a new AJAX request
   // for the same file repeatedly.
   Preview.prototype.getTemplate = function (callback) {
-    CES_GLOBALS.REQUEST_EXTENSION_URL('modules/html/profile-preview.html', function (response) {
+    CES.requestExtensionURL('modules/html/profile-preview.html', function (response) {
       $.get(response, function (response) {
         this.template = $(response);
         callback();
@@ -140,6 +140,15 @@
     }.bind(this));
   };
 
+  // http://stackoverflow.com/a/9251169
+  Preview.prototype.escapeHTML = (function () {
+    var escape = document.createElement('textarea');
+    return function (html) {
+      escape.textContent = html;
+      return escape.innerHTML;
+    };
+  })();
+
   Preview.prototype.parsePenData = function (data) {
     var $data = $(data);
     var pens = [];
@@ -155,7 +164,7 @@
       pen.iframe.attr({
         'src': location.protocol + '//s.codepen.io/derekjp/fullcpgrid/' + pen.slug,
         'data-title': pen.title,
-        'sandbox': CES_GLOBALS.INIT_DATA.__CPDATA.iframe_sandbox,
+        'sandbox': CES.initData.__CPDATA.iframe_sandbox,
         'scrolling': 'no',
         'frameborder': '0',
         'allowtransparency': 'true',
@@ -172,12 +181,12 @@
     var template = this.template;
     var name = template.find('.ces__profile__name');
 
-    name.html(CES_GLOBALS.ESCAPE_HTML(profile.name) + ' ');
+    name.html(this.escapeHTML(profile.name) + ' ');
     if (profile.isPro) {
       name.append($("<span class='ces__pro-badge badge badge-pro'>Pro</span>"));
     }
     template.find('.ces__profile__link').attr('href', this.baseURL);
-    template.find('.ces__profile__username').html(CES_GLOBALS.ESCAPE_HTML(profile.username));
+    template.find('.ces__profile__username').html(this.escapeHTML(profile.username));
     template.find('.ces__profile__avatar').attr('src', profile.avatar);
     template.find('.ces__profile__followers-stat').html(profile.followers);
     template.find('.ces__profile__followers-link').attr('href', this.baseURL + '/followers');
@@ -190,7 +199,7 @@
 
       // Strip away follow buttons if it's the user's own profile
       // (or if you're not logged in)
-      if (username === CES_GLOBALS.INIT_DATA.__user.username || CES_GLOBALS.INIT_DATA.__user.username === 'anon') {
+      if (username === CES.initData.__user.username || CES.initData.__user.username === 'anon') {
         template.find('.ces__profile__follow-buttons').remove();
         return;
       }
@@ -208,13 +217,13 @@
       });
 
       template.find('.ces__follow-user').click(function () {
-        CES_GLOBALS.CP(followBaseURL + '/follow');
+        CES.cpPost(followBaseURL + '/follow');
         followersNum++;
         followersEl.html(followersNum);
       });
 
       template.find('.ces__unfollow-user').click(function () {
-        CES_GLOBALS.CP(followBaseURL + '/unfollow');
+        CES.cpPost(followBaseURL + '/unfollow');
         followersNum--;
         followersEl.html(followersNum);
       });
@@ -234,7 +243,7 @@
       var penLink = $("<a class='ces__pen__link'>");
       penLink.attr('href', pens[i].url);
       iframeWrapper.append(pens[i].iframe);
-      titleWrapper.html(CES_GLOBALS.ESCAPE_HTML(pens[i].title));
+      titleWrapper.html(this.escapeHTML(pens[i].title));
       penWrapper
         .append(penLink)
         .append(iframeWrapper)
