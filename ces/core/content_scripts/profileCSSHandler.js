@@ -103,7 +103,7 @@
     chrome.storage.local.set({'disabledProfiles': disabledProfiles});
   }
 
-  function isProfileCSSDisabled () {
+  function isProfileCSSDisabled (user, disabledProfiles) {
     return (disabledProfiles.indexOf(user) !== -1);
   }
 
