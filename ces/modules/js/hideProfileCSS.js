@@ -13,16 +13,15 @@
 
 (function () {
   'use strict';
-
-  var headEl = document.getElementsByTagName('head')[0];
-  var styleEl = headEl.getElementsByTagName('style')[0];
-
+  var $style = $("style");
+  var $head = $("head");
+  var $window = $(window);
   // These events are fired by the profileCSSHandler content script
-  window.addEventListener('disable-css', function () {
-    styleEl.remove();
+  $window.on('disable-css', function () {
+    $style.remove();
   });
-  window.addEventListener('enable-css', function () {
-    headEl.appendChild(styleEl);
+  $window.on('enable-css', function () {
+    $head.append($style);
   });
 
   // Asks the content script for the status of the current profile's css
