@@ -120,7 +120,7 @@
   Preview.prototype.parseProfileData = function (page) {
     var profile = {};
     profile.name = page.find('#profile-name-header').text().trim();
-    profile.username = page.find('#profile-username').text().trim();
+    profile.username = page.find('#profile-username').text().trim().substring(1); // removes "@";
     profile.isPro = !!profile.name.match(/PRO$/);
     if (profile.isPro) {
       profile.name = profile.name.replace(/PRO$/, '').trim();
@@ -152,6 +152,7 @@
   Preview.prototype.parsePenData = function (data) {
     var $data = $(data);
     var pens = [];
+    var username = this.profile.username;
 
     $data.find('item').each(function () {
       if (pens.length === 3) { return false; } // bail after 3rd Pen
@@ -162,7 +163,7 @@
       pen.slug = pen.url.substr(pen.url.lastIndexOf('/') + 1);
       pen.iframe = $('<iframe>');
       pen.iframe.attr({
-        'src': location.protocol + '//s.codepen.io/derekjp/fullcpgrid/' + pen.slug,
+        'src': location.protocol + '//s.codepen.io/' + username + '/fullcpgrid/' + pen.slug,
         'data-title': pen.title,
         'sandbox': CES.initData.__CPDATA.iframe_sandbox,
         'scrolling': 'no',
@@ -186,7 +187,7 @@
       name.append($("<span class='ces__pro-badge badge badge-pro'>Pro</span>"));
     }
     template.find('.ces__profile__link').attr('href', this.baseURL);
-    template.find('.ces__profile__username').html(this.escapeHTML(profile.username));
+    template.find('.ces__profile__username').html(this.escapeHTML("@" + profile.username));
     template.find('.ces__profile__avatar').attr('src', profile.avatar);
     template.find('.ces__profile__followers-stat').html(profile.followers);
     template.find('.ces__profile__followers-link').attr('href', this.baseURL + '/followers');
@@ -195,7 +196,7 @@
 
     // Controls toggling of follow/unfollow state
     var handleFollowEvents = function (initialState) {
-      var username = this.profile.username.substring(1); // removes "@"
+      var username = this.profile.username;
 
       // Strip away follow buttons if it's the user's own profile
       // (or if you're not logged in)
