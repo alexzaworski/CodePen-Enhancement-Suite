@@ -9,7 +9,7 @@
   var disableCSS = document.getElementById('disable-css');
   disableCSS.setAttribute('disabled', true);
 
-  // Waits for INIT_DATA to be passed, then initializes everything accordingly
+  // Waits for initData to be passed, then initializes everything accordingly
   chrome.runtime.onMessage.addListener(function (message) {
     if (message.method === 'init-data-ready') {
       if (message.data.__pageType === 'profile') {
@@ -19,7 +19,7 @@
     }
   });
 
-  // Requests INIT_DATA after the init-data-ready listener is set
+  // Requests initData after the init-data-ready listener is set
   sendToActiveTab({method: 'request-init-data'});
 
   function setEventListeners () {

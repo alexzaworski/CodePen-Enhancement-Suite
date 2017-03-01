@@ -8,7 +8,7 @@
 *
 */
 
-CES_GLOBALS.REQUEST_EXTENSION_URL('modules/css/distractionFreeMode.css', function (url) {
+CES.requestExtensionURL('modules/css/distractionFreeMode.css', function (url) {
   var $styleEl = $('<link>');
   var $head = $('head');
   var $checkbox;
@@ -24,7 +24,7 @@ CES_GLOBALS.REQUEST_EXTENSION_URL('modules/css/distractionFreeMode.css', functio
 
   var $distractionToggle = $("<div class='ces__fancy-checkbox__wrapper ces__clearfix'>");
 
-  CES_GLOBALS.REQUEST_EXTENSION_URL('modules/html/distraction-free-mode.html', function (url) {
+  CES.requestExtensionURL('modules/html/distraction-free-mode.html', function (url) {
     $distractionToggle.load(url, function () {
       $('.editor-layout-buttons').before($distractionToggle);
       $checkbox = $('#distraction-free-mode');

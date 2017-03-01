@@ -8,20 +8,20 @@
 (function profileCSSHandler () {
   var disabledProfiles = [];
   var user;
-  var INIT_DATA;
+  var initData;
 
-  // Needs to have access to the INIT_DATA object in order to determine
+  // Needs to have access to the initData object in order to determine
   // if all of the profile-related listeners etc need to be enabled
   window.addEventListener('init-data-ready', function (e) {
-    INIT_DATA = e.detail;
+    initData = e.detail;
     // If we're not on a profile page we can just bail and skip doing anything else
-    if (INIT_DATA.__pageType !== 'profile') {
+    if (initData.__pageType !== 'profile') {
       return;
     }
 
     // Otherwise record what profile we're currently viewing
     // and handle things accordingly
-    user = INIT_DATA.__profiled.username;
+    user = initData.__profiled.username;
     setRuntimeListeners();
     setUpDisabledProfiles();
   });
@@ -72,14 +72,14 @@
     });
   }
 
-  // Sends a copy of INIT_DATA to the Page Action popup.
+  // Sends a copy of initData to the Page Action popup.
   //
   // It really feels like there ought to be a better way to handle this
   // but I'm not sure what it is.
   function prepareInitDataForPopup () {
     var initDataReady = {
       method: 'init-data-ready',
-      data: INIT_DATA
+      data: initData
     };
     chrome.runtime.sendMessage(initDataReady);
   }

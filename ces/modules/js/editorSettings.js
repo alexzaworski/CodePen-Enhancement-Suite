@@ -20,7 +20,7 @@
   var pendingSave = false;
 
   // Grabs the inital settings for the editor so we can change 'em as necessary.
-  var editorSettings = CES_GLOBALS.INIT_DATA.__item.editor_settings;
+  var editorSettings = CES.initData.__item.editor_settings;
 
   // Markup is reconstructed from what CodePen was already using so that
   // I can just re-use their tab functionality.
@@ -47,7 +47,8 @@
   //
   // Once it's fully loaded, it sets the active theme
   // based on the init data.
-  CES_GLOBALS.REQUEST_EXTENSION_URL('modules/html/editor-settings.html', function (response) {
+  var isHTTPS = (window.location.protocol === 'https:');
+  CES.requestExtensionURL('modules/html/editor-settings.html', function (response) {
     $editorSettingsContainer.load(response, function () {
       $('#' + editorSettings.theme).prop('checked', true);
       $('#' + editorSettings.font_type).prop('selected', true);
@@ -56,7 +57,7 @@
       // Because of the redirect caused by saving a new Pen, the callback gets screwed up
       // when saving editor settings. The easiest way to fix this is to force people to save
       // first. Sorta sucks, but it works.
-      if (CES_GLOBALS.INIT_DATA.__item.slug_hash === '') {
+      if (CES.initData.__item.slug_hash === '') {
         $editorSettingsContainer.prepend("<p>Editor settings are only available once you've saved your Pen at least once. I know it's weird, I'm working on it :(</p>");
         $editorSettingsContainer.find('input, select, label').addClass('disabled');
         return;
@@ -65,7 +66,7 @@
       // This module won't work over an insecure connection because it needs to hit
       // a secure endpoint. If the user is browsing over HTTP it'll throw a cross-origin
       // error and won't save.
-      if (!CES_GLOBALS.IS_HTTPS()) {
+      if (!isHTTPS) {
         $editorSettingsContainer.find('input, select, label').addClass('disabled');
         var httpsMessage = "Hi! Looks like you're not currently using HTTPS. Editor settings will only work over a secure connection.";
         var httpsUrl = location.href.replace('http://', 'https://');
@@ -87,7 +88,12 @@
 
   // Kicks off our custom save function every time a
   // 'pen-saved' event gets fired.
-  CES_GLOBALS.ON_PEN_SAVE(cesSaveInit);
+  //
+  // Binds to CodePen's internal pubhub dealio.
+  // I abstracted this into my own function incase it changes
+  // or this strategy stops being viable.
+  Hub.sub('pen-saved', cesSaveInit);
+
   function cesSaveInit () {
     // If there's an outstanding save request,
     // wait until it's done to avoid any interference.
@@ -131,10 +137,10 @@
   // To combat that, we throw an error client-side and ask the user to reload
   // the page over HTTPS (and even give 'em a link, how nice are we?)
   function editorSettingsValid () {
-    if (!CES_GLOBALS.IS_HTTPS()) {
+    if (!isHTTPS) {
       var httpsUrl = location.href.replace('http://', 'https://');
       var httpsLink = "<a href='" + httpsUrl + "'>Reload this page over HTTPS.</a>";
-      CES_GLOBALS.THROW_ERROR_MODAL('Whoops! You need to be browsing over HTTPS for editor settings to work.<br><br>' + httpsLink);
+      throwErrorModal('Whoops! You need to be browsing over HTTPS for editor settings to work.<br><br>' + httpsLink);
       return false;
     }
     return true;
@@ -149,13 +155,22 @@
       return;
     }
 
-    CES_GLOBALS.CP('/' + CES_GLOBALS.INIT_DATA.__user.username + '/settings/save/editor', 'editor_settings', newEditorSettings, function (response) {
+    CES.cpPost('/' + CES.initData.__user.username + '/settings/save/editor', 'editor_settings', newEditorSettings, function (response) {
       if (response.status === 200) {
         location.reload();
       } else {
-        CES_GLOBALS.THROW_ERROR_MODAL("Uh oh. Those editor settings failed to save. CodePen doesn't know why, I don't know why, you don't know why (well, maybe you do?). It's a bad time.");
+        throwErrorModal("Uh oh. Those editor settings failed to save. CodePen doesn't know why, I don't know why, you don't know why (well, maybe you do?). It's a bad time.");
         return false;
       }
+    });
+  }
+
+  function throwErrorModal (message) {
+    CES.requestExtensionURL('modules/html/error-modal.html', function (response) {
+      var errorModal = $('<div>').load(response, function () {
+        errorModal.find('#ces__error-message').html(message);
+        $.showModal(errorModal[0].innerHTML);
+      });
     });
   }
 })();

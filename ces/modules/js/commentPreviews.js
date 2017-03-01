@@ -58,7 +58,7 @@
   // Creates the actual toggle switch used to control whether or not
   // the preview is currently enabled.
   function addPreviewToggle () {
-    CES_GLOBALS.REQUEST_EXTENSION_URL('modules/html/comment-preview-toggle.html', function (url) {
+    CES.requestExtensionURL('modules/html/comment-preview-toggle.html', function (url) {
       $previewToggle.load(url, function () {
         $submitButton.before($previewToggle);
         $previewToggle.click(handlePreviewClick);
