@@ -5,17 +5,17 @@
 * ---
 */
 
-var profileCSSHandler = (function() {
+(function profileCSSHandler () {
   var disabledProfiles = [];
   var user;
   var INIT_DATA;
 
   // Needs to have access to the INIT_DATA object in order to determine
   // if all of the profile-related listeners etc need to be enabled
-  window.addEventListener("init-data-ready", function(e) {
+  window.addEventListener('init-data-ready', function (e) {
     INIT_DATA = e.detail;
     // If we're not on a profile page we can just bail and skip doing anything else
-    if (INIT_DATA.__pageType != "profile") {
+    if (INIT_DATA.__pageType !== 'profile') {
       return;
     }
 
@@ -28,9 +28,9 @@ var profileCSSHandler = (function() {
 
   // Grabs an array of usernames that represents the profiles
   // which currently have their styles disabled.
-  function setUpDisabledProfiles() {
-    chrome.storage.local.get("disabledProfiles", function(data) {
-      if (data.hasOwnProperty("disabledProfiles")) {
+  function setUpDisabledProfiles () {
+    chrome.storage.local.get('disabledProfiles', function (data) {
+      if (data.hasOwnProperty('disabledProfiles')) {
         disabledProfiles = data.disabledProfiles;
       }
     });
@@ -44,7 +44,7 @@ var profileCSSHandler = (function() {
   // so it can remove the CSS immediately. This needs to be done this way since
   // the Page Action popup won't do anything until it's actually clicked
   // by the user (ie the CSS won't be removed at all until the user takes action).
-  window.addEventListener("request-css-event", function() {
+  window.addEventListener('request-css-event', function () {
     if (isProfileCSSDisabled(user, disabledProfiles)) {
       sendDisableCSSEvent();
     }
@@ -55,9 +55,9 @@ var profileCSSHandler = (function() {
   // This essentially acts as the bridge between the popup and the actual DOM--
   // the messages relayed to the Hide Profile CSS module which then strips
   // or adds the style tags accordingly.
-  function setRuntimeListeners() {
-    chrome.runtime.onMessage.addListener(function(message) {
-      if (message.method === "disable-profile-css") {
+  function setRuntimeListeners () {
+    chrome.runtime.onMessage.addListener(function (message) {
+      if (message.method === 'disable-profile-css') {
         if (message.data === true) {
           sendDisableCSSEvent();
           addToDisabledProfiles(user, disabledProfiles);
@@ -66,7 +66,7 @@ var profileCSSHandler = (function() {
           removeFromDisabledProfiles(user, disabledProfiles);
         }
       }
-      if (message.method === "request-init-data") {
+      if (message.method === 'request-init-data') {
         prepareInitDataForPopup();
       }
     });
@@ -76,9 +76,9 @@ var profileCSSHandler = (function() {
   //
   // It really feels like there ought to be a better way to handle this
   // but I'm not sure what it is.
-  function prepareInitDataForPopup() {
+  function prepareInitDataForPopup () {
     var initDataReady = {
-      method: "init-data-ready",
+      method: 'init-data-ready',
       data: INIT_DATA
     };
     chrome.runtime.sendMessage(initDataReady);
@@ -87,36 +87,36 @@ var profileCSSHandler = (function() {
   // Adds a username to the array of profiles
   // that have their CSS disabled, then saves to
   // Chrome's storage for later access.
-  function addToDisabledProfiles() {
+  function addToDisabledProfiles () {
     if (disabledProfiles.indexOf(user) === -1) {
       disabledProfiles.push(user);
     }
-    chrome.storage.local.set({"disabledProfiles": disabledProfiles});
+    chrome.storage.local.set({'disabledProfiles': disabledProfiles});
   }
 
   // Exact opposite of the above.
-  function removeFromDisabledProfiles() {
+  function removeFromDisabledProfiles () {
     var index = disabledProfiles.indexOf(user);
-    if (index != -1) {
+    if (index !== -1) {
       disabledProfiles.splice(index, 1);
     }
-    chrome.storage.local.set({"disabledProfiles": disabledProfiles});
+    chrome.storage.local.set({'disabledProfiles': disabledProfiles});
   }
 
-  function isProfileCSSDisabled() {
-    return (disabledProfiles.indexOf(user) != -1);
+  function isProfileCSSDisabled () {
+    return (disabledProfiles.indexOf(user) !== -1);
   }
 
   // These functions both dispatch events
   // which the Hide Profile CSS module listens for
   // in order to know when to make DOM changes
-  function sendDisableCSSEvent() {
-    var disableCSS = new CustomEvent("disable-css");
+  function sendDisableCSSEvent () {
+    var disableCSS = new CustomEvent('disable-css');
     window.dispatchEvent(disableCSS);
   }
 
-  function sendEnableCSSEvent() {
-    var enableCSS = new CustomEvent("enable-css");
+  function sendEnableCSSEvent () {
+    var enableCSS = new CustomEvent('enable-css');
     window.dispatchEvent(enableCSS);
   }
 })();

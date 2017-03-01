@@ -8,14 +8,14 @@
 *
 */
 
-(function() {
-  "use strict";
+(function () {
+  'use strict';
 
   var $commentBox;
   var $previewBox = $("<div class='block-comment-content module text'>");
   var $previewToggle = $("<div class='ces__fancy-checkbox__wrapper ces__clearfix'>");
   var $previewText = $("<div class='comment-text'>");
-  var $submitButton = $("#submit");
+  var $submitButton = $('#submit');
   var $checkBox;
 
   // It's possible (though unlikely) that a user requests the Comment Drawer
@@ -27,9 +27,9 @@
   if ($submitButton.length) {
     previewModuleInit();
   } else {
-    $(document).ajaxComplete(function(event, request, settings) {
-      if (settings.url.match("comment-")) {
-        $(document).unbind("ajaxComplete");
+    $(document).ajaxComplete(function (event, request, settings) {
+      if (settings.url.match('comment-')) {
+        $(document).unbind('ajaxComplete');
         waitForSubmitButton();
       }
     });
@@ -37,10 +37,10 @@
 
   // Runs a loop until the submit button is part of the DOM, at which point
   // we can fully initialize the module (should happen nearly instantly)
-  function waitForSubmitButton() {
+  function waitForSubmitButton () {
     var waitForLoadLoop = requestAnimationFrame(submitButtonLoop);
-    function submitButtonLoop() {
-      $submitButton = $("#submit");
+    function submitButtonLoop () {
+      $submitButton = $('#submit');
       if (!$submitButton.length) {
         requestAnimationFrame(submitButtonLoop);
       } else {
@@ -50,16 +50,16 @@
     }
   }
 
-  function previewModuleInit() {
+  function previewModuleInit () {
     addPreviewToggle();
     setUpCommentBox();
   }
 
   // Creates the actual toggle switch used to control whether or not
   // the preview is currently enabled.
-  function addPreviewToggle() {
-    CES_GLOBALS.REQUEST_EXTENSION_URL("modules/html/comment-preview-toggle.html", function(url) {
-      $previewToggle.load(url, function() {
+  function addPreviewToggle () {
+    CES_GLOBALS.REQUEST_EXTENSION_URL('modules/html/comment-preview-toggle.html', function (url) {
+      $previewToggle.load(url, function () {
         $submitButton.before($previewToggle);
         $previewToggle.click(handlePreviewClick);
       });
@@ -68,32 +68,31 @@
 
   // Adds some event listeners related to the comment box and prepares
   // the preview box by adding it to the DOM and hiding it
-  function setUpCommentBox() {
-
+  function setUpCommentBox () {
     // For styling reasons
-    $("#comment-form").addClass("ces__preview-enabled");
+    $('#comment-form').addClass('ces__preview-enabled');
 
     // Resets to the default state
     // when a comment is submitted
-    $submitButton.click(function() {
-      $checkBox.prop("checked", false);
+    $submitButton.click(function () {
+      $checkBox.prop('checked', false);
       showCommentBox();
     });
 
-    $commentBox = $("#new-comment");
+    $commentBox = $('#new-comment');
     $commentBox.after($previewBox);
     $previewBox
-      .css("min-height", $commentBox.outerHeight())
-      .css("margin-bottom", 0) // inherited from CodePen's module style, not appropriate here
+      .css('min-height', $commentBox.outerHeight())
+      .css('margin-bottom', 0) // inherited from CodePen's module style, not appropriate here
       .append($previewText)
       .hide();
   }
 
   // Toggles between the preview box/comment box as appropriate
-  function handlePreviewClick() {
+  function handlePreviewClick () {
     $checkBox = $previewToggle.find("input[type='checkbox']");
-    $checkBox.prop("checked", !$checkBox.prop("checked"));
-    if ($checkBox.prop("checked") === true) {
+    $checkBox.prop('checked', !$checkBox.prop('checked'));
+    if ($checkBox.prop('checked') === true) {
       showPreview();
     } else {
       showCommentBox();
@@ -103,28 +102,28 @@
 
   // Makes an AJAX call for the preview and writes it
   // to the preview box
-  function showPreview() {
-    getPreview(function(response) {
+  function showPreview () {
+    getPreview(function (response) {
       $commentBox.hide();
       $previewBox.show();
       $previewText.html(response);
     });
   }
 
-  function showCommentBox() {
+  function showCommentBox () {
     $previewBox.hide();
     $commentBox.show();
   }
 
   // Uses CodePen's internal preoprocessor endpoint to render
   // markdown into HTML.
-  function getPreview(callback) {
+  function getPreview (callback) {
     var rawText = $commentBox.val();
     $.ajax({
-      url: "https://preprocessor.codepen.io",
-      method: "POST",
-      data: "html=" + encodeURIComponent(rawText) + "&html_pre_processor=markdown",
-      complete: function(response) {
+      url: 'https://preprocessor.codepen.io',
+      method: 'POST',
+      data: 'html=' + encodeURIComponent(rawText) + '&html_pre_processor=markdown',
+      complete: function (response) {
         callback(JSON.parse(response.responseText).results.html);
       }
     });

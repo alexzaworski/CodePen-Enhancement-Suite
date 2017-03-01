@@ -1,20 +1,19 @@
-var cesUpdates = (function() {
-
+(function cesUpdates () {
   // Not actually in sync with the most up-to-date patch,
   // only incremented when the current version should display
   // patch notes (major releases, significant bug fixes)
-  var currentPatch = "0.7.0";
-  var patchNoteKey = currentPatch + "-patch-notes";
+  var currentPatch = '0.7.0';
+  var patchNoteKey = currentPatch + '-patch-notes';
 
-  var welcomeKey = "has-loaded-before";
+  var welcomeKey = 'has-loaded-before';
 
   // Note: never ever change this to a different name, you'll bypass the setting
   // and serve patch notes to people who disabled them which is super obnoxious
-  var disableKey = "disable-patch-notes";
+  var disableKey = 'disable-patch-notes';
 
-  function checkIfNotesDisabled(callback) {
-    chrome.storage.local.get(disableKey, function(response) {
-      if (!!response[disableKey]) {
+  function checkIfNotesDisabled (callback) {
+    chrome.storage.local.get(disableKey, function (response) {
+      if (response[disableKey]) {
         return;
       } else {
         callback();
@@ -22,8 +21,8 @@ var cesUpdates = (function() {
     });
   }
 
-  function checkIfSeenWelcome(callback) {
-    chrome.storage.local.get(welcomeKey, function(response) {
+  function checkIfSeenWelcome (callback) {
+    chrome.storage.local.get(welcomeKey, function (response) {
       if (!response[welcomeKey]) {
         var storageObj = {};
         storageObj[patchNoteKey] = true;
@@ -35,42 +34,42 @@ var cesUpdates = (function() {
     });
   }
 
-  function checkIfSeenCurentNotes(callback) {
-    chrome.storage.local.get(patchNoteKey, function(response) {
+  function checkIfSeenCurentNotes (callback) {
+    chrome.storage.local.get(patchNoteKey, function (response) {
       if (!response[patchNoteKey]) {
         callback();
       }
     });
   }
 
-  checkIfNotesDisabled(function() {
-    checkIfSeenWelcome(function() {
+  checkIfNotesDisabled(function () {
+    checkIfSeenWelcome(function () {
       checkIfSeenCurentNotes(init);
     });
   });
 
-  function init() {
+  function init () {
     // todo: make this be less garbage.
 
-    var setupButtons = function() {
-      var dismissButton = document.getElementById("ces__dismiss");
-      var hideForever = document.getElementById("ces__hide-forever");
-      hideForever.addEventListener("click", function() {
+    var setupButtons = function () {
+      var dismissButton = document.getElementById('ces__dismiss');
+      var hideForever = document.getElementById('ces__hide-forever');
+      hideForever.addEventListener('click', function () {
         setKey(disableKey);
       });
-      dismissButton.addEventListener("click", function() {
+      dismissButton.addEventListener('click', function () {
         setKey(patchNoteKey);
       });
     };
 
-    var setKey = function(key) {
+    var setKey = function (key) {
       removeModal();
       var storageObj = {};
       storageObj[key] = true;
       chrome.storage.local.set(storageObj);
     };
 
-    var removeModal = function() {
+    var removeModal = function () {
       modal.parentNode.removeChild(modal);
     };
 
@@ -96,7 +95,7 @@ var cesUpdates = (function() {
                       </div>
                     </div>`;
 
-    var modal = document.createElement("div");
+    var modal = document.createElement('div');
     modal.innerHTML = template;
     modal = modal.firstChild;
     document.body.appendChild(modal);
