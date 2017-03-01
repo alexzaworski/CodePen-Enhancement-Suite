@@ -11,21 +11,21 @@
 *
 */
 
-(function() {
-  "use strict";
+(function () {
+  'use strict';
 
-  var headEl = document.getElementsByTagName("head")[0];
-  var styleEl = headEl.getElementsByTagName("style")[0];
+  var headEl = document.getElementsByTagName('head')[0];
+  var styleEl = headEl.getElementsByTagName('style')[0];
 
   // These events are fired by the profileCSSHandler content script
-  window.addEventListener("disable-css", function() {
+  window.addEventListener('disable-css', function () {
     styleEl.remove();
   });
-  window.addEventListener("enable-css", function() {
+  window.addEventListener('enable-css', function () {
     headEl.appendChild(styleEl);
   });
 
   // Asks the content script for the status of the current profile's css
-  var requestCSSEvent = new CustomEvent("request-css-event");
+  var requestCSSEvent = new CustomEvent('request-css-event');
   window.dispatchEvent(requestCSSEvent);
 })();

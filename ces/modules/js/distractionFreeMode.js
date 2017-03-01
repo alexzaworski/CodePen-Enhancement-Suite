@@ -8,69 +8,66 @@
 *
 */
 
-CES_GLOBALS.REQUEST_EXTENSION_URL("modules/css/distractionFreeMode.css", function(url) {
-  var $styleEl = $("<link>");
-  var $head = $("head");
-  var $button = $("#view-switcher-button");
+CES_GLOBALS.REQUEST_EXTENSION_URL('modules/css/distractionFreeMode.css', function (url) {
+  var $styleEl = $('<link>');
+  var $head = $('head');
   var $checkbox;
   $styleEl.attr({
-    rel: "stylesheet",
-    type: "text/css",
+    rel: 'stylesheet',
+    type: 'text/css',
     href: url
   });
 
-  $styleEl.one("load", function() {
+  $styleEl.one('load', function () {
     forceEditorsToAdjust();
   });
 
   var $distractionToggle = $("<div class='ces__fancy-checkbox__wrapper ces__clearfix'>");
 
-  CES_GLOBALS.REQUEST_EXTENSION_URL("modules/html/distraction-free-mode.html", function(url) {
-    $distractionToggle.load(url, function() {
-      $(".editor-layout-buttons").before($distractionToggle);
-      $checkbox = $("#distraction-free-mode");
+  CES_GLOBALS.REQUEST_EXTENSION_URL('modules/html/distraction-free-mode.html', function (url) {
+    $distractionToggle.load(url, function () {
+      $('.editor-layout-buttons').before($distractionToggle);
+      $checkbox = $('#distraction-free-mode');
       addListeners();
-      var requestInitialState = new CustomEvent("request-distraction-free");
+      var requestInitialState = new CustomEvent('request-distraction-free');
       window.dispatchEvent(requestInitialState);
     });
   });
 
-  function addStyles() {
+  function addStyles () {
     $head.append($styleEl);
     forceEditorsToAdjust();
   }
 
-  function removeStyles() {
+  function removeStyles () {
     $styleEl.remove();
   }
 
   // Forces a resize to trigger which normalizes
   // any weirdness caused by adjusting editor widths
-  function forceEditorsToAdjust() {
+  function forceEditorsToAdjust () {
     CP.codeEditorResizeController.onWindowResize();
   }
-  function addListeners() {
-    $checkbox.on("change", function(e) {
-      if ($checkbox.is(":checked")) {
+  function addListeners () {
+    $checkbox.on('change', function (e) {
+      if ($checkbox.is(':checked')) {
         addStyles();
       } else {
         removeStyles();
       }
 
       if (e.originalEvent) {
-        dispatchStatusEvent($checkbox.is(":checked"));
+        dispatchStatusEvent($checkbox.is(':checked'));
       }
-
     });
   }
 
-  function dispatchStatusEvent(status) {
-    var statusEvent = new CustomEvent("distraction-free-update", {detail: status});
+  function dispatchStatusEvent (status) {
+    var statusEvent = new CustomEvent('distraction-free-update', {detail: status});
     window.dispatchEvent(statusEvent);
   }
 
-  window.addEventListener("distraction-free-enabled", function(e) {
-    $checkbox.prop("checked", e.detail).change();
+  window.addEventListener('distraction-free-enabled', function (e) {
+    $checkbox.prop('checked', e.detail).change();
   });
-
 });

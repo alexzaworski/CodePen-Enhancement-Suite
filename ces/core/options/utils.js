@@ -1,17 +1,17 @@
-var escapeHTML = (function() {
-  "use strict";
-  var escape = document.createElement("textarea");
-  return function(html) {
+window.escapeHTML = (function () {
+  'use strict';
+  var escape = document.createElement('textarea');
+  return function (html) {
     escape.textContent = html;
     return escape.innerHTML;
   };
 })();
 
-var pubsub = (function() {
-  "use strict";
+window.pubsub = (function () {
+  'use strict';
   var topics = {};
   var subUid = -1;
-  var subscribe = function(topic, func) {
+  var subscribe = function (topic, func) {
     if (!topics[topic]) {
       topics[topic] = [];
     }
@@ -23,11 +23,11 @@ var pubsub = (function() {
     return token;
   };
 
-  var publish = function(topic, args) {
+  var publish = function (topic, args) {
     if (!topics[topic]) {
       return false;
     }
-    setTimeout(function() {
+    setTimeout(function () {
       var subscribers = topics[topic];
       var len = subscribers ? subscribers.length : 0;
       while (len--) {
@@ -36,7 +36,7 @@ var pubsub = (function() {
     }, 0);
   };
 
-  var unsubscribe = function(token) {
+  var unsubscribe = function (token) {
     for (var m in topics) {
       if (topics[m]) {
         for (var i = 0, j = topics[m].length; i < j; i++) {
@@ -50,7 +50,7 @@ var pubsub = (function() {
     return false;
   };
 
-  var reset = function() {
+  var reset = function () {
     topics = {};
     subUid = -1;
   };
