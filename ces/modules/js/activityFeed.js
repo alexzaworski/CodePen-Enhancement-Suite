@@ -7,7 +7,6 @@
 * in the activity feed dropdown
 *
 */
-
 (function () {
   'use strict';
   var $activityButton = $('.header-activity-button');
