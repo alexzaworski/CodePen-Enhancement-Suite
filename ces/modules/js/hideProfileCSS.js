@@ -13,8 +13,8 @@
 
 (function () {
   'use strict';
-  var $style = $("style");
-  var $head = $("head");
+  var $style = $('style');
+  var $head = $('head');
   var $window = $(window);
   // These events are fired by the profileCSSHandler content script
   $window.on('disable-css', function () {
