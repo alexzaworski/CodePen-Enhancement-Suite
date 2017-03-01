@@ -13,8 +13,12 @@
       "Hub"
     ]
   },
+  "pre-commit": {
+    "run": "lint"
+  },
   "devDependencies": {
     "node-zip": "^1.1.1",
+    "pre-commit": "^1.2.2",
     "semistandard": "^9.2.1"
   }
 }
