@@ -14,18 +14,16 @@
     "storage"
   ],
   "background": {
-    "scripts": ["core/background_scripts/bg.js"]
+    "scripts": ["lib/bg.js"]
   },
   "content_scripts": [
     {
       "matches":["http://codepen.io/*", "https://codepen.io/*"],
-      "js":[
-        "core/content_scripts/init.js",
-        "core/content_scripts/profileCSSHandler.js",
-        "core/content_scripts/customThemeHandler.js",
-        "core/content_scripts/cesUpdates.js",
-        "core/content_scripts/activityFeedHandler.js",
-        "core/content_scripts/distractionFreeModeHandler.js"
+      "js": [
+        "dist/bundle.js"
+      ],
+      "css": [
+        "lib/style.css"
       ]
     }
   ],
@@ -33,6 +31,7 @@
     "default_popup" : "core/popup/popup.html"
   },
   "web_accessible_resources": [
-    "modules/**/*"
+    "modules/**/*",
+    "dist/*"
   ]
 }

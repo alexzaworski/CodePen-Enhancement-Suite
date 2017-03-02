@@ -78,6 +78,6 @@ function loadConditionalModules () {
 // absolute paths.
 window.addEventListener('requestExtensionUrl', function (e) {
   var url = e.detail;
-  var urlResponse = new CustomEvent('receivedUrl', {detail: chrome.extension.getURL(url)});
+  var urlResponse = new CustomEvent('receivedUrl', {detail: chrome.runtime.getURL(url)});
   window.dispatchEvent(urlResponse);
 });

@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "lint": "semistandard --fix --env browser",
+    "lint": "echo \"Linting....\" && semistandard --fix --env browser",
     "zip": "zip -r ces.zip ces",
     "build": "npm run lint && npm run zip"
   },
@@ -19,6 +19,8 @@
   "devDependencies": {
     "node-zip": "^1.1.1",
     "pre-commit": "^1.2.2",
-    "semistandard": "^9.2.1"
+    "semistandard": "^9.2.1",
+    "uglify-js": "github:mishoo/UglifyJS2#harmony",
+    "webpack": "^2.2.1"
   }
 }
