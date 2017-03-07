@@ -13,7 +13,7 @@ be doing much DOM stuff anyways.
 API:
 
   ===================================================================
-  BaseNode (wrapper class shared by DOM/El)
+  BaseNode (wrapper class shared by Doc/El)
   ===================================================================
 
   .node
@@ -48,14 +48,14 @@ API:
       fired once.
 
   ===================================================================
-  DOM (extends BaseNode, instance exported as module)
+  Doc (extends BaseNode, exported, default export is instance)
   ===================================================================
 
-  .constructor ()
-    - creates instance of BaseNode with window.document
+  .constructor ([Node?] document = window.document)
+    - creates instance of BaseNode with document
 
   .body
-    - instance of El wrapping window.document.body
+    - instance of El wrapping this.node.body (if it exists)
 
   .create ([String] tag, [PlainObject?] attributes)
     - runs document.createElement
@@ -63,7 +63,7 @@ API:
     - returns instance of El
 
   ===================================================================
-  El (extends BaseNode, exposed via DOM.get, DOM.getAll, DOM.create)
+  El (extends BaseNode, exposed via Doc.get, Doc.getAll, Doc.create)
   ===================================================================
 
   All methods return self (i.e. are chainable) unless otherwise noted.
@@ -119,6 +119,10 @@ API:
   .html ([String?] text)
     - if text is specified, sets node.innerHTML to text
     - otherwise returns node.innerHTML
+
+  .text ([String?] text)
+    - if text is specified, sets node.innerText to text
+    - otherwise returns node.innerText
 */
 
 class BaseNode {
@@ -169,10 +173,13 @@ class BaseNode {
   }
 }
 
-class DOM extends BaseNode {
-  constructor () {
-    super(window.document);
-    this.body = this.get('body');
+export class Doc extends BaseNode {
+  constructor (document = window.document) {
+    super(document);
+    const body = this.exists('body');
+    if (body) {
+      this.body = body;
+    }
   }
 
   create (tag, attributes) {
@@ -294,7 +301,16 @@ class El extends BaseNode {
       return node.innerHTML;
     }
   }
+
+  text (text) {
+    const { node } = this;
+    if (typeof text !== 'undefined') {
+      node.innerText = text;
+      return this;
+    } else {
+      return node.innerText;
+    }
+  }
 }
 
-const dom = new DOM();
-export default dom;
+export default new Doc();
