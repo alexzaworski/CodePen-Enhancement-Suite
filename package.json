@@ -22,5 +22,8 @@
     "semistandard": "^9.2.1",
     "uglify-js": "github:mishoo/UglifyJS2#harmony",
     "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.15.3"
   }
 }
