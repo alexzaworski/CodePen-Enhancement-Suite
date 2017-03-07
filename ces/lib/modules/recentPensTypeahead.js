@@ -6,7 +6,7 @@ import initData from '../utils/initData';
 
 export default class RecentPensTypeahead extends CESModule {
   constructor () {
-    super();
+    super()
     this.conditions = {
       isPage: ['pen']
     };

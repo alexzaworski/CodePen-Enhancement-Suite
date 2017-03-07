@@ -1,6 +1,7 @@
 {
   "scripts": {
     "lint": "echo \"Linting....\" && semistandard --fix --env browser",
+    "lint-no-fix": "echo \"Linting....\" && semistandard --env browser",
     "zip": "zip -r ces.zip ces",
     "build": "npm run lint && npm run zip"
   },
@@ -14,7 +15,7 @@
     ]
   },
   "pre-commit": {
-    "run": "lint"
+    "run": "lint-no-fix"
   },
   "devDependencies": {
     "node-zip": "^1.1.1",
