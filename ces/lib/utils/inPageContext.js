@@ -10,5 +10,6 @@ export default (fn, ...args) => {
   dom
     .create('script')
     .html(`(${fn})(${args})`)
-    .appendTo(dom.body);
+    .appendTo(dom.body)
+    .remove();
 };
