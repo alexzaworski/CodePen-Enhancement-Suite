@@ -13,7 +13,25 @@ be doing much DOM stuff anyways.
 API:
 
   ===================================================================
-  BaseNode (wrapper class shared by Doc/El)
+  EventBase (private, adds event helpers to a target)
+  ===================================================================
+
+  .on([String] event, [Function] fn)
+    - Adds an event listener, returns self
+
+  .off([String] event, [Function] fn)
+    - Removes an event listener, returns self
+
+  .onOff([String] event, [Function] fn)
+    - Adds an event listener, returns a function that
+      removes that listener
+
+  .one([String] event, [Function] fn)
+    - Adds an event listener that is removed after being
+      fired once.
+
+  ===================================================================
+  NodeBase (private, wrapper class shared by Doc/El)
   ===================================================================
 
   .node
@@ -33,29 +51,12 @@ API:
     - otherwise if forceBool is false, returns instance of El
     - if forceBool is true, returns true
 
-  .on([String] event, [Function] fn)
-    - Adds an event listener, returns self
-
-  .off([String] event, [Function] fn)
-    - Removes an event listener, returns self
-
-  .onOff([String] event, [Function] fn)
-    - Adds an event listener, returns a function that
-      removes that listener
-
-  .one([String] event, [Function] fn)
-    - Adds an event listener that is removed after being
-      fired once.
-
   ===================================================================
-  Doc (extends BaseNode, exported, default export is instance)
+  Doc (public, extends NodeBase)
   ===================================================================
 
   .constructor ([Node?] document = window.document)
-    - creates instance of BaseNode with document
-
-  .body
-    - instance of El wrapping this.node.body (if it exists)
+    - creates instance of NodeBase with document
 
   .create ([String] tag, [PlainObject?] attributes)
     - runs document.createElement
@@ -63,7 +64,17 @@ API:
     - returns instance of El
 
   ===================================================================
-  El (extends BaseNode, exposed via Doc.get, Doc.getAll, Doc.create)
+  DOM (public, extends Doc. default export is an instance of DOM.)
+  ===================================================================
+
+  .body
+    - instance of El with document.body as the node
+
+  .window
+    - instance of EventBase with the window object
+
+  ===================================================================
+  El (private, extends NodeBase, exposed via Doc)
   ===================================================================
 
   All methods return self (i.e. are chainable) unless otherwise noted.
@@ -125,9 +136,38 @@ API:
     - otherwise returns node.innerText
 */
 
-class BaseNode {
+class EventBase {
+  constructor (native) {
+    this.native = native;
+  }
 
+  on (event, fn) {
+    this.native.addEventListener(event, fn);
+    return this;
+  }
+
+  off (event, fn) {
+    this.native.removeEventListener(event, fn);
+    return this;
+  }
+
+  onOff (event, fn) {
+    this.on(event, fn);
+    return () => { this.off(event, fn); };
+  }
+
+  one (event, fn) {
+    const off = this.onOff(event, () => {
+      fn();
+      off();
+    });
+    return this;
+  }
+}
+
+class NodeBase extends EventBase {
   constructor (node) {
+    super(node);
     this.node = node;
   }
 
@@ -148,38 +188,11 @@ class BaseNode {
       return forceBool ? true : el;
     }
   }
-
-  on (event, fn) {
-    this.node.addEventListener(event, fn);
-    return this;
-  }
-
-  off (event, fn) {
-    this.node.removeEventListener(event, fn);
-    return this;
-  }
-
-  onOff (event, fn) {
-    this.on(event, fn);
-    return () => { this.off(event, fn); };
-  }
-
-  one (event, fn) {
-    const off = this.onOff(event, () => {
-      fn();
-      off();
-    });
-    return this;
-  }
 }
 
-export class Doc extends BaseNode {
+export class Doc extends NodeBase {
   constructor (document = window.document) {
     super(document);
-    const body = this.exists('body');
-    if (body) {
-      this.body = body;
-    }
   }
 
   create (tag, attributes) {
@@ -191,7 +204,15 @@ export class Doc extends BaseNode {
   }
 }
 
-class El extends BaseNode {
+class DOM extends Doc {
+  constructor () {
+    super(window.document);
+    this.body = this.get('body');
+    this.window = new EventBase(window);
+  }
+}
+
+class El extends NodeBase {
   remove () {
     const { node } = this;
     node.parentNode.removeChild(node);
@@ -313,4 +334,4 @@ class El extends BaseNode {
   }
 }
 
-export default new Doc();
+export default new DOM();
