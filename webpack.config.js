@@ -1,8 +1,11 @@
 module.exports = {
-  entry: './ces/lib/index.js',
+  entry: {
+    content: './ces/lib/content.js',
+    background: './ces/lib/background.js'
+  },
   output: {
     path: './ces/dist',
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   devtool: 'source-map'
 };

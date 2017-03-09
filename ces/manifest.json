@@ -14,13 +14,13 @@
     "storage"
   ],
   "background": {
-    "scripts": ["lib/bg.js"]
+    "scripts": ["dist/background.js"]
   },
   "content_scripts": [
     {
       "matches":["http://codepen.io/*", "https://codepen.io/*"],
       "js": [
-        "dist/bundle.js"
+        "dist/content.js"
       ],
       "css": [
         "lib/style.css"

@@ -7,4 +7,3 @@ CES.registerModule(ResizablePreviews);
 CES.registerModule(RecentPensTypeahead);
 CES.registerModule(HideProfileCSS);
 CES.initModules();
-
