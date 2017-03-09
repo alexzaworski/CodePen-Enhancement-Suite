@@ -334,4 +334,5 @@ class El extends NodeBase {
   }
 }
 
-export default new DOM();
+const dom = new DOM();
+export default dom;

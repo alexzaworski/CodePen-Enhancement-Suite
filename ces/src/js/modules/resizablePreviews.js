@@ -1,4 +1,4 @@
-import CESModule from '../core/CESModule';
+import CESModule from './core/CESModule';
 import dom from '../utils/dom';
 
 export default class ResizePreviews extends CESModule {
@@ -69,7 +69,6 @@ export default class ResizePreviews extends CESModule {
       .rmClass('result')
       .wrap(resizeWrap)
       .after(resizeBar);
-
     resizeBar.on('mousedown', (e) => {
       e.preventDefault();
       this.startDrag(e);
@@ -92,7 +91,6 @@ export default class ResizePreviews extends CESModule {
     });
 
     dragCover.css('display', 'block');
-
     const dragListenerOff = dom.onOff('mousemove', (e) => {
       this.drag(e);
     });

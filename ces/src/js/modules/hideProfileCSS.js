@@ -1,4 +1,4 @@
-import CESModule from '../core/CESModule';
+import CESModule from './core/CESModule';
 import dom from '../utils/dom';
 
 export default class HideProfileCSS extends CESModule {
@@ -15,16 +15,16 @@ export default class HideProfileCSS extends CESModule {
     this.addWindowListeners();
   }
 
-  addWindowListeners() {
+  addWindowListeners () {
     dom.window.on('disable-css', this.removeStyle.bind(this));
     dom.window.on('enable-css', this.appendStyle.bind(this));
   }
 
-  removeStyle() {
+  removeStyle () {
     this.style.remove();
   }
 
-  appendStyle() {
+  appendStyle () {
     this.head.append(this.style);
   }
 

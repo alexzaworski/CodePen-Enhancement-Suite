@@ -1,4 +1,4 @@
-import conditionChecker from '../utils/conditionChecker';
+import conditionChecker from '../../utils/conditionChecker';
 export default class CESModule {
   constructor () {
     this.conditions = {};

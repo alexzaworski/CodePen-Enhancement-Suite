@@ -8,27 +8,27 @@
     "48":  "core/icons/icon-48.png",
     "128": "core/icons/icon-128.png"
   },
-  "options_page": "core/options/options.html",
+  "options_page": "pages/options.html",
   "permissions": [
     "tabs",
     "storage"
   ],
   "background": {
-    "scripts": ["dist/background.js"]
+    "scripts": ["dist/js/background.js"]
   },
   "content_scripts": [
     {
       "matches":["http://codepen.io/*", "https://codepen.io/*"],
       "js": [
-        "dist/content.js"
+        "dist/js/content.js"
       ],
       "css": [
-        "lib/style.css"
+        "src/css/style.css"
       ]
     }
   ],
   "page_action": {
-    "default_popup" : "core/popup/popup.html"
+    "default_popup" : "pages/popup.html"
   },
   "web_accessible_resources": [
     "modules/**/*",
