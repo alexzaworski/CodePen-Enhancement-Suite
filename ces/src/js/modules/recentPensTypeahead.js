@@ -1,7 +1,6 @@
 import CESModule from './core/CESModule';
 import { Doc } from '../utils/dom';
 import inPageContext from '../utils/inPageContext';
-import axios from 'axios';
 import initData from '../utils/initData';
 
 export default class RecentPensTypeahead extends CESModule {
@@ -14,9 +13,9 @@ export default class RecentPensTypeahead extends CESModule {
 
   go () {
     const feedURL = this.buildFeedURL();
-    axios
-      .get(feedURL)
-      .then(response => this.parsePenData(response.data))
+    fetch(feedURL)
+      .then(response => response.text())
+      .then(data => this.parsePenData(data))
       .then(penObjects => this.setUpjQueryAjax(penObjects));
   }
 
