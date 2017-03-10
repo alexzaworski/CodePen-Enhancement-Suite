@@ -2,6 +2,7 @@ class Messenger {
   constructor () {
     this.callbacks = {};
     this.send = chrome.tabs ? this.sendToTab : this.sendGeneralMessage;
+    this.initPoll();
   }
 
   on (method, callback) {
