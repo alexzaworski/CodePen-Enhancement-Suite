@@ -1,0 +1,173 @@
+/* RESET-ISH STUFF */
+
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+.clearfix:after {
+  content: "";
+  clear: both; 
+  display: block;
+}
+
+body, html {
+  margin:0;
+}
+
+/* BASIC TYPE & STRUCTURE */
+
+body {
+  width: 275px;
+  font-family: "Lato", sans-serif;
+  background: #191919;
+  color: white;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.main-content-wrapper {
+  padding: 15px;
+}
+
+a, a:visited {
+  color: #76daff;
+  outline: none;
+}
+
+a:hover {
+  color:white;
+}
+
+p {
+  margin-top:0;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+
+.row:last-child {
+  margin-bottom:0;
+}
+
+.divider--half {
+  width: 50%;
+  float:left;
+}
+
+.divider--half:nth-of-type(1) {
+  padding-right: 5px;
+}
+
+.divider--half:nth-of-type(2) {
+  padding-left: 5px;
+}
+
+/* HEADER STUFF */
+
+header {
+  background: black;
+  padding: 15px;
+}
+
+.header__icon-wrap {
+  width:  40px;
+  margin: 0 auto;
+}
+
+.header__icon {
+  height: 100%;
+  width: auto;
+  fill:white;
+}
+
+/* BASIC INPUT STYLES */
+
+label {
+  cursor:pointer;
+}
+
+input[disabled],
+input[disabled] ~ label {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/* FANCY INPUTS */
+
+.fancy-checkbox__wrapper {
+  position: relative;
+}
+
+.fancy-checkbox {
+  display:none;
+}
+
+.fancy-checkbox ~ label {
+  -webkit-user-select: none;
+  user-select:none;
+  float:left;
+  line-height: 15px; /* Should be the same as the height of label:after */
+}
+.fancy-checkbox ~ label:after {
+  margin-right: 10px;
+  content: '';
+  display:block;
+  float:left;
+  height: 15px; /* Height/border radius should be equal */
+  border-radius: 15px;
+  width: 30px;
+  background: red;
+}
+
+.fancy-checkbox:checked ~ label:after {
+  background: #bada55;
+}
+.fancy-checkbox ~ label:before {
+  top: 50%;
+  transform:translateY(-50%);
+  position: absolute;
+  margin-right: 10px;
+  content: '';
+  display:block;
+  float:left;
+  left: -1px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: white;
+  transition:
+    color .1s ease-out,
+    left .1s ease-out;
+}
+
+.fancy-checkbox:checked ~ label:before {
+  left: 10px; /* Difference between label:after width and label:before width */
+}
+
+/* BUTTONS */
+
+.button {
+  display:block;
+  padding: 10px 15px;
+  text-align:center;
+  background: #343436;
+  color: white;
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+.button:visited {
+  color: white;
+}
+
+.button--skinny {
+  padding: 5px 15px;
+}
+
+.button:hover {
+  background: #555 ;
+}
