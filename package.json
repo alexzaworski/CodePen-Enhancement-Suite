@@ -18,9 +18,13 @@
     "run": "lint-no-fix"
   },
   "devDependencies": {
+    "css-loader": "^0.27.1",
+    "node-sass": "^4.5.0",
     "node-zip": "^1.1.1",
     "pre-commit": "^1.2.2",
+    "sass-loader": "^6.0.3",
     "semistandard": "^9.2.1",
+    "style-loader": "^0.13.2",
     "uglify-js": "github:mishoo/UglifyJS2#harmony",
     "webpack": "^2.2.1"
   },

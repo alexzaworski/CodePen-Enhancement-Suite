@@ -21,9 +21,6 @@
       "matches":["http://codepen.io/*", "https://codepen.io/*"],
       "js": [
         "dist/js/content.js"
-      ],
-      "css": [
-        "src/css/style.css"
       ]
     }
   ],
