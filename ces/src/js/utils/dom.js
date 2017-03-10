@@ -247,19 +247,28 @@ class El {
 
   attr (attributes, val) {
     const { node } = this;
-    if (typeof attributes === 'string') {
+
+    const handleString = () => {
       if (typeof val !== 'undefined') {
-        node.setAttribute(attributes, val);
-        return node;
+        if (val === null) {
+          node.removeAttribute(attributes);
+        } else {
+          node.setAttribute(attributes, val);
+        }
+        return this;
       } else {
         return node.getAttribute(attributes);
       }
+    };
+
+    if (typeof attributes === 'string') {
+      return handleString();
     } else {
       for (const attribute in attributes) {
         node.setAttribute(attribute, attributes[attribute]);
       }
-      return this;
     }
+    return this;
   }
 
   css (props, val) {
