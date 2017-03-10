@@ -13,7 +13,7 @@ be doing much DOM stuff anyways.
 API:
 
   ===================================================================
-  EventBase (private, adds event helpers to a target)
+  EventBase (mixin, adds event helpers to a target)
   ===================================================================
 
   .on([String] event, [Function] fn)
@@ -31,11 +31,8 @@ API:
       fired once.
 
   ===================================================================
-  NodeBase (private, wrapper class shared by Doc/El)
+  NodeBase (mixin, adds helpers for retrieving nodes)
   ===================================================================
-
-  .node
-    - native dom node
 
   .get ([String] selector)
     - runs node.querySelector
@@ -52,20 +49,20 @@ API:
     - if forceBool is true, returns true
 
   ===================================================================
-  Doc (public, extends NodeBase)
+  Doc (public, mixes in NodeBase)
   ===================================================================
 
   .constructor ([Node?] document = window.document)
     - creates instance of NodeBase with document
 
+  ===================================================================
+  DOM (public/default export, mixes in EventBase, extends Doc)
+  ===================================================================
+
   .create ([String] tag, [PlainObject?] attributes)
     - runs document.createElement
     - adds attributes, given in the form of { attribute: value, ... }
     - returns instance of El
-
-  ===================================================================
-  DOM (public, extends Doc. default export is an instance of DOM.)
-  ===================================================================
 
   .body
     - instance of El with document.body as the node
@@ -74,7 +71,7 @@ API:
     - instance of EventBase with the window object
 
   ===================================================================
-  El (private, extends NodeBase, exposed via Doc)
+  El (private, mixes in NodeBase and EventBase, exposed via Doc/DOM)
   ===================================================================
 
   All methods return self (i.e. are chainable) unless otherwise noted.
@@ -137,17 +134,23 @@ API:
 */
 
 class EventBase {
-  constructor (native) {
-    this.native = native;
+  constructor (target) {
+    this.target = target;
+    return {
+      on: this.on.bind(this),
+      off: this.off.bind(this),
+      onOff: this.onOff.bind(this),
+      one: this.one.bind(this)
+    };
   }
 
   on (event, fn) {
-    this.native.addEventListener(event, fn);
+    this.target.addEventListener(event, fn);
     return this;
   }
 
   off (event, fn) {
-    this.native.removeEventListener(event, fn);
+    this.target.removeEventListener(event, fn);
     return this;
   }
 
@@ -165,10 +168,15 @@ class EventBase {
   }
 }
 
-class NodeBase extends EventBase {
+class NodeBase {
   constructor (node) {
-    super(node);
     this.node = node;
+    return {
+      node,
+      get: this.get.bind(this),
+      getAll: this.getAll.bind(this),
+      exists: this.exists.bind(this)
+    };
   }
 
   get (selector) {
@@ -190,9 +198,18 @@ class NodeBase extends EventBase {
   }
 }
 
-export class Doc extends NodeBase {
+export class Doc {
   constructor (document = window.document) {
-    super(document);
+    Object.assign(this, new NodeBase(document));
+  }
+}
+
+class DOM extends Doc {
+  constructor () {
+    super();
+    Object.assign(this, new EventBase(this.node));
+    this.window = new EventBase(window);
+    this.body = this.get('body');
   }
 
   create (tag, attributes) {
@@ -204,15 +221,12 @@ export class Doc extends NodeBase {
   }
 }
 
-class DOM extends Doc {
-  constructor () {
-    super(window.document);
-    this.body = this.get('body');
-    this.window = new EventBase(window);
+class El {
+  constructor (node) {
+    this.node = node;
+    Object.assign(this, new NodeBase(node), new EventBase(node));
   }
-}
 
-class El extends NodeBase {
   remove () {
     const { node } = this;
     node.parentNode.removeChild(node);
@@ -334,5 +348,4 @@ class El extends NodeBase {
   }
 }
 
-const dom = new DOM();
-export default dom;
+export default new DOM();
