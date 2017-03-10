@@ -17,7 +17,9 @@ class Storage {
 
   set (key, data) {
     return new Promise(resolve => {
-      this.store.set({key: data}, resolve);
+      const storageObject = {};
+      storageObject[key] = data;
+      this.store.set(storageObject, resolve);
     });
   }
 }
