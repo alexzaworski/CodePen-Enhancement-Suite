@@ -28,6 +28,9 @@ export default class HideProfileCSS extends CESModule {
     this.profile = initData.__profiled.username;
     this.style = dom.get('style');
     this.head = dom.get('head');
+    if (this.isDisabled()) {
+      this.removeStyle();
+    }
     this.addRuntimeListeners();
   }
 
@@ -41,23 +44,28 @@ export default class HideProfileCSS extends CESModule {
         this.removeFromDisabledProfiles();
       }
     });
+
+    messenger.on('popup-toggle-ready', () => {
+      messenger.send('profile-css-data', this.isDisabled());
+    });
   }
 
   removeFromDisabledProfiles () {
-    const { profile, disabledProfiles } = this;
-    disabledProfiles.delete(profile);
-    this.saveProfilesToStorage(disabledProfiles);
+    this.disabledProfiles.delete(this.profile);
+    this.saveProfilesToStorage();
   }
 
   addToDisabledProfiles () {
-    const { profile, disabledProfiles } = this;
-    disabledProfiles.add(profile);
-    this.saveProfilesToStorage(disabledProfiles);
+    this.disabledProfiles.add(this.profile);
+    this.saveProfilesToStorage();
+  }
+
+  isDisabled () {
+    return this.disabledProfiles.has(this.profile);
   }
 
   saveProfilesToStorage () {
-    const { disabledProfiles } = this;
-    storage.set('disabledProfiles', [...disabledProfiles]);
+    storage.set('disabledProfiles', [...this.disabledProfiles]);
   }
 
   removeStyle () {
