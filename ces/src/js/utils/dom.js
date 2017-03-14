@@ -116,6 +116,9 @@ API:
   .after ([El] el) {
     - inserts el.node after self.node
 
+  .before ([El] el) {
+    - inserts el.node before self.node
+
   .width ([String?] val)
     - if val is specified, sets style.width to val
     - otherwise returns node.offsetWidth
@@ -321,6 +324,13 @@ class El {
     } else {
       parentNode.appendChild(el.node);
     }
+    return this;
+  }
+
+  before (el) {
+    const { node } = this;
+    const { parentNode } = node;
+    parentNode.insertBefore(el.node, node);
     return this;
   }
 
