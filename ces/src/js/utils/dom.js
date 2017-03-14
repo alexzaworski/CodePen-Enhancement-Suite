@@ -241,9 +241,8 @@ class El {
   }
 
   wrap (wrapper) {
-    const parent = this.parent();
     wrapper = wrapper.clone();
-    parent.append(wrapper);
+    this.after(wrapper);
     wrapper.append(this);
     return this;
   }
