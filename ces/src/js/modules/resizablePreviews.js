@@ -36,7 +36,7 @@ export default class ResizePreviews extends CESModule {
 
   buildResizeWrap () {
     return dom.create('div', {
-      class: 'result',
+      class: 'result box',
       id: 'ces__resize'
     });
   }
