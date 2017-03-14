@@ -104,6 +104,10 @@ API:
   .rmClass ([String] classNames)
     - removes one or more classes (space separated)
 
+  .toggleClass([String] classnames, [Boolean?] force)
+    - toggles one or more classes (space separated
+    - can force class state with the `force` param
+
   .parent ()
     - returns new instance of El with self.node's parentNode
 
@@ -300,6 +304,13 @@ class El {
       this.node.classList.remove(className);
     });
     return this;
+  }
+
+  toggleClass (classNames, force) {
+    classNames = classNames.split(' ');
+    classNames.forEach(className => {
+      this.node.classList.toggle(className, force);
+    });
   }
 
   parent () {
