@@ -30,15 +30,15 @@ class ConditionChecker {
     return dom.exists(selector, true);
   }
 
-  isLoggedIn (status) {
+  isLoggedIn (status = true) {
     const isLoggedIn = initData.__user.id !== 1;
     return status === isLoggedIn;
   }
 
-  ownsItem (status) {
+  ownsItem (status = true) {
     const userID = initData.__user.id;
     const ownerID = initData.__item.user_id;
-    const isOwner = this.isLoggedIn(true) && (userID === ownerID);
+    const isOwner = this.isLoggedIn() && (userID === ownerID);
     return status === isOwner;
   }
 }
