@@ -19,8 +19,10 @@ API:
   .on([String] event, [Function] fn)
     - Adds an event listener, returns self
 
-  .off([String] event, [Function] fn)
+  .off([String?] event, [Function?] fn)
     - Removes an event listener, returns self
+    - If no event string is passed, removes
+      all added listeners
 
   .onOff([String] event, [Function] fn)
     - Adds an event listener, returns a function that
@@ -146,6 +148,7 @@ API:
 class EventBase {
   constructor (target) {
     this.target = target;
+    this.offFunctions = [];
     return {
       on: this.on.bind(this),
       off: this.off.bind(this),
@@ -156,11 +159,19 @@ class EventBase {
 
   on (event, fn) {
     this.target.addEventListener(event, fn);
+    this.offFunctions.push(() => {
+      this.off(event, fn);
+    });
     return this;
   }
 
   off (event, fn) {
-    this.target.removeEventListener(event, fn);
+    if (!event) {
+      this.offFunctions.forEach(fn => fn());
+      this.offFunctions = [];
+    } else {
+      this.target.removeEventListener(event, fn);
+    }
     return this;
   }
 
