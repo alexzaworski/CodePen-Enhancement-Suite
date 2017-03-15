@@ -35,6 +35,11 @@ class ConditionChecker {
     return status === isLoggedIn;
   }
 
+  isGridView (status = true) {
+    const isGridView = initData.hasOwnProperty('__pages');
+    return status === isGridView;
+  }
+
   ownsItem (status = true) {
     const userID = initData.__user.id;
     const ownerID = initData.__item.user_id;
