@@ -135,6 +135,9 @@ API:
     - if text is specified, sets node.innerHTML to text
     - otherwise returns node.innerHTML
 
+  .outerHTML ([String?] text)
+    - returns node.outerHTML
+
   .text ([String?] text)
     - if text is specified, sets node.innerText to text
     - otherwise returns node.innerText
@@ -364,6 +367,10 @@ class El {
     } else {
       return node.innerHTML;
     }
+  }
+
+  outerHTML () {
+    return this.node.outerHTML;
   }
 
   text (text) {
