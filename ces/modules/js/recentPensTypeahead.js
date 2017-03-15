@@ -25,7 +25,7 @@
     $data.find('item').each(function () {
       var pen = {};
       var $this = $(this);
-      pen.name = $this.find('title').text().toLowerCase().replace(/\s/g, '-');
+      pen.name = $this.find('title').html().toLowerCase().replace(/\s/g, '-');
       pen.value = $this.find('link').text();
       pen.tokens = ['::']; // adds a cute 'lil shortcut to filter out Pens
       pens.push(pen);

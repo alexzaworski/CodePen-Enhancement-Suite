@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.7.5
+
+### Fixed
+
+* Fixed a possible self-xss problem with the Pens typeahead module
+
 ## v0.7.4
 
 ### Fixed
