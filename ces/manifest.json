@@ -29,6 +29,7 @@
   },
   "web_accessible_resources": [
     "modules/**/*",
-    "dist/*"
+    "dist/*",
+    "html_partials/*"
   ]
 }

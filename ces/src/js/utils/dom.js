@@ -96,9 +96,10 @@ API:
     - if attribute is a string and no value is specified, returns
       the value of that attribute.
 
-  .css ([String|PlainObject] props, [String?] val)
+  .css ([String|PlainObject?] props, [String?] val)
     - sets style props
     - accepts ("property", "value") or { property: "value", ... }
+    - if only `props` is passed, returns node.style[props]
 
   .addClass ([String] classNames)
     - adds one or more classes (space separated)
@@ -140,6 +141,12 @@ API:
   .outerHTML ([String?] text)
     - returns node.outerHTML
 
+  .rect ()
+    - returns node.getBoundingClientRect();
+
+  .matches ([String] selector)
+    - returns node.matches(selector)
+
   .text ([String?] text)
     - if text is specified, sets node.innerText to text
     - otherwise returns node.innerText
@@ -166,7 +173,7 @@ class EventBase {
   }
 
   off (event, fn) {
-    if (!event) {
+    if (typeof event !== 'string') {
       this.offFunctions.forEach(fn => fn());
       this.offFunctions = [];
     } else {
@@ -293,8 +300,13 @@ class El {
 
   css (props, val) {
     const { node } = this;
+
     if (typeof props === 'string') {
-      node.style[props] = val;
+      if (typeof val !== 'undefined') {
+        node.style[props] = val;
+      } else {
+        return node.style[props];
+      }
     } else {
       for (const prop in props) {
         node.prop[prop] = props[prop];
@@ -392,6 +404,14 @@ class El {
     } else {
       return node.innerText;
     }
+  }
+
+  rect () {
+    return this.node.getBoundingClientRect();
+  }
+
+  matches (selector) {
+    return this.node.matches(selector);
   }
 }
 

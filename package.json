@@ -28,5 +28,7 @@
     "uglify-js": "github:mishoo/UglifyJS2#harmony",
     "webpack": "^2.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "escape-html": "^1.0.3"
+  }
 }
