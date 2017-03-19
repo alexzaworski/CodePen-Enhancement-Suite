@@ -33,7 +33,7 @@ export default class RecentPensTypeahead extends CESModule {
   }
 
   penObjFromNode (item) {
-    const title = item
+    const name = item
       .get('title')
       .html()
       .toLowerCase()
@@ -41,10 +41,7 @@ export default class RecentPensTypeahead extends CESModule {
     const value = item.get('link').html();
     const tokens = ['::']; // adds a cute 'lil shortcut to filter out Pens
     return {
-      // this used to just be declared as 'name' but
-      // for some reason the minifier was choking
-      // when running `webpack -p`
-      name: title,
+      name,
       value,
       tokens
     };
