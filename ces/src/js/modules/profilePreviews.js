@@ -115,7 +115,7 @@ class Preview {
 
     const profile = {
       name: doc.get('#profile-name-header').text().trim(),
-      username: doc.get('#profile-username').text().trim().substring(1), // removes "@";,
+      username: doc.get('#profile-username').text().trim().substring(1), // removes '@'
       avatar: doc.get('#profile-image').attr('src'),
       followers: doc.get('#followers-count').text(),
       following: doc.get('#following-count').text(),
