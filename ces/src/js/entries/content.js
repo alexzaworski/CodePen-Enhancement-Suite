@@ -11,4 +11,4 @@ CES.registerModule(RecentPensTypeahead);
 CES.registerModule(HideProfileCSS);
 CES.registerModule(DistractionFreeMode);
 CES.registerModule(ProfilePreviews);
-CES.initModules();
+CES.init();
