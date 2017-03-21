@@ -224,16 +224,16 @@ class Preview {
 
   addPensToPreview (preview, pens) {
     const pensWrapper = preview.get('.ces__profile__pens');
-    pens.forEach(pen => {
-      const {
-        iframe,
-        url,
-        title
-      } = pen;
 
+    pens.forEach(pen => {
+      const { iframe, url, title } = pen;
       const wrapper = dom.create('div', { class: 'ces__pen' });
-      const iframeWrap = dom.create('div', { class: 'ces__iframe-wrap' });
-      const titleWrap = dom.create('div', { class: 'ces__pen__title' });
+      const iframeWrap = dom
+        .create('div', { class: 'ces__iframe-wrap' })
+        .append(iframe);
+      const titleWrap = dom
+        .create('div', { class: 'ces__pen__title' })
+        .html(escapeHTML(title));
       const penLink = dom.create('a', {
         class: 'ces__pen__link',
         href: url
@@ -241,8 +241,8 @@ class Preview {
 
       wrapper
         .append(penLink)
-        .append(iframeWrap.append(iframe))
-        .append(titleWrap.html(escapeHTML(title)))
+        .append(iframeWrap)
+        .append(titleWrap)
         .appendTo(pensWrapper);
     });
   }
