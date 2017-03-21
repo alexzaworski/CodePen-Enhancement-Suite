@@ -27,10 +27,10 @@ class CES {
     // this moves everything from local to sync and
     // clears local.
     const local = new Storage('local');
-    local.get().then(response => {
+    return local.get().then(response => {
       response[this.hasMigratedKey] = true;
-      storage.set(response);
       chrome.storage.local.clear();
+      return storage.set(response);
     });
   }
 }
