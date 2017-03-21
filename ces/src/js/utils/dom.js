@@ -138,7 +138,7 @@ API:
     - if text is specified, sets node.innerHTML to text
     - otherwise returns node.innerHTML
 
-  .outerHTML ([String?] text)
+  .outerHTML ()
     - returns node.outerHTML
 
   .rect ()
