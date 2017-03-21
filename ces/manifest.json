@@ -14,7 +14,8 @@
     "storage"
   ],
   "background": {
-    "scripts": ["dist/js/background.js"]
+    "scripts": ["dist/js/background.js"],
+    "persistent": false
   },
   "content_scripts": [
     {
