@@ -3,7 +3,7 @@ import dom from '../utils/dom';
 import messenger from '../utils/messenger';
 import toggle from '../pages/popup/toggle';
 
-messenger.send('popup-toggle-ready');
+messenger.sendToTab('popup-toggle-ready');
 
 toggle({
   el: dom.get('#disable-css'),

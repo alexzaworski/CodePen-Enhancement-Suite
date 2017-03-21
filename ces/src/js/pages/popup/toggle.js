@@ -20,6 +20,6 @@ const setInitialState = (el, state) => {
 
 const addListeners = (el, sendMessage) => {
   el.on('click', () => {
-    messenger.send(sendMessage, el.node.checked);
+    messenger.sendToTab(sendMessage, el.node.checked);
   });
 };
