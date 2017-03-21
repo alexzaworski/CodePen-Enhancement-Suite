@@ -10,6 +10,5 @@ export default class CESModule {
 
   go () {
     console.log(`No go func defined on ${this.constructor.name}`);
-    return;
   }
 }

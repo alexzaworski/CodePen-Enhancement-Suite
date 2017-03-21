@@ -23,8 +23,8 @@
     "node-zip": "^1.1.1",
     "pre-commit": "^1.2.2",
     "sass-loader": "^6.0.3",
-    "semistandard": "^9.2.1",
-    "style-loader": "^0.13.2",
+    "semistandard": "^10.0.0",
+    "style-loader": "^0.15.0",
     "webpack": "fulls1z3/webpack#v2.1.0-beta.27-harmony"
   },
   "dependencies": {

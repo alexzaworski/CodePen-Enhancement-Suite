@@ -19,9 +19,7 @@
   });
 
   var handleFeeds = function (newFeed, oldFeed) {
-    if (newFeed === oldFeed) {
-      return;
-    } else {
+    if (newFeed !== oldFeed) {
       var hasNewActivity = new CustomEvent('new-activity');
       window.dispatchEvent(hasNewActivity);
     }

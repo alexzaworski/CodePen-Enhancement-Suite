@@ -11,7 +11,7 @@ export class Storage {
         } else if (response.hasOwnProperty(key)) {
           resolve(response[key]);
         } else {
-          reject();
+          reject(new Error());
         }
       });
     });

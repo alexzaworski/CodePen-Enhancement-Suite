@@ -13,9 +13,7 @@
 
   function checkIfNotesDisabled (callback) {
     chrome.storage.local.get(disableKey, function (response) {
-      if (response[disableKey]) {
-        return;
-      } else {
+      if (!response[disableKey]) {
         callback();
       }
     });

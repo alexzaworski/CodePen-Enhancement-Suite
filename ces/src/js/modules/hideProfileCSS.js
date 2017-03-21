@@ -71,5 +71,4 @@ export default class HideProfileCSS extends CESModule {
   appendStyle () {
     this.head.append(this.style);
   }
-
 }
