@@ -21,6 +21,11 @@ class Messenger {
     });
   }
 
+  sendGlobal (method, data) {
+    this.send(method, data);
+    this.sendToTab(method, data);
+  }
+
   initPoll () {
     chrome.runtime.onMessage.addListener(message => {
       const { method, data } = message;
