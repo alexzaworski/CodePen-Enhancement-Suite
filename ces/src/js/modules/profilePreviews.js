@@ -100,14 +100,14 @@ class Preview {
     this.previewEl = dom.create('div', { class: 'ces__profile-preview' });
 
     fetch(this.profileURL, { credentials: 'include' })
-      .then(response => response.text())
-      .then(profilePage => this.parseProfilePage(profilePage))
-      .then(profile => this.mapPensToProfile(profile))
-      .then(profile => this.mapProfileToTemplate(profile, this.previewEl))
-      .then(() => {
-        dom.body.append(this.previewEl);
-        this.addListeners();
-      });
+    .then(response => response.text())
+    .then(profilePage => this.parseProfilePage(profilePage))
+    .then(profile => this.mapPensToProfile(profile))
+    .then(profile => this.mapProfileToTemplate(profile, this.previewEl))
+    .then(() => {
+      dom.body.append(this.previewEl);
+      this.addListeners();
+    });
   }
 
   parseProfilePage (profilePage) {
@@ -133,12 +133,12 @@ class Preview {
   mapPensToProfile (profile) {
     return new Promise((resolve) => {
       fetch(`${this.profileURL}/popular/feed`)
-        .then(response => response.text())
-        .then(pens => this.parsePens(pens, profile.username))
-        .then(pens => {
-          profile.pens = pens;
-          resolve(profile);
-        });
+      .then(response => response.text())
+      .then(pens => this.parsePens(pens, profile.username))
+      .then(pens => {
+        profile.pens = pens;
+        resolve(profile);
+      });
     });
   }
 
@@ -174,8 +174,8 @@ class Preview {
   mapProfileToTemplate (profile, previewEl) {
     return new Promise(resolve => {
       getPartial('profile-popover')
-        .then(templateHTML => this.fillTemplate(profile, previewEl, templateHTML))
-        .then(mergedTemplate => resolve(mergedTemplate));
+      .then(templateHTML => this.fillTemplate(profile, previewEl, templateHTML))
+      .then(mergedTemplate => resolve(mergedTemplate));
     });
   }
 

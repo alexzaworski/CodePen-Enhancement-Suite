@@ -12,11 +12,9 @@ export default class DistractionFreeMode extends CESModule {
   }
 
   go () {
-    storage.get('distractionFree').then(isDistractionFree => {
-      this.init(isDistractionFree);
-    }, () => {
-      this.init(false);
-    });
+    storage.get('distractionFree')
+    .then(isDistractionFree => this.init(isDistractionFree))
+    .catch(() => this.init(false));
   }
 
   init (isDistractionFree) {

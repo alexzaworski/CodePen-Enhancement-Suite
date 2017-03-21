@@ -14,13 +14,9 @@ export default class HideProfileCSS extends CESModule {
 
   go () {
     storage.get('disabledProfiles')
-    .then(profiles => {
-      return new Set(profiles);
-    }, () => {
-      return new Set();
-    }).then((profiles) => {
-      this.initWithProfiles(profiles);
-    });
+    .then(profiles => new Set(profiles))
+    .catch(() => new Set())
+    .then((profiles) => this.initWithProfiles(profiles));
   }
 
   initWithProfiles (profiles) {
