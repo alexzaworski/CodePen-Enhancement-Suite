@@ -1,14 +1,13 @@
 /*
 
-Tiny, bespoke DOM manipulation lib since
-loading something like jQuery seems excessive.
+Tiny, bespoke DOM manipulation lib since loading something like jQuery
+seems excessive.
 
-(if I had a dollar for every time some bespoke DOM
-lib got outta hand...)
+(if I had a dollar for every time some bespoke DOM lib got outta hand...)
 
-If this spirals out of control it's almost certainly
-worth swapping to a more developed solution but we shouldn't
-be doing much DOM stuff anyways.
+If this spirals out of control it's almost certainly worth swapping to
+a more developed solution but we shouldn't be doing much DOM stuff
+anyways.
 
 API:
 
@@ -21,16 +20,14 @@ API:
 
   .off([String?] event, [Function?] fn)
     - Removes an event listener, returns self
-    - If no event string is passed, removes
-      all added listeners
+    - If no event string is passed, removes all added listeners
 
   .onOff([String] event, [Function] fn)
-    - Adds an event listener, returns a function that
-      removes that listener
+    - Adds an event listener, returns a function that removes
+      that listener
 
   .one([String] event, [Function] fn)
-    - Adds an event listener that is removed after being
-      fired once.
+    - Adds an event listener that is removed after being fired once.
 
   ===================================================================
   NodeBase (mixin, adds helpers for retrieving nodes)
@@ -93,13 +90,20 @@ API:
   .attr ([String|PlainObject] attributes, [String?] val)
     - sets attributes
     - accepts ("attribute", "value") or { attribute: "value", ...}
-    - if attribute is a string and no value is specified, returns
-      the value of that attribute.
+    - if attribute is a string and no value is specified, returns the
+      value of that attribute.
+
+  .prop ([String|PlainObject] attributes, [String?] val)
+    - does the same thing as .attr() but with props
 
   .css ([String|PlainObject?] props, [String?] val)
     - sets style props
     - accepts ("property", "value") or { property: "value", ... }
     - if only `props` is passed, returns node.style[props]
+
+  .class ([String?] classes)
+    - if classes is defined, sets node.className to className
+    - otherwise returns node.className
 
   .addClass ([String] classNames)
     - adds one or more classes (space separated)
@@ -119,6 +123,12 @@ API:
 
   .appendTo ([El] el)
     - appends self.node to el.node
+
+  .prepend ([El] el)
+    - prepends el.node to self.node
+
+  .prependTo ([El] el)
+    - prepends self.node to el.node
 
   .after ([El] el) {
     - inserts el.node after self.node
@@ -150,6 +160,12 @@ API:
   .text ([String?] text)
     - if text is specified, sets node.innerText to text
     - otherwise returns node.innerText
+
+  .empty ()
+    - sets node.innerHTML to an empty string
+
+  .click ()
+    - fires node.click()
 */
 
 class EventBase {
@@ -276,7 +292,7 @@ class El {
     const { node } = this;
 
     const handleString = () => {
-      if (typeof val !== 'undefined') {
+      if (val !== undefined) {
         if (val === null) {
           node.removeAttribute(attributes);
         } else {
@@ -298,14 +314,13 @@ class El {
     return this;
   }
 
-  css (props, val) {
+  prop (props, val) {
     const { node } = this;
-
     if (typeof props === 'string') {
-      if (typeof val !== 'undefined') {
-        node.style[props] = val;
+      if (val !== undefined) {
+        node[props] = val;
       } else {
-        return node.style[props];
+        return node[props];
       }
     } else {
       for (const prop in props) {
@@ -313,6 +328,33 @@ class El {
       }
     }
     return this;
+  }
+
+  css (props, val) {
+    const { node } = this;
+
+    if (typeof props === 'string') {
+      if (val !== undefined) {
+        node.style[props] = val;
+      } else {
+        return node.style[props];
+      }
+    } else {
+      for (const prop in props) {
+        node.style[prop] = props[prop];
+      }
+    }
+    return this;
+  }
+
+  classes (classes) {
+    const { node } = this;
+    if (classes !== undefined) {
+      node.className = classes;
+      return this;
+    } else {
+      return node.className;
+    }
   }
 
   addClass (classNames) {
@@ -352,6 +394,18 @@ class El {
     return this;
   }
 
+  prepend (el) {
+    const { node } = this;
+    node.insertBefore(el.node, node.firstChild);
+    return this;
+  }
+
+  prependTo (el) {
+    const { node } = el;
+    node.insertBefore(this.node, node.firstChild);
+    return this;
+  }
+
   after (el) {
     const { nextSibling } = this.node;
     const { parentNode } = this.node;
@@ -371,20 +425,20 @@ class El {
   }
 
   width (val) {
-    return (typeof val === 'undefined')
+    return (val === undefined)
       ? this.node.offsetWidth
       : this.css('width', val);
   }
 
   height (val) {
-    return (typeof val === 'undefined')
+    return (val === undefined)
       ? this.node.offsetHeight
       : this.css('height', val);
   }
 
   html (text) {
     const { node } = this;
-    if (typeof text !== 'undefined') {
+    if (text !== undefined) {
       node.innerHTML = text;
       return this;
     } else {
@@ -398,12 +452,17 @@ class El {
 
   text (text) {
     const { node } = this;
-    if (typeof text !== 'undefined') {
+    if (text !== undefined) {
       node.innerText = text;
       return this;
     } else {
       return node.innerText;
     }
+  }
+
+  empty () {
+    this.node.innerHTML = '';
+    return this;
   }
 
   rect () {
@@ -412,6 +471,11 @@ class El {
 
   matches (selector) {
     return this.node.matches(selector);
+  }
+
+  click () {
+    this.node.click();
+    return this;
   }
 }
 

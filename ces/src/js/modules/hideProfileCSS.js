@@ -13,10 +13,10 @@ export default class HideProfileCSS extends CESModule {
   }
 
   go () {
-    storage.get('disabledProfiles')
-    .then(profiles => new Set(profiles))
-    .catch(() => new Set())
-    .then((profiles) => this.initWithProfiles(profiles));
+    storage.get('disabled-profiles')
+      .then(profiles => new Set(profiles))
+      .catch(() => new Set())
+      .then((profiles) => this.initWithProfiles(profiles));
   }
 
   initWithProfiles (profiles) {
@@ -41,8 +41,8 @@ export default class HideProfileCSS extends CESModule {
       }
     });
 
-    messenger.on('popup-toggle-ready', () => {
-      messenger.send('profile-css-data', this.isDisabled());
+    messenger.onRequest('profile-css-state', () => {
+      return this.isDisabled();
     });
   }
 
@@ -61,7 +61,7 @@ export default class HideProfileCSS extends CESModule {
   }
 
   saveProfilesToStorage () {
-    storage.set('disabledProfiles', [...this.disabledProfiles]);
+    storage.set('disabled-profiles', [...this.disabledProfiles]);
   }
 
   removeStyle () {

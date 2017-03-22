@@ -12,9 +12,10 @@ export default class DistractionFreeMode extends CESModule {
   }
 
   go () {
-    storage.get('distractionFree')
-    .then(isDistractionFree => this.init(isDistractionFree))
-    .catch(() => this.init(false));
+    storage
+      .get('distraction-free')
+      .then(isDistractionFree => this.init(isDistractionFree))
+      .catch(() => this.init(false));
   }
 
   init (isDistractionFree) {
@@ -50,13 +51,13 @@ export default class DistractionFreeMode extends CESModule {
   }
 
   handleInputChange (input) {
-    const checked = input.node.checked;
+    const checked = input.prop('checked');
     this.setDistractionFreeMode(checked);
   }
 
   setDistractionFreeMode (state) {
     dom.body.toggleClass('distraction-free-mode', state);
-    storage.set('distractionFree', state);
+    storage.set('distraction-free', state);
     if (state) {
       this.forceEditorsToAdjust();
     }

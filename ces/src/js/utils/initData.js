@@ -25,10 +25,10 @@ if (initData) {
     }
   }
 
-  // stupid hack to add a page type to Project pages,
-  // since that's not in there by default.
-  if (typeof initData.__pageType === 'undefined') {
-    if (typeof initData.__INITIAL_STATE__ !== 'undefined') {
+  // stupid hack to add a page type to Project pages, since that's not
+  // in there by default.
+  if (initData.__pageType === undefined) {
+    if (initData.__INITIAL_STATE__ !== undefined) {
       initData.__pageType = 'project';
     }
   }

@@ -14,9 +14,9 @@ export default class RecentPensTypeahead extends CESModule {
   go () {
     const feedURL = this.buildFeedURL();
     fetch(feedURL)
-    .then(response => response.text())
-    .then(data => this.parsePenData(data))
-    .then(penObjects => this.setUpjQueryAjax(penObjects));
+      .then(response => response.text())
+      .then(data => this.parsePenData(data))
+      .then(penObjects => this.setUpjQueryAjax(penObjects));
   }
 
   buildFeedURL () {

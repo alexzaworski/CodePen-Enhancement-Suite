@@ -1,0 +1,25 @@
+<div class="themeEl__fauxColor" style="background-color: {{color}}">
+  <input class="themeEl__color" type="color" value={{color}}>
+</div>
+<button class="themeEl__settings">
+  <svg>
+    <use xlink:href="#gear" xmlns:xlink="http://www.w3.org/1999/xlink"></use>
+  </svg>
+</button>
+<h2 class="themeEl__heading">{{prettyName}}</h2>
+<div class="themeEl__advanced">
+  <p class="themeEl__desc">{{description}}</p>
+  <div class="themeEl__font-controls">
+    <svg class="themeEl__font-control themeEl__font-control--italic">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#italic"></use>
+    </svg>
+    <svg class="themeEl__font-control themeEl__font-control--underline">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#underline"></use>
+    </svg>
+  </div>
+  <div class="themeEl__syncTo-label">Sync to:</label>
+    <select>
+      <option>None</option>
+    </select>
+  </div>
+</div>

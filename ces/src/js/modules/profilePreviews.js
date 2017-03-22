@@ -5,6 +5,7 @@ import dom, { Doc } from '../utils/dom';
 import conditionChecker from '../utils/conditionChecker';
 import escapeHTML from 'escape-html';
 import getPartial from '../utils/getPartial';
+import renderTemplate from '../utils/renderTemplate';
 import cpAjax from '../utils/cpAjax';
 
 export default class ProfilePreview extends CESModule {
@@ -42,29 +43,29 @@ export default class ProfilePreview extends CESModule {
       pen: '.pen-owner-link, .comment-username, .pen-owner-name',
       full: '.pen-owner-link',
       project: '.pen-owner-link',
-      // nth-of-type makes sure the link to the user's blog isn't also
-      // included (they have the same class applied)
+      // nth-of-type makes sure the link to the user's blog isn't also included
+      // (they have the same class applied)
       posts: '.author-link:nth-of-type(2), .comment-username',
 
       details: '.comment-username, .pen-owner-name, .user-name.module',
       collection: '.username, .author-link',
 
-      // needs to be :first-of-type so it doesn't pick up
-      // the link to the pen/post/whatever.
+      // needs to be :first-of-type so it doesn't pick up the link to the
+      // pen/post/whatever.
       activity: '.activity-name:first-of-type'
     };
     return selectors[pageType] || selectors.default;
   }
 
   subscribeToGrid () {
-    // Add a listener to the window object since we
-    // can actually interact with that from a content script
+    // Add a listener to the window object since we can actually interact with
+    // that from a content script
     dom.window.on('grid-changed', () => {
       this.updateProfileLinks();
     });
 
-    // Then within the context of the page, listen for CodePen's
-    // internal Hub events and replay them as custom events
+    // Then within the context of the page, listen for CodePen's internal Hub
+    // events and replay them as custom events
     inPageContext(() => {
       Hub.sub('grid-changed', function () {
         window.dispatchEvent(new CustomEvent('grid-changed'));
@@ -100,14 +101,14 @@ class Preview {
     this.previewEl = dom.create('div', { class: 'ces__profile-preview' });
 
     fetch(this.profileURL, { credentials: 'include' })
-    .then(response => response.text())
-    .then(profilePage => this.parseProfilePage(profilePage))
-    .then(profile => this.mapPensToProfile(profile))
-    .then(profile => this.mapProfileToTemplate(profile, this.previewEl))
-    .then(() => {
-      dom.body.append(this.previewEl);
-      this.addListeners();
-    });
+      .then(response => response.text())
+      .then(profilePage => this.parseProfilePage(profilePage))
+      .then(profile => this.mapPensToProfile(profile))
+      .then(profile => this.mapProfileToTemplate(profile, this.previewEl))
+      .then(() => {
+        dom.body.append(this.previewEl);
+        this.addListeners();
+      });
   }
 
   parseProfilePage (profilePage) {
@@ -133,12 +134,12 @@ class Preview {
   mapPensToProfile (profile) {
     return new Promise((resolve) => {
       fetch(`${this.profileURL}/popular/feed`)
-      .then(response => response.text())
-      .then(pens => this.parsePens(pens, profile.username))
-      .then(pens => {
-        profile.pens = pens;
-        resolve(profile);
-      });
+        .then(response => response.text())
+        .then(pens => this.parsePens(pens, profile.username))
+        .then(pens => {
+          profile.pens = pens;
+          resolve(profile);
+        });
     });
   }
 
@@ -173,9 +174,9 @@ class Preview {
 
   mapProfileToTemplate (profile, previewEl) {
     return new Promise(resolve => {
-      getPartial('profile-popover')
-      .then(templateHTML => this.fillTemplate(profile, previewEl, templateHTML))
-      .then(mergedTemplate => resolve(mergedTemplate));
+      getPartial('templates/profile-popover')
+        .then(templateHTML => this.fillTemplate(profile, previewEl, templateHTML))
+        .then(mergedTemplate => resolve(mergedTemplate));
     });
   }
 
@@ -212,9 +213,7 @@ class Preview {
       followingURL: `${profileURL}/following`
     };
 
-    Object.keys(templateData).forEach(key => {
-      templateHTML = templateHTML.replace(`{{${key}}}`, templateData[key]);
-    });
+    templateHTML = renderTemplate(templateData, templateHTML);
 
     previewEl.html(templateHTML);
 
@@ -297,10 +296,11 @@ class Preview {
   }
 
   display () {
-    // Checking :hover is an attempt to fix a long-standing bug in which
-    // profile previews would appear seamingly at random or in the wrong spot.
-    // Obviously this is a bandage fix and doesn't address the root cause
-    // which I'm assuming is related to the way timeouts are handled.
+    // Checking :hover is an attempt to fix a long-standing bug in
+    // which profile previews would appear seamingly at random or in
+    // the wrong spot. Obviously this is a bandage fix and doesn't
+    // address the root cause which I'm assuming is related to the way
+    // timeouts are handled.
     //
     // This is a holdover from before the es6 rewrite so it's possible
     // it's not necessary anymore but whatevs
@@ -320,8 +320,10 @@ class Preview {
     const height = profileLink.height();
     const scrollY = window.pageYOffset;
     const scrollX = window.pageXOffset;
-    previewEl.css('left', `${left + scrollX}px`);
-    previewEl.css('top', `${top + scrollY + height}px`);
+    previewEl.css({
+      left: `${left + scrollX}px`,
+      top: `${top + scrollY + height}px`
+    });
   }
 
   addListeners () {
@@ -331,11 +333,12 @@ class Preview {
       this.startDisplayTimer();
     });
 
-    // We need to wait until neither the profile link *nor* the preview is
-    // hovered to  hide everything.
+    // We need to wait until neither the profile link *nor* the
+    // preview is hovered to  hide everything.
     //
-    // By adding a 0ms timeout we prevent the preview from instantly collapsing
-    // when the user moves their cursor from the link to the preview.
+    // By adding a 0ms timeout we prevent the preview from instantly
+    // collapsing when the user moves their cursor from the link to
+    // the preview.
     let timer = -1;
     [profileLink, previewEl].forEach(el => {
       el.on('mouseenter', () => {

@@ -14,13 +14,13 @@ export default class ActivityFeed extends CESModule {
 
   go () {
     fetch('/activity/header/', { credentials: 'include' })
-    .then(response => response.text())
-    .then(activity => this.parseActivity(activity))
-    .then(activity => {
-      storage.get(this.storageKey)
-      .then(oldActivity => this.handleActivity(activity, oldActivity))
-      .catch(() => this.updateStorage(activity));
-    });
+      .then(response => response.text())
+      .then(activity => this.parseActivity(activity))
+      .then(activity => {
+        storage.get(this.storageKey)
+        .then(oldActivity => this.handleActivity(activity, oldActivity))
+        .catch(() => this.updateStorage(activity));
+      });
   }
 
   handleActivity (newActivity, oldActivity) {

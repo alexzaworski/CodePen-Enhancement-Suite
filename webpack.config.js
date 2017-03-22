@@ -10,6 +10,9 @@ module.exports = {
     filename: '[name].js'
   },
   devtool: 'source-map',
+  resolve: {
+    modules: ['ces/src', 'node_modules']
+  },
   module: {
     rules: [{
       test: /\.scss$/,

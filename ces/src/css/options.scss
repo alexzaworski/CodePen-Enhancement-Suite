@@ -1,0 +1,458 @@
+@import 'options/codemirror-base';
+
+::-webkit-scrollbar {
+  width: .5em;
+  height: .5em;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(102, 102, 102, 0.4);
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+html {
+  box-sizing: border-box;
+  overflow-y: hidden;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+html {
+  margin: 0;
+}
+
+body {
+  font-family: lato;
+  font-size: 16px;
+  min-width: 1150px;
+}
+
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main {
+  display: flex;
+  height: 100vh;
+}
+
+.preview {
+  padding: 20px;
+  background: #333;
+  display: flex;
+  overflow-x: auto;
+}
+.light .preview {
+  background: #ccc;
+}
+
+.top-controls {
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.version-controls {
+  background: #111;
+  padding: 20px;
+  flex-grow: 1;
+}
+.light .version-controls {
+  background: white;
+}
+
+.button {
+  background: transparent;
+  border: 0;
+  outline: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.button--default {
+  letter-spacing: .05em;
+  padding: 8px 10px;
+  color: white;
+  background: black;
+  margin: 0;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 3px solid #333;
+}
+
+.button--default:last-child {
+  margin-right: 0;
+}
+
+.button--tiny {
+  padding: 4px;
+  border: 0;
+  font-size: .8em;
+  font-weight: normal;
+}
+
+.button--default:hover:not(:active) {
+  background-color: #333;
+}
+
+.light .button--default:hover:not(:active) {
+  background: #ccc;
+}
+
+.light .button--default:not(:active) {
+  background: white;
+  color: #555;
+  border-color: #ccc;
+}
+
+.button--save:hover,
+.light .button--save:hover {
+  border-color: #46D06B;
+}
+.button--save:active {
+  background: #46D06B;
+}
+
+.button--revert:hover,
+.light .button--revert:hover {
+  border-color: #ff3c41;
+}
+.button--revert:active {
+  background: #ff3c41;
+}
+
+.save-info--hidden {
+  display: none;
+}
+
+.last-saved {
+  font-size: .8em;
+  color: #666;
+  font-weight: bold;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  animation: fade 1s ease-out;
+}
+
+.light .last-saved {
+  color: #aaa;
+  animation-name: fade--dark;
+}
+
+@keyframes fade {
+  0% {
+    color: white;
+  }
+  100% {
+    color: #666;
+  }
+}
+@keyframes fade--dark {
+  0% {
+    color: black;
+  }
+  100% {
+    color: #aaa;
+  }
+}
+
+.controls-wrap {
+  overflow: auto;
+  padding: 20px;
+  width: 275px;
+  background: #eee;
+  flex-shrink: 0;
+}
+
+.themeEl:not(:last-of-type) {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.themeEl__advanced {
+  margin-top: 10px;
+  display: none;
+}
+.themeEl__settings.active ~ .themeEl__advanced {
+  display: block;
+}
+
+.themeEl__heading {
+  display: inline-block;
+  cursor: pointer;
+  margin: 0;
+  font-size: .8em;
+  letter-spacing: .02em;
+  color: #333;
+  text-transform: uppercase;
+  line-height: 20px;
+  position: relative;
+  bottom: 2px;
+}
+
+.themeEl__heading:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+.themeEl__settings {
+  float: right;
+  background: transparent;
+  border: none;
+  display: block;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  height: 18px;
+  width: 18px;
+  line-height: 20px;
+  fill: #aaa;
+}
+
+.themeEl__settings svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transition: fill .1s;
+}
+
+.themeEl__settings:hover, .themeEl__settings.active {
+  fill: #333;
+}
+
+.themeEl__color {
+  display: block;
+}
+
+.themeEl__syncTo {
+  display: inline-block;
+  width: 150px;
+}
+
+.themeEl__syncTo-label {
+  display: inline-block;
+  margin-right: 5px;
+  font-size: .7em;
+  color: #666;
+  font-weight: bold;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.themeEl__color {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.themeEl__fauxColor {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+  float: left;
+}
+
+.themeEl__desc {
+  font-style: italic;
+  color: #111;
+  font-size: .9em;
+  line-height: 1.5em;
+  color: #333;
+  text-transform: none;
+  margin: 10px 0;
+}
+
+.box {
+  min-width: 200px;
+  flex-basis: 33%;
+  margin-left: 20px;
+  overflow: auto;
+  overflow-x: hidden;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.box:first-of-type {
+  margin-left: 0;
+}
+
+.base-ui-controls {
+  background: #333;
+  width: 275px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.light .base-ui-controls {
+  background: #ccc;
+}
+
+.base-ui__toggle {
+  position: relative;
+  height: 30px;
+  margin: auto 20px;
+}
+
+.giant-toggle {
+  display: none;
+}
+
+.giant-toggle ~ label {
+  cursor: pointer;
+
+  /* Should be the same as the height of label:after */
+  line-height: 30px;
+}
+
+.giant-toggle ~ label:after {
+  content: '';
+  display: block;
+  float: left;
+
+  /* Height/border radius should be equal */
+  height: 30px;
+  border-radius: 30px;
+  
+  width: 50px;
+  background: #ccc;
+}
+
+.light .giant-toggle ~ label:after {
+  background: #777;
+}
+
+.giant-toggle ~ label:before {
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  content: '';
+  display: block;
+  float: left;
+  height: 35px;
+  width: 35px;
+  left: -5px;
+  border-radius: 50%;
+  background: white;
+  transition: color .1s ease-out, left .1s ease-out;
+}
+
+.giant-toggle:checked ~ label:before {
+
+  /* Difference between label:after width and label:before width */
+  left: 20px;
+}
+
+.base-ui__label {
+  cursor: pointer;
+  margin: auto 0;
+  font-size: .75em;
+  color: #999;
+  font-weight: bold;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+}
+
+.light .base-ui__label {
+  color: #777;
+}
+
+.presets-wrapper {
+  font-size: .8em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: -20px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background: #aaa;
+}
+
+.presets {
+  margin-left: 4px;
+  margin-right: 2px;
+  background: black;
+  color: white;
+  border: 0;
+  padding: 4px 20px 4px 10px;
+  font-size: 0.8em;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: 0;
+  -webkit-appearance: none;
+}
+
+.light .presets {
+  background: white;
+  color: #555;
+}
+.presets-select-wrapper {
+  position: relative;
+  display: inline-block;
+  color: #555;
+  vertical-align: top;
+}
+
+.presets-select-wrapper:after {
+  position: absolute;
+  display: inline-block;
+  content: "";
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  border: .35rem solid transparent;
+  border-top-color: inherit;
+  right: 8px;
+  top: 40%;
+}
+
+.themeEl__font-controls {
+  margin-bottom: 5px;
+}
+
+.themeEl__font-controls:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+.themeEl__font-control {
+  padding: 5px;
+  display: block;
+  height: 20px;
+  width: 20px;
+  float: left;
+  background: #999;
+  fill: #333;
+  margin-right: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.themeEl__font-control.active {
+  background: #333;
+  fill: #999;
+}
+
+.export-controls {
+  background: #111;
+  padding: 20px;
+  padding-left: 0;
+}
+
+.light .export-controls {
+  background: white;
+}

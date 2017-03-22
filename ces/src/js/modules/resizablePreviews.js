@@ -47,9 +47,9 @@ export default class ResizePreviews extends CESModule {
     });
   }
 
-  // The Pen preview frame is actually totally replaced
-  // when the source is determined, so we need to wait
-  // for that to happen before we can make DOM changes.
+  // The Pen preview frame is actually totally replaced when the
+  // source is determined, so we need to wait for that to happen
+  // before we can make DOM changes.
   waitForIframeLoad () {
     return new Promise(resolve => {
       (function checkIfReady () {
