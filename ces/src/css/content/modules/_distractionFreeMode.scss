@@ -5,6 +5,15 @@ body.distraction-free-mode {
   .site-footer {
     height: $footer-size;
   }
+  
+  #main-header {
+    min-width: 700px;
+  }
+
+  .signup-and-login {
+    padding-top: 0;
+    margin: auto 0;
+  }
 
   &.layout-top {
 
