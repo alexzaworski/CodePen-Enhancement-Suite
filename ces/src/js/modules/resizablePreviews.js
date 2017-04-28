@@ -19,7 +19,6 @@ export default class ResizePreviews extends CESModule {
     };
 
     this.waitForIframeLoad().then(() => {
-      this.loadText.remove();
       this.initResize();
     });
   }
@@ -30,7 +29,6 @@ export default class ResizePreviews extends CESModule {
     this.resultDiv = dom.get('#result_div');
     this.widthReadout = dom.get('#width-readout');
     this.dragCover = dom.get('#editor-drag-cover');
-    this.loadText = dom.get('#loading-text');
     this.resultIframe = dom.get('.result-iframe');
   }
 
