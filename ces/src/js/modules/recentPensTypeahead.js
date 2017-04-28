@@ -7,7 +7,8 @@ export default class RecentPensTypeahead extends CESModule {
   constructor () {
     super();
     this.conditions = {
-      isPage: ['pen']
+      isPage: ['pen'],
+      isLoggedIn: true
     };
   }
 
