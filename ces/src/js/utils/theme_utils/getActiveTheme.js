@@ -5,13 +5,14 @@ import mergeThemeWithGlobals from './mergeThemeWithGlobals';
 
 const local = new Storage('local');
 
-export default () => new Promise((resolve) => {
-  storage
-    .get('custom-editor-theme')
-    .then(mergeThemeWithGlobals)
-    .catch(handleOldTheme)
-    .then(resolve);
-});
+export default () =>
+  new Promise(resolve => {
+    storage
+      .get('custom-editor-theme')
+      .then(mergeThemeWithGlobals)
+      .catch(handleOldTheme)
+      .then(resolve);
+  });
 
 const handleOldTheme = () => {
   return new Promise(resolve => {

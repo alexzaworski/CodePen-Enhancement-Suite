@@ -9,7 +9,7 @@ import renderTemplate from '../utils/renderTemplate';
 import cpAjax from '../utils/cpAjax';
 
 export default class ProfilePreview extends CESModule {
-  constructor () {
+  constructor() {
     super();
     this.conditions = {
       isPage: [
@@ -29,7 +29,7 @@ export default class ProfilePreview extends CESModule {
     };
   }
 
-  go () {
+  go() {
     this.selector = this.getSelector(initData.__pageType);
     this.updateProfileLinks();
     if (conditionChecker.isGridView()) {
@@ -37,7 +37,7 @@ export default class ProfilePreview extends CESModule {
     }
   }
 
-  getSelector (pageType) {
+  getSelector(pageType) {
     const selectors = {
       default: '.user a',
       pen: '.pen-owner-link, .comment-username, .pen-owner-name',
@@ -57,7 +57,7 @@ export default class ProfilePreview extends CESModule {
     return selectors[pageType] || selectors.default;
   }
 
-  subscribeToGrid () {
+  subscribeToGrid() {
     // Add a listener to the window object since we can actually interact with
     // that from a content script
     dom.window.on('grid-changed', () => {
@@ -67,13 +67,13 @@ export default class ProfilePreview extends CESModule {
     // Then within the context of the page, listen for CodePen's internal Hub
     // events and replay them as custom events
     inPageContext(() => {
-      Hub.sub('grid-changed', function () {
+      Hub.sub('grid-changed', function() {
         window.dispatchEvent(new CustomEvent('grid-changed'));
       });
     });
   }
 
-  updateProfileLinks () {
+  updateProfileLinks() {
     const profileLinks = dom.getAll(this.selector);
     const currentPreviews = dom.getAll('.ces__profile-preview');
     currentPreviews.forEach(preview => {
@@ -89,14 +89,12 @@ export default class ProfilePreview extends CESModule {
 }
 
 class Preview {
-  constructor (profileLink) {
+  constructor(profileLink) {
     this.profileLink = profileLink;
 
     const href = profileLink.attr('href');
     const origin = location.origin;
-    this.profileURL = href.includes(origin)
-      ? href
-      : origin + href;
+    this.profileURL = href.includes(origin) ? href : origin + href;
 
     this.previewEl = dom.create('div', { class: 'ces__profile-preview' });
 
@@ -111,8 +109,10 @@ class Preview {
       });
   }
 
-  parseProfilePage (profilePage) {
-    const doc = new Doc(new DOMParser().parseFromString(profilePage, 'text/html'));
+  parseProfilePage(profilePage) {
+    const doc = new Doc(
+      new DOMParser().parseFromString(profilePage, 'text/html')
+    );
 
     const profile = {
       name: doc.get('#profile-name-header').text().trim(),
@@ -120,7 +120,10 @@ class Preview {
       avatar: doc.get('#profile-image').attr('src'),
       followers: doc.get('#followers-count').text(),
       following: doc.get('#following-count').text(),
-      isFollowing: !doc.exists('#follow-this-user:not([style="display: none;"])', true)
+      isFollowing: !doc.exists(
+        '#follow-this-user:not([style="display: none;"])',
+        true
+      )
     };
 
     profile.isPro = !!profile.name.match(/PRO$/);
@@ -131,8 +134,8 @@ class Preview {
     return profile;
   }
 
-  mapPensToProfile (profile) {
-    return new Promise((resolve) => {
+  mapPensToProfile(profile) {
+    return new Promise(resolve => {
       fetch(`${this.profileURL}/popular/feed`)
         .then(response => response.text())
         .then(pens => this.parsePens(pens, profile.username))
@@ -143,7 +146,7 @@ class Preview {
     });
   }
 
-  parsePens (penPage, username) {
+  parsePens(penPage, username) {
     const xml = new Doc(new DOMParser().parseFromString(penPage, 'text/xml'));
     const pens = [];
     const items = xml.getAll('item');
@@ -172,15 +175,17 @@ class Preview {
     return pens;
   }
 
-  mapProfileToTemplate (profile, previewEl) {
+  mapProfileToTemplate(profile, previewEl) {
     return new Promise(resolve => {
       getPartial('templates/profile-popover')
-        .then(templateHTML => this.fillTemplate(profile, previewEl, templateHTML))
+        .then(templateHTML =>
+          this.fillTemplate(profile, previewEl, templateHTML)
+        )
         .then(mergedTemplate => resolve(mergedTemplate));
     });
   }
 
-  fillTemplate (profile, previewEl, templateHTML) {
+  fillTemplate(profile, previewEl, templateHTML) {
     const { profileURL } = this;
 
     const {
@@ -221,7 +226,7 @@ class Preview {
     this.handleFollowButtons(previewEl, username, isFollowing);
   }
 
-  addPensToPreview (preview, pens) {
+  addPensToPreview(preview, pens) {
     const pensWrapper = preview.get('.ces__profile__pens');
 
     pens.forEach(pen => {
@@ -246,10 +251,13 @@ class Preview {
     });
   }
 
-  handleFollowButtons (preview, username, isFollowing) {
+  handleFollowButtons(preview, username, isFollowing) {
     const buttons = preview.get('.ces__profile__follow-buttons');
 
-    if (conditionChecker.isLoggedIn(false) || initData.__user.username === username) {
+    if (
+      conditionChecker.isLoggedIn(false) ||
+      initData.__user.username === username
+    ) {
       buttons.remove();
       return;
     }
@@ -285,17 +293,17 @@ class Preview {
     });
   }
 
-  startDisplayTimer () {
+  startDisplayTimer() {
     this.displayTimer = setTimeout(() => {
       this.display();
     }, 1000);
   }
 
-  stopDisplayTimer () {
+  stopDisplayTimer() {
     clearTimeout(this.displayTimer);
   }
 
-  display () {
+  display() {
     // Checking :hover is an attempt to fix a long-standing bug in
     // which profile previews would appear seamingly at random or in
     // the wrong spot. Obviously this is a bandage fix and doesn't
@@ -310,11 +318,11 @@ class Preview {
     }
   }
 
-  hide () {
+  hide() {
     this.previewEl.rmClass('active');
   }
 
-  position () {
+  position() {
     const { profileLink, previewEl } = this;
     const { left, top } = profileLink.rect();
     const height = profileLink.height();
@@ -326,7 +334,7 @@ class Preview {
     });
   }
 
-  addListeners () {
+  addListeners() {
     const { profileLink, previewEl } = this;
 
     profileLink.on('mouseenter', () => {
@@ -341,14 +349,16 @@ class Preview {
     // the preview.
     let timer = -1;
     [profileLink, previewEl].forEach(el => {
-      el.on('mouseenter', () => {
-        clearTimeout(timer);
-      }).on('mouseleave', () => {
-        timer = setTimeout(() => {
-          this.stopDisplayTimer();
-          this.hide();
-        }, 0);
-      });
+      el
+        .on('mouseenter', () => {
+          clearTimeout(timer);
+        })
+        .on('mouseleave', () => {
+          timer = setTimeout(() => {
+            this.stopDisplayTimer();
+            this.hide();
+          }, 0);
+        });
     });
   }
 }

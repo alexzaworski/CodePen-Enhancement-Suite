@@ -1,11 +1,11 @@
 export class Storage {
-  constructor (area) {
+  constructor(area) {
     this.store = chrome.storage[area];
   }
 
-  get (key = null) {
+  get(key = null) {
     return new Promise((resolve, reject) => {
-      this.store.get(key, (response) => {
+      this.store.get(key, response => {
         if (key === null) {
           resolve(response);
         } else if (response.hasOwnProperty(key)) {
@@ -17,7 +17,7 @@ export class Storage {
     });
   }
 
-  set (key, data) {
+  set(key, data) {
     return new Promise(resolve => {
       let storageObject = {};
 

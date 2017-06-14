@@ -3,7 +3,7 @@ import dom from 'js/utils/dom';
 import { localMessenger as messenger } from 'js/utils/messenger';
 
 export default class ThemeEl {
-  constructor (settings, template) {
+  constructor(settings, template) {
     // Settings include:
     // - color
     // - description
@@ -16,12 +16,12 @@ export default class ThemeEl {
     this.template = template;
   }
 
-  init (container, allEls) {
+  init(container, allEls) {
     this.setupEls(allEls);
     this.appendToDOM(container);
   }
 
-  setupEls (allEls) {
+  setupEls(allEls) {
     // color is only set to a default to avoid warnings when initially
     // rendering controls that have a master instead of a color set.
     const { color = '#000000', prettyName, template, description = '' } = this;
@@ -41,11 +41,8 @@ export default class ThemeEl {
     this.initFontControls();
   }
 
-  initFontControls () {
-    const {
-      fontControls,
-      prop = 'color'
-    } = this;
+  initFontControls() {
+    const { fontControls, prop = 'color' } = this;
     if (prop !== 'color') {
       fontControls.remove();
     } else {
@@ -53,7 +50,7 @@ export default class ThemeEl {
     }
   }
 
-  setFontControlClasses () {
+  setFontControlClasses() {
     const {
       italicControl,
       underlineControl,
@@ -64,7 +61,7 @@ export default class ThemeEl {
     underlineControl.toggleClass('active', underline);
   }
 
-  addListeners () {
+  addListeners() {
     const {
       selectEl,
       colorEl,
@@ -82,9 +79,7 @@ export default class ThemeEl {
     selectEl.on('change', e => {
       const { value } = e.target;
       messenger.request('element-color', value).then(color => {
-        color
-          ? this.syncTo({ prettyName: value, color })
-          : this.unSync();
+        color ? this.syncTo({ prettyName: value, color }) : this.unSync();
       });
     });
 
@@ -105,11 +100,11 @@ export default class ThemeEl {
     });
   }
 
-  sendStyleUpdate () {
+  sendStyleUpdate() {
     messenger.send('style-update');
   }
 
-  setupElSelect (allEls) {
+  setupElSelect(allEls) {
     const { selectEl } = this;
     let html = selectEl.html();
 
@@ -117,17 +112,14 @@ export default class ThemeEl {
       const { prettyName } = this;
       const { prettyName: elName } = el;
       if (elName !== prettyName) {
-        html += dom
-          .create('option')
-          .text(elName)
-          .outerHTML();
+        html += dom.create('option').text(elName).outerHTML();
       }
     });
 
     selectEl.html(html);
   }
 
-  syncTo (master) {
+  syncTo(master) {
     const { selectEl } = this;
     const { prettyName, color } = master;
     this.unSync();
@@ -139,14 +131,14 @@ export default class ThemeEl {
     });
   }
 
-  unSync () {
+  unSync() {
     const { masterListener, currentMaster } = this;
     messenger.off(currentMaster, masterListener);
     this.currentMaster = null;
     this.masterListener = null;
   }
 
-  updateColor (color) {
+  updateColor(color) {
     const { prettyName, fauxEl, colorEl } = this;
 
     this.color = color;
@@ -159,14 +151,9 @@ export default class ThemeEl {
     }
   }
 
-  reset (newSettings) {
+  reset(newSettings) {
     const { selectEl } = this;
-    const {
-      color,
-      master = null,
-      underline,
-      italic
-    } = newSettings;
+    const { color, master = null, underline, italic } = newSettings;
 
     this.unSync();
     selectEl.prop('value', 'None');
@@ -178,7 +165,7 @@ export default class ThemeEl {
     this.setFontControlClasses();
   }
 
-  appendToDOM (parent) {
+  appendToDOM(parent) {
     parent.append(this.domEl);
   }
 }

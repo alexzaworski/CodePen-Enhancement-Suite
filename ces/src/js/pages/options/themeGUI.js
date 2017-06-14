@@ -5,7 +5,7 @@ import storage from 'js/utils/storage';
 import { localMessenger as messenger } from 'js/utils/messenger';
 
 class ThemeGUI {
-  init (theme) {
+  init(theme) {
     const { light, elements, lastSaved = false } = theme;
     this.lastSaved = lastSaved;
     this.presets = presets;
@@ -16,12 +16,12 @@ class ThemeGUI {
     this.ColorHandler = new ColorHandler(elements, this.colorControlsWrap);
   }
 
-  handleLightStatus (isLight) {
+  handleLightStatus(isLight) {
     this.lightThemeToggle.prop('checked', isLight);
     this.setPageBackground(isLight);
   }
 
-  setupUIEls () {
+  setupUIEls() {
     this.lightThemeToggle = dom.get('#base-ui');
     this.pageWrap = dom.get('#page-wrap');
     this.fauxToggleLabels = dom.getAll('.base-ui__label');
@@ -33,19 +33,14 @@ class ThemeGUI {
     this.setupPresetSelect();
   }
 
-  setPageBackground (isLight) {
+  setPageBackground(isLight) {
     this.pageWrap.toggleClass('light', isLight);
   }
 
-  setupListeners () {
-    const {
-      lightThemeToggle,
-      fauxToggleLabels,
-      presetLoad,
-      saveButton
-    } = this;
+  setupListeners() {
+    const { lightThemeToggle, fauxToggleLabels, presetLoad, saveButton } = this;
 
-    lightThemeToggle.on('click', e => {
+    lightThemeToggle.on('click', () => {
       this.light = !this.light;
       this.setPageBackground(this.light);
     });
@@ -87,19 +82,16 @@ class ThemeGUI {
     });
   }
 
-  updateStyles () {
+  updateStyles() {
     const { ColorHandler, styleEl } = this;
     styleEl.text(ColorHandler.getElementCSS());
   }
 
-  setupPresetSelect () {
+  setupPresetSelect() {
     const { presetSelect, presets } = this;
     let html = '';
     for (const preset in presets) {
-      html += dom
-        .create('option')
-        .text(preset)
-        .outerHTML();
+      html += dom.create('option').text(preset).outerHTML();
     }
     presetSelect.html(html);
   }

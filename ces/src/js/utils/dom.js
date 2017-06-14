@@ -169,7 +169,7 @@ API:
 */
 
 class EventBase {
-  constructor (target) {
+  constructor(target) {
     this.target = target;
     this.offFunctions = [];
     return {
@@ -180,7 +180,7 @@ class EventBase {
     };
   }
 
-  on (event, fn) {
+  on(event, fn) {
     this.target.addEventListener(event, fn);
     this.offFunctions.push(() => {
       this.off(event, fn);
@@ -188,7 +188,7 @@ class EventBase {
     return this;
   }
 
-  off (event, fn) {
+  off(event, fn) {
     if (typeof event !== 'string') {
       this.offFunctions.forEach(fn => fn());
       this.offFunctions = [];
@@ -198,12 +198,14 @@ class EventBase {
     return this;
   }
 
-  onOff (event, fn) {
+  onOff(event, fn) {
     this.on(event, fn);
-    return () => { this.off(event, fn); };
+    return () => {
+      this.off(event, fn);
+    };
   }
 
-  one (event, fn) {
+  one(event, fn) {
     const off = this.onOff(event, () => {
       fn();
       off();
@@ -213,7 +215,7 @@ class EventBase {
 }
 
 class NodeBase {
-  constructor (node) {
+  constructor(node) {
     this.node = node;
     return {
       node,
@@ -223,16 +225,16 @@ class NodeBase {
     };
   }
 
-  get (selector) {
+  get(selector) {
     return new El(this.node.querySelector(selector));
   }
 
-  getAll (selector) {
+  getAll(selector) {
     const nodes = this.node.querySelectorAll(selector);
     return [...nodes].map(node => new El(node));
   }
 
-  exists (selector, forceBool = false) {
+  exists(selector, forceBool = false) {
     const el = this.get(selector);
     if (!el.node) {
       return false;
@@ -243,20 +245,20 @@ class NodeBase {
 }
 
 export class Doc {
-  constructor (document = window.document) {
+  constructor(document = window.document) {
     Object.assign(this, new NodeBase(document));
   }
 }
 
 class DOM extends Doc {
-  constructor () {
+  constructor() {
     super();
     Object.assign(this, new EventBase(this.node));
     this.window = new EventBase(window);
     this.body = this.get('body');
   }
 
-  create (tag, attributes) {
+  create(tag, attributes) {
     const el = new El(this.node.createElement(tag));
     if (attributes) {
       el.attr(attributes);
@@ -266,29 +268,29 @@ class DOM extends Doc {
 }
 
 class El {
-  constructor (node) {
+  constructor(node) {
     this.node = node;
     Object.assign(this, new NodeBase(node), new EventBase(node));
   }
 
-  remove () {
+  remove() {
     const { node } = this;
     node.parentNode.removeChild(node);
     return this;
   }
 
-  wrap (wrapper) {
+  wrap(wrapper) {
     wrapper = wrapper.clone();
     this.after(wrapper);
     wrapper.append(this);
     return this;
   }
 
-  clone () {
+  clone() {
     return new El(this.node.cloneNode());
   }
 
-  attr (attributes, val) {
+  attr(attributes, val) {
     const { node } = this;
 
     const handleString = () => {
@@ -314,7 +316,7 @@ class El {
     return this;
   }
 
-  prop (props, val) {
+  prop(props, val) {
     const { node } = this;
     if (typeof props === 'string') {
       if (val !== undefined) {
@@ -330,7 +332,7 @@ class El {
     return this;
   }
 
-  css (props, val) {
+  css(props, val) {
     const { node } = this;
 
     if (typeof props === 'string') {
@@ -347,7 +349,7 @@ class El {
     return this;
   }
 
-  classes (classes) {
+  classes(classes) {
     const { node } = this;
     if (classes !== undefined) {
       node.className = classes;
@@ -357,7 +359,7 @@ class El {
     }
   }
 
-  addClass (classNames) {
+  addClass(classNames) {
     classNames = classNames.split(' ');
     classNames.forEach(className => {
       this.node.classList.add(className);
@@ -365,7 +367,7 @@ class El {
     return this;
   }
 
-  rmClass (classNames) {
+  rmClass(classNames) {
     classNames = classNames.split(' ');
     classNames.forEach(className => {
       this.node.classList.remove(className);
@@ -373,40 +375,40 @@ class El {
     return this;
   }
 
-  toggleClass (classNames, force) {
+  toggleClass(classNames, force) {
     classNames = classNames.split(' ');
     classNames.forEach(className => {
       this.node.classList.toggle(className, force);
     });
   }
 
-  parent () {
+  parent() {
     return new El(this.node.parentNode);
   }
 
-  append (el) {
+  append(el) {
     this.node.appendChild(el.node);
     return this;
   }
 
-  appendTo (el) {
+  appendTo(el) {
     el.append(this);
     return this;
   }
 
-  prepend (el) {
+  prepend(el) {
     const { node } = this;
     node.insertBefore(el.node, node.firstChild);
     return this;
   }
 
-  prependTo (el) {
+  prependTo(el) {
     const { node } = el;
     node.insertBefore(this.node, node.firstChild);
     return this;
   }
 
-  after (el) {
+  after(el) {
     const { nextSibling } = this.node;
     const { parentNode } = this.node;
     if (nextSibling) {
@@ -417,26 +419,22 @@ class El {
     return this;
   }
 
-  before (el) {
+  before(el) {
     const { node } = this;
     const { parentNode } = node;
     parentNode.insertBefore(el.node, node);
     return this;
   }
 
-  width (val) {
-    return (val === undefined)
-      ? this.node.offsetWidth
-      : this.css('width', val);
+  width(val) {
+    return val === undefined ? this.node.offsetWidth : this.css('width', val);
   }
 
-  height (val) {
-    return (val === undefined)
-      ? this.node.offsetHeight
-      : this.css('height', val);
+  height(val) {
+    return val === undefined ? this.node.offsetHeight : this.css('height', val);
   }
 
-  html (text) {
+  html(text) {
     const { node } = this;
     if (text !== undefined) {
       node.innerHTML = text;
@@ -446,11 +444,11 @@ class El {
     }
   }
 
-  outerHTML () {
+  outerHTML() {
     return this.node.outerHTML;
   }
 
-  text (text) {
+  text(text) {
     const { node } = this;
     if (text !== undefined) {
       node.innerText = text;
@@ -460,20 +458,20 @@ class El {
     }
   }
 
-  empty () {
+  empty() {
     this.node.innerHTML = '';
     return this;
   }
 
-  rect () {
+  rect() {
     return this.node.getBoundingClientRect();
   }
 
-  matches (selector) {
+  matches(selector) {
     return this.node.matches(selector);
   }
 
-  click () {
+  click() {
     this.node.click();
     return this;
   }

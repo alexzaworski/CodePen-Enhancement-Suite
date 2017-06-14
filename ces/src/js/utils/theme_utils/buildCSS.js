@@ -5,7 +5,7 @@ const getColorFromMaster = (master, elements) => {
   return masterEl.color;
 };
 
-export const buildElementCSS = (elements) => {
+export const buildElementCSS = elements => {
   let styles = '';
   elements.forEach(element => {
     const {
@@ -25,16 +25,20 @@ export const buildElementCSS = (elements) => {
   return styles;
 };
 
-export default (theme) => {
+export default theme => {
   const { light, elements } = theme;
   let styles = buildElementCSS(elements);
 
-  const basePromise = getCSS('content/modules/custom_themes/base')
-    .then(base => { styles = base + styles; });
+  const basePromise = getCSS(
+    'content/modules/custom_themes/base'
+  ).then(base => {
+    styles = base + styles;
+  });
 
   const lightPromise = light
-    ? getCSS('content/modules/custom_themes/light')
-        .then(light => { styles = light + styles; })
+    ? getCSS('content/modules/custom_themes/light').then(light => {
+      styles = light + styles;
+    })
     : Promise.resolve();
 
   return new Promise(resolve => {

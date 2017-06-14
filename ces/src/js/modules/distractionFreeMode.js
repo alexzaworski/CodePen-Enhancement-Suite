@@ -4,58 +4,64 @@ import inPageContext from '../utils/inPageContext';
 import storage from '../utils/storage';
 
 export default class DistractionFreeMode extends CESModule {
-  constructor () {
+  constructor() {
     super();
     this.conditions = {
       isPage: ['pen']
     };
   }
 
-  go () {
+  go() {
     storage
       .get('distraction-free')
       .then(isDistractionFree => this.init(isDistractionFree))
       .catch(() => this.init(false));
   }
 
-  init (isDistractionFree) {
+  init(isDistractionFree) {
     const toggleWrapper = this.buildToggleWrapper();
     const label = this.buildLabel();
     const input = this.buildInput(isDistractionFree);
     toggleWrapper.append(input).append(label);
-    input.on('change', () => { this.handleInputChange(input); });
+    input.on('change', () => {
+      this.handleInputChange(input);
+    });
     dom.get('.editor-layout-buttons').before(toggleWrapper);
     if (isDistractionFree) {
       this.setDistractionFreeMode(true);
     }
   }
 
-  buildToggleWrapper () {
+  buildToggleWrapper() {
     return dom.create('div', {
       class: 'ces__fancy-checkbox__wrapper ces__clearfix'
     });
   }
 
-  buildInput (isChecked) {
-    return dom.create('input', {
-      type: 'checkbox',
-      class: 'ces__fancy-checkbox ces__fancy-checkbox--light',
-      id: 'distraction-free-mode'
-    }).attr('checked', isChecked ? 'checked' : null);
+  buildInput(isChecked) {
+    return dom
+      .create('input', {
+        type: 'checkbox',
+        class: 'ces__fancy-checkbox ces__fancy-checkbox--light',
+        id: 'distraction-free-mode'
+      })
+      .attr('checked', isChecked ? 'checked' : null);
   }
 
-  buildLabel () {
-    return dom.create('label', {
-      for: 'distraction-free-mode'
-    }).text('Distraction Free Mode');
+  buildLabel() {
+    return dom
+      .create('label', {
+        for: 'distraction-free-mode'
+      })
+      .text('Distraction Free Mode');
   }
 
-  handleInputChange (input) {
+  handleInputChange(input) {
     const checked = input.prop('checked');
     this.setDistractionFreeMode(checked);
   }
 
-  setDistractionFreeMode (state) {
+  setDistractionFreeMode(state) {
     dom.body.toggleClass('distraction-free-mode', state);
     storage.set('distraction-free', state);
     if (state) {
@@ -63,7 +69,7 @@ export default class DistractionFreeMode extends CESModule {
     }
   }
 
-  forceEditorsToAdjust () {
+  forceEditorsToAdjust() {
     inPageContext(() => {
       CP.codeEditorResizeController.onWindowResize();
     });

@@ -5,7 +5,7 @@ let initData = dom.exists('#init-data');
 // Checks if a prop is parsed JSON, and if it's not parses it again
 //
 // (this is weird but it's literally how CodePen handles it as well sooo...)
-function needsParsing (prop) {
+function needsParsing(prop) {
   if (typeof prop === 'string') {
     var char = prop.substring(0, 1);
     if (char === '[' || char === '{') {

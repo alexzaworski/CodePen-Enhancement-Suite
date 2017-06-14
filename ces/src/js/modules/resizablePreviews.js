@@ -2,14 +2,14 @@ import CESModule from './core/CESModule';
 import dom from '../utils/dom';
 
 export default class ResizePreviews extends CESModule {
-  constructor () {
+  constructor() {
     super();
     this.conditions = {
       isPage: ['pen']
     };
   }
 
-  go () {
+  go() {
     this.setupEls();
     this.dragState = {
       dragging: false,
@@ -23,7 +23,7 @@ export default class ResizePreviews extends CESModule {
     });
   }
 
-  setupEls () {
+  setupEls() {
     this.resizeBar = this.buildResizeBar();
     this.resizeWrap = this.buildResizeWrap();
     this.resultDiv = dom.get('#result_div');
@@ -32,14 +32,14 @@ export default class ResizePreviews extends CESModule {
     this.resultIframe = dom.get('.result-iframe');
   }
 
-  buildResizeWrap () {
+  buildResizeWrap() {
     return dom.create('div', {
       class: 'result box',
       id: 'ces__resize'
     });
   }
 
-  buildResizeBar () {
+  buildResizeBar() {
     return dom.create('div', {
       class: 'ces__resize-bar'
     });
@@ -48,9 +48,9 @@ export default class ResizePreviews extends CESModule {
   // The Pen preview frame is actually totally replaced when the
   // source is determined, so we need to wait for that to happen
   // before we can make DOM changes.
-  waitForIframeLoad () {
+  waitForIframeLoad() {
     return new Promise(resolve => {
-      (function checkIfReady () {
+      (function checkIfReady() {
         const iframe = dom.get('.result-iframe');
         if (iframe.attr('src')) {
           resolve();
@@ -61,23 +61,20 @@ export default class ResizePreviews extends CESModule {
     });
   }
 
-  initResize () {
+  initResize() {
     const { resultDiv, resizeBar, resizeWrap } = this;
-    resultDiv
-      .rmClass('result')
-      .wrap(resizeWrap)
-      .after(resizeBar);
-    resizeBar.on('mousedown', (e) => {
+    resultDiv.rmClass('result').wrap(resizeWrap).after(resizeBar);
+    resizeBar.on('mousedown', e => {
       e.preventDefault();
       this.startDrag(e);
     });
   }
 
-  updateDragState (dragState) {
+  updateDragState(dragState) {
     this.dragState = Object.assign(this.dragState, dragState);
   }
 
-  startDrag (e) {
+  startDrag(e) {
     const { widthReadout, resultDiv, dragCover } = this;
 
     widthReadout.addClass('visible');
@@ -89,7 +86,7 @@ export default class ResizePreviews extends CESModule {
     });
 
     dragCover.css('display', 'block');
-    const dragListenerOff = dom.onOff('mousemove', (e) => {
+    const dragListenerOff = dom.onOff('mousemove', e => {
       this.drag(e);
     });
 
@@ -99,16 +96,18 @@ export default class ResizePreviews extends CESModule {
       this.stopDrag();
     });
 
-    window.requestAnimationFrame(() => { this.animate(); });
+    window.requestAnimationFrame(() => {
+      this.animate();
+    });
   }
 
-  drag (e) {
+  drag(e) {
     this.updateDragState({
       offsetX: this.dragState.startX - e.pageX
     });
   }
 
-  stopDrag () {
+  stopDrag() {
     const { widthReadout, dragCover, dragState } = this;
 
     window.setTimeout(() => {
@@ -125,7 +124,7 @@ export default class ResizePreviews extends CESModule {
     });
   }
 
-  animate () {
+  animate() {
     const { dragState, resultDiv, widthReadout } = this;
 
     if (dragState.dragging) {
@@ -138,7 +137,7 @@ export default class ResizePreviews extends CESModule {
     }
   }
 
-  clampResultDivWidth (width) {
+  clampResultDivWidth(width) {
     const { resizeBar } = this;
     const maxWidth = window.innerWidth - resizeBar.width();
 

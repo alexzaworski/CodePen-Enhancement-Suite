@@ -2,7 +2,8 @@ let elementGlobals = {};
 
 elementGlobals['Background'] = {
   globals: {
-    selector: '.box, .editor .top-boxes, .CodeMirror-gutter-wrapper, body.project .editor-pane, body.project .editor',
+    selector:
+      '.box, .editor .top-boxes, .CodeMirror-gutter-wrapper, body.project .editor-pane, body.project .editor',
     prop: 'background'
   },
   fallback: {
@@ -22,8 +23,9 @@ elementGlobals['Cursor'] = {
 
 elementGlobals['Default'] = {
   globals: {
-    selector: '.CodeMirror pre, .box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre',
-    description: "when nothin' else applies"
+    selector:
+      '.CodeMirror pre, .box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre',
+    description: 'when nothin\' else applies'
   },
   fallback: {
     color: '#FFFFFF'
@@ -43,7 +45,8 @@ elementGlobals['Keyword'] = {
 elementGlobals['Atom'] = {
   globals: {
     selector: '.cm-atom',
-    description: 'used for some CSS values and JS primitives (e.g. null, undefined)'
+    description:
+      'used for some CSS values and JS primitives (e.g. null, undefined)'
   },
   fallback: {
     master: 'Default'
@@ -269,7 +272,8 @@ elementGlobals['Comment'] = {
 
 elementGlobals['Selected'] = {
   globals: {
-    selector: '.cm-searching, .CodeMirror-focused .CodeMirror-selected, .CodeMirror-selected',
+    selector:
+      '.cm-searching, .CodeMirror-focused .CodeMirror-selected, .CodeMirror-selected',
     description: 'used for highlighted text',
     prop: 'background-color'
   },

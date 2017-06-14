@@ -1,20 +1,20 @@
 class Messenger {
-  constructor (local = false) {
+  constructor(local = false) {
     this.local = local;
     this.methods = {};
     this.initPoll();
   }
 
-  on (method, callback) {
+  on(method, callback) {
     const { methods } = this;
     const callbacks = methods[method] || [];
     const id = callbacks.length;
-    callbacks.push({fn: callback, id});
+    callbacks.push({ fn: callback, id });
     this.methods[method] = callbacks;
     return id;
   }
 
-  off (method, id) {
+  off(method, id) {
     const { methods } = this;
     const callbacks = methods[method];
     if (!callbacks) return;
@@ -26,26 +26,28 @@ class Messenger {
     this.methods[method] = callbacks;
   }
 
-  send (method, data) {
+  send(method, data) {
     const { local } = this;
     if (local) {
-      const event = new CustomEvent('ces-messenger', { detail: { method, data } });
+      const event = new CustomEvent('ces-messenger', {
+        detail: { method, data }
+      });
       window.dispatchEvent(event);
     } else {
-      chrome.runtime.sendMessage({method, data});
+      chrome.runtime.sendMessage({ method, data });
     }
   }
 
-  sendToTab (method, data) {
-    chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+  sendToTab(method, data) {
+    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
       if (tabs.length) {
         const tabID = tabs[0].id;
-        chrome.tabs.sendMessage(tabID, {method, data});
+        chrome.tabs.sendMessage(tabID, { method, data });
       }
     });
   }
 
-  sendGlobal (method, data) {
+  sendGlobal(method, data) {
     this.send(method, data);
     if (chrome.tabs) {
       this.sendToTab(method, data);
@@ -65,11 +67,11 @@ class Messenger {
   // rely on the retry functionality. It's hacky in general
   // and should probaly be pulled out, but careful not to
   // break them!
-  request (method, data, retry = 100) {
+  request(method, data, retry = 100) {
     const requestMethod = `request-${method}`;
     const responseMethod = `response-${method}`;
     let retryInterval;
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const id = this.on(responseMethod, response => {
         const { requester, data } = response;
         if (requester === id) {
@@ -79,7 +81,8 @@ class Messenger {
         }
       });
 
-      const sendFunc = () => this.sendGlobal(requestMethod, { data, requester: id });
+      const sendFunc = () =>
+        this.sendGlobal(requestMethod, { data, requester: id });
 
       if (retry > 0) {
         retryInterval = setInterval(sendFunc, retry);
@@ -95,7 +98,7 @@ class Messenger {
   // Synchronus functions will be made thenable via Promise.resolve().
   //
   // Only one onRequest handler should be set up for any given method.
-  onRequest (method, callback) {
+  onRequest(method, callback) {
     const { methods } = this;
     const requestMethod = `request-${method}`;
     const responseMethod = `response-${method}`;
@@ -113,7 +116,7 @@ class Messenger {
     });
   }
 
-  initPoll () {
+  initPoll() {
     const { local } = this;
     if (local) {
       window.addEventListener('ces-messenger', e => {
@@ -126,7 +129,7 @@ class Messenger {
     }
   }
 
-  fireCallback ({method, data}) {
+  fireCallback({ method, data }) {
     const { methods } = this;
     const callbacks = methods[method];
     if (callbacks !== undefined) {

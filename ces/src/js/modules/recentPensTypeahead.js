@@ -4,7 +4,7 @@ import inPageContext from '../utils/inPageContext';
 import initData from '../utils/initData';
 
 export default class RecentPensTypeahead extends CESModule {
-  constructor () {
+  constructor() {
     super();
     this.conditions = {
       isPage: ['pen'],
@@ -12,7 +12,7 @@ export default class RecentPensTypeahead extends CESModule {
     };
   }
 
-  go () {
+  go() {
     const feedURL = this.buildFeedURL();
     fetch(feedURL)
       .then(response => response.text())
@@ -20,25 +20,21 @@ export default class RecentPensTypeahead extends CESModule {
       .then(penObjects => this.setUpjQueryAjax(penObjects));
   }
 
-  buildFeedURL () {
+  buildFeedURL() {
     const protocol = location.protocol;
     const username = initData.__user.username;
     return `${protocol}//codepen.io/${username}/public/feed`;
   }
 
-  parsePenData (data) {
+  parsePenData(data) {
     const xml = new Doc(new DOMParser().parseFromString(data, 'text/xml'));
     const items = xml.getAll('item');
     const pens = items.map(item => this.penObjFromNode(item));
     return pens;
   }
 
-  penObjFromNode (item) {
-    const name = item
-      .get('title')
-      .html()
-      .toLowerCase()
-      .replace(/\s/g, '-');
+  penObjFromNode(item) {
+    const name = item.get('title').html().toLowerCase().replace(/\s/g, '-');
     const value = item.get('link').html();
     const tokens = ['::']; // adds a cute 'lil shortcut to filter out Pens
     return {
@@ -50,9 +46,9 @@ export default class RecentPensTypeahead extends CESModule {
 
   // Hooks into $.ajaxSend within the full context of the page,
   // allowing us to modify the response of requests for typeahead data
-  setUpjQueryAjax (pens) {
-    inPageContext((pens) => {
-      const dataFunc = (data) => {
+  setUpjQueryAjax(pens) {
+    inPageContext(pens => {
+      const dataFunc = data => {
         data = JSON.parse(data);
         return JSON.stringify([...data, ...pens]);
       };

@@ -6,7 +6,7 @@ import buildCSS from 'js/utils/theme_utils/buildCSS';
 import getActiveTheme from 'js/utils/theme_utils/getActiveTheme';
 
 export default class CustomTheme extends CESModule {
-  constructor () {
+  constructor() {
     super();
     this.originalThemeSelector = '[href*="assets/editor/themes"]';
     this.conditions = {
@@ -14,7 +14,7 @@ export default class CustomTheme extends CESModule {
     };
   }
 
-  go () {
+  go() {
     this.pageWrap = dom.exists('.page-wrap');
     this.ogWrapClass = this.pageWrap ? this.pageWrap.classes() : '';
     this.ogTheme = dom.get(this.originalThemeSelector);
@@ -22,17 +22,17 @@ export default class CustomTheme extends CESModule {
     storage
       .get('enable-custom-theme')
       .catch(() => false)
-      .then((enabled) => this.init(enabled));
+      .then(enabled => this.init(enabled));
   }
 
-  init (enabled) {
+  init(enabled) {
     this.enabled = enabled;
     this.setupThemeStyles(enabled);
     messenger.on('enable-custom-theme', enabled => this.handleChange(enabled));
     messenger.onRequest('custom-theme-state', () => this.enabled);
   }
 
-  setupThemeStyles (enabled) {
+  setupThemeStyles(enabled) {
     const { styleEl } = this;
     getActiveTheme().then(theme => {
       this.theme = theme;
@@ -43,7 +43,7 @@ export default class CustomTheme extends CESModule {
     });
   }
 
-  enableTheme () {
+  enableTheme() {
     const { ogTheme, styleEl } = this;
     ogTheme.remove();
     styleEl.appendTo(dom.get('head'));
@@ -52,7 +52,7 @@ export default class CustomTheme extends CESModule {
     this.addWrapClasses();
   }
 
-  disableTheme () {
+  disableTheme() {
     const { ogTheme, styleEl } = this;
     ogTheme.appendTo(dom.get('head'));
     styleEl.remove();
@@ -61,20 +61,20 @@ export default class CustomTheme extends CESModule {
     this.removeWrapClasses();
   }
 
-  addWrapClasses () {
+  addWrapClasses() {
     const { pageWrap, theme } = this;
     const { light } = theme;
     if (!pageWrap) return;
     pageWrap.classes(`page-wrap ces-theme ${light ? 'ces-light-theme' : ''}`);
   }
 
-  removeWrapClasses () {
+  removeWrapClasses() {
     const { pageWrap, ogWrapClass } = this;
     if (!pageWrap) return;
     pageWrap.classes(ogWrapClass);
   }
 
-  handleChange (enabled) {
+  handleChange(enabled) {
     if (enabled) {
       this.enableTheme();
     } else {

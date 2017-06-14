@@ -1,17 +1,11 @@
 import dom from 'js/utils/dom';
 
 export const appendCSS = css => {
-  dom
-    .create('style')
-    .html(css)
-    .appendTo(dom.get('head'));
+  dom.create('style').html(css).appendTo(dom.get('head'));
 };
 
 export const prependCSS = css => {
-  dom
-    .create('style')
-    .html(css)
-    .prependTo(dom.get('head'));
+  dom.create('style').html(css).prependTo(dom.get('head'));
 };
 
 export const getCSS = name => {
@@ -19,8 +13,9 @@ export const getCSS = name => {
   return fetch(url).then(response => response.text());
 };
 
-export default (name, opts = {}) => new Promise(resolve => {
-  const { prepend = false } = opts;
-  const attachFunc = prepend ? prependCSS : appendCSS;
-  getCSS(name).then(attachFunc);
-});
+export default (name, opts = {}) =>
+  new Promise(resolve => {
+    const { prepend = false } = opts;
+    const attachFunc = prepend ? prependCSS : appendCSS;
+    getCSS(name).then(attachFunc).then(resolve);
+  });

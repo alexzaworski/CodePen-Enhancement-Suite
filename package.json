@@ -1,32 +1,30 @@
 {
   "scripts": {
-    "lint": "echo \"Linting....\" && semistandard --fix --env browser",
-    "lint-no-fix": "echo \"Linting....\" && semistandard --env browser",
+    "lint": "echo \"Linting...\" && prettier-eslint --write \"**/*.js\" \".eslintrc.js\"",
     "sass": "node-sass --output ces/dist/css --output-style compressed ces/src/css/",
     "zip": "rm -f ces.zip && zip -r ces.zip ces -x *.map *src* *DS_Store*",
-    "dev": "npm run sass && concurrently \"webpack -w\" \"npm run sass -- --watch --recursive\"",
-    "build": "npm run lint-no-fix && npm run sass && webpack -p && npm run zip"
+    "start": "yarn run sass && concurrently \"webpack -w\" \"yarn run sass -- --watch --recursive\"",
+    "build": "yarn run lint && yarn run sass && webpack -p && yarn run zip",
+    "pre-commit": "lint-staged"
   },
-  "semistandard": {
-    "globals": [
-      "chrome",
-      "$",
-      "CES",
-      "CP",
-      "Hub"
+  "pre-commit": "pre-commit",
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write",
+      "git add"
     ]
-  },
-  "pre-commit": {
-    "run": "lint-no-fix"
   },
   "devDependencies": {
     "concurrently": "^3.4.0",
+    "eslint": "^4.0.0",
+    "lint-staged": "^3.6.1",
     "node-sass": "^4.5.2",
-    "pre-commit": "^1.2.2",
-    "semistandard": "^10.0.0",
+    "prettier": "^1.4.4",
+    "prettier-eslint-cli": "^4.1.1",
     "webpack": "fulls1z3/webpack#v2.1.0-beta.27-harmony"
   },
   "dependencies": {
-    "escape-html": "^1.0.3"
+    "escape-html": "^1.0.3",
+    "pre-commit": "^1.2.2"
   }
 }

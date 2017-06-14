@@ -5,21 +5,22 @@ import storage from '../utils/storage';
 import initData from '../utils/initData';
 
 export default class HideProfileCSS extends CESModule {
-  constructor () {
+  constructor() {
     super();
     this.conditions = {
       isPage: ['profile']
     };
   }
 
-  go () {
-    storage.get('disabled-profiles')
+  go() {
+    storage
+      .get('disabled-profiles')
       .then(profiles => new Set(profiles))
       .catch(() => new Set())
-      .then((profiles) => this.initWithProfiles(profiles));
+      .then(profiles => this.initWithProfiles(profiles));
   }
 
-  initWithProfiles (profiles) {
+  initWithProfiles(profiles) {
     this.disabledProfiles = profiles;
     this.profile = initData.__profiled.username;
     this.style = dom.get('style');
@@ -30,8 +31,8 @@ export default class HideProfileCSS extends CESModule {
     this.addRuntimeListeners();
   }
 
-  addRuntimeListeners () {
-    messenger.on('disable-profile-css', (isDisabled) => {
+  addRuntimeListeners() {
+    messenger.on('disable-profile-css', isDisabled => {
       if (isDisabled) {
         this.removeStyle();
         this.addToDisabledProfiles();
@@ -46,29 +47,29 @@ export default class HideProfileCSS extends CESModule {
     });
   }
 
-  removeFromDisabledProfiles () {
+  removeFromDisabledProfiles() {
     this.disabledProfiles.delete(this.profile);
     this.saveProfilesToStorage();
   }
 
-  addToDisabledProfiles () {
+  addToDisabledProfiles() {
     this.disabledProfiles.add(this.profile);
     this.saveProfilesToStorage();
   }
 
-  isDisabled () {
+  isDisabled() {
     return this.disabledProfiles.has(this.profile);
   }
 
-  saveProfilesToStorage () {
+  saveProfilesToStorage() {
     storage.set('disabled-profiles', [...this.disabledProfiles]);
   }
 
-  removeStyle () {
+  removeStyle() {
     this.style.remove();
   }
 
-  appendStyle () {
+  appendStyle() {
     this.head.append(this.style);
   }
 }

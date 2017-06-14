@@ -27,7 +27,9 @@ export default ({
   onToggleMessage,
   disable = false
 }) => {
-  if (disable) { el.attr('disabled', true); }
+  if (disable) {
+    el.attr('disabled', true);
+  }
   messenger.request(initialStateMessage).then(isChecked => {
     addListeners(el, onToggleMessage);
     setInitialState(el, isChecked);

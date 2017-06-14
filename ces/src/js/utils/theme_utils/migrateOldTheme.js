@@ -2,13 +2,7 @@ import storage from '../storage';
 
 export default (elements, lastSaved, isLightTheme) => {
   elements = elements.map(element => {
-    const {
-      color,
-      italic,
-      master,
-      prettyName,
-      underline
-    } = element;
+    const { color, italic, master, prettyName, underline } = element;
 
     const newEl = {
       prettyName,
@@ -35,9 +29,7 @@ export default (elements, lastSaved, isLightTheme) => {
   };
 
   return new Promise(resolve => {
-    storage
-      .set('custom-editor-theme', theme)
-      .then(() => resolve(theme));
+    storage.set('custom-editor-theme', theme).then(() => resolve(theme));
   });
 };
 

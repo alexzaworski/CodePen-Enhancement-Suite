@@ -6,9 +6,5 @@ import dom from './dom';
 
 export default (fn, ...args) => {
   args = args.map(arg => JSON.stringify(arg));
-  dom
-    .create('script')
-    .html(`(${fn})(${args})`)
-    .appendTo(dom.body)
-    .remove();
+  dom.create('script').html(`(${fn})(${args})`).appendTo(dom.body).remove();
 };

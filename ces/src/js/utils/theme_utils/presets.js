@@ -124,7 +124,9 @@ presets['Solarized Dark'] = {
     { prettyName: 'String Color', color: '#7f9009' },
     { prettyName: 'Secondary String', color: '#1f8261' },
     { prettyName: 'HTML Tag', color: '#1b89d4' },
-    { prettyName: 'CSS Tag', color: '#cb4b16'
+    {
+      prettyName: 'CSS Tag',
+      color: '#cb4b16'
     },
     { prettyName: 'Tag Bracket', master: 'HTML Tag' },
     { prettyName: 'Line Number', color: '#999999' },
@@ -499,7 +501,7 @@ presets['Plain'] = {
 
 const mergedPresets = {};
 for (const preset in presets) {
-  mergedPresets[preset] = (mergeThemeWithGlobals(presets[preset]));
+  mergedPresets[preset] = mergeThemeWithGlobals(presets[preset]);
 }
 
 export default mergedPresets;

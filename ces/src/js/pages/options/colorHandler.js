@@ -4,7 +4,7 @@ import { localMessenger as messenger } from 'js/utils/messenger';
 import { buildElementCSS } from 'js/utils/theme_utils/buildCSS';
 
 export default class ColorHandler {
-  constructor (elements, wrapper) {
+  constructor(elements, wrapper) {
     this.wrapper = wrapper;
     getPartial('templates/theme-element').then(template => {
       this.themeEls = this.createthemeEls(elements, template);
@@ -14,7 +14,7 @@ export default class ColorHandler {
     });
   }
 
-  createthemeEls (elements, template) {
+  createthemeEls(elements, template) {
     let controls = [];
     elements.forEach(element => {
       controls.push(new ThemeEl(element, template));
@@ -22,7 +22,7 @@ export default class ColorHandler {
     return controls;
   }
 
-  bindMasters () {
+  bindMasters() {
     const { themeEls } = this;
     themeEls.forEach(control => {
       const { master } = control;
@@ -32,36 +32,30 @@ export default class ColorHandler {
     });
   }
 
-  initControls () {
+  initControls() {
     const { themeEls, wrapper } = this;
     this.themeEls.forEach(control => {
       control.init(wrapper, themeEls);
     });
   }
 
-  setupListeners () {
+  setupListeners() {
     messenger.onRequest('element-color', name => {
       const el = this.getByName(name);
       return el ? el.color : false;
     });
   }
 
-  getByName (name) {
+  getByName(name) {
     const { themeEls } = this;
     return themeEls.find(el => el.prettyName === name);
   }
 
-  getElementBasics () {
+  getElementBasics() {
     // Things like prop/selector/etc all come from the global element
     // settings which means we don't need to save them to storage.
     return this.themeEls.map(element => {
-      const {
-        prettyName,
-        color,
-        master,
-        underline,
-        italic
-      } = element;
+      const { prettyName, color, master, underline, italic } = element;
 
       const basics = {
         prettyName,
@@ -79,11 +73,11 @@ export default class ColorHandler {
     });
   }
 
-  getElementCSS () {
+  getElementCSS() {
     return buildElementCSS(this.themeEls);
   }
 
-  setTo (elements) {
+  setTo(elements) {
     elements.forEach(element => {
       const { prettyName } = element;
       this.getByName(prettyName).reset(element);

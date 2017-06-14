@@ -1,13 +1,13 @@
 class CES {
-  constructor () {
+  constructor() {
     this.modules = [];
   }
 
-  registerModule (Module) {
+  registerModule(Module) {
     this.modules.push(new Module());
   }
 
-  initModules () {
+  initModules() {
     this.modules.forEach(module => {
       module.shouldInit() && module.go();
     });
