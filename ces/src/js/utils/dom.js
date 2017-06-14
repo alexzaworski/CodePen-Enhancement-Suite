@@ -180,8 +180,8 @@ class EventBase {
     };
   }
 
-  on(event, fn) {
-    this.target.addEventListener(event, fn);
+  on(event, fn, opts = {}) {
+    this.target.addEventListener(event, fn, opts);
     this.offFunctions.push(() => {
       this.off(event, fn);
     });
@@ -206,10 +206,7 @@ class EventBase {
   }
 
   one(event, fn) {
-    const off = this.onOff(event, () => {
-      fn();
-      off();
-    });
+    this.on(event, fn, { once: true });
     return this;
   }
 }
@@ -274,8 +271,7 @@ class El {
   }
 
   remove() {
-    const { node } = this;
-    node.parentNode.removeChild(node);
+    this.node.remove();
     return this;
   }
 
@@ -387,7 +383,7 @@ class El {
   }
 
   append(el) {
-    this.node.appendChild(el.node);
+    this.node.append(el.node);
     return this;
   }
 
@@ -397,32 +393,22 @@ class El {
   }
 
   prepend(el) {
-    const { node } = this;
-    node.insertBefore(el.node, node.firstChild);
+    this.node.prepend(el.node);
     return this;
   }
 
   prependTo(el) {
-    const { node } = el;
-    node.insertBefore(this.node, node.firstChild);
+    el.prepend(this);
     return this;
   }
 
   after(el) {
-    const { nextSibling } = this.node;
-    const { parentNode } = this.node;
-    if (nextSibling) {
-      parentNode.insertBefore(el.node, nextSibling);
-    } else {
-      parentNode.appendChild(el.node);
-    }
+    this.node.after(el.node);
     return this;
   }
 
   before(el) {
-    const { node } = this;
-    const { parentNode } = node;
-    parentNode.insertBefore(el.node, node);
+    this.node.before(el.node);
     return this;
   }
 
