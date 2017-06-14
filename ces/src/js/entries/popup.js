@@ -17,6 +17,7 @@ toggle({
   onToggleMessage: 'enable-custom-theme'
 });
 
-dom.get('#options-link').on('click', () => {
+dom.get('#options-link').on('click', e => {
+  e.preventDefault();
   chrome.runtime.openOptionsPage();
 });
