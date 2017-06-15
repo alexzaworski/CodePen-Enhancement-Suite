@@ -164,6 +164,9 @@ API:
   .empty ()
     - sets node.innerHTML to an empty string
 
+  .replace ([El] el) 
+    - replaces self.node with el.node
+
   .click ()
     - fires node.click()
 */
@@ -455,6 +458,11 @@ class El {
 
   matches(selector) {
     return this.node.matches(selector);
+  }
+
+  replace(el) {
+    this.node.replaceWith(el.node);
+    return this;
   }
 
   click() {

@@ -7,12 +7,15 @@ import { localMessenger as messenger } from 'js/utils/messenger';
 class ThemeGUI {
   init(theme) {
     const { light, elements, lastSaved = false } = theme;
-    this.lastSaved = lastSaved;
     this.presets = presets;
+    this.lastSaved = lastSaved;
+    this.light = light;
+
     this.setupUIEls();
     this.setupListeners();
-    this.light = light;
     this.handleLightStatus(light);
+    this.displaySaveTime();
+
     this.ColorHandler = new ColorHandler(elements, this.colorControlsWrap);
   }
 
@@ -30,6 +33,9 @@ class ThemeGUI {
     this.colorControlsWrap = dom.get('#color-controls');
     this.styleEl = dom.get('#theme-styles');
     this.saveButton = dom.get('#save');
+    this.lastSavedEl = dom.get('#last-saved');
+    this.saveInfo = dom.get('#save-info');
+    this.revertButton = dom.get('#revert');
     this.setupPresetSelect();
   }
 
@@ -37,8 +43,26 @@ class ThemeGUI {
     this.pageWrap.toggleClass('light', isLight);
   }
 
+  displaySaveTime() {
+    const { lastSaved, lastSavedEl, saveInfo } = this;
+    if (!lastSaved) {
+      return;
+    }
+    saveInfo.rmClass('save-info--hidden');
+    const newSaved = lastSavedEl.clone();
+    newSaved.html(`Saved @ ${lastSaved}`);
+    lastSavedEl.replace(newSaved);
+    this.lastSavedEl = newSaved;
+  }
+
   setupListeners() {
-    const { lightThemeToggle, fauxToggleLabels, presetLoad, saveButton } = this;
+    const {
+      lightThemeToggle,
+      fauxToggleLabels,
+      presetLoad,
+      saveButton,
+      revertButton
+    } = this;
 
     lightThemeToggle.on('click', () => {
       this.light = !this.light;
@@ -64,8 +88,16 @@ class ThemeGUI {
     saveButton.on('click', () => {
       const { ColorHandler, light } = this;
       const elements = ColorHandler.getElementBasics();
-      storage.set('custom-editor-theme', { elements, light });
+      this.lastSaved = String(new Date()).substr(4, 20);
+      this.displaySaveTime();
+      storage.set('custom-editor-theme', {
+        elements,
+        light,
+        lastSaved: this.lastSaved
+      });
     });
+
+    revertButton.on('click', () => location.reload());
 
     messenger.on('style-update', () => {
       // This can get fired a whole bunch of times at once, especially
