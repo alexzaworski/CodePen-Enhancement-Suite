@@ -36,6 +36,9 @@ class ThemeGUI {
     this.lastSavedEl = dom.get('#last-saved');
     this.saveInfo = dom.get('#save-info');
     this.revertButton = dom.get('#revert');
+    this.exportButton = dom.get('#export-json');
+    this.importButton = dom.get('#import-json');
+    this.importInput = dom.get('#import-input');
     this.setupPresetSelect();
   }
 
@@ -61,7 +64,10 @@ class ThemeGUI {
       fauxToggleLabels,
       presetLoad,
       saveButton,
-      revertButton
+      revertButton,
+      exportButton,
+      importButton,
+      importInput
     } = this;
 
     lightThemeToggle.on('click', () => {
@@ -75,29 +81,12 @@ class ThemeGUI {
       });
     });
 
-    presetLoad.on('click', () => {
-      const { presetSelect, ColorHandler, presets } = this;
-      const value = presetSelect.prop('value');
-      const { elements, light } = presets[value];
-      this.light = light;
-      this.handleLightStatus(light);
-      ColorHandler.setTo(elements);
-      this.updateStyles();
-    });
-
-    saveButton.on('click', () => {
-      const { ColorHandler, light } = this;
-      const elements = ColorHandler.getElementBasics();
-      this.lastSaved = String(new Date()).substr(4, 20);
-      this.displaySaveTime();
-      storage.set('custom-editor-theme', {
-        elements,
-        light,
-        lastSaved: this.lastSaved
-      });
-    });
-
+    presetLoad.on('click', () => this.loadFromPreset());
+    saveButton.on('click', () => this.saveTheme());
     revertButton.on('click', () => location.reload());
+    exportButton.on('click', () => this.exportJSON());
+    importButton.on('click', () => importInput.click());
+    importInput.on('change', () => this.importJSON());
 
     messenger.on('style-update', () => {
       // This can get fired a whole bunch of times at once, especially
@@ -111,6 +100,66 @@ class ThemeGUI {
       this.pendingUpdate = setTimeout(() => {
         this.updateStyles();
       }, 10);
+    });
+  }
+
+  exportJSON() {
+    const { ColorHandler, light } = this;
+
+    const exportData = JSON.stringify({
+      elements: ColorHandler.getElementBasics(),
+      light
+    });
+
+    dom
+      .create('a', {
+        download: 'ces_theme.json',
+        href: `data:text/json;charset=utf-8,${encodeURIComponent(exportData)}`
+      })
+      .appendTo(dom.body)
+      .click()
+      .remove();
+  }
+
+  importJSON() {
+    const setupFR = () => {
+      const fr = new FileReader();
+      fr.onload = () => {
+        this.setTheme(JSON.parse(fr.result));
+      };
+      this.fr = fr;
+      return fr;
+    };
+
+    const { importInput } = this;
+    const fr = this.fr || setupFR();
+    const file = importInput.prop('files')[0];
+    fr.readAsText(file);
+  }
+
+  loadFromPreset() {
+    const { presetSelect, presets } = this;
+    const value = presetSelect.prop('value');
+    this.setTheme(presets[value]);
+  }
+
+  setTheme({ elements, light }) {
+    const { ColorHandler } = this;
+    this.light = light;
+    this.handleLightStatus(light);
+    ColorHandler.setTo(elements);
+    this.updateStyles();
+  }
+
+  saveTheme() {
+    const { ColorHandler, light } = this;
+    const elements = ColorHandler.getElementBasics();
+    this.lastSaved = String(new Date()).substr(4, 20);
+    this.displaySaveTime();
+    storage.set('custom-editor-theme', {
+      elements,
+      light,
+      lastSaved: this.lastSaved
     });
   }
 
