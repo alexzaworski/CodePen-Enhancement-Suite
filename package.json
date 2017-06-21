@@ -27,6 +27,7 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "codemirror": "^5.26.0",
     "escape-html": "^1.0.3"
   }
 }

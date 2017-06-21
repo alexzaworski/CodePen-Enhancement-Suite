@@ -282,10 +282,8 @@ body {
   min-width: 200px;
   flex-basis: 33%;
   margin-left: 20px;
-  overflow: auto;
-  overflow-x: hidden;
+  overflow: hidden;
   border-radius: 4px;
-  padding: 5px;
 }
 
 .box:first-of-type {
