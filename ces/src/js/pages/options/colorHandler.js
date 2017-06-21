@@ -57,11 +57,15 @@ export default class ColorHandler {
     return this.themeEls.map(element => {
       const { prettyName, color, master, underline, italic } = element;
 
-      const basics = {
-        prettyName,
-        italic,
-        underline
-      };
+      const basics = { prettyName };
+
+      if (italic) {
+        basics.italic = italic;
+      }
+
+      if (underline) {
+        basics.underline = underline;
+      }
 
       if (master) {
         basics.master = master;

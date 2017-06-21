@@ -7,6 +7,7 @@ import { localMessenger as messenger } from 'js/utils/messenger';
 class ThemeGUI {
   init(theme) {
     const { light, elements, lastSaved = false } = theme;
+    this.savedTheme = theme;
     this.presets = presets;
     this.lastSaved = lastSaved;
     this.light = light;
@@ -16,7 +17,7 @@ class ThemeGUI {
     this.handleLightStatus(light);
     this.displaySaveTime();
 
-    this.ColorHandler = new ColorHandler(elements, this.colorControlsWrap);
+    this.colorHandler = new ColorHandler(elements, this.colorControlsWrap);
   }
 
   handleLightStatus(isLight) {
@@ -70,6 +71,10 @@ class ThemeGUI {
       importInput
     } = this;
 
+    // this doesn't work if I add it as an event listener,
+    // dunno why.
+    window.onbeforeunload = () => this.hasUnsavedChanges();
+
     lightThemeToggle.on('click', () => {
       this.light = !this.light;
       this.setPageBackground(this.light);
@@ -104,10 +109,10 @@ class ThemeGUI {
   }
 
   exportJSON() {
-    const { ColorHandler, light } = this;
+    const { colorHandler, light } = this;
 
     const exportData = JSON.stringify({
-      elements: ColorHandler.getElementBasics(),
+      elements: colorHandler.getElementBasics(),
       light
     });
 
@@ -132,7 +137,11 @@ class ThemeGUI {
     };
 
     const { importInput } = this;
+
+    // can't assign via default assignment/destructuring due to bug in
+    // current version of uglify used in uglify-webpack-plugin
     const fr = this.fr || setupFR();
+
     const file = importInput.prop('files')[0];
     fr.readAsText(file);
   }
@@ -144,28 +153,50 @@ class ThemeGUI {
   }
 
   setTheme({ elements, light }) {
-    const { ColorHandler } = this;
+    const { colorHandler } = this;
     this.light = light;
     this.handleLightStatus(light);
-    ColorHandler.setTo(elements);
+    colorHandler.setTo(elements);
     this.updateStyles();
   }
 
   saveTheme() {
-    const { ColorHandler, light } = this;
-    const elements = ColorHandler.getElementBasics();
+    const { colorHandler, light } = this;
+    const elements = colorHandler.getElementBasics();
     this.lastSaved = String(new Date()).substr(4, 20);
     this.displaySaveTime();
-    storage.set('custom-editor-theme', {
+
+    const toSave = {
       elements,
       light,
       lastSaved: this.lastSaved
+    };
+
+    storage.set('custom-editor-theme', toSave);
+    this.savedTheme = toSave;
+  }
+
+  hasUnsavedChanges() {
+    const { colorHandler, light, savedTheme } = this;
+    const elements = colorHandler.getElementBasics();
+    const { elements: savedEls, light: savedLight } = savedTheme;
+
+    const keysToCheck = ['color', 'master', 'italic', 'underline'];
+
+    const elementsMatch = elements.every(element => {
+      const { prettyName } = element;
+      const ogElement = savedEls.find(el => el.prettyName === prettyName);
+      return keysToCheck.every(key => {
+        return ogElement[key] === element[key];
+      });
     });
+
+    return light === savedLight && elementsMatch ? null : true;
   }
 
   updateStyles() {
-    const { ColorHandler, styleEl } = this;
-    styleEl.text(ColorHandler.getElementCSS());
+    const { colorHandler, styleEl } = this;
+    styleEl.text(colorHandler.getElementCSS());
   }
 
   setupPresetSelect() {
