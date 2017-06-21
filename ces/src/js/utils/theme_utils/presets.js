@@ -290,7 +290,7 @@ presets['Classic'] = {
     { prettyName: 'Operator', color: '#000000' },
     { prettyName: 'Meta', color: '#221199' },
     { prettyName: 'String Color', color: '#aa1111' },
-    { prettyName: 'Secondary String', master: 'String' },
+    { prettyName: 'Secondary String', master: 'String Color' },
     { prettyName: 'HTML Tag', color: '#221199' },
     { prettyName: 'CSS Tag', master: 'HTML Tag' },
     { prettyName: 'Tag Bracket', master: 'HTML Tag' },
@@ -356,7 +356,7 @@ presets['XQ Light'] = {
     { prettyName: 'Operator', color: '#5A5CAD' },
     { prettyName: 'Meta', color: '#0080FF' },
     { prettyName: 'String Color', color: '#ff0000' },
-    { prettyName: 'Secondary String', master: 'String' },
+    { prettyName: 'Secondary String', master: 'String Color' },
     { prettyName: 'HTML Tag', color: '#3F7F7F' },
     { prettyName: 'CSS Tag', master: 'HTML Tag' },
     { prettyName: 'Tag Bracket', master: 'HTML Tag' },
@@ -389,14 +389,14 @@ presets['Oceanic Light'] = {
     { prettyName: 'Operator', master: 'Default' },
     { prettyName: 'Meta', master: 'Default' },
     { prettyName: 'String Color', color: '#E1AF1D' },
-    { prettyName: 'Secondary String', master: 'String' },
+    { prettyName: 'Secondary String', master: 'String Color' },
     { prettyName: 'HTML Tag', color: '#bf616a' },
     { prettyName: 'CSS Tag', master: 'HTML Tag' },
     { prettyName: 'Tag Bracket', master: 'HTML Tag' },
     { prettyName: 'Line Number', color: '#bbbbbb' },
     { prettyName: 'Gutter Marker', master: 'Line Number' },
     { prettyName: 'Comment', color: '#ab7967' },
-    { prettyName: 'Selected', color: '#EDF0F0' }
+    { prettyName: 'Selected', color: '#D4D8D8' }
   ]
 };
 
@@ -429,7 +429,7 @@ presets['MDN Like'] = {
     { prettyName: 'Line Number', color: '#aaaaaa' },
     { prettyName: 'Gutter Marker', master: 'Line Number' },
     { prettyName: 'Comment', color: '#777777' },
-    { prettyName: 'Selected', color: '#EDF0F0' }
+    { prettyName: 'Selected', color: '#D4D8D8' }
   ]
 };
 
