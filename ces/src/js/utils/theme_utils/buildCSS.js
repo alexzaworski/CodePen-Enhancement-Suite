@@ -2,7 +2,7 @@ import { getCSS } from 'js/utils/loadCSS';
 
 const getColorFromMaster = (master, elements) => {
   const masterEl = elements.find(el => el.prettyName === master);
-  return masterEl.color;
+  return masterEl.color || getColorFromMaster(masterEl.master, elements);
 };
 
 export const buildElementCSS = elements => {
