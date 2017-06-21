@@ -119,12 +119,12 @@ export default class ThemeEl {
     selectEl.html(html);
   }
 
-  syncTo(master) {
+  syncTo(masterEl) {
     const { selectEl } = this;
-    const { prettyName, color } = master;
+    const { prettyName, color } = masterEl;
     this.unSync();
     selectEl.prop('value', prettyName);
-    this.currentMaster = prettyName;
+    this.master = prettyName;
     this.updateColor(color);
     this.masterListener = messenger.on(prettyName, color => {
       this.updateColor(color);
@@ -132,9 +132,9 @@ export default class ThemeEl {
   }
 
   unSync() {
-    const { masterListener, currentMaster } = this;
-    messenger.off(currentMaster, masterListener);
-    this.currentMaster = null;
+    const { masterListener, master } = this;
+    messenger.off(master, masterListener);
+    this.master = null;
     this.masterListener = null;
   }
 
