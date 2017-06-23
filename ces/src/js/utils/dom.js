@@ -440,10 +440,10 @@ class El {
   text(text) {
     const { node } = this;
     if (text !== undefined) {
-      node.innerText = text;
+      node.textContent = text;
       return this;
     } else {
-      return node.innerText;
+      return node.textContent;
     }
   }
 
