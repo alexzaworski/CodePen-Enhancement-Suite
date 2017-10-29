@@ -4,33 +4,24 @@
   "description": "A collection of enhancements for CodePen.",
   "version": "1.0.0",
   "icons": {
-    "16":  "core/icons/icon-16.png",
-    "48":  "core/icons/icon-48.png",
-    "128": "core/icons/icon-128.png"
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   },
   "options_page": "pages/options.html",
-  "permissions": [
-    "tabs",
-    "storage"
-  ],
+  "permissions": ["tabs", "storage"],
   "background": {
     "scripts": ["dist/js/background.js"],
     "persistent": false
   },
   "content_scripts": [
     {
-      "matches":["http://codepen.io/*", "https://codepen.io/*"],
-      "js": [
-        "dist/js/content.js"
-      ]
+      "matches": ["http://codepen.io/*", "https://codepen.io/*"],
+      "js": ["dist/js/content.js"]
     }
   ],
   "page_action": {
-    "default_popup" : "pages/popup.html"
+    "default_popup": "pages/popup.html"
   },
-  "web_accessible_resources": [
-    "modules/**/*",
-    "dist/*",
-    "html_partials/*"
-  ]
+  "web_accessible_resources": ["modules/**/*", "dist/*", "html_partials/*"]
 }
