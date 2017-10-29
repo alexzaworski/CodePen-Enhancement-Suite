@@ -3,7 +3,7 @@ export class Storage {
     this.store = chrome.storage[area];
   }
 
-  get(key = null) {
+  get(key = null, strict = true) {
     return new Promise((resolve, reject) => {
       this.store.get(key, response => {
         if (key === null) {
@@ -11,7 +11,11 @@ export class Storage {
         } else if (response.hasOwnProperty(key)) {
           resolve(response[key]);
         } else {
-          reject(new Error());
+          if (strict) {
+            reject(new Error());
+          } else {
+            resolve(undefined);
+          }
         }
       });
     });

@@ -10,6 +10,7 @@ import DistractionFreeMode from 'js/modules/distractionFreeMode';
 import ProfilePreviews from 'js/modules/profilePreviews';
 import ActivityFeed from 'js/modules/activityFeed';
 import CustomTheme from 'js/modules/customTheme';
+import PatchNotes from 'js/modules/patchNotes';
 
 loadCSS('content');
 
@@ -20,5 +21,6 @@ CES.registerModule(DistractionFreeMode);
 CES.registerModule(ProfilePreviews);
 CES.registerModule(ActivityFeed);
 CES.registerModule(CustomTheme);
+CES.registerModule(PatchNotes);
 
 ensureSyncStorage().then(() => CES.initModules());
