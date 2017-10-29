@@ -1,0 +1,140 @@
+.editor-title-button svg {
+  fill: silver
+}
+
+.editor-title-button:focus svg,
+.editor-title-button:hover svg {
+  fill: #919191
+}
+
+.console-command-line {
+  color: #555;
+  background: #F6F6F6;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc
+}
+
+.console-command-line-input {
+  color: #222
+}
+
+body.room-editor .main-header,
+body.room-pres .main-header {
+  border-bottom-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .1)
+}
+
+body.room-editor .editor-footer,
+body.room-editor .main-header,
+body.room-pres .editor-footer,
+body.room-pres .main-header {
+  background: #fff;
+  color: #000
+}
+
+body.room-editor .pen-title-area .icon-codepen-box,
+body.room-pres .pen-title-area .icon-codepen-box {
+  fill: #000
+}
+
+body.room-editor .pen-title-area .by .pen-owner-link,
+body.room-pres .pen-title-area .by .pen-owner-link {
+  color: #000
+}
+
+body.room-editor .editor-footer .button,
+body.room-editor .primary-actions .button,
+body.room-pres .editor-footer .button,
+body.room-pres .primary-actions .button {
+  background: #fff;
+  border-color: #ccc;
+  color: #555
+}
+
+body.room-editor .editor-footer .button>svg,
+body.room-editor .primary-actions .button>svg,
+body.room-pres .editor-footer .button>svg,
+body.room-pres .primary-actions .button>svg {
+  fill: #444
+}
+
+body.room-editor .editor-footer .button:focus,
+body.room-editor .editor-footer .button:hover,
+body.room-editor .primary-actions .button:focus,
+body.room-editor .primary-actions .button:hover,
+body.room-pres .editor-footer .button:focus,
+body.room-pres .editor-footer .button:hover,
+body.room-pres .primary-actions .button:focus,
+body.room-pres .primary-actions .button:hover {
+  background: #eee
+}
+
+body.room-editor .editor-footer,
+body.room-pres .editor-footer {
+  border-top-color: #ccc
+}
+
+body.room-editor .collections-select,
+body.room-pres .collections-select {
+  background: url(https://assets.codepen.io/assets/buttons/arrow-tiny-down-white-35adf71dfb348f6977df19b0243e1dbe.png) 93% 7px no-repeat, #fff!important
+}
+
+body.room-editor .editor-resizer,
+body.room-editor .editor-resizer-console,
+body.room-pres .editor-resizer,
+body.room-pres .editor-resizer-console {
+  background: #CACACA
+}
+
+body.room-editor .result,
+body.room-pres .result {
+  background: #fff
+}
+
+body.room-editor .loading-text,
+body.room-pres .loading-text {
+  color: #222
+}
+
+body.room-editor.layout-side .resizer,
+body.room-pres.layout-side .resizer {
+  background: #fff;
+  box-shadow: -1px 0 1px rgba(0, 0, 0, .1), 1px 0 1px rgba(0, 0, 0, .1)
+}
+
+body.room-editor.layout-top .resizer,
+body.room-editor.layout-top .top-boxes .editor-resizer,
+body.room-pres.layout-top .resizer,
+body.room-pres.layout-top .top-boxes .editor-resizer {
+  background: #fff;
+  border: 0;
+  box-shadow: 0 -1px 1px rgba(0, 0, 0, .1), 0 1px 1px rgba(0, 0, 0, .1)
+}
+
+.CodeMirror-simplescroll-horizontal div,
+.CodeMirror-simplescroll-vertical div {
+  background: #ccc
+}
+
+.CodeMirror-simplescroll-horizontal,
+.CodeMirror-simplescroll-vertical {
+  background: #eee
+}
+
+.box-title {
+  color: #555
+}
+
+.powers button {
+  background: #999
+}
+
+.powers {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.0745098);
+  background: #E6E6E6
+}
+
+.powers button:focus,
+.powers button:hover {
+  background: #635C48
+}

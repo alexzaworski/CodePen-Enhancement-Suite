@@ -1,10 +1,16 @@
 # Change Log
 
-## v0.7.5
+## v1.0.0
 
-### Fixed
+### Changed
 
-* Fixed a possible self-xss problem with the Pens typeahead module
+* Full rewrite in e2015
+* Now using Chrome's sync storage to acommodate multiple installs
+
+### Deprecated
+
+* Editor settings module has been removed
+* Comment previews module has been removed
 
 ## v0.7.4
 

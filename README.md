@@ -19,8 +19,6 @@ To install in dev mode:
 * [Easily see when you have new notifications](#easily-see-when-you-have-new-notifications)
 * [Quick-add your Pens as an external resource](#quick-add-your-pens-as-an-external-resource)
 * [On-hover profile previews](#profile-previews)
-* [Access editor settings from within the Pen editor](#access-editor-settings-from-within-the-pen-editor)
-* [Preview comments on Pens/Posts before submitting](#preview-comments-on-pensposts-before-submitting)
 * [Toggle custom CSS on user profiles](#toggle-custom-css-on-user-profiles)
 
 ### Custom Editor Themes
@@ -64,18 +62,6 @@ Want to quickly filter out your Pens? Just search `::`.
 Hover over a profile link for more details on that user. Currently works in the following places:
 
 ![Profile Hover Preview](/demo_images/profile_preview.gif)
-
-### Access Editor Settings from Within the Pen Editor
-
-Adds another tab to the `Pen Settings` modal that lets you change current theme/font/font size. Only works if you're using the editor over HTTPS.
-
-![Editor Settings Demo](demo_images/editor_settings.gif)
-
-### Preview Comments on Pens/Posts Before Submitting
-
-Pretty straightforward. Relies on CodePen's internal markdown processing to generate previews which is kinda neat. It won't compile @username links, but most everything else works.
-
-![Comment Preview Demo](demo_images/comment_preview.gif)
 
 ### Toggle Custom CSS on User Profiles
 
