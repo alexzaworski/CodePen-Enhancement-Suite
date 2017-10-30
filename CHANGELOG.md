@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.0.1
+
+### Fixed
+
+* Fixed a bug where custom theme state couldn't be changed from pages without an editor
+
 ## v1.0.0
 
 ### Changed
