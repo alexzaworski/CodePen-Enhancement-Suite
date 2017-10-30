@@ -7,14 +7,12 @@ messenger.sendToTab('popup-toggle-ready');
 toggle({
   el: dom.get('#disable-css'),
   initialStateMessage: 'profile-css-state',
-  onToggleMessage: 'disable-profile-css',
-  disable: true
+  onToggleMessage: 'disable-profile-css'
 });
 
 toggle({
   el: dom.get('#enable-theme'),
-  initialStateMessage: 'custom-theme-state',
-  onToggleMessage: 'enable-custom-theme'
+  toggleKey: 'enable-custom-theme'
 });
 
 dom.get('#options-link').on('click', e => {

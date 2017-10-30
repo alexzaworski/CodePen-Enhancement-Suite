@@ -1,4 +1,5 @@
-import messenger from '../../utils/messenger';
+import messenger from 'js/utils/messenger';
+import storage from 'js/utils/storage';
 
 /*
 * Important thing!
@@ -21,19 +22,21 @@ import messenger from '../../utils/messenger';
 * before attempting to do anything.
 */
 
-export default ({
-  el,
-  initialStateMessage,
-  onToggleMessage,
-  disable = false
-}) => {
-  if (disable) {
-    el.attr('disabled', true);
+export default ({ el, initialStateMessage, onToggleMessage, toggleKey }) => {
+  if (toggleKey) {
+    storage.get(toggleKey, false).then(isChecked => {
+      addStorageListeners(el, toggleKey);
+      setInitialState(el, isChecked);
+    });
   }
-  messenger.request(initialStateMessage).then(isChecked => {
-    addListeners(el, onToggleMessage);
-    setInitialState(el, isChecked);
-  });
+
+  if (initialStateMessage) {
+    el.attr('disabled', true);
+    messenger.request(initialStateMessage).then(isChecked => {
+      addMessengerListeners(el, onToggleMessage);
+      setInitialState(el, isChecked);
+    });
+  }
 };
 
 const setInitialState = (el, state) => {
@@ -41,8 +44,19 @@ const setInitialState = (el, state) => {
   el.prop('checked', state);
 };
 
-const addListeners = (el, onToggleMessage) => {
+const addMessengerListeners = (el, onToggleMessage) => {
   el.on('click', () => {
     messenger.sendToTab(onToggleMessage, el.prop('checked'));
+  });
+};
+
+const addStorageListeners = (el, toggleKey) => {
+  el.on('click', () => {
+    storage.get(toggleKey, false).then(value => {
+      const newValue = !value;
+      storage.set(toggleKey, newValue).then(() => {
+        messenger.sendToTab(toggleKey, newValue);
+      });
+    });
   });
 };

@@ -29,7 +29,6 @@ export default class CustomTheme extends CESModule {
     this.enabled = enabled;
     this.setupThemeStyles(enabled);
     messenger.on('enable-custom-theme', enabled => this.handleChange(enabled));
-    messenger.onRequest('custom-theme-state', () => this.enabled);
   }
 
   setupThemeStyles(enabled) {
@@ -47,7 +46,6 @@ export default class CustomTheme extends CESModule {
     const { ogTheme, styleEl } = this;
     ogTheme.remove();
     styleEl.appendTo(dom.get('head'));
-    storage.set('enable-custom-theme', true);
     this.enabled = true;
     this.addWrapClasses();
   }
@@ -56,7 +54,6 @@ export default class CustomTheme extends CESModule {
     const { ogTheme, styleEl } = this;
     ogTheme.appendTo(dom.get('head'));
     styleEl.remove();
-    storage.set('enable-custom-theme', false);
     this.enabled = false;
     this.removeWrapClasses();
   }

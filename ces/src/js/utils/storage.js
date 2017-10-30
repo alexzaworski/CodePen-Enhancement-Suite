@@ -3,6 +3,8 @@ export class Storage {
     this.store = chrome.storage[area];
   }
 
+  // TODO: stop throwing on key not found
+  // once any code depending on it is cleaned up
   get(key = null, strict = true) {
     return new Promise((resolve, reject) => {
       this.store.get(key, response => {
