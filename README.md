@@ -45,7 +45,7 @@ Adds a draggable handle in the `Editor View` while using the `Top` layout that a
 
 ### Easily see when you have new notifications
 
-Adds a small visiual indicator when new items are added to your activity feed.
+Adds a small visual indicator when new items are added to your activity feed.
 
 ![New Activity](/demo_images/notification.png)
 
