@@ -4,7 +4,6 @@ import ensureSyncStorage from 'js/utils/ensureSyncStorage';
 import CES from 'js/modules/core/CES';
 
 import ResizablePreviews from 'js/modules/resizablePreviews';
-import RecentPensTypeahead from 'js/modules/recentPensTypeahead';
 import HideProfileCSS from 'js/modules/hideProfileCSS';
 import DistractionFreeMode from 'js/modules/distractionFreeMode';
 import ProfilePreviews from 'js/modules/profilePreviews';
@@ -15,7 +14,6 @@ import PatchNotes from 'js/modules/patchNotes';
 loadCSS('content');
 
 CES.registerModule(ResizablePreviews);
-CES.registerModule(RecentPensTypeahead);
 CES.registerModule(HideProfileCSS);
 CES.registerModule(DistractionFreeMode);
 CES.registerModule(ProfilePreviews);

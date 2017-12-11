@@ -17,7 +17,6 @@ To install in dev mode:
 * [Distraction Free editing mode](#distraction-free-mode)
 * [Resizable Pen previews](#resizable-pen-previews)
 * [Easily see when you have new notifications](#easily-see-when-you-have-new-notifications)
-* [Quick-add your Pens as an external resource](#quick-add-your-pens-as-an-external-resource)
 * [On-hover profile previews](#profile-previews)
 * [Toggle custom CSS on user profiles](#toggle-custom-css-on-user-profiles)
 
@@ -48,14 +47,6 @@ Adds a draggable handle in the `Editor View` while using the `Top` layout that a
 Adds a small visual indicator when new items are added to your activity feed.
 
 ![New Activity](/demo_images/notification.png)
-
-### Quick-Add Your Pens as an External Resource
-
-Adds your most recent public Pens to the CSS/JS typeaheads.
-
-Want to quickly filter out your Pens? Just search `::`.
-
-![Recent Pens Typeahead](/demo_images/typeahead.gif)
 
 ### Profile Previews
 

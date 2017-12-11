@@ -1,5 +1,11 @@
 # Change Log
 
+## v1.1.0
+
+### Removed
+
+* The Recent Pens Typeahead module has been deprecated due to changes on CodePen's end
+
 ## v1.0.1
 
 ### Fixed
