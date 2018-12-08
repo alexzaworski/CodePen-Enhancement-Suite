@@ -1,0 +1,36 @@
+// https://codepen.io/chasebank/pen/jQeeNw
+
+.ces__activity-bell {
+  height: auto;
+  fill: #0ebeff;
+  height: 16px;
+  width: auto;
+  margin-left: 6px;
+  margin-top: 2px;
+}
+
+.ces__activity-bell-clapper {
+  transform-origin: top center;
+}
+
+.drawer-button:hover {
+  .ces__activity-bell {
+    animation: ring 1.75s infinite ease-in-out;
+  }
+  .ces__activity-bell-clapper {
+    animation: ring-clapper 1.75s infinite linear;
+  }
+}
+
+@keyframes ring {
+  0% { transform: rotate(-30deg) }
+  50% { transform: rotate(30deg) }
+  100% { transform: rotate(-30deg) }
+}
+
+@keyframes ring-clapper {
+  0% { transform: rotate(0deg) }
+  20% { transform: rotate(20deg) }
+  70% { transform: rotate(-20deg) }
+  100% { transform: rotate(0deg) }
+}

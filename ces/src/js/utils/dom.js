@@ -265,6 +265,10 @@ class DOM extends Doc {
     }
     return el;
   }
+
+  fragment() {
+    return new El(document.createDocumentFragment());
+  }
 }
 
 class El {
