@@ -6,7 +6,7 @@ import getPartial from 'js/utils/getPartial';
 // Not actually in sync with the most up-to-date patch,
 // only incremented when the current version should display
 // patch notes (major releases, significant bug fixes)
-const currentPatch = '1.0.0';
+const currentPatch = '1.2.0';
 const patchNoteKey = `${currentPatch}-patch-notes`;
 
 // Note: never ever change this to a different name, you'll bypass the setting
