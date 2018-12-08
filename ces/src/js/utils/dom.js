@@ -221,6 +221,7 @@ class NodeBase {
       node,
       get: this.get.bind(this),
       getAll: this.getAll.bind(this),
+      await: this.await.bind(this),
       exists: this.exists.bind(this)
     };
   }
@@ -232,6 +233,16 @@ class NodeBase {
   getAll(selector) {
     const nodes = this.node.querySelectorAll(selector);
     return [...nodes].map(node => new El(node));
+  }
+
+  await(selector) {
+    return new Promise(resolve => {
+      const loop = () => {
+        const el = this.exists(selector);
+        return el ? resolve(el) : requestAnimationFrame(loop);
+      };
+      loop();
+    });
   }
 
   exists(selector, forceBool = false) {

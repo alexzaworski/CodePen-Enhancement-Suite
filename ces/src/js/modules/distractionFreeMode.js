@@ -26,7 +26,11 @@ export default class DistractionFreeMode extends CESModule {
     input.on('change', () => {
       this.handleInputChange(input);
     });
-    dom.get('.editor-layout-buttons').before(toggleWrapper);
+
+    dom
+      .await('.editor-layout-buttons')
+      .then(buttons => buttons.before(toggleWrapper));
+
     if (isDistractionFree) {
       this.setDistractionFreeMode(true);
     }

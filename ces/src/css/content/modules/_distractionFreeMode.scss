@@ -10,11 +10,6 @@ body.distraction-free-mode {
     min-width: 700px;
   }
 
-  .signup-and-login {
-    padding-top: 0;
-    margin: auto 0;
-  }
-
   &.layout-top {
 
     /*
@@ -77,17 +72,22 @@ body.distraction-free-mode {
     border-color: #222;
   }
 
+  .main-header .header-router-wrap,
+  .main-header .navigation-wrap {
+    height: 100%;
+  }
+
   .by {
     margin: auto 0 auto 10px;
   }
 
-  .user-avatar {
+  .navigation-wrap .user-avatar {
     width: 22px;
     height: 22px;
     margin-left: 3px;
   }
 
-  .pen-title-area .icon-codepen-box {
+  .item-title-area .icon-codepen-box {
     height: 18px;
     width: 18px;
     margin-right: 5px;
@@ -113,7 +113,11 @@ body.distraction-free-mode {
     right: 3px;
   }
 
-  .primary-actions .button {
+  .button.green {
+    color: #47cf73;
+  }
+
+  .navigation-wrap .button {
     padding: 3px 8px;
     border: 0;
     background: transparent!important;
@@ -122,38 +126,40 @@ body.distraction-free-mode {
     font-size: .9em;
   }
 
-  .primary-actions .button:not(.loves) > svg {
+  .navigation-wrap .button:not(.loves):not(.pin-button):not(.pin-dropdown-button) > svg {
     display: none;
   }
 
-  .primary-actions .button:hover {
+  .navigation-wrap .pin-button {
+    padding-right: 0;
+  }
+
+  .navigation-wrap .button:hover {
     opacity: 1;
   }
 
-  .pen-title-area .pen-title {
+  .item-title {
     font-size: 1em;
     width: auto;
-    background: rgba(127,127,127,.3);
     height: 100%;
     display: flex;
   }
-
-  .pen-title-area .pen-title-link {
-    max-width: none;
-    margin: auto 0;
-    padding: 0 10px;
-  }
-  .pen-title-text, .pen-title-home-link {
+  
+  .item-title-text {
     display: flex;
     margin-right: 5px;
   }
 
-  .pen-title-home-link svg {
+  .logo.header-chunk {
+    height: 65%;
     margin: auto;
-  }
+    a, .icon {
+      height: 100%;
+    }
 
-  .pen-title-area {
-    padding: 0 0 0 8px;
+    .icon {
+      display: block;
+    }
   }
 
   .mini-button {
