@@ -27,7 +27,7 @@ class CPAjax {
       }
       return data.slice(0, -1);
     } else if (type === 'json') {
-      return JSON.stringify({ payload: body });
+      return JSON.stringify(body);
     } else {
       return body;
     }

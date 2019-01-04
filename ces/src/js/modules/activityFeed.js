@@ -2,6 +2,7 @@ import CESModule from './core/CESModule';
 import dom, { Doc } from '../utils/dom';
 import storage from '../utils/storage';
 import initData from '../utils/initData';
+import cpAjax from '../utils/cpAjax';
 
 const bell = `
 <svg class="ces__activity-bell" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 47" height="46" width="47">
@@ -27,9 +28,21 @@ export default class ActivityFeed extends CESModule {
   }
 
   go() {
-    fetch('/activity/header/', { credentials: 'include' })
-      .then(response => response.text())
-      .then(activity => this.parseActivity(activity))
+    cpAjax
+      .post('/graphql', {
+        type: 'json',
+        body: [
+          {
+            operationName: null,
+            variables: {},
+            query: '{recentActivities}'
+          }
+        ]
+      })
+      .then(r => r.json())
+      .then(([{ data: { recentActivities } }]) => {
+        return this.parseActivity(recentActivities);
+      })
       .then(activity => {
         storage
           .get(this.storageKey)
@@ -77,8 +90,7 @@ export default class ActivityFeed extends CESModule {
   }
 
   parseActivity(activityResponse) {
-    const json = JSON.parse(activityResponse);
-    const activityHTML = dom.create('div').html(json.html);
+    const activityHTML = dom.create('div').html(activityResponse);
     const activity = [];
     activityHTML.getAll('.activity-list .activity').forEach(item => {
       const name = item.get('.activity-name').html().replace(/\s/g, '');
