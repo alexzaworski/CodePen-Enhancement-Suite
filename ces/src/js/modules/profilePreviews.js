@@ -8,6 +8,8 @@ import getPartial from '../utils/getPartial';
 import renderTemplate from '../utils/renderTemplate';
 import cpAjax from '../utils/cpAjax';
 
+const HANDLED_DATA_ATTR = 'ces-handled-preview';
+
 export default class ProfilePreview extends CESModule {
   constructor() {
     super();
@@ -31,7 +33,7 @@ export default class ProfilePreview extends CESModule {
 
   go() {
     this.selector = this.getSelector(initData.__pageType);
-    this.updateProfileLinks();
+    this.setBodyListener();
     if (conditionChecker.isGridView()) {
       this.subscribeToGrid();
     }
@@ -39,10 +41,10 @@ export default class ProfilePreview extends CESModule {
 
   getSelector(pageType) {
     const selectors = {
-      default: '.user a',
-      pen: '.pen-owner-link, .comment-username, .pen-owner-name',
-      full: '.pen-owner-link',
-      project: '.pen-owner-link',
+      default: '.user a span',
+      pen: '.comment-username, .pen-owner-name, .item-owner-link',
+      full: '.item-owner-link',
+      project: '.item-owner-link',
       // nth-of-type makes sure the link to the user's blog isn't also included
       // (they have the same class applied)
       posts: '.author-link:nth-of-type(2), .comment-username',
@@ -61,7 +63,7 @@ export default class ProfilePreview extends CESModule {
     // Add a listener to the window object since we can actually interact with
     // that from a content script
     dom.window.on('grid-changed', () => {
-      this.updateProfileLinks();
+      this.clearPreviews();
     });
 
     // Then within the context of the page, listen for CodePen's internal Hub
@@ -73,17 +75,25 @@ export default class ProfilePreview extends CESModule {
     });
   }
 
-  updateProfileLinks() {
-    const profileLinks = dom.getAll(this.selector);
-    const currentPreviews = dom.getAll('.ces__profile-preview');
-    currentPreviews.forEach(preview => {
+  clearPreviews() {
+    dom.getAll(`[${HANDLED_DATA_ATTR}]`).forEach(el => {
+      el.attr(HANDLED_DATA_ATTR, 'false');
+    });
+
+    dom.getAll('.ces__profile-preview').forEach(preview => {
       preview.remove();
     });
-    profileLinks.forEach(link => {
-      link.one('mouseover', () => {
-        const preview = new Preview(link);
-        preview.startDisplayTimer();
-      });
+  }
+
+  setBodyListener() {
+    dom.body.on('mouseover', event => {
+      const el = dom.fromNative(event.target);
+
+      if (!el.matches(this.selector)) return;
+      if (el.attr(HANDLED_DATA_ATTR) === 'true') return;
+
+      el.attr(HANDLED_DATA_ATTR, 'true');
+      new Preview(el);
     });
   }
 }
@@ -92,7 +102,14 @@ class Preview {
   constructor(profileLink) {
     this.profileLink = profileLink;
 
-    const href = profileLink.attr('href');
+    // due to specific quirks of Codepen's markup we can't
+    // delegate a listner directly on the <a/> inside some
+    // blocks of markup, and get stuck hitting a span instead.
+    //
+    // to counteract that we're allowing spans to match
+    // as links sometimes so we'll need to handle that case here.
+    const href = profileLink.attr('href') || profileLink.parent().attr('href');
+
     const origin = location.origin;
     this.profileURL = href.includes(origin) ? href : origin + href;
 
@@ -107,6 +124,8 @@ class Preview {
         dom.body.append(this.previewEl);
         this.addListeners();
       });
+
+    this.startDisplayTimer();
   }
 
   parseProfilePage(profilePage) {

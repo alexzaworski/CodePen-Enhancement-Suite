@@ -63,6 +63,9 @@ API:
     - adds attributes, given in the form of { attribute: value, ... }
     - returns instance of El
 
+  .fromNative ([Node] node)
+    - returns an instance of El for a given native DOM node
+
   .body
     - instance of El with document.body as the node
 
@@ -279,6 +282,10 @@ class DOM extends Doc {
 
   fragment() {
     return new El(document.createDocumentFragment());
+  }
+
+  fromNative(node) {
+    return new El(node);
   }
 }
 
