@@ -299,34 +299,6 @@
   color: #999;
 }
 
-.ces__unfollow-user:hover {
-  background:red;
-  color: white;
-}
-
-.ces__unfollow-user .ces__icon-x {
-  display:none;
-}
-
-.ces__unfollow-user:hover .ces__icon-x {
-  display:inline-block;
-}
-
-.ces__unfollow-user:hover .ces__icon-check {
-  display:none;
-}
-
-.ces__unfollow-user {
-  display:none;
-}
-
-.ces__isFollowing .ces__unfollow-user {
-  display:inline-block;
-}
-.ces__isFollowing .ces__follow-user {
-  display:none;
-}
-
 /* UPDATE MODAL STYLES */
 
 .ces__update-modal {

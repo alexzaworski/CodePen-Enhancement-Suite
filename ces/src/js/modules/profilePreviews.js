@@ -6,7 +6,6 @@ import conditionChecker from '../utils/conditionChecker';
 import escapeHTML from 'escape-html';
 import getPartial from '../utils/getPartial';
 import renderTemplate from '../utils/renderTemplate';
-import cpAjax from '../utils/cpAjax';
 
 const HANDLED_DATA_ATTR = 'ces-handled-preview';
 
@@ -138,11 +137,7 @@ class Preview {
       username: doc.get('#profile-username').text().trim().substring(1), // removes '@'
       avatar: doc.get('#profile-image').attr('src'),
       followers: doc.get('#followers-count').text(),
-      following: doc.get('#following-count').text(),
-      isFollowing: !doc.exists(
-        '#follow-this-user:not([style="display: none;"])',
-        true
-      )
+      following: doc.get('#following-count').text()
     };
 
     profile.isPro = !!profile.name.match(/PRO$/);
@@ -214,7 +209,6 @@ class Preview {
       avatar,
       followers,
       following,
-      isFollowing,
       pens
     } = profile;
 
@@ -242,7 +236,6 @@ class Preview {
     previewEl.html(templateHTML);
 
     this.addPensToPreview(previewEl, pens);
-    this.handleFollowButtons(previewEl, username, isFollowing);
   }
 
   addPensToPreview(preview, pens) {
@@ -267,48 +260,6 @@ class Preview {
         .append(iframeWrap)
         .append(titleWrap)
         .appendTo(pensWrapper);
-    });
-  }
-
-  handleFollowButtons(preview, username, isFollowing) {
-    const buttons = preview.get('.ces__profile__follow-buttons');
-
-    if (
-      conditionChecker.isLoggedIn(false) ||
-      initData.__user.username === username
-    ) {
-      buttons.remove();
-      return;
-    }
-
-    const followBaseURL = `follow/user/${username}`;
-    const followers = preview.get('.ces__profile__followers-stat');
-    const followButton = preview.get('.ces__follow-user');
-    const unfollowButton = preview.get('.ces__unfollow-user');
-
-    let state = isFollowing;
-    let numFollowers = parseInt(followers.html());
-
-    const setButtonClass = () => {
-      buttons.toggleClass('ces__isFollowing', state);
-    };
-    setButtonClass();
-
-    buttons.on('click', () => {
-      state = !state;
-      setButtonClass();
-    });
-
-    followButton.on('click', () => {
-      numFollowers++;
-      cpAjax.post(`${followBaseURL}/follow`);
-      followers.html(numFollowers);
-    });
-
-    unfollowButton.on('click', () => {
-      numFollowers--;
-      cpAjax.post(`${followBaseURL}/unfollow`);
-      followers.html(numFollowers);
     });
   }
 
