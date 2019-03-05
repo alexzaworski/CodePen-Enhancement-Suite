@@ -21,7 +21,7 @@ const drawerItemSelector = '.your-links-menu .drawer-button';
 export default class ActivityFeed extends CESModule {
   constructor() {
     super();
-    this.storageKey = this.setupStorageKey('activity-feed-1.0.0');
+    this.storageKey = this.getStorageKey('activity-feed-1.0.0');
     this.conditions = {
       selectorExists: drawerItemSelector
     };
@@ -83,10 +83,10 @@ export default class ActivityFeed extends CESModule {
     return storage.set(this.storageKey, activity);
   }
 
-  setupStorageKey(base) {
+  getStorageKey(base) {
     const { __user: user } = initData;
     const { username, current_team_id } = user;
-    return `${base}-${username}-${current_team_id}`; // eslint-disable-line camelcase
+    return `${base}-${username}-${current_team_id}`;
   }
 
   parseActivity(activityResponse) {
