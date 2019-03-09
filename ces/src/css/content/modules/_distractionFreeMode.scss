@@ -33,8 +33,14 @@ body.distraction-free-mode {
     
     // The actual normal headers (hidden by default I guess,
     // we need them now that the swivel ones are gone)
-    .top-boxes .box .box-title-name {
+    .top-boxes .box .box-title-name,
+    .top-boxes .box .box-title::after {
       visibility: visible;
+    }
+
+    .top-boxes .box .box-title::after {
+      bottom: 1px;
+      font-size: 10px;
     }
 
     .top-boxes .editor-resizer,
@@ -48,9 +54,6 @@ body.distraction-free-mode {
       height: $resizer-size - 2px;
     }
 
-    .editor-actions-left {
-      padding-left: 3px;
-    }
   }
   
   &.layout-side {
@@ -65,15 +68,15 @@ body.distraction-free-mode {
   }
 
 
-  .main-header {
+  #main-header {
     height: 34px;
     min-height: 34px;
     border-width: 3px;
     border-color: #222;
   }
 
-  .main-header .header-router-wrap,
-  .main-header .navigation-wrap {
+  #main-header .header-router-wrap,
+  #main-header .navigation-wrap {
     height: 100%;
   }
 
@@ -143,23 +146,25 @@ body.distraction-free-mode {
     width: auto;
     height: 100%;
     display: flex;
+    margin-bottom: 0;
   }
   
   .item-title-text {
     display: flex;
     margin-right: 5px;
+    align-items: center;
   }
 
-  .logo.header-chunk {
-    height: 65%;
+  // goofy classes here are 'cause CodePen
+  // is using some sort of generated class names
+  // that I can't target consistently
+  [class^=Logo_root] {
+    display: flex;
+  }
+  
+  [class^=Logo_small] {
     margin: auto;
-    a, .icon {
-      height: 100%;
-    }
-
-    .icon {
-      display: block;
-    }
+    height: 16px;
   }
 
   .mini-button {
