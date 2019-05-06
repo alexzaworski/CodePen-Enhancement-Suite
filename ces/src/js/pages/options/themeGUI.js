@@ -203,7 +203,10 @@ class ThemeGUI {
     const { presetSelect, presets } = this;
     let html = '';
     for (const preset in presets) {
-      html += dom.create('option').text(preset).outerHTML();
+      html += dom
+        .create('option')
+        .text(preset)
+        .outerHTML();
     }
     presetSelect.html(html);
   }

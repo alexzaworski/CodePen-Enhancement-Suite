@@ -1,7 +1,10 @@
 import dom from 'js/utils/dom';
 
 export const appendCSS = css => {
-  dom.create('style').html(css).appendTo(dom.get('head'));
+  dom
+    .create('style')
+    .html(css)
+    .appendTo(dom.get('head'));
 };
 
 export const getCSS = name => {
@@ -11,5 +14,7 @@ export const getCSS = name => {
 
 export default name =>
   new Promise(resolve => {
-    getCSS(name).then(appendCSS).then(resolve);
+    getCSS(name)
+      .then(appendCSS)
+      .then(resolve);
   });

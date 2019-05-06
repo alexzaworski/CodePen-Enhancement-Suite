@@ -18,11 +18,9 @@ const handleOldTheme = () => {
   return new Promise(resolve => {
     // Attempts to grab all the old storage keys from custom themes
     // (from pre-1.0.0)
-    const oldThemeParts = [
-      'cmElements',
-      'cmLastSaved',
-      'cmIsLightTheme'
-    ].map(key => local.get(key));
+    const oldThemeParts = ['cmElements', 'cmLastSaved', 'cmIsLightTheme'].map(
+      key => local.get(key)
+    );
 
     Promise.all(oldThemeParts)
       // If they're there we need to migrate the user's existing theme

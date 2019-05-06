@@ -29,11 +29,11 @@ export default theme => {
   const { light, elements } = theme;
   let styles = buildElementCSS(elements);
 
-  const basePromise = getCSS(
-    'content/modules/custom_themes/base'
-  ).then(base => {
-    styles = base + styles;
-  });
+  const basePromise = getCSS('content/modules/custom_themes/base').then(
+    base => {
+      styles = base + styles;
+    }
+  );
 
   const lightPromise = light
     ? getCSS('content/modules/custom_themes/light').then(light => {

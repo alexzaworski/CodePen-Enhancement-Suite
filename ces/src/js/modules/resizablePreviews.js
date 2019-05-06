@@ -63,7 +63,10 @@ export default class ResizePreviews extends CESModule {
 
   initResize() {
     const { resultDiv, resizeBar, resizeWrap } = this;
-    resultDiv.rmClass('result').wrap(resizeWrap).after(resizeBar);
+    resultDiv
+      .rmClass('result')
+      .wrap(resizeWrap)
+      .after(resizeBar);
     resizeBar.on('mousedown', e => {
       e.preventDefault();
       this.startDrag(e);

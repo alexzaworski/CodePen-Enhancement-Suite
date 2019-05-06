@@ -93,9 +93,18 @@ export default class ActivityFeed extends CESModule {
     const activityHTML = dom.create('div').html(activityResponse);
     const activity = [];
     activityHTML.getAll('.activity-list .activity').forEach(item => {
-      const name = item.get('.activity-name').html().replace(/\s/g, '');
-      const action = item.get('.activity-action').html().replace(/\s/g, '');
-      const thing = item.get('.activity-thing').html().replace(/\s/g, '');
+      const name = item
+        .get('.activity-name')
+        .html()
+        .replace(/\s/g, '');
+      const action = item
+        .get('.activity-action')
+        .html()
+        .replace(/\s/g, '');
+      const thing = item
+        .get('.activity-thing')
+        .html()
+        .replace(/\s/g, '');
       activity.push(`${name}-${action}-${thing}`);
     });
     return activity;

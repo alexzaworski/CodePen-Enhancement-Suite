@@ -58,7 +58,10 @@ export default class PatchNotes extends CESModule {
   setupModal() {
     return new Promise(resolve => {
       getPartial('patch-notes').then(html => {
-        this.modal = dom.create('div').html(html).appendTo(dom.body);
+        this.modal = dom
+          .create('div')
+          .html(html)
+          .appendTo(dom.body);
         resolve();
       });
     });

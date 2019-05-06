@@ -21,7 +21,10 @@ const keysToMigrate = [
 
 export default () => {
   return new Promise(resolve => {
-    storage.get(syncKey).catch(migrateStorage).then(resolve);
+    storage
+      .get(syncKey)
+      .catch(migrateStorage)
+      .then(resolve);
   });
 };
 

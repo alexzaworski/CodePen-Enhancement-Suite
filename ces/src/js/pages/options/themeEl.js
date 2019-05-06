@@ -112,7 +112,10 @@ export default class ThemeEl {
       const { prettyName } = this;
       const { prettyName: elName } = el;
       if (elName !== prettyName) {
-        html += dom.create('option').text(elName).outerHTML();
+        html += dom
+          .create('option')
+          .text(elName)
+          .outerHTML();
       }
     });
 

@@ -133,8 +133,15 @@ class Preview {
     );
 
     const profile = {
-      name: doc.get('#profile-name-header').text().trim(),
-      username: doc.get('#profile-username').text().trim().substring(1), // removes '@'
+      name: doc
+        .get('#profile-name-header')
+        .text()
+        .trim(),
+      username: doc
+        .get('#profile-username')
+        .text()
+        .trim()
+        .substring(1), // removes '@'
       avatar: doc.get('#profile-image').attr('src'),
       followers: doc.get('#followers-count').text(),
       following: doc.get('#following-count').text()
@@ -172,7 +179,9 @@ class Preview {
 
       pen.slug = pen.url.substr(pen.url.lastIndexOf('/') + 1);
       pen.iframe = dom.create('iframe', {
-        src: `${location.protocol}//s.codepen.io/${username}/fullcpgrid/${pen.slug}`,
+        src: `${location.protocol}//s.codepen.io/${username}/fullcpgrid/${
+          pen.slug
+        }`,
         'data-title': pen.title,
         sandbox: initData.__CPDATA.iframe_sandbox,
         scrolling: 'no',
@@ -319,16 +328,14 @@ class Preview {
     // the preview.
     let timer = -1;
     [profileLink, previewEl].forEach(el => {
-      el
-        .on('mouseenter', () => {
-          clearTimeout(timer);
-        })
-        .on('mouseleave', () => {
-          timer = setTimeout(() => {
-            this.stopDisplayTimer();
-            this.hide();
-          }, 0);
-        });
+      el.on('mouseenter', () => {
+        clearTimeout(timer);
+      }).on('mouseleave', () => {
+        timer = setTimeout(() => {
+          this.stopDisplayTimer();
+          this.hide();
+        }, 0);
+      });
     });
   }
 }
