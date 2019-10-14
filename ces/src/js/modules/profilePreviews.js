@@ -1,94 +1,93 @@
 import CESModule from './core/CESModule';
 import initData from '../utils/initData';
-import inPageContext from '../utils/inPageContext';
 import dom, { Doc } from '../utils/dom';
-import conditionChecker from '../utils/conditionChecker';
+import cpAjax from '../utils/cpAjax';
 import escapeHTML from 'escape-html';
 import getPartial from '../utils/getPartial';
 import renderTemplate from '../utils/renderTemplate';
 
 const HANDLED_DATA_ATTR = 'ces-handled-preview';
+const SELECTOR = [
+  '.authorName', // grid view author
+  '[class^=ItemTitle_ownerLink]', // pen author,
+  '.content-author a:nth-of-type(2)', // post author
+  '.comment-username', // pen/post comments
+  '.username', // forkers/lovers in pen details
+  '.activity-name'
+].join(', ');
+
+const fetchProfile = username => {
+  return cpAjax
+    .post('/graphql', {
+      type: 'json',
+      body: [
+        {
+          operationName: 'ProfileOwner',
+          variables: {
+            ownerType: 'USER',
+            ownerUsername: username
+          },
+          query: `query ProfileOwner($ownerUsername: String!, $ownerType: ContextEnum!) {
+                ownerByUsername(ownerUsername: $ownerUsername, ownerType: $ownerType) {
+                  id
+                  ownerType
+                  title
+                  avatar512
+                  pro
+                  username
+                  baseUrl
+                  counts {
+                    followers
+                    following
+                  }
+                }
+              }
+            `
+        }
+      ]
+    })
+    .then(r => r.json())
+    .then(gqlResponse => {
+      const [response] = gqlResponse;
+      const {
+        data: { ownerByUsername }
+      } = response;
+      const {
+        title,
+        username,
+        avatar512,
+        counts,
+        pro,
+        baseUrl
+      } = ownerByUsername;
+      const { followers, following } = counts;
+      return {
+        name: title,
+        username,
+        avatar: avatar512,
+        followers,
+        following,
+        isPro: pro,
+        baseUrl
+      };
+    });
+};
+
+const hrefToUsername = href => {
+  const noTrailingSlash = href.replace(/\/$/, '');
+  return noTrailingSlash.slice(noTrailingSlash.lastIndexOf('/') + 1);
+};
 
 export default class ProfilePreview extends CESModule {
-  constructor() {
-    super();
-    this.conditions = {
-      isPage: [
-        'home',
-        'pen',
-        'project',
-        'posts',
-        'collection',
-        'details',
-        'explore-pens',
-        'explore-posts',
-        'explore-collections',
-        'explore-projects',
-        'full',
-        'activity'
-      ]
-    };
-  }
-
   go() {
-    this.selector = this.getSelector(initData.__pageType);
     this.setBodyListener();
-    if (conditionChecker.isGridView()) {
-      this.subscribeToGrid();
-    }
-  }
-
-  getSelector(pageType) {
-    const selectors = {
-      default: '.user a span',
-      pen: '.comment-username, .pen-owner-name, .item-owner-link',
-      full: '.item-owner-link',
-      project: '.item-owner-link',
-      // nth-of-type makes sure the link to the user's blog isn't also included
-      // (they have the same class applied)
-      posts: '.author-link:nth-of-type(2), .comment-username',
-
-      details: '.comment-username, .pen-owner-name, .user-name.module',
-      collection: '.username, .author-link',
-
-      // needs to be :first-of-type so it doesn't pick up the link to the
-      // pen/post/whatever.
-      activity: '.activity-name:first-of-type'
-    };
-    return selectors[pageType] || selectors.default;
-  }
-
-  subscribeToGrid() {
-    // Add a listener to the window object since we can actually interact with
-    // that from a content script
-    dom.window.on('grid-changed', () => {
-      this.clearPreviews();
-    });
-
-    // Then within the context of the page, listen for CodePen's internal Hub
-    // events and replay them as custom events
-    inPageContext(() => {
-      Hub.sub('grid-changed', function() {
-        window.dispatchEvent(new CustomEvent('grid-changed'));
-      });
-    });
-  }
-
-  clearPreviews() {
-    dom.getAll(`[${HANDLED_DATA_ATTR}]`).forEach(el => {
-      el.attr(HANDLED_DATA_ATTR, 'false');
-    });
-
-    dom.getAll('.ces__profile-preview').forEach(preview => {
-      preview.remove();
-    });
   }
 
   setBodyListener() {
     dom.body.on('mouseover', event => {
       const el = dom.fromNative(event.target);
 
-      if (!el.matches(this.selector)) return;
+      if (!el.matches(SELECTOR)) return;
       if (el.attr(HANDLED_DATA_ATTR) === 'true') return;
 
       el.attr(HANDLED_DATA_ATTR, 'true');
@@ -108,15 +107,10 @@ class Preview {
     // to counteract that we're allowing spans to match
     // as links sometimes so we'll need to handle that case here.
     const href = profileLink.attr('href') || profileLink.parent().attr('href');
-
-    const origin = location.origin;
-    this.profileURL = href.includes(origin) ? href : origin + href;
-
+    const username = hrefToUsername(href);
     this.previewEl = dom.create('div', { class: 'ces__profile-preview' });
 
-    fetch(this.profileURL, { credentials: 'include' })
-      .then(response => response.text())
-      .then(profilePage => this.parseProfilePage(profilePage))
+    fetchProfile(username)
       .then(profile => this.mapPensToProfile(profile))
       .then(profile => this.mapProfileToTemplate(profile, this.previewEl))
       .then(() => {
@@ -127,37 +121,9 @@ class Preview {
     this.startDisplayTimer();
   }
 
-  parseProfilePage(profilePage) {
-    const doc = new Doc(
-      new DOMParser().parseFromString(profilePage, 'text/html')
-    );
-
-    const profile = {
-      name: doc
-        .get('#profile-name-header')
-        .text()
-        .trim(),
-      username: doc
-        .get('#profile-username')
-        .text()
-        .trim()
-        .substring(1), // removes '@'
-      avatar: doc.get('#profile-image').attr('src'),
-      followers: doc.get('#followers-count').text(),
-      following: doc.get('#following-count').text()
-    };
-
-    profile.isPro = !!profile.name.match(/PRO$/);
-    if (profile.isPro) {
-      profile.name = profile.name.replace(/PRO$/, '').trim();
-    }
-
-    return profile;
-  }
-
   mapPensToProfile(profile) {
     return new Promise(resolve => {
-      fetch(`${this.profileURL}/popular/feed`)
+      fetch(`${profile.baseUrl}/popular/feed`)
         .then(response => response.text())
         .then(pens => this.parsePens(pens, profile.username))
         .then(pens => {
