@@ -10,7 +10,7 @@ export default class CustomTheme extends CESModule {
     super();
     this.originalThemeSelector = '[href*="assets/editor/themes"]';
     this.conditions = {
-      selectorExists: this.originalThemeSelector
+      selectorExists: this.originalThemeSelector,
     };
   }
 
@@ -32,7 +32,7 @@ export default class CustomTheme extends CESModule {
   }
 
   setupThemeStyles(enabled) {
-    const { styleEl } = this;
+    const {styleEl} = this;
     getActiveTheme().then(theme => {
       this.theme = theme;
       buildCSS(theme).then(css => {
@@ -43,7 +43,7 @@ export default class CustomTheme extends CESModule {
   }
 
   enableTheme() {
-    const { ogTheme, styleEl } = this;
+    const {ogTheme, styleEl} = this;
     ogTheme.remove();
     styleEl.appendTo(dom.get('head'));
     this.enabled = true;
@@ -51,7 +51,7 @@ export default class CustomTheme extends CESModule {
   }
 
   disableTheme() {
-    const { ogTheme, styleEl } = this;
+    const {ogTheme, styleEl} = this;
     ogTheme.appendTo(dom.get('head'));
     styleEl.remove();
     this.enabled = false;
@@ -59,14 +59,14 @@ export default class CustomTheme extends CESModule {
   }
 
   addWrapClasses() {
-    const { pageWrap, theme } = this;
-    const { light } = theme;
+    const {pageWrap, theme} = this;
+    const {light} = theme;
     if (!pageWrap) return;
     pageWrap.classes(`page-wrap ces-theme ${light ? 'ces-light-theme' : ''}`);
   }
 
   removeWrapClasses() {
-    const { pageWrap, ogWrapClass } = this;
+    const {pageWrap, ogWrapClass} = this;
     if (!pageWrap) return;
     pageWrap.classes(ogWrapClass);
   }

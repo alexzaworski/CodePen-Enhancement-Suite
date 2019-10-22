@@ -24,12 +24,12 @@ export default class PatchNotes extends CESModule {
     Promise.all([
       this.checkIfNotesDisabled(),
       this.checkIfHasLoaded(),
-      this.checkIfNotesSeen()
+      this.checkIfNotesSeen(),
     ]).then(([isDisabled, hasLoaded, isSeen]) => {
       if (!hasLoaded) {
         storage.set({
           [hasLoadedKey]: true,
-          [patchNoteKey]: true
+          [patchNoteKey]: true,
         });
       } else if (!isDisabled && !isSeen) {
         this.setupModal().then(() => this.setupButtons());

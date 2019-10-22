@@ -8,7 +8,7 @@ export default class HideProfileCSS extends CESModule {
   constructor() {
     super();
     this.conditions = {
-      isPage: ['profile']
+      isPage: ['profile'],
     };
   }
 

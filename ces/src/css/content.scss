@@ -4,42 +4,42 @@
 /* GENERIC STYLES */
 
 .ces__padded-heading {
-  padding-bottom:8px;
+  padding-bottom: 8px;
 }
 
 .ces__clearfix:after {
-  content: "";
-  clear: both; 
+  content: '';
+  clear: both;
   display: block;
 }
 .ces__divider-half {
-  float:left;
-  width:50%;
+  float: left;
+  width: 50%;
   max-width: 250px;
 }
 
 .ces__label {
-  display:block;
+  display: block;
 }
 
-.ces__label [type="radio"] {
+.ces__label [type='radio'] {
   margin-right: 6px;
   margin-bottom: 6px;
 }
 
 .ces__input--with-margin {
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
 .ces__white {
-  color:white!important;
+  color: white !important;
 }
 
 .ces__light-gray {
-  color: #ccc!important;
+  color: #ccc !important;
 }
 .ces__small-text {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 /* RESPONSIVE PREVIEW STYLES */
@@ -47,20 +47,20 @@
 .layout-top .ces__resize-bar {
   width: 20px;
   cursor: col-resize;
-  border-left: 1px solid rgba(255,255,255,0.1);
-  border-right: 1px solid rgba(0,0,0,0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(0, 0, 0, 0.4);
   background: #343436;
-  flex-shrink:0;
+  flex-shrink: 0;
   z-index: 1;
 }
 
 .layout-top #ces__resize {
-  display:flex;
+  display: flex;
 }
 
 .layout-top #result_div {
   position: relative;
-  width:100%;
+  width: 100%;
 }
 
 .layout-top .ces-light-theme .ces__resize-bar,
@@ -70,20 +70,20 @@
 .layout-top .xq-light .ces__resize-bar,
 .layout-top .oceanic-light .ces__resize-bar,
 .layout-top .mdn-like .ces__resize-bar,
-.layout-top .duotone-light .ces__resize-bar  {
+.layout-top .duotone-light .ces__resize-bar {
   background: white;
   border: 0;
-  box-shadow: 0 0px 2px rgba(0,0,0,0.1),0 1px 1px rgba(0,0,0,0.1);
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-.ces-light-theme  #ces__resize,
+.ces-light-theme #ces__resize,
 .classic #ces__resize,
 .solarized-light #ces__resize,
 .xq-light #ces__resize,
 .oceanic-light #ces__resize,
 .mdn-like #ces__resize,
 .duotone-light #ces__resize {
-  background: #EFF1F5;
+  background: #eff1f5;
 }
 
 /* FANCY INPUTS STYLING */
@@ -95,21 +95,21 @@
 }
 
 .ces__fancy-checkbox {
-  display:none;
+  display: none;
 }
 
 .ces__fancy-checkbox ~ label {
   -webkit-user-select: none;
-  user-select:none;
-  float:left;
+  user-select: none;
+  float: left;
   line-height: 15px; /* Should be the same as the height of label:after */
 }
 
 .ces__fancy-checkbox ~ label:after {
   margin-right: 10px;
   content: '';
-  display:block;
-  float:left;
+  display: block;
+  float: left;
   height: 15px; /* Height/border radius should be equal */
   border-radius: 15px;
   width: 30px;
@@ -126,20 +126,18 @@
 
 .ces__fancy-checkbox ~ label:before {
   top: 50%;
-  transform:translateY(-50%);
+  transform: translateY(-50%);
   position: absolute;
   margin-right: 10px;
   content: '';
-  display:block;
-  float:left;
+  display: block;
+  float: left;
   left: -1px;
   height: 20px;
   width: 20px;
   border-radius: 50%;
   background: white;
-  transition:
-    color .1s ease-out,
-    left .1s ease-out;
+  transition: color 0.1s ease-out, left 0.1s ease-out;
 }
 
 .ces__fancy-checkbox--light ~ label:before {
@@ -152,9 +150,10 @@
   left: 11px; /* Difference between label:after width and label:before width */
 }
 
-.ces__preview-enabled #subscribe-link { /* Properly aligns "notify me of new comment" link on the Post comment box */
+.ces__preview-enabled #subscribe-link {
+  /* Properly aligns "notify me of new comment" link on the Post comment box */
   line-height: 15px;
-  display: block!important; /* Battling inline styling */
+  display: block !important; /* Battling inline styling */
   padding-top: 10px;
 }
 
@@ -163,73 +162,73 @@
 .ces__profile-preview {
   padding-top: 10px;
   padding-bottom: 10px;
-  display:none;
+  display: none;
   position: absolute;
   z-index: 99;
   width: 450px;
 }
 
 .ces__profile-preview.active {
-  display:block;
+  display: block;
 }
 
 .ces__profile-wrapper {
-  background: #28282B;
-  box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
+  background: #28282b;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.28);
   border: 3px solid #0ebeff;
   border-radius: 2px;
 }
 
 .ces__profile-wrapper:after {
-  content: "";
-  display:block;
+  content: '';
+  display: block;
   height: 18px;
   width: 18px;
-  transform:rotate(45deg);
+  transform: rotate(45deg);
   background: #0ebeff;
   position: absolute;
   border-radius: 2px;
   top: 7.5px;
-  z-index:-1;
-  left:35px; /* (padding in header + avatar width)/2 == centered over avatar */
+  z-index: -1;
+  left: 35px; /* (padding in header + avatar width)/2 == centered over avatar */
 }
 
 .ces__pen__link {
   position: absolute;
   height: 100%;
   width: 100%;
-  top:0;
-  left:0; 
+  top: 0;
+  left: 0;
   z-index: 99;
 }
 
 .ces__iframe-wrap {
-  background:white;
+  background: white;
   height: 80px;
   margin-bottom: 5px;
-  box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.28);
   position: relative;
 }
 
 .ces__pen__link:hover ~ .ces__iframe-wrap:after {
-  content: "";
-  display:block;
+  content: '';
+  display: block;
   height: 3px;
   width: 100%;
   background: #0ebeff;
-  bottom:0;
-  
+  bottom: 0;
+
   position: absolute;
 }
 .ces__iframe {
   width: 500%;
   height: 500%;
   transform-origin: top left;
-  transform: scale(.2);
+  transform: scale(0.2);
 }
 
 .ces__profile__pens {
-  display:flex;
+  display: flex;
 }
 
 .ces__pen {
@@ -246,47 +245,45 @@
 
 .ces__pen__title {
   color: #999;
-  font-size: .85rem;
+  font-size: 0.85rem;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow:hidden;
+  overflow: hidden;
   margin-left: 3px;
   font-weight: bold;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
 
 .ces__profile__avatar {
-  background:#1E1E1E;
+  background: #1e1e1e;
   height: 60px;
   width: 60px;
   border-radius: 2px;
-  float:left;
+  float: left;
   margin-right: 10px;
 }
 
 .ces__profile__name {
-  font-family: "Telefon";
+  font-family: 'Telefon';
   font-weight: 900;
   font-size: 1.3rem;
   margin-top: 5px;
-  color:white;
+  color: white;
 }
 
 .ces__pro-badge {
   margin-left: 3px;
 }
 
-
 .ces__profile__header {
   padding: 10px;
-  background: #28282B;
-
+  background: #28282b;
 }
 
 .ces__profile__stats {
   background: #191919;
   padding: 10px;
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .ces__profile__stat {
@@ -294,7 +291,7 @@
 }
 
 .ces__stats__link {
-  display:inline-block;
+  display: inline-block;
   margin-right: 5px;
   color: #999;
 }
@@ -303,14 +300,14 @@
 
 .ces__update-modal {
   background: white;
-  position:fixed;
+  position: fixed;
   padding: 15px;
   bottom: 15px;
   left: 15px;
-  z-index:99;
+  z-index: 99;
   border-radius: 2px;
-  box-shadow: 2px 2px 3px rgba(0,0,0,0.28);
-  color:#191919;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.28);
+  color: #191919;
   max-width: 350px;
   font-size: 13px;
 }
@@ -345,11 +342,11 @@
 }
 
 .ces__update-modal :last-child {
-  margin-bottom:0;
+  margin-bottom: 0;
 }
 
 .ces__update__dismiss {
-  float:right;
+  float: right;
   padding: 5px 10px;
   margin-right: 0;
 }
@@ -357,10 +354,10 @@
 .ces__text-like-button {
   font-size: 1em;
   color: #0ebeff;
-  display:inline;
-  background:none;
+  display: inline;
+  background: none;
   border: 0;
-  cursor:pointer;
+  cursor: pointer;
   line-height: 34px; /* matches height of buttons */
 }
 
@@ -373,7 +370,7 @@
 .ces-theme ~ .CodeMirror-hints {
   border: 1px solid #555;
   background: #333;
-  color: #fff
+  color: #fff;
 }
 
 .ces-theme ~ .CodeMirror-hints li.CodeMirror-hint-active {
@@ -388,11 +385,10 @@
 }
 
 .ces-light-theme ~ .CodeMirror-hint {
-  color: #000!important;
+  color: #000 !important;
 }
 
 .ces-light-theme ~ .CodeMirror-hints li.CodeMirror-hint-active {
   background: #08f;
-  color:white;
+  color: white;
 }
-

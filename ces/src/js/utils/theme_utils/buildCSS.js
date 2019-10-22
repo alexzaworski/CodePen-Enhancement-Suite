@@ -1,4 +1,4 @@
-import { getCSS } from 'js/utils/loadCSS';
+import {getCSS} from 'js/utils/loadCSS';
 
 const getColorFromMaster = (master, elements) => {
   const masterEl = elements.find(el => el.prettyName === master);
@@ -14,7 +14,7 @@ export const buildElementCSS = elements => {
       color,
       master,
       italic,
-      underline
+      underline,
     } = element;
     styles += `${selector}{`;
     styles += `${prop}:${color || getColorFromMaster(master, elements)};`;
@@ -26,7 +26,7 @@ export const buildElementCSS = elements => {
 };
 
 export default theme => {
-  const { light, elements } = theme;
+  const {light, elements} = theme;
   let styles = buildElementCSS(elements);
 
   const basePromise = getCSS('content/modules/custom_themes/base').then(
@@ -37,8 +37,8 @@ export default theme => {
 
   const lightPromise = light
     ? getCSS('content/modules/custom_themes/light').then(light => {
-      styles = light + styles;
-    })
+        styles = light + styles;
+      })
     : Promise.resolve();
 
   return new Promise(resolve => {

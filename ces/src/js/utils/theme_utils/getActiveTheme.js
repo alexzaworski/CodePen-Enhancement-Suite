@@ -1,5 +1,5 @@
-import storage, { Storage } from 'js/utils/storage';
-import { defaultPreset } from './presets';
+import storage, {Storage} from 'js/utils/storage';
+import {defaultPreset} from './presets';
 import migrateOldTheme from './migrateOldTheme';
 import mergeThemeWithGlobals from './mergeThemeWithGlobals';
 

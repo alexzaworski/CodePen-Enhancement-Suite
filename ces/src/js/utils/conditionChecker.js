@@ -21,7 +21,7 @@ class ConditionChecker {
   }
 
   isPage(pages) {
-    const { __pageType: pageType } = initData;
+    const {__pageType: pageType} = initData;
     const pageRegex = new RegExp(`^${pageType}$`);
     return pages.some(page => page.match(pageRegex));
   }

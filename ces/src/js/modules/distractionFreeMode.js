@@ -7,7 +7,7 @@ export default class DistractionFreeMode extends CESModule {
   constructor() {
     super();
     this.conditions = {
-      isPage: ['pen']
+      isPage: ['pen'],
     };
   }
 
@@ -38,7 +38,7 @@ export default class DistractionFreeMode extends CESModule {
 
   buildToggleWrapper() {
     return dom.create('div', {
-      class: 'ces__fancy-checkbox__wrapper ces__clearfix'
+      class: 'ces__fancy-checkbox__wrapper ces__clearfix',
     });
   }
 
@@ -47,7 +47,7 @@ export default class DistractionFreeMode extends CESModule {
       .create('input', {
         type: 'checkbox',
         class: 'ces__fancy-checkbox ces__fancy-checkbox--light',
-        id: 'distraction-free-mode'
+        id: 'distraction-free-mode',
       })
       .attr('checked', isChecked ? 'checked' : null);
   }
@@ -55,7 +55,7 @@ export default class DistractionFreeMode extends CESModule {
   buildLabel() {
     return dom
       .create('label', {
-        for: 'distraction-free-mode'
+        for: 'distraction-free-mode',
       })
       .text('Distraction Free Mode');
   }

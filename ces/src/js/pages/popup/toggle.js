@@ -22,7 +22,7 @@ import storage from 'js/utils/storage';
  * before attempting to do anything.
  */
 
-export default ({ el, initialStateMessage, onToggleMessage, toggleKey }) => {
+export default ({el, initialStateMessage, onToggleMessage, toggleKey}) => {
   if (toggleKey) {
     storage.get(toggleKey, false).then(isChecked => {
       addStorageListeners(el, toggleKey);

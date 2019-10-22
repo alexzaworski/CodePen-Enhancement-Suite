@@ -1,5 +1,5 @@
 import CESModule from './core/CESModule';
-import dom, { Doc } from '../utils/dom';
+import dom, {Doc} from '../utils/dom';
 import storage from '../utils/storage';
 import initData from '../utils/initData';
 import cpAjax from '../utils/cpAjax';
@@ -23,7 +23,7 @@ export default class ActivityFeed extends CESModule {
     super();
     this.storageKey = this.getStorageKey('activity-feed-1.0.0');
     this.conditions = {
-      selectorExists: drawerItemSelector
+      selectorExists: drawerItemSelector,
     };
   }
 
@@ -35,12 +35,12 @@ export default class ActivityFeed extends CESModule {
           {
             operationName: null,
             variables: {},
-            query: '{recentActivities}'
-          }
-        ]
+            query: '{recentActivities}',
+          },
+        ],
       })
       .then(r => r.json())
-      .then(([{ data: { recentActivities } }]) => {
+      .then(([{data: {recentActivities}}]) => {
         return this.parseActivity(recentActivities);
       })
       .then(activity => {
@@ -84,8 +84,8 @@ export default class ActivityFeed extends CESModule {
   }
 
   getStorageKey(base) {
-    const { __user: user } = initData;
-    const { username, current_team_id } = user;
+    const {__user: user} = initData;
+    const {username, current_team_id} = user;
     return `${base}-${username}-${current_team_id}`;
   }
 

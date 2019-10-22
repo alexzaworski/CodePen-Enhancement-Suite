@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "lint": "echo \"Linting...\" && prettier-eslint --write \"**/*.js\" \".eslintrc.js\"",
+    "prettier": "prettier --write '**/*.{js,jsx,json,scss}'",
+    "eslint": "eslint --fix '**/*.{js,jsx}'",
+    "lint": "echo \"Linting...\" && yarn run prettier && yarn run eslint",
     "sass": "node-sass --output ces/dist/css --output-style compressed ces/src/css/",
     "zip": "rm -f ces.zip && zip -r ces.zip ces -x *.map *src* *DS_Store*",
     "start": "yarn run sass && concurrently \"webpack -w --mode development\" \"yarn run sass -- --watch --recursive\"",
@@ -10,19 +12,18 @@
   "pre-commit": "pre-commit",
   "lint-staged": {
     "*.js": [
-      "prettier-eslint --write",
+      "prettier --write",
       "git add"
     ]
   },
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "eslint": "^5.16.0",
-    "lint-staged": "^8.1.6",
+    "concurrently": "^5.0.0",
+    "eslint": "^6.5.1",
+    "lint-staged": "^9.4.2",
     "node-sass": "^4.12.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.17.0",
-    "prettier-eslint-cli": "^4.7.1",
-    "terser-webpack-plugin": "^1.2.3",
+    "prettier": "^1.18.2",
+    "terser-webpack-plugin": "^2.1.3",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.2"
   },

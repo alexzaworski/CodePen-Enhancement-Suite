@@ -5,7 +5,7 @@ export default class ResizePreviews extends CESModule {
   constructor() {
     super();
     this.conditions = {
-      isPage: ['pen']
+      isPage: ['pen'],
     };
   }
 
@@ -15,7 +15,7 @@ export default class ResizePreviews extends CESModule {
       dragging: false,
       startX: 0,
       offsetX: 0,
-      initialWidth: 0
+      initialWidth: 0,
     };
 
     this.waitForIframeLoad().then(() => {
@@ -35,13 +35,13 @@ export default class ResizePreviews extends CESModule {
   buildResizeWrap() {
     return dom.create('div', {
       class: 'result box',
-      id: 'ces__resize'
+      id: 'ces__resize',
     });
   }
 
   buildResizeBar() {
     return dom.create('div', {
-      class: 'ces__resize-bar'
+      class: 'ces__resize-bar',
     });
   }
 
@@ -62,7 +62,7 @@ export default class ResizePreviews extends CESModule {
   }
 
   initResize() {
-    const { resultDiv, resizeBar, resizeWrap } = this;
+    const {resultDiv, resizeBar, resizeWrap} = this;
     resultDiv
       .rmClass('result')
       .wrap(resizeWrap)
@@ -78,14 +78,14 @@ export default class ResizePreviews extends CESModule {
   }
 
   startDrag(e) {
-    const { widthReadout, resultDiv, dragCover } = this;
+    const {widthReadout, resultDiv, dragCover} = this;
 
     widthReadout.addClass('visible');
 
     this.updateDragState({
       startX: e.pageX,
       dragging: true,
-      initialWidth: resultDiv.width()
+      initialWidth: resultDiv.width(),
     });
 
     dragCover.css('display', 'block');
@@ -106,12 +106,12 @@ export default class ResizePreviews extends CESModule {
 
   drag(e) {
     this.updateDragState({
-      offsetX: this.dragState.startX - e.pageX
+      offsetX: this.dragState.startX - e.pageX,
     });
   }
 
   stopDrag() {
-    const { widthReadout, dragCover, dragState } = this;
+    const {widthReadout, dragCover, dragState} = this;
 
     window.setTimeout(() => {
       if (!dragState.dragging) {
@@ -123,12 +123,12 @@ export default class ResizePreviews extends CESModule {
 
     this.updateDragState({
       dragging: false,
-      offsetX: 0
+      offsetX: 0,
     });
   }
 
   animate() {
-    const { dragState, resultDiv, widthReadout } = this;
+    const {dragState, resultDiv, widthReadout} = this;
 
     if (dragState.dragging) {
       const newWidth = dragState.initialWidth - dragState.offsetX;
@@ -141,7 +141,7 @@ export default class ResizePreviews extends CESModule {
   }
 
   clampResultDivWidth(width) {
-    const { resizeBar } = this;
+    const {resizeBar} = this;
     const maxWidth = window.innerWidth - resizeBar.width();
 
     // http://stackoverflow.com/a/11409944
