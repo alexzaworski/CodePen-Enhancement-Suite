@@ -25,7 +25,7 @@ elementGlobals['Default'] = {
   globals: {
     selector:
       '.CodeMirror pre, .box pre,.editor .top-boxes pre,.CodeMirror-gutter-wrapper pre',
-    description: 'when nothin\' else applies'
+    description: "when nothin' else applies"
   },
   fallback: {
     color: '#FFFFFF'

@@ -37,8 +37,8 @@ export default theme => {
 
   const lightPromise = light
     ? getCSS('content/modules/custom_themes/light').then(light => {
-      styles = light + styles;
-    })
+        styles = light + styles;
+      })
     : Promise.resolve();
 
   return new Promise(resolve => {

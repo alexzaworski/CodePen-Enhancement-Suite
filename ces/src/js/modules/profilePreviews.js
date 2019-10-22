@@ -145,9 +145,7 @@ class Preview {
 
       pen.slug = pen.url.substr(pen.url.lastIndexOf('/') + 1);
       pen.iframe = dom.create('iframe', {
-        src: `${location.protocol}//s.codepen.io/${username}/fullcpgrid/${
-          pen.slug
-        }`,
+        src: `${location.protocol}//s.codepen.io/${username}/fullcpgrid/${pen.slug}`,
         'data-title': pen.title,
         sandbox: initData.__CPDATA.iframe_sandbox,
         scrolling: 'no',
@@ -189,9 +187,9 @@ class Preview {
 
     const pro = isPro
       ? dom
-        .create('span', { class: 'ces__pro-badge badge badge-pro' })
-        .html('PRO')
-        .outerHTML()
+          .create('span', { class: 'ces__pro-badge badge badge-pro' })
+          .html('PRO')
+          .outerHTML()
       : '';
 
     const templateData = {
