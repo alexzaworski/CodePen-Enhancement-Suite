@@ -2,11 +2,11 @@ import presets from 'js/utils/theme_utils/presets';
 import dom from 'js/utils/dom';
 import ColorHandler from 'js/pages/options/colorHandler';
 import storage from 'js/utils/storage';
-import { localMessenger as messenger } from 'js/utils/messenger';
+import {localMessenger as messenger} from 'js/utils/messenger';
 
 class ThemeGUI {
   init(theme) {
-    const { light, elements, lastSaved = false } = theme;
+    const {light, elements, lastSaved = false} = theme;
     this.savedTheme = theme;
     this.presets = presets;
     this.lastSaved = lastSaved;
@@ -48,7 +48,7 @@ class ThemeGUI {
   }
 
   displaySaveTime() {
-    const { lastSaved, lastSavedEl, saveInfo } = this;
+    const {lastSaved, lastSavedEl, saveInfo} = this;
     if (!lastSaved) {
       return;
     }
@@ -68,7 +68,7 @@ class ThemeGUI {
       revertButton,
       exportButton,
       importButton,
-      importInput
+      importInput,
     } = this;
 
     // this doesn't work if I add it as an event listener,
@@ -100,7 +100,7 @@ class ThemeGUI {
       //
       // We still want snappy responses to changing values though so
       // the timeout shouldn't be higher than a few MS.
-      const { pendingUpdate } = this;
+      const {pendingUpdate} = this;
       clearTimeout(pendingUpdate);
       this.pendingUpdate = setTimeout(() => {
         this.updateStyles();
@@ -109,17 +109,17 @@ class ThemeGUI {
   }
 
   exportJSON() {
-    const { colorHandler, light } = this;
+    const {colorHandler, light} = this;
 
     const exportData = JSON.stringify({
       elements: colorHandler.getElementBasics(),
-      light
+      light,
     });
 
     dom
       .create('a', {
         download: 'ces_theme.json',
-        href: `data:text/json;charset=utf-8,${encodeURIComponent(exportData)}`
+        href: `data:text/json;charset=utf-8,${encodeURIComponent(exportData)}`,
       })
       .appendTo(dom.body)
       .click()
@@ -136,7 +136,7 @@ class ThemeGUI {
       return fr;
     };
 
-    const { importInput } = this;
+    const {importInput} = this;
 
     // can't assign via default assignment/destructuring due to bug in
     // current version of uglify used in uglify-webpack-plugin
@@ -147,13 +147,13 @@ class ThemeGUI {
   }
 
   loadFromPreset() {
-    const { presetSelect, presets } = this;
+    const {presetSelect, presets} = this;
     const value = presetSelect.prop('value');
     this.setTheme(presets[value]);
   }
 
-  setTheme({ elements, light }) {
-    const { colorHandler } = this;
+  setTheme({elements, light}) {
+    const {colorHandler} = this;
     this.light = light;
     this.handleLightStatus(light);
     colorHandler.setTo(elements);
@@ -161,7 +161,7 @@ class ThemeGUI {
   }
 
   saveTheme() {
-    const { colorHandler, light } = this;
+    const {colorHandler, light} = this;
     const elements = colorHandler.getElementBasics();
     this.lastSaved = String(new Date()).substr(4, 20);
     this.displaySaveTime();
@@ -169,7 +169,7 @@ class ThemeGUI {
     const toSave = {
       elements,
       light,
-      lastSaved: this.lastSaved
+      lastSaved: this.lastSaved,
     };
 
     storage.set('custom-editor-theme', toSave);
@@ -177,14 +177,14 @@ class ThemeGUI {
   }
 
   hasUnsavedChanges() {
-    const { colorHandler, light, savedTheme } = this;
+    const {colorHandler, light, savedTheme} = this;
     const elements = colorHandler.getElementBasics();
-    const { elements: savedEls, light: savedLight } = savedTheme;
+    const {elements: savedEls, light: savedLight} = savedTheme;
 
     const keysToCheck = ['color', 'master', 'italic', 'underline'];
 
     const elementsMatch = elements.every(element => {
-      const { prettyName } = element;
+      const {prettyName} = element;
       const ogElement = savedEls.find(el => el.prettyName === prettyName);
       return keysToCheck.every(key => {
         return ogElement[key] === element[key];
@@ -195,12 +195,12 @@ class ThemeGUI {
   }
 
   updateStyles() {
-    const { colorHandler, styleEl } = this;
+    const {colorHandler, styleEl} = this;
     styleEl.text(colorHandler.getElementCSS());
   }
 
   setupPresetSelect() {
-    const { presetSelect, presets } = this;
+    const {presetSelect, presets} = this;
     let html = '';
     for (const preset in presets) {
       html += dom

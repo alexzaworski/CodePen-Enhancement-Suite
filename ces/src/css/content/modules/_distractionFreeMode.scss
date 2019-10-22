@@ -5,13 +5,12 @@ body.distraction-free-mode {
   .site-footer {
     height: $footer-size;
   }
-  
+
   #main-header {
     min-width: 700px;
   }
 
   &.layout-top {
-
     /*
     * This is the main editor container. By adding to the
     * overall width we can shove it off screen by a bit which
@@ -24,13 +23,12 @@ body.distraction-free-mode {
     .top-boxes {
       width: calc(100% + 24px);
     }
-    
+
     // The headers that swivel when you resize the editor windows
     .box-title--resizer {
-      display:none;
+      display: none;
     }
-    
-    
+
     // The actual normal headers (hidden by default I guess,
     // we need them now that the swivel ones are gone)
     .top-boxes .box .box-title-name,
@@ -53,9 +51,8 @@ body.distraction-free-mode {
       // looks correct to me.
       height: $resizer-size - 2px;
     }
-
   }
-  
+
   &.layout-side {
     .resizer {
       width: $resizer-size;
@@ -66,7 +63,6 @@ body.distraction-free-mode {
     padding: 5px 0;
     margin-right: 5px;
   }
-
 
   #main-header {
     height: 34px;
@@ -104,7 +100,7 @@ body.distraction-free-mode {
   }
 
   .box-title {
-    font-size: .9em;
+    font-size: 0.9em;
   }
 
   .powers {
@@ -123,13 +119,15 @@ body.distraction-free-mode {
   .navigation-wrap .button {
     padding: 3px 8px;
     border: 0;
-    background: transparent!important;
+    background: transparent !important;
     margin: 0;
-    opacity: .6;
-    font-size: .9em;
+    opacity: 0.6;
+    font-size: 0.9em;
   }
 
-  .navigation-wrap .button:not(.loves):not(.pin-button):not(.pin-dropdown-button) > svg {
+  .navigation-wrap
+    .button:not(.loves):not(.pin-button):not(.pin-dropdown-button)
+    > svg {
     display: none;
   }
 
@@ -148,7 +146,7 @@ body.distraction-free-mode {
     display: flex;
     margin-bottom: 0;
   }
-  
+
   .item-title-text {
     display: flex;
     margin-right: 5px;
@@ -158,11 +156,11 @@ body.distraction-free-mode {
   // goofy classes here are 'cause CodePen
   // is using some sort of generated class names
   // that I can't target consistently
-  [class^=Logo_root] {
+  [class^='Logo_root'] {
     display: flex;
   }
-  
-  [class^=Logo_small] {
+
+  [class^='Logo_small'] {
     margin: auto;
     height: 16px;
   }
@@ -171,7 +169,8 @@ body.distraction-free-mode {
     padding: 2px 4px;
   }
 
-  .settings-nub, .editor-dropdown-button {
+  .settings-nub,
+  .editor-dropdown-button {
     padding: 0 2px;
   }
 
@@ -181,7 +180,7 @@ body.distraction-free-mode {
 
   &.unsaved #save,
   &.unsaved #update {
-    color: #FEDD31;
+    color: #fedd31;
     opacity: 1;
   }
 

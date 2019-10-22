@@ -5,7 +5,7 @@ class CPAjax {
     this.csrf = dom.get('meta[name=csrf-token]').attr('content');
     this.types = {
       form: 'application/x-www-form-urlencoded; charset=UTF-8',
-      json: 'application/json;charset=utf-8'
+      json: 'application/json;charset=utf-8',
     };
 
     this.baseURL = `${location.origin}/`;
@@ -34,7 +34,7 @@ class CPAjax {
   }
 
   post(url, settings = {}) {
-    const { type = 'form', body = null } = settings;
+    const {type = 'form', body = null} = settings;
     const headers = this.headers(type);
     const data = this.setupBody(type, body);
 
@@ -42,7 +42,7 @@ class CPAjax {
       method: 'post',
       body: data,
       credentials: 'include',
-      headers: headers
+      headers: headers,
     });
   }
 }

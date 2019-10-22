@@ -1,22 +1,22 @@
-import storage, { Storage } from 'js/utils/storage';
+import storage, {Storage} from 'js/utils/storage';
 
 const syncKey = 'is-sync';
 
 const keysToMigrate = [
-  { oldKey: 'disable-patch-notes' },
-  { oldKey: 'has-loaded-before' },
+  {oldKey: 'disable-patch-notes'},
+  {oldKey: 'has-loaded-before'},
   {
     oldKey: 'disabledProfiles',
-    newKey: 'disabled-profiles'
+    newKey: 'disabled-profiles',
   },
   {
     oldKey: 'distractionFree',
-    newKey: 'distraction-free'
+    newKey: 'distraction-free',
   },
   {
     oldKey: 'cmCustomThemeEnabled',
-    newKey: 'custom-theme-enabled'
-  }
+    newKey: 'custom-theme-enabled',
+  },
 ];
 
 export default () => {
@@ -41,7 +41,7 @@ const migrateKeys = oldStorage => {
   newStorage[syncKey] = true;
 
   keysToMigrate.forEach(key => {
-    const { oldKey, newKey = oldKey } = key;
+    const {oldKey, newKey = oldKey} = key;
     const value = oldStorage[oldKey];
     if (value !== undefined) newStorage[newKey] = value;
   });

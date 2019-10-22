@@ -6,16 +6,16 @@ class Messenger {
   }
 
   on(method, callback) {
-    const { methods } = this;
+    const {methods} = this;
     const callbacks = methods[method] || [];
     const id = callbacks.length;
-    callbacks.push({ fn: callback, id });
+    callbacks.push({fn: callback, id});
     this.methods[method] = callbacks;
     return id;
   }
 
   off(method, id) {
-    const { methods } = this;
+    const {methods} = this;
     const callbacks = methods[method];
     if (!callbacks) return;
     callbacks.forEach((callback, index) => {
@@ -27,22 +27,22 @@ class Messenger {
   }
 
   send(method, data) {
-    const { local } = this;
+    const {local} = this;
     if (local) {
       const event = new CustomEvent('ces-messenger', {
-        detail: { method, data }
+        detail: {method, data},
       });
       window.dispatchEvent(event);
     } else {
-      chrome.runtime.sendMessage({ method, data });
+      chrome.runtime.sendMessage({method, data});
     }
   }
 
   sendToTab(method, data) {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    chrome.tabs.query({active: true, currentWindow: true}, tabs => {
       if (tabs.length) {
         const tabID = tabs[0].id;
-        chrome.tabs.sendMessage(tabID, { method, data });
+        chrome.tabs.sendMessage(tabID, {method, data});
       }
     });
   }
@@ -73,7 +73,7 @@ class Messenger {
     let retryInterval;
     return new Promise(resolve => {
       const id = this.on(responseMethod, response => {
-        const { requester, data } = response;
+        const {requester, data} = response;
         if (requester === id) {
           this.off(responseMethod, id);
           clearInterval(retryInterval);
@@ -82,7 +82,7 @@ class Messenger {
       });
 
       const sendFunc = () =>
-        this.sendGlobal(requestMethod, { data, requester: id });
+        this.sendGlobal(requestMethod, {data, requester: id});
 
       if (retry > 0) {
         retryInterval = setInterval(sendFunc, retry);
@@ -99,7 +99,7 @@ class Messenger {
   //
   // Only one onRequest handler should be set up for any given method.
   onRequest(method, callback) {
-    const { methods } = this;
+    const {methods} = this;
     const requestMethod = `request-${method}`;
     const responseMethod = `response-${method}`;
 
@@ -109,15 +109,15 @@ class Messenger {
     }
 
     this.on(requestMethod, request => {
-      const { data, requester } = request;
+      const {data, requester} = request;
       Promise.resolve(callback(data)).then(response => {
-        this.sendGlobal(responseMethod, { data: response, requester });
+        this.sendGlobal(responseMethod, {data: response, requester});
       });
     });
   }
 
   initPoll() {
-    const { local } = this;
+    const {local} = this;
     if (local) {
       window.addEventListener('ces-messenger', e => {
         this.fireCallback(e.detail);
@@ -129,8 +129,8 @@ class Messenger {
     }
   }
 
-  fireCallback({ method, data }) {
-    const { methods } = this;
+  fireCallback({method, data}) {
+    const {methods} = this;
     const callbacks = methods[method];
     if (callbacks !== undefined) {
       callbacks.forEach(callback => {

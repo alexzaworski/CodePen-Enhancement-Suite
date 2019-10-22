@@ -2,12 +2,12 @@ import storage from '../storage';
 
 export default (elements, lastSaved, isLightTheme) => {
   elements = elements.map(element => {
-    const { color, italic, master, prettyName, underline } = element;
+    const {color, italic, master, prettyName, underline} = element;
 
     const newEl = {
       prettyName,
       underline,
-      italic
+      italic,
     };
 
     // legacy themes used IDs to assign master values
@@ -25,7 +25,7 @@ export default (elements, lastSaved, isLightTheme) => {
   const theme = {
     elements,
     light: isLightTheme,
-    lastSaved: lastSaved
+    lastSaved: lastSaved,
   };
 
   return new Promise(resolve => {
@@ -35,7 +35,7 @@ export default (elements, lastSaved, isLightTheme) => {
 
 const idToName = (id, elements) => {
   for (const element of elements) {
-    const { prettyName } = element;
+    const {prettyName} = element;
     if (prettyNameToId(prettyName) === id) {
       return prettyName;
     }

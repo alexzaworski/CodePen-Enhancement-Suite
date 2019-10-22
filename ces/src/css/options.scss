@@ -1,8 +1,8 @@
 @import 'options/codemirror-base';
 
 ::-webkit-scrollbar {
-  width: .5em;
-  height: .5em;
+  width: 0.5em;
+  height: 0.5em;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -81,7 +81,7 @@ body {
 }
 
 .button--default {
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   padding: 8px 10px;
   color: white;
   background: black;
@@ -98,7 +98,7 @@ body {
 .button--tiny {
   padding: 4px;
   border: 0;
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: normal;
 }
 
@@ -118,10 +118,10 @@ body {
 
 .button--save:hover,
 .light .button--save:hover {
-  border-color: #46D06B;
+  border-color: #46d06b;
 }
 .button--save:active {
-  background: #46D06B;
+  background: #46d06b;
 }
 
 .button--revert:hover,
@@ -137,10 +137,10 @@ body {
 }
 
 .last-saved {
-  font-size: .8em;
+  font-size: 0.8em;
   color: #666;
   font-weight: bold;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
   animation: fade 1s ease-out;
 }
@@ -193,8 +193,8 @@ body {
   display: inline-block;
   cursor: pointer;
   margin: 0;
-  font-size: .8em;
-  letter-spacing: .02em;
+  font-size: 0.8em;
+  letter-spacing: 0.02em;
   color: #333;
   text-transform: uppercase;
   line-height: 20px;
@@ -226,10 +226,11 @@ body {
   display: block;
   height: 100%;
   width: 100%;
-  transition: fill .1s;
+  transition: fill 0.1s;
 }
 
-.themeEl__settings:hover, .themeEl__settings.active {
+.themeEl__settings:hover,
+.themeEl__settings.active {
   fill: #333;
 }
 
@@ -245,10 +246,10 @@ body {
 .themeEl__syncTo-label {
   display: inline-block;
   margin-right: 5px;
-  font-size: .7em;
+  font-size: 0.7em;
   color: #666;
   font-weight: bold;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
@@ -271,7 +272,7 @@ body {
 .themeEl__desc {
   font-style: italic;
   color: #111;
-  font-size: .9em;
+  font-size: 0.9em;
   line-height: 1.5em;
   color: #333;
   text-transform: none;
@@ -326,7 +327,7 @@ body {
   /* Height/border radius should be equal */
   height: 30px;
   border-radius: 30px;
-  
+
   width: 50px;
   background: #ccc;
 }
@@ -347,11 +348,10 @@ body {
   left: -5px;
   border-radius: 50%;
   background: white;
-  transition: color .1s ease-out, left .1s ease-out;
+  transition: color 0.1s ease-out, left 0.1s ease-out;
 }
 
 .giant-toggle:checked ~ label:before {
-
   /* Difference between label:after width and label:before width */
   left: 20px;
 }
@@ -359,10 +359,10 @@ body {
 .base-ui__label {
   cursor: pointer;
   margin: auto 0;
-  font-size: .75em;
+  font-size: 0.75em;
   color: #999;
   font-weight: bold;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
@@ -371,7 +371,7 @@ body {
 }
 
 .presets-wrapper {
-  font-size: .8em;
+  font-size: 0.8em;
   font-weight: bold;
   text-transform: uppercase;
   margin: -20px;
@@ -408,11 +408,11 @@ body {
 .presets-select-wrapper:after {
   position: absolute;
   display: inline-block;
-  content: "";
+  content: '';
   width: 0;
   height: 0;
   pointer-events: none;
-  border: .35rem solid transparent;
+  border: 0.35rem solid transparent;
   border-top-color: inherit;
   right: 8px;
   top: 40%;
@@ -424,7 +424,7 @@ body {
 
 .themeEl__font-controls:after {
   display: block;
-  content: "";
+  content: '';
   clear: both;
 }
 .themeEl__font-control {

@@ -1,6 +1,6 @@
 import CESModule from './core/CESModule';
 import initData from '../utils/initData';
-import dom, { Doc } from '../utils/dom';
+import dom, {Doc} from '../utils/dom';
 import cpAjax from '../utils/cpAjax';
 import escapeHTML from 'escape-html';
 import getPartial from '../utils/getPartial';
@@ -13,7 +13,7 @@ const SELECTOR = [
   '.content-author a:nth-of-type(2)', // post author
   '.comment-username', // pen/post comments
   '.username', // forkers/lovers in pen details
-  '.activity-name'
+  '.activity-name',
 ].join(', ');
 
 const fetchProfile = username => {
@@ -25,7 +25,7 @@ const fetchProfile = username => {
           operationName: 'ProfileOwner',
           variables: {
             ownerType: 'USER',
-            ownerUsername: username
+            ownerUsername: username,
           },
           query: `query ProfileOwner($ownerUsername: String!, $ownerType: ContextEnum!) {
                 ownerByUsername(ownerUsername: $ownerUsername, ownerType: $ownerType) {
@@ -42,15 +42,15 @@ const fetchProfile = username => {
                   }
                 }
               }
-            `
-        }
-      ]
+            `,
+        },
+      ],
     })
     .then(r => r.json())
     .then(gqlResponse => {
       const [response] = gqlResponse;
       const {
-        data: { ownerByUsername }
+        data: {ownerByUsername},
       } = response;
       const {
         title,
@@ -58,9 +58,9 @@ const fetchProfile = username => {
         avatar512,
         counts,
         pro,
-        baseUrl
+        baseUrl,
       } = ownerByUsername;
-      const { followers, following } = counts;
+      const {followers, following} = counts;
       return {
         name: title,
         username,
@@ -68,7 +68,7 @@ const fetchProfile = username => {
         followers,
         following,
         isPro: pro,
-        baseUrl
+        baseUrl,
       };
     });
 };
@@ -108,7 +108,7 @@ class Preview {
     // as links sometimes so we'll need to handle that case here.
     const href = profileLink.attr('href') || profileLink.parent().attr('href');
     const username = hrefToUsername(href);
-    this.previewEl = dom.create('div', { class: 'ces__profile-preview' });
+    this.previewEl = dom.create('div', {class: 'ces__profile-preview'});
 
     fetchProfile(username)
       .then(profile => this.mapPensToProfile(profile))
@@ -140,7 +140,7 @@ class Preview {
     for (const item of items) {
       const pen = {
         title: item.get('title').html(),
-        url: item.get('link').html()
+        url: item.get('link').html(),
       };
 
       pen.slug = pen.url.substr(pen.url.lastIndexOf('/') + 1);
@@ -151,7 +151,7 @@ class Preview {
         scrolling: 'no',
         frameborder: '0',
         allowtransparency: 'true',
-        class: 'ces__iframe'
+        class: 'ces__iframe',
       });
 
       pens.push(pen);
@@ -173,21 +173,13 @@ class Preview {
   }
 
   fillTemplate(profile, previewEl, templateHTML) {
-    const { profileURL } = this;
+    const {profileURL} = this;
 
-    const {
-      name,
-      isPro,
-      username,
-      avatar,
-      followers,
-      following,
-      pens
-    } = profile;
+    const {name, isPro, username, avatar, followers, following, pens} = profile;
 
     const pro = isPro
       ? dom
-          .create('span', { class: 'ces__pro-badge badge badge-pro' })
+          .create('span', {class: 'ces__pro-badge badge badge-pro'})
           .html('PRO')
           .outerHTML()
       : '';
@@ -201,7 +193,7 @@ class Preview {
       profileURL,
       name: escapeHTML(name),
       followersURL: `${profileURL}/followers`,
-      followingURL: `${profileURL}/following`
+      followingURL: `${profileURL}/following`,
     };
 
     templateHTML = renderTemplate(templateData, templateHTML);
@@ -215,17 +207,17 @@ class Preview {
     const pensWrapper = preview.get('.ces__profile__pens');
 
     pens.forEach(pen => {
-      const { iframe, url, title } = pen;
-      const wrapper = dom.create('div', { class: 'ces__pen' });
+      const {iframe, url, title} = pen;
+      const wrapper = dom.create('div', {class: 'ces__pen'});
       const iframeWrap = dom
-        .create('div', { class: 'ces__iframe-wrap' })
+        .create('div', {class: 'ces__iframe-wrap'})
         .append(iframe);
       const titleWrap = dom
-        .create('div', { class: 'ces__pen__title' })
+        .create('div', {class: 'ces__pen__title'})
         .html(escapeHTML(title));
       const penLink = dom.create('a', {
         class: 'ces__pen__link',
-        href: url
+        href: url,
       });
 
       wrapper
@@ -266,19 +258,19 @@ class Preview {
   }
 
   position() {
-    const { profileLink, previewEl } = this;
-    const { left, top } = profileLink.rect();
+    const {profileLink, previewEl} = this;
+    const {left, top} = profileLink.rect();
     const height = profileLink.height();
     const scrollY = window.pageYOffset;
     const scrollX = window.pageXOffset;
     previewEl.css({
       left: `${left + scrollX}px`,
-      top: `${top + scrollY + height}px`
+      top: `${top + scrollY + height}px`,
     });
   }
 
   addListeners() {
-    const { profileLink, previewEl } = this;
+    const {profileLink, previewEl} = this;
 
     profileLink.on('mouseenter', () => {
       this.startDisplayTimer();

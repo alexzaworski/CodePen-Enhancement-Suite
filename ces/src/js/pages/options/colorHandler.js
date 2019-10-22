@@ -1,7 +1,7 @@
 import getPartial from 'js/utils/getPartial';
 import ThemeEl from 'js/pages/options/themeEl';
-import { localMessenger as messenger } from 'js/utils/messenger';
-import { buildElementCSS } from 'js/utils/theme_utils/buildCSS';
+import {localMessenger as messenger} from 'js/utils/messenger';
+import {buildElementCSS} from 'js/utils/theme_utils/buildCSS';
 
 export default class ColorHandler {
   constructor(elements, wrapper) {
@@ -23,9 +23,9 @@ export default class ColorHandler {
   }
 
   bindMasters() {
-    const { themeEls } = this;
+    const {themeEls} = this;
     themeEls.forEach(control => {
-      const { master } = control;
+      const {master} = control;
       if (master) {
         control.syncTo(this.getByName(master));
       }
@@ -33,7 +33,7 @@ export default class ColorHandler {
   }
 
   initControls() {
-    const { themeEls, wrapper } = this;
+    const {themeEls, wrapper} = this;
     this.themeEls.forEach(control => {
       control.init(wrapper, themeEls);
     });
@@ -47,7 +47,7 @@ export default class ColorHandler {
   }
 
   getByName(name) {
-    const { themeEls } = this;
+    const {themeEls} = this;
     return themeEls.find(el => el.prettyName === name);
   }
 
@@ -55,9 +55,9 @@ export default class ColorHandler {
     // Things like prop/selector/etc all come from the global element
     // settings which means we don't need to save them to storage.
     return this.themeEls.map(element => {
-      const { prettyName, color, master, underline, italic } = element;
+      const {prettyName, color, master, underline, italic} = element;
 
-      const basics = { prettyName };
+      const basics = {prettyName};
 
       if (italic) {
         basics.italic = italic;
@@ -83,7 +83,7 @@ export default class ColorHandler {
 
   setTo(elements) {
     elements.forEach(element => {
-      const { prettyName } = element;
+      const {prettyName} = element;
       this.getByName(prettyName).reset(element);
     });
     this.bindMasters();

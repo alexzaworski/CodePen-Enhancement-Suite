@@ -182,7 +182,7 @@ class EventBase {
       on: this.on.bind(this),
       off: this.off.bind(this),
       onOff: this.onOff.bind(this),
-      one: this.one.bind(this)
+      one: this.one.bind(this),
     };
   }
 
@@ -212,7 +212,7 @@ class EventBase {
   }
 
   one(event, fn) {
-    this.on(event, fn, { once: true });
+    this.on(event, fn, {once: true});
     return this;
   }
 }
@@ -225,7 +225,7 @@ class NodeBase {
       get: this.get.bind(this),
       getAll: this.getAll.bind(this),
       await: this.await.bind(this),
-      exists: this.exists.bind(this)
+      exists: this.exists.bind(this),
     };
   }
 
@@ -312,7 +312,7 @@ class El {
   }
 
   attr(attributes, val) {
-    const { node } = this;
+    const {node} = this;
 
     const handleString = () => {
       if (val !== undefined) {
@@ -338,7 +338,7 @@ class El {
   }
 
   prop(props, val) {
-    const { node } = this;
+    const {node} = this;
     if (typeof props === 'string') {
       if (val !== undefined) {
         node[props] = val;
@@ -354,7 +354,7 @@ class El {
   }
 
   css(props, val) {
-    const { node } = this;
+    const {node} = this;
 
     if (typeof props === 'string') {
       if (val !== undefined) {
@@ -371,7 +371,7 @@ class El {
   }
 
   classes(classes) {
-    const { node } = this;
+    const {node} = this;
     if (classes !== undefined) {
       node.className = classes;
       return this;
@@ -446,7 +446,7 @@ class El {
   }
 
   html(text) {
-    const { node } = this;
+    const {node} = this;
     if (text !== undefined) {
       node.innerHTML = text;
       return this;
@@ -460,7 +460,7 @@ class El {
   }
 
   text(text) {
-    const { node } = this;
+    const {node} = this;
     if (text !== undefined) {
       node.textContent = text;
       return this;
