@@ -2,13 +2,12 @@ import CESModule from './core/CESModule';
 import dom from '../utils/dom';
 import messenger from '../utils/messenger';
 import storage from '../utils/storage';
-import initData from '../utils/initData';
 
 export default class HideProfileCSS extends CESModule {
   constructor() {
     super();
     this.conditions = {
-      isPage: ['profile'],
+      selectorExists: '#profile-custom-css',
     };
   }
 
@@ -22,7 +21,7 @@ export default class HideProfileCSS extends CESModule {
 
   initWithProfiles(profiles) {
     this.disabledProfiles = profiles;
-    this.profile = initData.__profiled.username;
+    this.profile = window.location.pathname.slice(1);
     this.style = dom.get('style');
     this.head = dom.get('head');
     if (this.isDisabled()) {
