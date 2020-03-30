@@ -7,7 +7,6 @@ import ResizablePreviews from 'js/modules/resizablePreviews';
 import HideProfileCSS from 'js/modules/hideProfileCSS';
 import DistractionFreeMode from 'js/modules/distractionFreeMode';
 import ProfilePreviews from 'js/modules/profilePreviews';
-import ActivityFeed from 'js/modules/activityFeed';
 import CustomTheme from 'js/modules/customTheme';
 import PatchNotes from 'js/modules/patchNotes';
 
@@ -17,7 +16,6 @@ CES.registerModule(ResizablePreviews);
 CES.registerModule(HideProfileCSS);
 CES.registerModule(DistractionFreeMode);
 CES.registerModule(ProfilePreviews);
-CES.registerModule(ActivityFeed);
 CES.registerModule(CustomTheme);
 CES.registerModule(PatchNotes);
 
