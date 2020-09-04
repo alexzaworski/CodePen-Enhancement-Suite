@@ -20,7 +20,7 @@
     "concurrently": "^5.0.0",
     "eslint": "^6.5.1",
     "lint-staged": "^9.4.2",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "pre-commit": "^1.2.2",
     "prettier": "^1.18.2",
     "terser-webpack-plugin": "^2.1.3",
