@@ -28,7 +28,7 @@
     "webpack-cli": "^3.3.2"
   },
   "dependencies": {
-    "codemirror": "^5.26.0",
+    "codemirror": "^5.58.2",
     "escape-html": "^1.0.3"
   }
 }
